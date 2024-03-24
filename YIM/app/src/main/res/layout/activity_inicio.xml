@@ -4,6 +4,474 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inicio">
+    android:background="@color/fondo"
+    tools:context=".vista.vistas.Inicio">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/inicio"
+            android:textColor="@color/blanco"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <LinearLayout
+                    android:id="@+id/continuar_linearlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/continuar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/continuar"
+                            android:textColor="@color/blanco"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                        <TextView
+                            android:id="@+id/semana"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/semana_888"
+                            android:textColor="@color/gris_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold|italic"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                        <TextView
+                            android:id="@+id/dia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/dia_888"
+                            android:textColor="@color/gris_oscuro"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imagen_continuar"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/hombre_mancuernas"
+                        android:contentDescription="@string/imagen_continuar"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ejercicios"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="5dp"
+                            android:text="@string/ejercicios"
+                            android:textColor="@color/blanco"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/lupa_ejercicios"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/lupa"
+                            android:contentDescription="@string/lupa_ejercicios" />
+
+                        <ImageView
+                            android:id="@+id/mas_ejercicios_pequeno"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="5dp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/mas"
+                            tools:ignore="RtlSymmetry"
+                            android:contentDescription="@string/mas_ejercicios_pequeno" />
+
+
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco"
+                        tools:ignore="SpeakableTextPresentCheck">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ejercicio1"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/curl_de_biceps_hombre"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ejercicio2"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/mujer_posando"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ejercicio3"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/sentadilla_hombre"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ejercicio4"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/press_militar_hombre"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <FrameLayout
+                                android:id="@+id/mas_ejercicios_grande"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/mas_ejercicios_grande"
+                                    android:src="@drawable/mas" />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rutinas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:gravity="left"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="5dp"
+                            android:text="@string/rutinas"
+                            android:textColor="@color/blanco"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/lupa_rutinas"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/lupa"
+                            android:contentDescription="@string/lupa_rutinas" />
+
+                        <ImageView
+                            android:id="@+id/mas_rutinas_pequeno"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="5dp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/mas"
+                            tools:ignore="RtlSymmetry"
+                            android:contentDescription="@string/mas_rutinas_pequeno" />
+
+
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco"
+                        tools:ignore="SpeakableTextPresentCheck">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rutina1"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/pierna"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rutina2"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/mujer_pierna"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rutina3"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/pecho"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rutina4"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
+                                android:src="@drawable/biceps"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <FrameLayout
+                                android:id="@+id/mas_rutinas_grande"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco">
+
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/mas"
+                                    android:contentDescription="@string/mas_rutinas_grande" />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/musculos_linearlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/_style_rectangulo__fondo_clarito__borde_blanco"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/musculos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/musculos_inicio"
+                            android:textColor="@color/blanco"
+                            android:textSize="22sp"
+                            android:textStyle="bold|italic"
+                            tools:ignore="RtlHardcoded,RtlSymmetry" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imagen_musculos"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/musculo_biceps"
+                        android:contentDescription="@string/imagen_musculos" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/_style_borde_negro_arriba"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:id="@+id/imagen_casa"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/negro_traslucido"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/casa"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/imagen_calendario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_izquierda"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/calendario"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagen_estadisticas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_derecha_izquierda"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/estadisticas"
+                    android:contentDescription="@string/imagen_estadisticas" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagen_usuario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/usuario"
+                    android:contentDescription="@string/imagen_usuario" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

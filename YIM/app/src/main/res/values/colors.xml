@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio -->
+    <color name="fondo">#252525</color> <!-- Inicio -->
+
+    <color name="gris_oscuro">#ACABAB</color> <!-- Inicio -->
+
+    <color name="negro_traslucido">#40000000</color> <!-- Inicio -->
+    <color name="negro">#303030</color> <!-- Inicio -->
+    <color name="negro_oscuro">#FF000000</color>
+
+
+    <color name="blanco">#FFFFFFFF</color> <!-- Inicio -->
+
 </resources>

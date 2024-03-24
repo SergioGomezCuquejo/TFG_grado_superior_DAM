@@ -1,8 +1,10 @@
-package com.example.yim;
+package com.example.yim.vista.vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.yim.R;
 
 public class Estadisticas extends AppCompatActivity {
 
