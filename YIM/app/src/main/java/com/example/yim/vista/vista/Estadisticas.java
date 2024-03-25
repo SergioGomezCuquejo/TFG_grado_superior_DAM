@@ -1,4 +1,4 @@
-package com.example.yim.vista.vistas;
+package com.example.yim.vista.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.example.yim.vista.vistas;
+package com.example.yim.vista.vista;
 
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 

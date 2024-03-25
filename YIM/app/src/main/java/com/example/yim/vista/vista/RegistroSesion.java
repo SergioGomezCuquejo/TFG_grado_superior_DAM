@@ -1,4 +1,4 @@
-package com.example.yim.vista.vistas;
+package com.example.yim.vista.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.yim.R;
 
-public class VerRutinas extends AppCompatActivity {
+public class RegistroSesion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_rutinas);
+        setContentView(R.layout.activity_registro_sesion);
     }
 }

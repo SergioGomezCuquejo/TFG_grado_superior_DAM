@@ -13,55 +13,52 @@
         android:theme="@style/Theme.YIM"
         tools:targetApi="31">
         <activity
-            android:name=".vista.vistas.Estadisticas"
+            android:name=".vista.vista.Estadisticas"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.Musculos"
+            android:name=".vista.vista.Musculos"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.RegistroSesion"
+            android:name=".vista.vista.RegistroSesion"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.PreguntasRegistro"
+            android:name=".vista.vista.PreguntasRegistro"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.InicioSesion"
+            android:name=".vista.vista.InicioSesion"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.MainActivity"
+            android:name=".vista.vista.RutinaSemanal"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.RutinaSemanal"
+            android:name=".vista.vista.EjerciciosDiarios"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.EjerciciosDiarios"
+            android:name=".vista.vista.EjerciciosRutinas"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.EjerciciosRutinas"
+            android:name=".vista.vista.CrearRutinas"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.CrearRutinas"
+            android:name=".vista.vista.VerRutinas"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.VerRutinas"
+            android:name=".vista.vista.CrearEjercicios"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.CrearEjercicios"
+            android:name=".vista.vista.VerEjercicios"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.VerEjercicios"
+            android:name=".vista.vista.Perfil"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.Perfil"
+            android:name=".vista.vista.Logros"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.Logros"
+            android:name=".vista.vista.Logo"
             android:exported="false" />
         <activity
-            android:name=".vista.vistas.Logo"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vistas.Inicio"
+            android:name=".vista.vista.Inicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

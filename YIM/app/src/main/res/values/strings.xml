@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">YIM</string>
 
-    <!-- Menú Inferior -->
+    <!-- Menú Inferior (Inicio, Perfil) -->
     <string name="imagen_casa">Casa</string>
     <string name="imagen_calendario">Calendario</string>
     <string name="imagen_estadisticas">Estadísticas</string>
@@ -9,18 +9,52 @@
 
     <!-- Inicio -->
     <string name="inicio">Inicio</string>
+
     <string name="continuar">Continuar</string>
-    <string name="ejercicios">Ejercicios</string>
     <string name="semana_888">SEMANA 888</string>
     <string name="dia_888">Día 888</string>
-    <string name="rutinas">Rutinas</string>
-    <string name="musculos_inicio">Personaliza tus propios músculos</string>
     <string name="imagen_continuar">imagen_continuar</string>
+
+    <string name="ejercicios">Ejercicios</string>
     <string name="lupa_ejercicios">lupa_ejercicios</string>
     <string name="mas_ejercicios_pequeno">mas_ejercicios_pequeno</string>
     <string name="mas_ejercicios_grande">mas_ejercicios_grande</string>
+
+    <string name="rutinas">Rutinas</string>
     <string name="lupa_rutinas">lupa_rutinas</string>
     <string name="mas_rutinas_pequeno">mas_rutinas_pequeno</string>
     <string name="mas_rutinas_grande">mas_rutinas_grande</string>
+
+    <string name="musculos_inicio">Personaliza tus propios músculos</string>
     <string name="imagen_musculos">imagen_musculos</string>
+
+
+
+    <!-- Perfil -->
+    <string name="perfil">Mi perfil</string>
+
+    <string name="imagen_subir">imagen_subir</string>
+    <string name="nombre">Nombre</string>
+    <string name="nombre_ejemplo">Nombre ejemplo</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="contrasena_ejemplo">ContrasenaEjemplo</string>
+
+    <string name="objetivo">Objetivo</string>
+    <string name="ganancia">Ganancia de músculo</string>
+    <string name="imagen_mayor_que">imagen_mayor_que</string>
+
+    <string name="equipo">Equipo disponible</string>
+    <string name="seleccionados">88 seleccionados</string>
+
+    <string name="informacion">Información básica</string>
+    <string name="genero">Género</string>
+    <string name="genero_ejemplo">Masculino</string>
+    <string name="unidades">Unidades</string>
+    <string name="unidades_ejemplo">kg, cm</string>
+    <string name="peso">Peso</string>
+    <string name="peso_ejemplo">0.0 kg</string>
+    <string name="altura">Altura</string>
+    <string name="altura_ejemplo">0.0 cm</string>
+    <string name="edad">Edad</string>
+    <string name="edad_ejemplo">0 años</string>
 </resources>

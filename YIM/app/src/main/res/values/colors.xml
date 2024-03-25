@@ -3,13 +3,15 @@
     <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio -->
     <color name="fondo">#252525</color> <!-- Inicio -->
 
+    <color name="gris_clarito">#E2E2E2</color> <!-- Perfil -->
+    <color name="gris">#C5C4C4</color> <!-- Perfil -->
     <color name="gris_oscuro">#ACABAB</color> <!-- Inicio -->
 
-    <color name="negro_traslucido">#40000000</color> <!-- Inicio -->
-    <color name="negro">#303030</color> <!-- Inicio -->
-    <color name="negro_oscuro">#FF000000</color>
+    <color name="negro_traslucido">#40000000</color> <!-- Inicio, Perfil -->
+    <color name="negro">#303030</color> <!-- Inicio, Perfil -->
+    <color name="negro_oscuro">#FF000000</color> <!-- Perfil -->
 
+    <color name="blanco">#FFFFFFFF</color> <!-- Inicio, Perfil -->
 
-    <color name="blanco">#FFFFFFFF</color> <!-- Inicio -->
 
 </resources>

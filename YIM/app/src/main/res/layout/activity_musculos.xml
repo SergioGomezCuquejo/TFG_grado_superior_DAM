@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista.vistas.Musculos">
+    tools:context=".vista.vista.Musculos">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
