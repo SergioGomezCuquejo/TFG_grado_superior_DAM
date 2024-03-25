@@ -14,6 +14,13 @@
     <string name="eres_nuevo">¿Eres nuevo?</string>
     <string name="ejemplo_error_login">Error. Nombre de usuario o contraseña incorrectos.</string>
 
+    <!-- RegistroSesion -->
+    <string name="registrarse">Registrarse</string>
+    <string name="repetir_contrasena">REPETIR CONTRASEÑA</string>
+    <string name="ejemplo_error_registro">Error. El nombre de usuario ya está en uso.</string>
+    <string name="tienes_cuenta">¿Tienes cuenta?</string>
+
+
 
 
     <!-- Menú Inferior (Inicio, Perfil) -->
