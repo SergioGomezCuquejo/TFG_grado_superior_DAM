@@ -74,7 +74,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             cambiarActivity(Musculos.class);
 
         } else if (id == R.id.imagen_casa) {
-            cambiarActivity(Inicio.class);
+            cambiarActivity(this.getClass());
 
         } else if (id == R.id.imagen_estadisticas) {
             cambiarActivity(Estadisticas.class);

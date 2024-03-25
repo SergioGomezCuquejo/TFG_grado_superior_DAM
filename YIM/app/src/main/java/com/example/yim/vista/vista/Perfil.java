@@ -47,7 +47,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             cambiarActivity(Estadisticas.class);
 
         } else if (id == R.id.imagen_usuario) {
-            cambiarActivity(Perfil.class);
+            cambiarActivity(this.getClass());
 
         }
     }

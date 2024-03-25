@@ -48,18 +48,20 @@
 
 
 
-    <!-- Menú Inferior (Inicio, Perfil) -->
+    <!-- Menú Inferior (Inicio, RutinaSemanal, Perfil) -->
     <string name="imagen_casa">Casa</string>
     <string name="imagen_calendario">Calendario</string>
     <string name="imagen_estadisticas">Estadísticas</string>
     <string name="imagen_usuario">Usuario</string>
 
 
+    <!-- Inicio, RutinaSemanal -->
+    <string name="semana_888">SEMANA 888</string>
+
     <!-- Inicio -->
     <string name="inicio">Inicio</string>
 
     <string name="continuar">Continuar</string>
-    <string name="semana_888">SEMANA 888</string>
     <string name="dia_888">Día 888</string>
     <string name="imagen_continuar">imagen_continuar</string>
 
@@ -76,6 +78,18 @@
     <string name="musculos_inicio">Personaliza tus propios músculos</string>
     <string name="imagen_musculos">imagen_musculos</string>
 
+
+    <!-- RutinaSemanal -->
+    <string name="dia_88">888</string>
+
+    <string name="espalda">ESPALDA</string>
+    <string name="biceps">BICEPS</string>
+
+    <string name="pecho">PECHO</string>
+    <string name="hombro">HOMBRO</string>
+    <string name="triceps">TRICEPS</string>
+
+    <string name="pierna">PIERNA</string>
 
 
     <!-- Perfil -->
