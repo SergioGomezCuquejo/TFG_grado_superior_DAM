@@ -1,11 +1,27 @@
 <resources>
     <string name="app_name">YIM</string>
 
+    <!-- InicioSesion, Registro -->
+    <string name="nombre_de_usuario">NOMBRE DE USUARIO</string>
+    <string name="contrasena_mayusculas">CONTRASEÑA</string>
+    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string>
+    <string name="registrarse_mayusculas">REGISTRARSE</string>
+
+
+    <!-- InicioSesion -->
+    <string name="bienvenido">Bienvenid@</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="eres_nuevo">¿Eres nuevo?</string>
+    <string name="ejemplo_error_login">Error. Nombre de usuario o contraseña incorrectos.</string>
+
+
+
     <!-- Menú Inferior (Inicio, Perfil) -->
     <string name="imagen_casa">Casa</string>
     <string name="imagen_calendario">Calendario</string>
     <string name="imagen_estadisticas">Estadísticas</string>
     <string name="imagen_usuario">Usuario</string>
+
 
     <!-- Inicio -->
     <string name="inicio">Inicio</string>
@@ -57,4 +73,5 @@
     <string name="altura_ejemplo">0.0 cm</string>
     <string name="edad">Edad</string>
     <string name="edad_ejemplo">0 años</string>
+    <string name="fondo_gimnasio">fondo_gimnasio</string>
 </resources>

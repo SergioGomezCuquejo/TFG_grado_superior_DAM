@@ -4,14 +4,21 @@
     <color name="fondo">#252525</color> <!-- Inicio -->
 
     <color name="gris_clarito">#E2E2E2</color> <!-- Perfil -->
-    <color name="gris">#C5C4C4</color> <!-- Perfil -->
+    <color name="gris">#C5C4C4</color> <!-- InicioSesion, Perfil -->
     <color name="gris_oscuro">#ACABAB</color> <!-- Inicio -->
 
     <color name="negro_traslucido">#40000000</color> <!-- Inicio, Perfil -->
-    <color name="negro">#303030</color> <!-- Inicio, Perfil -->
-    <color name="negro_oscuro">#FF000000</color> <!-- Perfil -->
+    <color name="negro_clarito">#777777</color> <!-- InicioSesion, Registro -->
+    <color name="negro">#303030</color> <!-- InicioSesion, Inicio, Perfil -->
+    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, Perfil -->
 
-    <color name="blanco">#FFFFFFFF</color> <!-- Inicio, Perfil -->
+    <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, Inicio, Perfil -->
+
+    <color name="azul_clarito">#EBFEFE</color> <!-- InicioSesion -->
+    <color name="azul">#c5ebff</color> <!-- InicioSesion -->
+    <color name="azul_oscuro">#1E9CD5</color> <!-- InicioSesion -->
+
+    <color name="rojo">#FA4B4B</color> <!-- InicioSesion -->
 
 
 </resources>

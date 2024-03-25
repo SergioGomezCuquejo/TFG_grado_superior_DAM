@@ -12,23 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YIM"
         tools:targetApi="31">
+
         <activity
-            android:name=".vista.vista.Estadisticas"
+            android:name=".vista.vista.CrearEjercicios"
             android:exported="false" />
         <activity
-            android:name=".vista.vista.Musculos"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.RegistroSesion"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.PreguntasRegistro"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.InicioSesion"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.RutinaSemanal"
+            android:name=".vista.vista.CrearRutinas"
             android:exported="false" />
         <activity
             android:name=".vista.vista.EjerciciosDiarios"
@@ -37,28 +26,13 @@
             android:name=".vista.vista.EjerciciosRutinas"
             android:exported="false" />
         <activity
-            android:name=".vista.vista.CrearRutinas"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.VerRutinas"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.CrearEjercicios"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.VerEjercicios"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.Perfil"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.Logros"
-            android:exported="false" />
-        <activity
-            android:name=".vista.vista.Logo"
+            android:name=".vista.vista.Estadisticas"
             android:exported="false" />
         <activity
             android:name=".vista.vista.Inicio"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.InicioSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,6 +40,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".vista.vista.Logo"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Logros"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Musculos"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.PreguntasRegistro"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.RegistroSesion"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.RutinaSemanal"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.VerEjercicios"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.VerRutinas"
+            android:exported="false" />
+
 
         <meta-data
             android:name="preloaded_fonts"
