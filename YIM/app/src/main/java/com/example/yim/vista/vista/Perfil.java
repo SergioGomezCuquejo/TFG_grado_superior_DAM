@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.yim.R;
 
-public class Perfil extends AppCompatActivity implements View.OnClickListener{
+public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
 

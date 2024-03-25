@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">YIM</string>
 
+    <!-- InicioSesion, Registro, PreguntasRegistro -->
+    <string name="fondo_gimnasio">fondo_gimnasio</string>
+
     <!-- InicioSesion, Registro -->
     <string name="nombre_de_usuario">NOMBRE DE USUARIO</string>
     <string name="contrasena_mayusculas">CONTRASEÑA</string>
@@ -20,6 +23,28 @@
     <string name="ejemplo_error_registro">Error. El nombre de usuario ya está en uso.</string>
     <string name="tienes_cuenta">¿Tienes cuenta?</string>
 
+
+    <!-- PreguntasRegistro -->
+    <string name="imagen_silueta_hombre">imagen_silueta_hombre</string>
+    <string name="comencemos">¡Comencemos a personalizar tu rutina de entrenamiento!</string>
+
+    <string name="pregunta_ejemplo">¿Cuántas flexiones de pecho puedes hacer en una ronda?</string>
+    <string name="respuesta_ejemplo1">Menos de 10</string>
+    <string name="respuesta_ejemplo2">Entre 10 y 20</string>
+    <string name="respuesta_ejemplo3">Entre 21 y 30</string>
+    <string name="respuesta_ejemplo4">Más de 30</string>
+    <string name="ejemplo_error_pregunta">Selecciona una opción.</string>
+
+    <string name="imagen_silueta_mujer">imagen_silueta_mujer</string>
+    <string name="empezar">Ya hemos diseñado la rutina perfecta para amoldarse a tus necesidades. ¡Empecemos!</string>
+
+    <string name="omitir">Omitir</string>
+    <string name="siguiente">Siguiente</string>
+
+    <string name="titulo_omitir">Omitir creación automática de rutina.</string>
+    <string name="mensaje_omitir">Podrás hacer la rutina manualmente o volver aquí más tarde.</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
 
 
 
@@ -80,5 +105,4 @@
     <string name="altura_ejemplo">0.0 cm</string>
     <string name="edad">Edad</string>
     <string name="edad_ejemplo">0 años</string>
-    <string name="fondo_gimnasio">fondo_gimnasio</string>
 </resources>

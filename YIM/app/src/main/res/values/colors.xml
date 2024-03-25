@@ -3,22 +3,24 @@
     <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio -->
     <color name="fondo">#252525</color> <!-- Inicio -->
 
-    <color name="gris_clarito">#E2E2E2</color> <!-- Perfil -->
+    <color name="gris_clarito">#E2E2E2</color> <!-- PreguntasRegistro, Perfil -->
     <color name="gris">#C5C4C4</color> <!-- InicioSesion, Perfil -->
     <color name="gris_oscuro">#ACABAB</color> <!-- Inicio -->
 
     <color name="negro_traslucido">#40000000</color> <!-- Inicio, Perfil -->
     <color name="negro_clarito">#777777</color> <!-- InicioSesion, RegistroSesion, Registro -->
-    <color name="negro">#303030</color> <!-- InicioSesion, RegistroSesion, Inicio, Perfil -->
-    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, RegistroSesion, Perfil -->
+    <color name="negro">#303030</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, Inicio, Perfil -->
+    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, Perfil -->
 
     <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, RegistroSesion , Inicio, Perfil -->
 
-    <color name="azul_clarito">#EBFEFE</color> <!-- InicioSesion, RegistroSesion -->
-    <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion  -->
-    <color name="azul_oscuro">#1E9CD5</color> <!-- InicioSesion, RegistroSesion  -->
+    <color name="azul_clarito">#EBFEFE</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
+    <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
+    <color name="azul_oscuro">#1E9CD5</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
 
-    <color name="rojo">#FA4B4B</color> <!-- InicioSesion, RegistroSesion -->
+    <color name="rojo">#FA4B4B</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
+
+    <color name="verde">#007e48</color> <!-- PreguntasRegistro -->
 
 
 </resources>
