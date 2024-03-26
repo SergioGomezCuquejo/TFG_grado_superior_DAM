@@ -47,8 +47,7 @@
     <string name="aceptar">Aceptar</string>
 
 
-
-    <!-- Menú Inferior (Inicio, RutinaSemanal, Perfil) -->
+    <!-- Menú Inferior (Inicio, RutinaSemanal, Perfil, Musculos) -->
     <string name="imagen_casa">Casa</string>
     <string name="imagen_calendario">Calendario</string>
     <string name="imagen_estadisticas">Estadísticas</string>
@@ -79,17 +78,25 @@
     <string name="imagen_musculos">imagen_musculos</string>
 
 
-    <!-- RutinaSemanal -->
-    <string name="dia_88">888</string>
 
-    <string name="espalda">ESPALDA</string>
+    <!-- Musculos, RutinaSemanal -->
     <string name="biceps">BICEPS</string>
-
-    <string name="pecho">PECHO</string>
+    <string name="espalda">ESPALDA</string>
     <string name="hombro">HOMBRO</string>
+    <string name="pecho">PECHO</string>
+    <string name="pierna">PIERNA</string>
     <string name="triceps">TRICEPS</string>
 
-    <string name="pierna">PIERNA</string>
+    <!-- Musculos -->
+    <string name="musculos">Musculos</string>
+    <string name="mas_musculos">mas_musculos</string>
+    <!-- PopupMusculos -->
+    <string name="imagen_cancelar">imagen_cancelar</string>
+    <string name="imagen_guardar">imagen_guardar</string>
+
+
+    <!-- RutinaSemanal -->
+    <string name="dia_88">88</string>
 
 
     <!-- Perfil -->
@@ -119,4 +126,18 @@
     <string name="altura_ejemplo">0.0 cm</string>
     <string name="edad">Edad</string>
     <string name="edad_ejemplo">0 años</string>
+
+    <string name="cambiar_colores">Cambiar colores</string>
+    <string name="color_del_fondo">Color del fondo:</string>
+    <string name="_88888">#88888</string>
+    <string name="color_de_las_letras">Color de las letras:</string>
+    <string name="informacion_adicional">Información adicional</string>
+    <string name="usos_esta_semana">Usos esta semana:</string>
+    <string name="_888">888</string>
+    <string name="num_rutinas_usado">Nº rutinas usado</string>
+    <string name="ejercicios_sin_realizar">Ejercicios sin realizar:</string>
+    <string name="ejercicios_totales">Ejercicios totales:</string>
+    <string name="usado_en_rutinas">Usado en rutinas:</string>
+
+
 </resources>

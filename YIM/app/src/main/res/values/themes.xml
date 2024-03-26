@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.YIM" parent="Base.Theme.YIM" />
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
 </resources>

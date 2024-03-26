@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio, RutinaSemanal -->
-    <color name="fondo">#252525</color> <!-- Inicio -->
+    <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio, RutinaSemanal, Musculos -->
+    <color name="fondo">#252525</color> <!-- Inicio, RutinaSemanal, Musculos, Perfil -->
 
     <color name="gris_clarito">#E2E2E2</color> <!-- PreguntasRegistro, Perfil -->
     <color name="gris">#C5C4C4</color> <!-- InicioSesion, Perfil -->
-    <color name="gris_oscuro">#ACABAB</color> <!-- Inicio, RutinaSemanal -->
+    <color name="gris_oscuro">#ACABAB</color> <!-- Inicio, RutinaSemanal, Musculos -->
 
     <color name="negro_traslucido">#40000000</color> <!-- Inicio, RegistroSesion, Perfil -->
     <color name="negro_clarito">#777777</color> <!-- InicioSesion, RegistroSesion, Registro -->
-    <color name="negro">#303030</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, Inicio, RutinaSemanal, Perfil -->
-    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, RutinaSemanal, Perfil -->
+    <color name="negro">#303030</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, Inicio, RutinaSemanal, Musculos, Perfil -->
+    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, RutinaSemanal, Musculos, Perfil -->
 
-    <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, RegistroSesion , Inicio, RutinaSemanal, Perfil -->
+    <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, RegistroSesion , Inicio, RutinaSemanal, Musculos, Perfil -->
 
     <color name="azul_clarito">#EBFEFE</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
     <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->

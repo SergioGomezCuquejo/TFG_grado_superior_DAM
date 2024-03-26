@@ -5,5 +5,11 @@
     <stroke
         android:width="2dp"
         android:color="@color/negro" />
-    <solid android:color="@color/gris_oscuro"/>
+    <padding
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp"/>
+    <corners android:radius="20dp"/>
+    <solid android:color="@color/fondo_clarito"/>
 </shape>
