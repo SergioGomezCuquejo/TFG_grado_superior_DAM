@@ -43,8 +43,6 @@
 
     <string name="titulo_omitir">Omitir creación automática de rutina.</string>
     <string name="mensaje_omitir">Podrás hacer la rutina manualmente o volver aquí más tarde.</string>
-    <string name="cancelar">Cancelar</string>
-    <string name="aceptar">Aceptar</string>
 
 
     <!-- Menú Inferior (Inicio, RutinaSemanal, Perfil, Musculos) -->
@@ -78,7 +76,6 @@
     <string name="imagen_musculos">imagen_musculos</string>
 
 
-
     <!-- Musculos, RutinaSemanal -->
     <string name="biceps">BICEPS</string>
     <string name="espalda">ESPALDA</string>
@@ -93,6 +90,20 @@
     <!-- PopupMusculos -->
     <string name="imagen_cancelar">imagen_cancelar</string>
     <string name="imagen_guardar">imagen_guardar</string>
+
+    <string name="cambiar_colores">Cambiar colores</string>
+    <string name="color_del_fondo">Color del fondo:</string>
+    <string name="color_de_las_letras">Color de las letras:</string>
+    <string name="_88888">#88888</string>
+
+    <string name="informacion_adicional">Información adicional</string>
+    <string name="usos_esta_semana">Usos esta semana:</string>
+    <string name="ejercicios_sin_realizar">Ejercicios sin realizar:</string>
+    <string name="ejercicios_totales">Ejercicios totales:</string>
+    <string name="usado_en_rutinas">Usado en rutinas:</string>
+    <string name="_888">888</string>
+
+    <string name="eliminar_musculo">Eliminar músculo</string>
 
 
     <!-- RutinaSemanal -->
@@ -127,17 +138,11 @@
     <string name="edad">Edad</string>
     <string name="edad_ejemplo">0 años</string>
 
-    <string name="cambiar_colores">Cambiar colores</string>
-    <string name="color_del_fondo">Color del fondo:</string>
-    <string name="_88888">#88888</string>
-    <string name="color_de_las_letras">Color de las letras:</string>
-    <string name="informacion_adicional">Información adicional</string>
-    <string name="usos_esta_semana">Usos esta semana:</string>
-    <string name="_888">888</string>
-    <string name="num_rutinas_usado">Nº rutinas usado</string>
-    <string name="ejercicios_sin_realizar">Ejercicios sin realizar:</string>
-    <string name="ejercicios_totales">Ejercicios totales:</string>
-    <string name="usado_en_rutinas">Usado en rutinas:</string>
+
+    <!-- PopupAlerta -->
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <!---->
 
 
 </resources>

@@ -52,6 +52,10 @@
             android:name=".vista.vista.Perfil"
             android:exported="false" />
         <activity
+            android:name=".vista.vista.PopupAlerta"
+            android:exported="false"
+            android:theme="@style/AppTheme.TemaPopup" />
+        <activity
             android:name=".vista.vista.PopupMusculos"
             android:exported="false"
             android:theme="@style/AppTheme.TemaPopup" />
