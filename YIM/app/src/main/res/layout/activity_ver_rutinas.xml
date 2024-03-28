@@ -52,6 +52,7 @@
                     android:layout_marginEnd="10dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/rutina1"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/pierna"
@@ -62,7 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:padding="10dp"
                     tools:ignore="NestedWeights">
 
@@ -106,7 +107,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:padding="10dp"
                     tools:ignore="NestedWeights">
 
@@ -151,7 +152,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:padding="10dp"
                     tools:ignore="NestedWeights">
 
@@ -195,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:padding="10dp"
                     tools:ignore="NestedWeights">
 
@@ -240,7 +241,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:padding="10dp"
                     tools:ignore="NestedWeights">
 
@@ -270,7 +271,7 @@
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:layout_weight="1"
                     tools:ignore="NestedWeights">
 

@@ -60,6 +60,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.TemaPopup" />
         <activity
+            android:name=".vista.vista.PopupRutinas"
+            android:exported="false"
+            android:theme="@style/AppTheme.TemaPopup" />
+        <activity
             android:name=".vista.vista.PreguntasRegistro"
             android:exported="false" />
         <activity

@@ -48,7 +48,7 @@
                     android:layout_marginStart="7dp"
                     android:layout_marginEnd="7dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco"
+                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     tools:ignore="RtlSymmetry">
@@ -168,7 +168,7 @@
                         android:paddingEnd="10dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
                         tools:ignore="SpeakableTextPresentCheck">
 
                         <LinearLayout
@@ -214,7 +214,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco">
+                                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20">
 
                                 <ImageView
                                     android:layout_width="50dp"
@@ -284,7 +284,7 @@
                         android:paddingEnd="10dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
                         tools:ignore="SpeakableTextPresentCheck">
 
                         <LinearLayout
@@ -337,7 +337,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
-                                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco">
+                                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20">
 
                                 <ImageView
                                     android:layout_width="50dp"
@@ -358,7 +358,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="20dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco"
+                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
                     android:orientation="horizontal"
                     android:paddingStart="10dp"
                     tools:ignore="RtlSymmetry">

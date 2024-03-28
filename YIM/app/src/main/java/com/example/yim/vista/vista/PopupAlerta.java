@@ -16,8 +16,8 @@ import com.example.yim.R;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
     TextView titulo_tv, texto_tv;
-    Button cancelar_btn, aceptar_btn;
-    String titulo, texto, aceptar;
+    Button cancelar_btn, aceptar;
+    String titulo, texto, iraA;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +45,24 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         if(intent != null) {
             titulo = intent.getStringExtra("titulo");
             texto = intent.getStringExtra("texto");
-            aceptar = intent.getStringExtra("aceptar");
+            iraA = intent.getStringExtra("iraA");
 
         }else{
             titulo = "OOPS.";
             texto = "Ha habido un problema, intentelo de nuevo más tarde.";
-            aceptar = "";
+            iraA = "";
         }
 
 
         //Referencias de las vistas.
         cancelar_btn = findViewById(R.id.cancelar);
-        aceptar_btn = findViewById(R.id.aceptar);
+        aceptar = findViewById(R.id.aceptar);
         titulo_tv = findViewById(R.id.titulo);
         texto_tv = findViewById(R.id.texto);
 
         //Listeners.
         cancelar_btn.setOnClickListener(this);
-        aceptar_btn.setOnClickListener(this);
+        aceptar.setOnClickListener(this);
 
 
         //Cambiar los textos por los obtenidos.
@@ -81,9 +81,12 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
             if(titulo.equals("OOPS.")){
                 finish();
             }else{
-                switch (aceptar){
+                switch (iraA){
                     case "ir_a_musculos":
                         cambiarActivity(Musculos.class);
+                        break;
+                    case "ir_a_ver_rutinas":
+                        cambiarActivity(VerRutinas.class);
                         break;
                     default:
                         finish();

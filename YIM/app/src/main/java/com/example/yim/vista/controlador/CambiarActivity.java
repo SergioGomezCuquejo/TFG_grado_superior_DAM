@@ -11,11 +11,11 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    public static void cambiarAlerta(Context context, String titulo, String texto, String aceptar) {
+    public static void cambiarAlerta(Context context, String titulo, String texto, String iraA) {
         Intent intent = new Intent(context, PopupAlerta.class);
         intent.putExtra("titulo", titulo);
         intent.putExtra("texto", texto);
-        intent.putExtra("aceptar", aceptar);
+        intent.putExtra("iraA", iraA);
         context.startActivity(intent);
     }
 

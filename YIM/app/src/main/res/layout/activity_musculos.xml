@@ -246,7 +246,7 @@
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/_style_borde_blanco"
+                    android:background="@drawable/_style_borde_blanco_10"
                     android:layout_weight="1"
                     tools:ignore="NestedWeights">
 

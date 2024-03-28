@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".vista.vista.PopupMusculos">
+    tools:context=".vista.vista.PopupRutinas">
 
 
     <LinearLayout
@@ -32,56 +33,19 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/guardar"
+            android:id="@+id/editar"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/guardar"
+            android:src="@drawable/lapiz"
             android:contentDescription="@string/imagen_guardar"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        tools:ignore="UselessParent">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
-            android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-            android:padding="1dp"
-            tools:ignore="NestedWeights">
-
-            <EditText
-                android:id="@+id/musculo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                android:fontFamily="@font/merriweather_light"
-                android:gravity="center"
-                android:text="@string/biceps"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize"
-                android:autofillHints="Musculo"
-                android:inputType="text" />
-        </FrameLayout>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:paddingTop="5dp"
+        android:paddingTop="20dp"
         android:paddingBottom="5dp"
         android:layout_weight="1">
 
@@ -93,6 +57,45 @@
             android:gravity="center"
             android:orientation="vertical"
             tools:ignore="UselessParent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/imagen_rutina"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    tools:ignore="NestedWeights">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/_style_borde_blanco_20"
+                        tools:ignore="NestedWeights">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:src="@drawable/pierna"
+                            app:shapeAppearanceOverlay="@style/radius" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignEnd="@id/imagen_rutina"
+                    android:layout_alignBottom="@id/imagen_rutina"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_50"
+                    android:src="@drawable/subir_imagen_blanca"
+                    android:contentDescription="@string/imagen_subir" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,7 +119,7 @@
                     android:layout_weight="2"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
-                    android:text="@string/cambiar_colores"
+                    android:text="@string/activar_rutina"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -130,7 +133,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/color_fondo"
+                android:id="@+id/activo_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -138,6 +141,7 @@
                 android:layout_marginRight="20dp"
                 android:padding="2dp"
                 android:baselineAligned="false"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 tools:ignore="UselessParent">
 
@@ -146,60 +150,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:fontFamily="@font/merriweather_light"
-                    android:text="@string/color_del_fondo"
+                    android:text="@string/rutina_activa"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
 
-                <TextView
-                    android:id="@+id/color_fondo_tv"
-                    android:layout_width="0dp"
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/activo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_88888"
-                    android:textColor="@color/blanco"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
+                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_50"
+                    android:padding="5dp"
+                    app:trackTint="@android:color/transparent"
+                    app:thumbTint="@color/gris"
+                    tools:ignore="TouchTargetSizeCheck" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/color_letras"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/color_de_las_letras"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/color_letras_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_88888"
-                    android:textColor="@color/blanco"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
 
             </LinearLayout>
 
@@ -254,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/merriweather_light"
-                    android:text="@string/usos_esta_semana"
+                    android:text="@string/veces_activadas"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
@@ -288,10 +253,45 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/merriweather_light"
-                    android:text="@string/ejercicios_realizados"
+                    android:text="Veces completadas:"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
                     tools:ignore="HardcodedText,NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/_style_borde_fondo_oscuro_arriba"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/ejercicios_realizados"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -380,6 +380,41 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/_style_borde_fondo_oscuro_arriba"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_activos"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 android:padding="2dp"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
@@ -390,7 +425,144 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/merriweather_light"
-                    android:text="@string/usado_en_rutinas"
+                    android:text="@string/musculos_totales"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/_style_borde_fondo_oscuro_arriba"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/dias_completados"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:padding="2dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/dias_totales"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:padding="2dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/dias_de_descanso"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/_888"
+                    android:textColor="@color/negro_clarito"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:padding="2dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/dias_descansados"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
@@ -412,14 +584,15 @@
                 android:id="@+id/borrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_light"
                 android:layout_marginTop="30dp"
-                android:padding="15dp"
                 android:background="@drawable/_style_borde_rojo"
+                android:fontFamily="@font/merriweather_light"
+                android:padding="15dp"
+                android:text="@string/eliminar_rutina"
                 android:textColor="@color/blanco"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:text="@string/eliminar_musculo" />
+                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
 
         </LinearLayout>
