@@ -45,12 +45,15 @@
     <string name="mensaje_omitir">Podrás hacer la rutina manualmente o volver aquí más tarde.</string>
 
 
-    <!-- Menú Inferior (Inicio, RutinaSemanal, Perfil, Musculos) -->
+    <!-- Menú Inferior (Inicio, VerRutinas, Musculos, RutinaSemanal, Perfil) -->
     <string name="imagen_casa">Casa</string>
     <string name="imagen_calendario">Calendario</string>
     <string name="imagen_estadisticas">Estadísticas</string>
     <string name="imagen_usuario">Usuario</string>
 
+
+    <!-- Inicio, VerRutinas -->
+    <string name="rutinas">Rutinas</string>
 
     <!-- Inicio, RutinaSemanal -->
     <string name="semana_888">SEMANA 888</string>
@@ -67,13 +70,18 @@
     <string name="mas_ejercicios_pequeno">mas_ejercicios_pequeno</string>
     <string name="mas_ejercicios_grande">mas_ejercicios_grande</string>
 
-    <string name="rutinas">Rutinas</string>
     <string name="lupa_rutinas">lupa_rutinas</string>
     <string name="mas_rutinas_pequeno">mas_rutinas_pequeno</string>
     <string name="mas_rutinas_grande">mas_rutinas_grande</string>
 
     <string name="musculos_inicio">Personaliza tus propios músculos</string>
     <string name="imagen_musculos">imagen_musculos</string>
+
+
+    <!-- VerRutinas -->
+    <string name="nombre_rutina_corto">Nombre de la rutina.</string>
+    <string name="nombre_rutina_largo">Nombre de la rutina más largo.</string>
+    <string name="agregar_rutina">agregar_rutina</string>
 
 
     <!-- Musculos, RutinaSemanal -->
@@ -86,7 +94,7 @@
 
     <!-- Musculos -->
     <string name="musculos">Musculos</string>
-    <string name="mas_musculos">mas_musculos</string>
+    <string name="agregar_musculo">agregar_musculo</string>
     <!-- PopupMusculos -->
     <string name="imagen_cancelar">imagen_cancelar</string>
     <string name="imagen_guardar">imagen_guardar</string>
@@ -143,6 +151,8 @@
     <string name="cancelar">Cancelar</string>
     <string name="aceptar">Aceptar</string>
     <!---->
+
+    <string name="qq">qq</string>
 
 
 </resources>

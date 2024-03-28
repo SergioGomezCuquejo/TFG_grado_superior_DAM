@@ -4,18 +4,21 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
 
 public class Musculos extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView espalda, biceps, pecho, hombro, triceps, pierna;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -321,6 +321,14 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_marginEnd="20dp"
+                                android:src="@drawable/mujer_ventana"
+                                app:shapeAppearanceOverlay="@style/radius" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rutina5"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginEnd="20dp"
                                 android:src="@drawable/biceps"
                                 app:shapeAppearanceOverlay="@style/radius" />
 

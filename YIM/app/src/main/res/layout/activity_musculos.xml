@@ -9,7 +9,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -252,14 +251,14 @@
                     tools:ignore="NestedWeights">
 
                     <ImageView
-                        android:id="@+id/mas_ejercicios_pequeno2"
+                        android:id="@+id/agregar_musculo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:layout_gravity="center_vertical"
                         app:srcCompat="@drawable/mas"
                         tools:ignore="RtlSymmetry"
-                        android:contentDescription="@string/mas_musculos" />
+                        android:contentDescription="@string/agregar_musculo" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -276,76 +275,72 @@
         android:paddingTop="2dp"
         android:baselineAligned="false">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/imagen_casa"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:src="@drawable/casa"
                 android:contentDescription="@string/imagen_casa" />
 
-        </LinearLayout>
+        </FrameLayout>
 
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/imagen_calendario"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/_style_borde_negro_izquierda"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:background="@drawable/_style_borde_negro_izquierda">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:src="@drawable/calendario"
                 android:contentDescription="@string/imagen_casa" />
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/imagen_estadisticas"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/_style_borde_negro_derecha_izquierda"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:background="@drawable/_style_borde_negro_derecha_izquierda">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:src="@drawable/estadisticas"
                 android:contentDescription="@string/imagen_estadisticas" />
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/imagen_usuario"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:src="@drawable/usuario"
                 android:contentDescription="@string/imagen_usuario" />
 
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>
