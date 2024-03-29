@@ -168,6 +168,14 @@
     <!---->
 
     <string name="qq">qq</string>
+    <string name="dia_1">1</string>
+    <string name="dia_2">2</string>
+    <string name="dia_3">3</string>
+    <string name="dia_4">4</string>
+    <string name="dia_5">5</string>
+    <string name="dia_6">6</string>
+    <string name="dia_7">7</string>
+    <string name="descanso">_DESCANSO_</string>
 
 
 </resources>
