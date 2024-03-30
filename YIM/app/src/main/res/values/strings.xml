@@ -52,6 +52,9 @@
     <string name="imagen_usuario">Usuario</string>
 
 
+    <!-- Inicio, VerEjercicios -->
+    <string name="ejercicios">Ejercicios</string>
+
     <!-- Inicio, VerRutinas -->
     <string name="rutinas">Rutinas</string>
 
@@ -65,7 +68,6 @@
     <string name="dia_888">Día 888</string>
     <string name="imagen_continuar">imagen_continuar</string>
 
-    <string name="ejercicios">Ejercicios</string>
     <string name="lupa_ejercicios">lupa_ejercicios</string>
     <string name="mas_ejercicios_pequeno">mas_ejercicios_pequeno</string>
     <string name="mas_ejercicios_grande">mas_ejercicios_grande</string>
@@ -77,6 +79,28 @@
     <string name="musculos_inicio">Personaliza tus propios músculos</string>
     <string name="imagen_musculos">imagen_musculos</string>
 
+    <!-- VerEjercicios -->
+    <string name="nombre_ejercicio_1">Curl de concentración con mancuerna</string>
+    <string name="musculos_ejercicio_1">Bíceps, Antebrazos</string>
+    <string name="nombre_ejercicio_2">Abdominales con barbilla de gorila.</string>
+    <string name="musculos_ejercicio_2">Abdominales, Cuádriceps</string>
+    <string name="nombre_ejercicio_3">Sentadilla con barra de pesas</string>
+    <string name="musculos_ejercicio_3">Cuádriceps, Glúteos</string>
+    <string name="nombre_ejercicio_4">Press de banca inclinado con mancuerna</string>
+    <string name="musculos_ejercicio_4">Pecho, Hombro, Tríceps</string>
+
+    <string name="agregar_ejercicio">agregar_ejercicio</string>
+
+
+    <!-- CrearRutinas -->
+    <string name="dia_1">1</string>
+    <string name="dia_2">2</string>
+    <string name="dia_3">3</string>
+    <string name="dia_4">4</string>
+    <string name="dia_5">5</string>
+    <string name="dia_6">6</string>
+    <string name="dia_7">7</string>
+    <string name="descanso">_DESCANSO_</string>
 
     <!-- VerRutinas -->
     <string name="nombre_rutina_corto">Nombre de la rutina.</string>
@@ -102,12 +126,12 @@
     <string name="ejercicios_totales">Ejercicios totales:</string>
 
     <!-- Musculos, RutinaSemanal -->
-    <string name="biceps">BICEPS</string>
+    <string name="biceps">BÍCEPS</string>
     <string name="espalda">ESPALDA</string>
     <string name="hombro">HOMBRO</string>
     <string name="pecho">PECHO</string>
     <string name="pierna">PIERNA</string>
-    <string name="triceps">TRICEPS</string>
+    <string name="triceps">TRÍCEPS</string>
 
     <!-- Musculos -->
     <string name="musculos">Musculos</string>
@@ -168,14 +192,6 @@
     <!---->
 
     <string name="qq">qq</string>
-    <string name="dia_1">1</string>
-    <string name="dia_2">2</string>
-    <string name="dia_3">3</string>
-    <string name="dia_4">4</string>
-    <string name="dia_5">5</string>
-    <string name="dia_6">6</string>
-    <string name="dia_7">7</string>
-    <string name="descanso">_DESCANSO_</string>
 
 
 </resources>

@@ -4,6 +4,313 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista.vista.VerEjercicios">
+    android:background="@color/fondo"
+    tools:context=".vista.vista.RutinaSemanal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/ejercicios"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                        android:padding="2dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imagen1"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:padding="10dp"
+                            android:src="@drawable/curl_de_biceps_hombre"
+                            app:shapeAppearanceOverlay="@style/radius" />
+
+                        <TextView
+                            android:id="@+id/nombre1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_toEndOf="@id/imagen1"
+                            android:text="@string/nombre_ejercicio_1"
+                            android:textColor="@color/blanco"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/nombre1"
+                            android:layout_toEndOf="@id/imagen1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/blanco"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/musculos_ejercicio_1" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                        android:padding="2dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imagen2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:padding="10dp"
+                            android:src="@drawable/mujer_posando"
+                            app:shapeAppearanceOverlay="@style/radius" />
+
+                        <TextView
+                            android:id="@+id/nombre2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_toEndOf="@id/imagen2"
+                            android:text="@string/nombre_ejercicio_2"
+                            android:textColor="@color/blanco"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/nombre2"
+                            android:layout_toEndOf="@id/imagen2"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/blanco"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/musculos_ejercicio_2" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                        android:padding="2dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imagen3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:padding="10dp"
+                            android:src="@drawable/sentadilla_hombre"
+                            app:shapeAppearanceOverlay="@style/radius" />
+
+                        <TextView
+                            android:id="@+id/nombre3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_toEndOf="@id/imagen3"
+                            android:text="@string/nombre_ejercicio_3"
+                            android:textColor="@color/blanco"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/nombre3"
+                            android:layout_toEndOf="@id/imagen3"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/blanco"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/musculos_ejercicio_3" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                        android:padding="2dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imagen4"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:padding="10dp"
+                            android:src="@drawable/press_militar_hombre"
+                            app:shapeAppearanceOverlay="@style/radius" />
+
+                        <TextView
+                            android:id="@+id/nombre4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_toEndOf="@id/imagen4"
+                            android:text="@string/nombre_ejercicio_4"
+                            android:textColor="@color/blanco"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/nombre4"
+                            android:layout_toEndOf="@id/imagen4"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/blanco"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/musculos_ejercicio_4" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <ImageView
+                android:id="@+id/agregar_ejercicio"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:layout_alignEnd="@id/scrollView"
+                android:layout_alignBottom="@id/scrollView"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/_style_circulo_fondo_oscuro__borde_blanco"
+                android:src="@drawable/mas"
+                android:contentDescription="@string/agregar_ejercicio" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/_style_borde_negro_arriba"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:baselineAligned="false">
+
+            <FrameLayout
+                android:id="@+id/imagen_casa"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/casa"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/imagen_calendario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_izquierda">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/calendario"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/imagen_estadisticas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_derecha_izquierda">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/estadisticas"
+                    android:contentDescription="@string/imagen_estadisticas" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/imagen_usuario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/usuario"
+                    android:contentDescription="@string/imagen_usuario" />
+
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

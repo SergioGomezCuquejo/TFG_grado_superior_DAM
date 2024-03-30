@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Inicio, VerEjercicios -->
     <style name="radius">
         <item name="cornerSizeTopRight">20dp</item>
         <item name="cornerSizeTopLeft">20dp</item>
