@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_izquierda_arriba_derecha"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".vista.vista.PopupCrearEjercicios">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/cancelar"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:contentDescription="@string/imagen_cancelar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cancelar" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:text="@string/nuevo_ejercicio"
+            android:textColor="@color/blanco"
+            android:textSize="25sp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:id="@+id/guardar"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:contentDescription="@string/imagen_guardar"
+            android:scaleType="fitCenter"
+            android:src="@drawable/guardar" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+            android:baselineAligned="false"
+            android:gravity="center|center_vertical"
+            tools:ignore="UselessParent">
+
+            <FrameLayout
+                android:id="@+id/imagen_rutina"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_centerHorizontal="true"
+                tools:ignore="NestedWeights">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/_style_borde_blanco_20"
+                    tools:ignore="NestedWeights">
+
+                    <TextView
+                        android:id="@+id/imagen_ejercicio"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/nombre_mayusculas"
+                        android:textColor="@color/blanco"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignEnd="@id/imagen_rutina"
+                android:layout_alignBottom="@id/imagen_rutina"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_50"
+                android:contentDescription="@string/imagen_subir"
+                android:padding="10dp"
+                android:src="@drawable/subir_imagen_blanca" />
+
+
+            <TextView
+                android:id="@+id/nombre_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagen_rutina"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/nombre"
+                android:textColor="@color/negro_clarito"
+                android:textSize="20sp"
+                tools:ignore="NestedWeights" />
+
+            <EditText
+                android:id="@+id/nombre_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nombre_tv"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:background="@drawable/_style_rectangulo_gris__borde_20"
+                android:fontFamily="@font/merriweather_light"
+                android:hint="@string/hint_nombre_ejercicio"
+                android:inputType="textMultiLine"
+                android:maxLength="50"
+                android:maxLines="3"
+                android:minHeight="48dp"
+                android:minLines="1"
+                android:textColor="@color/negro_oscuro"
+                android:textColorHint="@color/negro_clarito"
+                android:textStyle="bold"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/descanso_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nombre_et"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/merriweather_light"
+                android:text="Descanso entre series"
+                android:textColor="@color/negro_clarito"
+                android:textSize="20sp"
+                tools:ignore="NestedWeights" />
+
+            <EditText
+                android:id="@+id/descanso_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descanso_tv"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:background="@drawable/_style_rectangulo_gris__borde_20"
+                android:fontFamily="@font/merriweather_light"
+                android:hint="Selecciona un tiempo"
+                android:inputType="number"
+                android:maxLength="3"
+                android:minHeight="48dp"
+                android:textColor="@color/negro_oscuro"
+                android:textColorHint="@color/negro_clarito"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

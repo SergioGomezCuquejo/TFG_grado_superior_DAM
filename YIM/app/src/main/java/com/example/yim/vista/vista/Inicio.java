@@ -5,7 +5,6 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -90,7 +89,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             cambiarActivity(VerRutinas.class);
 
         } else if (id == R.id.mas_ejercicios_pequeno || id == R.id.mas_ejercicios_grande) {
-            cambiarActivity(CrearEjercicios.class);
+            cambiarActivity(PopupCrearEjercicios.class);
 
         } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
             cambiarActivity(CrearRutinas.class);

@@ -192,6 +192,9 @@
     <!---->
 
     <string name="qq">qq</string>
+    <string name="nombre_mayusculas">NOMBRE</string>
+    <string name="nuevo_ejercicio">Nuevo ejercicio</string>
+    <string name="hint_nombre_ejercicio">Crea un nombre</string>
 
 
 </resources>

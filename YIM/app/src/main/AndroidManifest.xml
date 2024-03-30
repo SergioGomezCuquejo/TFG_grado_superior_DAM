@@ -13,9 +13,6 @@
         android:theme="@style/Theme.YIM"
         tools:targetApi="31">
         <activity
-            android:name=".vista.vista.CrearEjercicios"
-            android:exported="false" />
-        <activity
             android:name=".vista.vista.CrearRutinas"
             android:exported="false" />
         <activity
@@ -54,15 +51,19 @@
         <activity
             android:name=".vista.vista.PopupAlerta"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup" />
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupCrearEjercicios"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
         <activity
             android:name=".vista.vista.PopupMusculos"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup" />
+            android:theme="@style/AppTheme.PopupNoCerrable" />
         <activity
             android:name=".vista.vista.PopupRutinas"
             android:exported="false"
-            android:theme="@style/AppTheme.TemaPopup" />
+            android:theme="@style/AppTheme.PopupNoCerrable" />
         <activity
             android:name=".vista.vista.PreguntasRegistro"
             android:exported="false" />
