@@ -17,15 +17,14 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/atras"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/imagen_estadisticas"
-            android:scaleType="fitCenter"
-            android:src="@drawable/atras" />
+            android:src="@drawable/atras"
+            app:shapeAppearanceOverlay="@style/radius" />
 
         <EditText
             android:id="@+id/textView"
@@ -36,7 +35,10 @@
             android:background="@drawable/_style_borde_blanco_arriba_abajo"
             android:fontFamily="@font/merriweather_light"
             android:gravity="center"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:maxLength="25"
+            android:maxLines="2"
+            android:minLines="1"
             android:padding="10dp"
             android:text="@string/nombre_rutina_largo"
             android:textColor="@color/blanco"
@@ -44,12 +46,13 @@
             android:textStyle="bold|italic"
             tools:ignore="LabelFor,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
+
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ejercicio1"
+            android:id="@+id/preguntas"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="7dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/hombre_preguntas2"
             app:shapeAppearanceOverlay="@style/radius" />
     </LinearLayout>
