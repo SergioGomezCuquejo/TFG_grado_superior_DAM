@@ -5,6 +5,8 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,31 +14,50 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class PopupCrearEjercicios extends AppCompatActivity implements View.OnClickListener {
-    ImageView cancelar, guardar;
+    ViewFlipper viewFlipper;
+    ImageView cancelar, guardar, atras;
     FrameLayout imagen_rutina;
     TextView imagen_ejercicio, musculos_tv, musculos_et;
     EditText nombre_et;
     String inicialesNombre;
+    CheckBox todo_el_cuerpo, tren_superior, espalda, biceps, cuadriceps;
+    HashSet<String> musculos = new HashSet<>();
+    StringBuilder musculosString;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_crear_ejercicios);
 
+        //Creación de variables.
+        DisplayMetrics medidasVentana;
+        int ancho, alto;
+        Intent intent;
+        ArrayList<String> musculosArray;
+        StringBuilder musculosString;
+
         //Cambiar el tamaño de la pantalla para que sea como un popup
-        DisplayMetrics medidasVentana = new DisplayMetrics();
+        medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
-        int ancho = medidasVentana.widthPixels;
-        int alto = medidasVentana.heightPixels;
+        ancho = medidasVentana.widthPixels;
+        alto = medidasVentana.heightPixels;
 
         Window ventana = getWindow();
         ventana.setLayout((int)(ancho), (int) (alto * 0.90));
@@ -44,6 +65,8 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
 
         //Referencias de las vistas
+        viewFlipper = findViewById(R.id.viewFlipper);
+
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar);
 
@@ -55,6 +78,8 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         musculos_tv = findViewById(R.id.musculos_tv);
         musculos_et = findViewById(R.id.musculos_et);
 
+        atras = findViewById(R.id.atras);
+
 
         //Listeners
         cancelar.setOnClickListener(this);
@@ -65,13 +90,23 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         musculos_tv.setOnClickListener(this);
         musculos_et.setOnClickListener(this);
 
+        atras.setOnClickListener(this);
+
+        todo_el_cuerpo = findViewById(R.id.todo_el_cuerpo);
+        tren_superior = findViewById(R.id.tren_superior);
+        espalda = findViewById(R.id.espalda);
+        biceps = findViewById(R.id.biceps);
+        cuadriceps = findViewById(R.id.cuadriceps);
+
+
+
+        //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
         nombre_et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-            //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -89,7 +124,54 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
             }
         });
+
+
+        //Cambiar los checkBox al marcarse
+        CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int id = buttonView.getId();
+                String musculo = obtenerMusculo(id);
+
+                if (isChecked) {
+                    musculos.add(musculo);
+
+                    cambiarColores((TextView) buttonView, getResources().getColor(R.color.blanco));
+                    if (id == R.id.todo_el_cuerpo) {
+                        tren_superior.setChecked(false);
+                        espalda.setChecked(false);
+                        biceps.setChecked(false);
+                        cuadriceps.setChecked(false);
+
+                    } else{
+                        todo_el_cuerpo.setChecked(false);
+
+                        if (id == R.id.tren_superior) {
+                            espalda.setChecked(false);
+                            biceps.setChecked(false);
+
+                        } else if (id == R.id.biceps || id == R.id.espalda) {
+                            tren_superior.setChecked(false);
+                        }
+                    }
+                } else {
+                    musculos.remove(musculo);
+
+                    cambiarColores((TextView) buttonView, getResources().getColor(R.color.negro_oscuro));
+                }
+
+            }
+        };
+
+        todo_el_cuerpo.setOnCheckedChangeListener(checkBoxListener);
+        tren_superior.setOnCheckedChangeListener(checkBoxListener);
+        espalda.setOnCheckedChangeListener(checkBoxListener);
+        biceps.setOnCheckedChangeListener(checkBoxListener);
+        cuadriceps.setOnCheckedChangeListener(checkBoxListener);
+
+
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -113,7 +195,19 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             cambiarActivity(this.getClass());
 
         } else if (id == R.id.musculos_tv || id == R.id.musculos_et) {
-            Toast.makeText(getApplicationContext(), "Músculos.", Toast.LENGTH_SHORT).show();
+            viewFlipper.showNext();
+
+        } else if (id == R.id.atras) {
+            if (musculos != null && !musculos.isEmpty()) {
+                musculosString = new StringBuilder();
+                for (String musculo : musculos) {
+                    musculosString.append(musculo).append(", ");
+                }
+                musculos_et.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
+            } else {
+                musculos_et.setText("Selecciona los músculos");
+            }
+            viewFlipper.showPrevious();
 
         }
     }
@@ -124,5 +218,26 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
     private void cambiarActivity(String titulo, String texto) {
         cambiarAlerta(this, titulo, texto, "ir_a_ejercicios");
+    }
+
+    public void cambiarColores(View view, int color){
+        ((TextView) view).setTextColor(color);
+    }
+
+    private String obtenerMusculo(int id) {
+        String musculo = "";
+        if(id == R.id.todo_el_cuerpo){
+            musculo = "Todo el cuerpo";
+        } else if (id == R.id.tren_superior){
+            musculo = "Tren superior";
+        } else if (id == R.id.espalda) {
+            musculo = "Espalda";
+        } else if (id == R.id.biceps) {
+            musculo = "Biceps";
+        } else if (id == R.id.cuadriceps) {
+            musculo = "Cuadriceps";
+        }
+
+        return musculo;
     }
 }

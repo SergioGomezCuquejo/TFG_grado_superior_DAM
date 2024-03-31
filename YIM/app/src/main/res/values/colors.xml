@@ -2,7 +2,7 @@
 <resources>
     <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio, VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas, Musculos, PopupMusculos, RutinaSemanal, PopupAlerta -->
     <color name="fondo">#252525</color> <!-- Inicio, VerEjercicios, VerRutinas, Musculos, RutinaSemanal, Perfil -->
-    <color name="fondo_oscuro">#232323</color> <!-- VerEjercicios, VerRutinas, PopupRutinas -->
+    <color name="fondo_oscuro">#232323</color> <!-- VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas -->
 
     <color name="gris_clarito">#E2E2E2</color> <!-- PreguntasRegistro, Perfil, CrearEjercicios -->
     <color name="gris">#C5C4C4</color> <!-- InicioSesion, PopupRutinas, PopupMusculos, Perfil, PopupAlerta -->
