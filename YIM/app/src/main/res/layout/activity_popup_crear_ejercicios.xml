@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
+    android:layout_marginStart="3dp"
+    android:layout_marginEnd="3dp"
     android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_izquierda_arriba_derecha"
     android:gravity="center"
     android:orientation="vertical"
@@ -51,10 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:paddingTop="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -87,7 +85,8 @@
                         android:text="@string/nombre_mayusculas"
                         android:textColor="@color/blanco"
                         android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
                 </FrameLayout>
             </FrameLayout>
 
@@ -124,6 +123,7 @@
                 android:autofillHints=""
                 android:background="@drawable/_style_rectangulo_gris__borde_20"
                 android:fontFamily="@font/merriweather_light"
+                android:gravity="center_vertical"
                 android:hint="@string/hint_nombre_ejercicio"
                 android:inputType="textMultiLine"
                 android:maxLength="50"
@@ -133,7 +133,7 @@
                 android:textColor="@color/negro_oscuro"
                 android:textColorHint="@color/negro_clarito"
                 android:textStyle="bold"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor,VisualLintTextFieldSize" />
 
             <TextView
                 android:id="@+id/descanso_tv"
@@ -142,7 +142,7 @@
                 android:layout_below="@id/nombre_et"
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/merriweather_light"
-                android:text="Descanso entre series"
+                android:text="@string/descanso_entre_series"
                 android:textColor="@color/negro_clarito"
                 android:textSize="20sp"
                 tools:ignore="NestedWeights" />
@@ -156,13 +156,172 @@
                 android:autofillHints=""
                 android:background="@drawable/_style_rectangulo_gris__borde_20"
                 android:fontFamily="@font/merriweather_light"
-                android:hint="Selecciona un tiempo"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_descanso_ejercicios"
                 android:inputType="number"
                 android:maxLength="3"
                 android:minHeight="48dp"
                 android:textColor="@color/negro_oscuro"
                 android:textColorHint="@color/negro_clarito"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="VisualLintTextFieldSize" />
+
+            <LinearLayout
+                android:id="@+id/series_repeticiones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descanso_et"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingEnd="10dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <TextView
+                        android:id="@+id/series_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/series"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="20sp"
+                        tools:ignore="NestedWeights" />
+
+                    <EditText
+                        android:id="@+id/series_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:autofillHints=""
+                        android:background="@drawable/_style_rectangulo_gris__borde_20"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:hint="@string/hint_series_repeticiones_ejercicios"
+                        android:inputType="number"
+                        android:lines="2"
+                        android:maxLength="3"
+                        android:minHeight="48dp"
+                        android:textColor="@color/negro_oscuro"
+                        android:textColorHint="@color/negro_clarito"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <TextView
+                        android:id="@+id/repeticiones_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/repeticiones"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="20sp"
+                        tools:ignore="NestedWeights" />
+
+                    <EditText
+                        android:id="@+id/repeticiones_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:autofillHints=""
+                        android:background="@drawable/_style_rectangulo_gris__borde_20"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:hint="@string/hint_series_repeticiones_ejercicios"
+                        android:inputType="number"
+                        android:lines="2"
+                        android:maxLength="3"
+                        android:minHeight="48dp"
+                        android:textColor="@color/negro_oscuro"
+                        android:textColorHint="@color/negro_clarito"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintTextFieldSize" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/notas_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/series_repeticiones"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/nota_adicional"
+                android:textColor="@color/negro_clarito"
+                android:textSize="20sp"
+                tools:ignore="NestedWeights" />
+
+            <EditText
+                android:id="@+id/notas_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/notas_tv"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:background="@drawable/_style_rectangulo_gris__borde_20"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_nota_ejercicios"
+                android:inputType="textMultiLine"
+                android:maxLength="50"
+                android:maxLines="3"
+                android:minHeight="48dp"
+                android:minLines="1"
+                android:textColor="@color/negro_oscuro"
+                android:textColorHint="@color/negro_clarito"
+                android:textStyle="bold"
+                tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+
+            <TextView
+                android:id="@+id/musculos_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/notas_et"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/musculos"
+                android:textColor="@color/negro_clarito"
+                android:textSize="20sp"
+                tools:ignore="NestedWeights" />
+
+
+            <TextView
+                android:id="@+id/musculos_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/musculos_tv"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/_style_rectangulo_gris__borde_20"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:text="@string/hint_musculos_ejercicios"
+                android:textColor="@color/negro_clarito"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="NestedWeights" />
+
         </RelativeLayout>
     </ScrollView>
 

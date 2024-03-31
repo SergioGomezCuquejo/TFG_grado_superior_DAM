@@ -91,6 +91,24 @@
 
     <string name="agregar_ejercicio">agregar_ejercicio</string>
 
+    <!-- CrearEjercicios -->
+    <string name="nuevo_ejercicio">Nuevo ejercicio</string>
+    <string name="nombre_mayusculas">NOMBRE</string>
+
+    <string name="hint_nombre_ejercicio">Crea un nombre</string>
+
+    <string name="descanso_entre_series">Descanso entre series</string>
+    <string name="hint_descanso_ejercicios">Selecciona un tiempo</string>
+
+    <string name="series">Series</string>
+    <string name="repeticiones">Repeticiones</string>
+    <string name="hint_series_repeticiones_ejercicios">Recomendadas</string>
+
+    <string name="nota_adicional">Nota adicional</string>
+    <string name="hint_nota_ejercicios">Añadir nota</string>
+
+    <string name="hint_musculos_ejercicios">Selecciona los músculos</string>
+
 
     <!-- CrearRutinas -->
     <string name="dia_1">1</string>
@@ -125,7 +143,7 @@
     <string name="ejercicios_realizados">Ejercicios realizados:</string>
     <string name="ejercicios_totales">Ejercicios totales:</string>
 
-    <!-- Musculos, RutinaSemanal -->
+    <!-- Músculos, RutinaSemanal -->
     <string name="biceps">BÍCEPS</string>
     <string name="espalda">ESPALDA</string>
     <string name="hombro">HOMBRO</string>
@@ -133,10 +151,12 @@
     <string name="pierna">PIERNA</string>
     <string name="triceps">TRÍCEPS</string>
 
-    <!-- Musculos -->
-    <string name="musculos">Musculos</string>
-    <string name="agregar_musculo">agregar_musculo</string>
-    <!-- PopupMusculos -->
+    <!-- Músculos, CrearEjercicios -->
+    <string name="musculos">Músculos</string>
+
+    <!-- Músculos -->
+    <string name="agregar_musculo">agregar_músculo</string>
+    <!-- PopupMúsculos -->
     <string name="imagen_cancelar">imagen_cancelar</string>
     <string name="imagen_guardar">imagen_guardar</string>
 
@@ -157,11 +177,13 @@
     <string name="dia_88">88</string>
 
 
+    <!-- Perfil, CrearEjercicios -->
+    <string name="nombre">Nombre</string>
+
     <!-- Perfil -->
     <string name="perfil">Mi perfil</string>
 
     <string name="imagen_subir">imagen_subir</string>
-    <string name="nombre">Nombre</string>
     <string name="nombre_ejemplo">Nombre ejemplo</string>
     <string name="contrasena">Contraseña</string>
     <string name="contrasena_ejemplo">ContrasenaEjemplo</string>
@@ -192,9 +214,6 @@
     <!---->
 
     <string name="qq">qq</string>
-    <string name="nombre_mayusculas">NOMBRE</string>
-    <string name="nuevo_ejercicio">Nuevo ejercicio</string>
-    <string name="hint_nombre_ejercicio">Crea un nombre</string>
 
 
 </resources>

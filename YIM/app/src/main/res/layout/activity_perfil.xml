@@ -206,56 +206,6 @@
                     android:paddingRight="5dp">
 
                     <TextView
-                        android:id="@+id/equipo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:padding="10dp"
-                        android:text="@string/equipo"
-                        android:textColor="@color/negro_oscuro"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/_style_borde_gris_arriba"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
-
-                        <TextView
-                            android:id="@+id/seleccionados"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/merriweather_light"
-                            android:padding="10dp"
-                            android:text="@string/seleccionados"
-                            android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:id="@+id/mayor_que_seleccionados"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_marginEnd="5dp"
-                            android:src="@drawable/mayor_que"
-                            android:contentDescription="@string/imagen_mayor_que" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
-                    android:orientation="vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp">
-
-                    <TextView
                         android:id="@+id/informacion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -325,13 +275,13 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:autofillHints="Unidades"
                             android:background="@null"
                             android:ems="10"
                             android:gravity="right|center_vertical"
                             android:inputType="number"
                             android:text="@string/unidades_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded"
-                            android:autofillHints="Unidades" />
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -359,13 +309,13 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:autofillHints="Peso"
                             android:background="@null"
                             android:ems="10"
                             android:gravity="right|center_vertical"
                             android:inputType="number"
                             android:text="@string/peso_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded"
-                            android:autofillHints="Peso" />
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -393,13 +343,13 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:autofillHints="Altura"
                             android:background="@null"
                             android:ems="10"
                             android:gravity="right|center_vertical"
                             android:inputType="number"
                             android:text="@string/altura_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,VisualLintTextFieldSize"
-                            android:autofillHints="Altura" />
+                            tools:ignore="LabelFor,RtlHardcoded,VisualLintTextFieldSize,TouchTargetSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -427,13 +377,13 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:autofillHints="Edad"
                             android:background="@null"
                             android:ems="10"
                             android:gravity="right|center_vertical"
                             android:inputType="number"
                             android:text="@string/edad_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded"
-                            android:autofillHints="Edad" />
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
                     </LinearLayout>
                 </LinearLayout>
 
