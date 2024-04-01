@@ -180,6 +180,9 @@
     <!-- Perfil, CrearEjercicios -->
     <string name="nombre">Nombre</string>
 
+    <!-- Perfil, Logros -->
+    <string name="logros">Logros</string>
+
     <!-- Perfil -->
     <string name="perfil">Mi perfil</string>
 
@@ -187,6 +190,7 @@
     <string name="nombre_ejemplo">Nombre ejemplo</string>
     <string name="contrasena">Contraseña</string>
     <string name="contrasena_ejemplo">ContrasenaEjemplo</string>
+
 
     <string name="objetivo">Objetivo</string>
     <string name="ganancia">Ganancia de músculo</string>
@@ -214,7 +218,6 @@
     <!---->
 
     <string name="qq">qq</string>
-    <string name="eliminar_ejercico">ELIMINAR EJERCICO</string>
 
 
 </resources>

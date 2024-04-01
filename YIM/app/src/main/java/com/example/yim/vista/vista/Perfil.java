@@ -13,7 +13,7 @@ import com.example.yim.R;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    LinearLayout logros, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -22,12 +22,16 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_perfil);
 
         //Referencias de las vistas
+        logros = findViewById(R.id.logros);
+
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
         imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
         imagen_usuario = findViewById(R.id.imagen_usuario);
 
         //Listeners
+        logros.setOnClickListener(this);
+
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
@@ -37,7 +41,10 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imagen_casa){
+        if (id == R.id.logros){
+            cambiarActivity(Logros.class);
+
+        } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
 
         } else if (id == R.id.imagen_calendario) {
