@@ -4,6 +4,7 @@
     <color name="fondo">#252525</color> <!-- Inicio, VerEjercicios, VerRutinas, Musculos, RutinaSemanal, Perfil -->
     <color name="fondo_oscuro">#232323</color> <!-- VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas -->
 
+    <color name="gris_translucido">#CD7C7C7C</color> <!-- Logros -->
     <color name="gris_clarito">#E2E2E2</color> <!-- PreguntasRegistro, Perfil, CrearEjercicios -->
     <color name="gris">#C5C4C4</color> <!-- InicioSesion, PopupRutinas, PopupMusculos, Perfil, PopupAlerta -->
     <color name="gris_oscuro">#ACABAB</color> <!-- Inicio, Musculos, PopupMusculos, RutinaSemanal -->

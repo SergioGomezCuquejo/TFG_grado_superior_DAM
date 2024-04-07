@@ -26,55 +26,101 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:ignore="SpeakableTextPresentCheck">
 
-        <GridLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="4"
+            android:layout_gravity="center_horizontal"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <FrameLayout
                 android:id="@+id/logro_50_flexiones"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:padding="10dp"
-                android:src="@drawable/logro_50_flexiones"
-                app:shapeAppearanceOverlay="@style/radius" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
-            <com.google.android.material.imageview.ShapeableImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_50_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_50_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_50_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/logro_100_flexiones"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:src="@drawable/logro_100_flexiones"
-                app:shapeAppearanceOverlay="@style/radius" />
+                android:layout_toEndOf="@+id/logro_50_flexiones">
 
-            <com.google.android.material.imageview.ShapeableImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_100_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_100_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_100_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/logro_150_flexiones"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:src="@drawable/logro_150_flexiones"
-                app:shapeAppearanceOverlay="@style/radius" />
+                android:layout_toEndOf="@+id/logro_100_flexiones">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagen1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:padding="10dp"
-                android:src="@drawable/biceps"
-                app:shapeAppearanceOverlay="@style/radius" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_150_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_150_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagen2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                <View
+                    android:id="@+id/progreso_logro_150_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/logro_250_flexiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:src="@drawable/mujer_ventana"
-                app:shapeAppearanceOverlay="@style/radius" />
-        </GridLayout>
+                android:layout_toEndOf="@+id/logro_150_flexiones">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_250_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/biceps"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_250_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+
+        </RelativeLayout>
 
     </ScrollView>
 

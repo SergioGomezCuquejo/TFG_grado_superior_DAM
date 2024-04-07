@@ -218,6 +218,9 @@
     <!---->
 
     <string name="qq">qq</string>
+    <string name="titulo_logro_50_flexiones">El niño de las flexiones</string>
+    <string name="porcentaje_logro_50_flexiones">8/50</string>
+    <string name="descripcion_logro_50_flexiones">Realiza 50 flexiones cualquier día de cualquier rutina.</string>
 
 
 </resources>
