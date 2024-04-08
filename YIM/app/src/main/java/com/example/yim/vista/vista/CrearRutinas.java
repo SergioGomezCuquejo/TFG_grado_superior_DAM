@@ -19,6 +19,7 @@ import com.example.yim.R;
 
 public class CrearRutinas extends AppCompatActivity implements View.OnClickListener {
     ImageView atras, preguntas;
+    LinearLayout dia1;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView espalda, biceps, pecho, hombro, triceps, pierna, descanso, espalda2, biceps2, pecho2, hombro2, triceps2, pierna2;
 
@@ -31,6 +32,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         //Referencias de las vistas
         atras = findViewById(R.id.atras);
         preguntas = findViewById(R.id.preguntas);
+
+        dia1 = findViewById(R.id.dia1);
 
         espalda = findViewById(R.id.espalda);
         biceps = findViewById(R.id.biceps);
@@ -54,6 +57,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         //Listeners
         atras.setOnClickListener(this);
         preguntas.setOnClickListener(this);
+
+        dia1.setOnClickListener(this);
 
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
@@ -88,10 +93,13 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         } else if (id == R.id.preguntas){
             cambiarActivity(PreguntasRegistro.class);
 
+        } else if (id == R.id.dia1){
+            cambiarActivity(EjerciciosRutinas.class);
+
         } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
+        }  else if (id == R.id.imagen_calendario) {
             cambiarActivity(RutinaSemanal.class);
 
         } else if (id == R.id.imagen_estadisticas) {

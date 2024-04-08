@@ -4,6 +4,7 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,20 +15,25 @@ import android.widget.TextView;
 import com.example.yim.R;
 
 public class RutinaSemanal extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    LinearLayout dia1, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView espalda, biceps, pecho, hombro, triceps, pierna;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutina_semanal);
 
         //Referencias de las vistas
+        dia1 = findViewById(R.id.dia1);
+
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
         imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
         imagen_usuario = findViewById(R.id.imagen_usuario);
 
         //Listeners
+        dia1.setOnClickListener(this);
+
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
@@ -75,7 +81,10 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imagen_casa){
+        if (id == R.id.dia1){
+            cambiarActivity(EjerciciosDiarios.class);
+
+        } else if (id == R.id.imagen_casa) {
             cambiarActivity(Inicio.class);
 
         } else if (id == R.id.imagen_calendario) {

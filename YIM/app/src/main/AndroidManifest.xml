@@ -65,6 +65,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.PopupNoCerrable" />
         <activity
+            android:name=".vista.vista.PopupMusculosRutina"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable"  />
+        <activity
             android:name=".vista.vista.PopupRutinas"
             android:exported="false"
             android:theme="@style/AppTheme.PopupNoCerrable" />
