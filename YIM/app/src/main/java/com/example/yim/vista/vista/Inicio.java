@@ -21,7 +21,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     TextView ejercicios, rutinas;
     ImageView lupa_ejercicios, mas_ejercicios_pequeno, lupa_rutinas, mas_rutinas_pequeno;
     FrameLayout mas_ejercicios_grande, mas_rutinas_grande;
-    ShapeableImageView rutina1;
+    ShapeableImageView rutina1, rutina2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,6 +45,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         mas_ejercicios_grande = findViewById(R.id.mas_ejercicios_grande);
         mas_rutinas_grande = findViewById(R.id.mas_rutinas_grande);
         rutina1 = findViewById(R.id.rutina1);
+        rutina2 = findViewById(R.id.rutina2);
 
         //Listeners
         continuar_linearlayout.setOnClickListener(this);
@@ -62,6 +63,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         mas_ejercicios_grande.setOnClickListener(this);
         mas_rutinas_grande.setOnClickListener(this);
         rutina1.setOnClickListener(this);
+        rutina2.setOnClickListener(this);
     }
 
     @Override
@@ -93,6 +95,9 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
         } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
             cambiarActivity(CrearRutinas.class);
+
+        } else if (id == R.id.rutina2) {
+            cambiarActivity(EjerciciosRutinas.class);
 
         }
     }

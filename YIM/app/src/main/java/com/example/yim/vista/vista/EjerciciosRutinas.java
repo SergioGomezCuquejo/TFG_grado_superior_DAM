@@ -12,17 +12,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.yim.R;
 
 public class EjerciciosRutinas extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout musculos;
+    LinearLayout musculos, editar;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
 
-    private RelativeLayout ejercicio1, ejercicio12;
-    private Button buttonToggle;
+    private RelativeLayout ejercicio1;
     private boolean isListVisible = false;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -48,7 +46,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         imagen_usuario.setOnClickListener(this);
 
 
-        ejercicio12 = findViewById(R.id.ejercicio12);
+        editar = findViewById(R.id.editar);
         ejercicio1 = findViewById(R.id.ejercicio1);
         ejercicio1.setOnClickListener(this);
 
@@ -57,13 +55,15 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
     private void toggleListVisibility() {
         Animation animation;
         if (isListVisible) {
-            animation = AnimationUtils.loadAnimation(this, R.anim.slide_in);
-            ejercicio12.setVisibility(View.GONE);
+            animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_abajo);
+            ejercicio1.setBackgroundResource(R.drawable._style_rectangulo_fondo_clarito__borde_negro);
+            editar.setVisibility(View.GONE);
         } else {
-            animation = AnimationUtils.loadAnimation(this, R.anim.slide_out);
-            ejercicio12.setVisibility(View.VISIBLE);
+            animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_arriba);
+            ejercicio1.setBackgroundResource(R.drawable._style_rectangulo_fondo_clarito__borde_negro_arriba);
+            editar.setVisibility(View.VISIBLE);
         }
-        ejercicio12.startAnimation(animation);
+        editar.startAnimation(animation);
         isListVisible = !isListVisible;
     }
 
