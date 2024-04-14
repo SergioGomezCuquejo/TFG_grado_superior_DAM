@@ -13,9 +13,6 @@
         android:theme="@style/Theme.YIM"
         tools:targetApi="31">
         <activity
-            android:name=".vista.vista.PopupAgregarEjercicio"
-            android:exported="false" />
-        <activity
             android:name=".vista.vista.CrearRutinas"
             android:exported="false" />
         <activity
@@ -51,6 +48,10 @@
         <activity
             android:name=".vista.vista.Perfil"
             android:exported="false" />
+        <activity
+            android:name=".vista.vista.PopupAgregarEjercicio"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
         <activity
             android:name=".vista.vista.PopupAlerta"
             android:exported="false"

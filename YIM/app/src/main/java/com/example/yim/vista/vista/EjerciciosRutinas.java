@@ -1,6 +1,7 @@
 package com.example.yim.vista.vista;
 
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
+import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,10 +23,11 @@ import android.widget.TextView;
 import com.example.yim.R;
 
 public class EjerciciosRutinas extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout musculos, editar;
+    LinearLayout musculos, editar, opciones;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView espalda, biceps;
     ImageView agregar_ejercicio;
+    Button borrar;
 
     RelativeLayout ejercicio1;
     boolean visible;
@@ -40,8 +43,10 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         espalda = findViewById(R.id.espalda);
         biceps = findViewById(R.id.biceps);
 
-        editar = findViewById(R.id.editar);
         ejercicio1 = findViewById(R.id.ejercicio1);
+        editar = findViewById(R.id.editar);
+        opciones = findViewById(R.id.opciones);
+        borrar = findViewById(R.id.borrar);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -54,6 +59,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculos.setOnClickListener(this);
 
         ejercicio1.setOnClickListener(this);
+        borrar.setOnClickListener(this);
 
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
@@ -78,11 +84,14 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         if (visible) {
             animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_abajo);
             editar.setVisibility(View.GONE);
+            opciones.setVisibility(View.GONE);
         } else {
             animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_arriba);
             editar.setVisibility(View.VISIBLE);
+            opciones.setVisibility(View.VISIBLE);
         }
         editar.startAnimation(animation);
+        opciones.startAnimation(animation);
         visible = !visible;
     }
 
@@ -106,6 +115,12 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
         } else if (id == R.id.ejercicio1) {
             cambiarVisibilidad();
+
+        } else if (id == R.id.borrar) {
+            cambiarAlerta(this, "Eliminar ejercicio", "Se eleminará el ejercicio 'Ejercicio' de este día.", "ir_a_ejercicios_rutina");
+
+        } else if (id == R.id.agregar_ejercicio) {
+            cambiarActivity(PopupAgregarEjercicio.class);
 
         }
     }

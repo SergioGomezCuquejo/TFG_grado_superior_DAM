@@ -94,6 +94,9 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                     case "ir_a_inicio":
                         cambiarActivity(Inicio.class);
                         break;
+                    case "ir_a_ejercicios_rutina":
+                        cambiarActivity(EjerciciosRutinas.class);
+                        break;
                     default:
                         finish();
                         break;

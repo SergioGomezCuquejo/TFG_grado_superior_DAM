@@ -34,7 +34,7 @@
                 android:fontFamily="@font/merriweather_light"
                 android:inputType="text"
                 android:padding="10dp"
-                android:text="Nombre del ejercicio"
+                android:hint="Nombre del ejercicio"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <ImageButton
@@ -60,14 +60,275 @@
             android:src="@drawable/cancelar" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen2"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre2"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen2"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre3"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen3"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout><RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen4"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre4"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen4"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen5"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre5"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen5"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:src="@drawable/mujer_posando"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <TextView
+                    android:id="@+id/nombre6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen6"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_ejercicio_2"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nombre6"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@id/imagen6"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/musculos_ejercicio_2"
+                    android:textColor="@color/blanco" />
+
+            </RelativeLayout>
 
 
-    </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 
