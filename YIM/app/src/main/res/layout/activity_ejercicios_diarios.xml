@@ -41,7 +41,7 @@
             android:padding="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Ejercicios del día 88"
+            android:text="Ejercicios del día 888"
             android:textColor="@color/blanco"
             android:textSize="16sp"
             android:textStyle="bold|italic" />

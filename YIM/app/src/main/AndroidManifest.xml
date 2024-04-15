@@ -13,6 +13,9 @@
         android:theme="@style/Theme.YIM"
         tools:targetApi="31">
         <activity
+            android:name=".vista.vista.EjercicioActivo"
+            android:exported="false" />
+        <activity
             android:name=".vista.vista.CrearRutinas"
             android:exported="false" />
         <activity

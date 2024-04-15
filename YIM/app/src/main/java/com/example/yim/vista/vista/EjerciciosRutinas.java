@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.yim.R;
 
 public class EjerciciosRutinas extends AppCompatActivity implements View.OnClickListener {
+    ImageView atras;
     LinearLayout musculos, editar, opciones;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView espalda, biceps;
@@ -39,6 +40,8 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_ejercicios_rutinas);
 
         //Referencias de las vistas
+        atras = findViewById(R.id.atras);
+
         musculos = findViewById(R.id.musculos);
         espalda = findViewById(R.id.espalda);
         biceps = findViewById(R.id.biceps);
@@ -56,6 +59,8 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
 
         //Listeners
+        atras.setOnClickListener(this);
+
         musculos.setOnClickListener(this);
 
         ejercicio1.setOnClickListener(this);
@@ -98,10 +103,13 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.musculos) {
+        if (id == R.id.atras) {
+            finish();
+
+        } else if (id == R.id.musculos) {
             cambiarActivity(PopupMusculosRutina.class);
 
-        }else if (id == R.id.imagen_casa){
+        } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
 
         } else if (id == R.id.imagen_calendario) {
