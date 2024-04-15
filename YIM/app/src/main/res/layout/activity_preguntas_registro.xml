@@ -193,7 +193,7 @@
                 android:gravity="center"
                 android:shadowColor="#000000"
                 android:text="@string/ejemplo_error_pregunta"
-                android:textColor="@color/rojo"
+                android:textColor="@color/rojo_clarito"
                 android:textStyle="bold" />
 
             <LinearLayout

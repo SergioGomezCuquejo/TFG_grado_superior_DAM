@@ -20,8 +20,12 @@
     <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
     <color name="azul_oscuro">#1E9CD5</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
 
-    <color name="rojo">#FA4B4B</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, PopupRutinas, PopupMusculos, PopupAlerta -->
+    <color name="rojo_clarito">#FA4B4B</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, PopupRutinas, PopupMusculos, PopupAlerta -->
+    <color name="rojo">#FF0000</color> <!-- EjerciciosDiarios -->
 
+    <color name="naranja">#FFA83C</color> <!-- EjerciciosDiarios -->
+
+    <color name="verde_clarito">#02FF92</color> <!-- EjerciciosDiarios -->
     <color name="verde">#007e48</color> <!-- PreguntasRegistro, PopupAlerta -->
 
     <color name="amarillo">#E3994A</color> <!-- VerRutinas -->

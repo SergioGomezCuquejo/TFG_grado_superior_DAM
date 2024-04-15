@@ -57,7 +57,7 @@
                 android:background="@drawable/_style_borde_rojo"
                 android:fontFamily="@font/merriweather_light"
                 android:text="@string/cancelar"
-                android:textColor="@color/rojo"
+                android:textColor="@color/rojo_clarito"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="TextSizeCheck" />
