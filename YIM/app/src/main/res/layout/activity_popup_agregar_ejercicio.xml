@@ -74,7 +74,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
@@ -160,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
@@ -201,7 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
@@ -243,7 +243,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
@@ -285,7 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco"
+                android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
                 android:orientation="horizontal"
                 android:padding="2dp">
 
