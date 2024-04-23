@@ -177,6 +177,12 @@
     <string name="dia_88">88</string>
 
 
+    <!-- Estadisticas -->
+    <string-array name="tipos_busqueda">
+        <item>Ejercicio</item>
+        <item>Músculo</item>
+    </string-array>
+
     <!-- Perfil, CrearEjercicios -->
     <string name="nombre">Nombre</string>
 

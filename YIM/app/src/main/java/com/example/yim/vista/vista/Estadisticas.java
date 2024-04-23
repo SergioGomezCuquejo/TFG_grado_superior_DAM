@@ -7,13 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.example.yim.R;
 
 public class Estadisticas extends AppCompatActivity implements View.OnClickListener {
-
+    Spinner tipo;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
 
     @SuppressLint("MissingInflatedId")
@@ -23,6 +24,8 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_estadisticas);
 
         //Referencias de las vistas
+        tipo = findViewById(R.id.tipo);
+
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
         imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
@@ -33,7 +36,12 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
         imagen_usuario.setOnClickListener(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Estadisticas.this, R.layout.spinner_items, getResources().getStringArray(R.array.tipos_busqueda));
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        tipo.setAdapter(adapter);
     }
+
 
     @Override
     public void onClick(View view) {
