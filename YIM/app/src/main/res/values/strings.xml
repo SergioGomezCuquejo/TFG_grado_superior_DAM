@@ -4,29 +4,23 @@
     <!-- InicioSesion, Registro, PreguntasRegistro -->
     <string name="fondo_gimnasio">fondo_gimnasio</string>
 
-    <!-- InicioSesion, Registro -->
-    <string name="nombre_de_usuario_m">NOMBRE DE USUARIO</string>
-    <string name="contrasena_mayusculas_m">CONTRASEÑA</string>
-    <string name="iniciar_sesion_mayusculas_m">INICIAR SESIÓN</string>
-    <string name="registrarse_mayusculas_m">REGISTRARSE</string>
-
 
     <!-- InicioSesion -->
     <string name="bienvenido">Bienvenid@</string>
+
     <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="email">Email</string> <!-- InicioSesion, RegistroSesion -->
+    <string name="contrasena">Contraseña</string> <!-- InicioSesion, RegistroSesion -->
+
     <string name="eres_nuevo">¿Eres nuevo?</string>
-    <string name="ejemplo_error_login">Error. Nombre de usuario o contraseña incorrectos.</string>
+    <string name="registrarse_mayusculas">REGISTRARSE</string> <!-- InicioSesion, RegistroSesion -->
+    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string> <!-- InicioSesion, RegistroSesion -->
 
     <!-- RegistroSesion -->
     <string name="registrarse">Registrarse</string>
 
     <string name="nombre_de_usuario">Nombre de usuario</string>
-    <string name="correo">Correo</string>
-    <string name="contrasena">Contraseña</string>
-
-    <string name="registrarse_mayusculas">REGISTRARSE</string>
     <string name="tienes_cuenta">¿Tienes cuenta?</string>
-    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string>
 
 
 

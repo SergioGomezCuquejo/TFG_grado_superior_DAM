@@ -1,6 +1,8 @@
 package com.example.yim.vista.vista;
 
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
+import static com.example.yim.vista.controlador.Validar.validarContrasena;
+import static com.example.yim.vista.controlador.Validar.validarEmail;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +18,6 @@ import android.widget.Toast;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaPerfil;
-import com.example.yim.modelo.tablas.TablaUsuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,11 +30,11 @@ import java.util.regex.Pattern;
 public class RegistroSesion extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseManager firebaseManager;
-    EditText nombre, correo, contrasena;
+    EditText nombre, email, contrasena;
     TextView error;
     Button registrarse, iniciarSesion;
 
-    String nombreUsuario, correoUsuario, contrasenaUsuario;
+    String nombreUsuario, emailUsuario, contrasenaUsuario;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -48,7 +48,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
         //Referencias de las vistas.
         nombre = findViewById(R.id.nombre);
-        correo = findViewById(R.id.correo);
+        email = findViewById(R.id.email);
         contrasena = findViewById(R.id.contrasena);
 
         error = findViewById(R.id.error);
@@ -67,11 +67,11 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
         int id = view.getId();
         if (id == R.id.registrarse) {
             nombreUsuario = nombre.getText().toString();
-            correoUsuario = correo.getText().toString();
+            emailUsuario = email.getText().toString();
             contrasenaUsuario = contrasena.getText().toString();
 
-            if(!camposVacios(nombreUsuario, correoUsuario, contrasenaUsuario)){
-                registro(nombreUsuario, correoUsuario, contrasenaUsuario);
+            if(!camposVacios(nombreUsuario, emailUsuario, contrasenaUsuario)){
+                registro(nombreUsuario, emailUsuario, contrasenaUsuario);
 
             }
 
@@ -82,10 +82,10 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     }
 
     //Comprueba que todos los campos estén rellenos.
-    public boolean camposVacios(String nombreUsuario, String eamilUsuario, String contrasenaUsuario){
+    private boolean camposVacios(String nombreUsuario, String emailUsuario, String contrasenaUsuario){
         boolean vacio;
 
-        if(!nombreUsuario.isEmpty() && !eamilUsuario.isEmpty() && !contrasenaUsuario.isEmpty() ){
+        if(!nombreUsuario.isEmpty() && !emailUsuario.isEmpty() && !contrasenaUsuario.isEmpty() ){
             vacio = false;
         }else {
             vacio = true;
@@ -96,71 +96,44 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     }
 
     //Registrar al usuario.
-    private void registro(String nombreUsuario, String correoUsuario, String contrasenaUsuario){
+    private void registro(String nombreUsuario, String emailUsuario, String contrasenaUsuario){
+        try{
+            boolean emailCorrecto = validarEmail(emailUsuario);
+            boolean contrasenaCorrecta = validarContrasena(contrasenaUsuario);
 
-        if (validarEmail(correoUsuario) && validarContrasena(contrasenaUsuario)){
-            auth.createUserWithEmailAndPassword(correoUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+            if ( emailCorrecto && contrasenaCorrecta){
+                auth.createUserWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if (task.isSuccessful()) {
-                        String id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+                        if (task.isSuccessful()) {
+                            String id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
-                        firebaseManager.agregarUsuario(id, contrasenaUsuario, correoUsuario, nombreUsuario);
+                            firebaseManager.agregarUsuario(id, contrasenaUsuario, emailUsuario, nombreUsuario);
 
-                        Toast.makeText(getApplicationContext(), "Registrado", Toast.LENGTH_SHORT).show();
+                            mostrarToast("Usuario registrado correctamente");
+                        }
+
                     }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mostrarToast("Error al registrar sesión");
+                    }
+                });
+            } else if(!emailCorrecto){
+                mostrarError("Email no valido.");
 
+            } else {
+                if(contrasenaUsuario.length() < 6){
+                    mostrarError("La contraseña debe tener al ménos 6 carácteres.");
+                } else {
+                    mostrarError("La contraseña debe incluir al menos una letra mayúscula, un número y un carácter especial.");
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "Error al registrar sesión.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    //Comprobar si la estructura del correo es correcta.
-    private boolean validarEmail(String correoUsuario) {
-        boolean correcto;
-
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        if(pattern.matcher(correoUsuario).matches()){
-            correcto = true;
-        }else{
-            correcto = false;
-            mostrarError("Correo incorrecto.");
-        }
-
-        return correcto;
-    }
-
-    //Comprobar que la contraseña tenga mínimo 6 carácteres.
-    private boolean validarContrasena(String contrasenaUsuario){
-        boolean correcta;
-
-        Pattern pattern = Pattern.compile("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+");
-
-        if( contrasena.length() >= 6 ){
-            if(pattern.matcher(contrasenaUsuario).matches()) {
-                correcta = true;
-            }else{
-                correcta = false;
-
-                mostrarError("La contraseña debe tener al menos un número, una mayúscula y un carácter.");
             }
-        }else{
-            correcta = false;
-
-            mostrarError("La contraseña debe tener 6 caracteres como mínimo.");
+        }catch (Exception ex){
+            mostrarToast("Error al registrar sesión");
         }
-        return correcta;
-    }
-
-    //Cambiar a otra interfaz.
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
     }
 
     //Mostrar el error por la interfaz.
@@ -169,5 +142,16 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
             error.setVisibility(View.VISIBLE);
         }
         error.setText(mensaje);
+    }
+
+    //Cambiar a otra interfaz.
+    private void cambiarActivity(Class<?> activity) {
+        finish();
+        cambiar(this, activity);
+    }
+
+    //Mostrar alertas (Toasts)
+    private void mostrarToast(String mensaje){
+        Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
     }
 }
