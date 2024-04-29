@@ -126,7 +126,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
                             android:padding="10dp"
-                            android:text="@string/contrasena"
+                            android:text="@string/contrasena_m"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"
                             android:textStyle="bold" />

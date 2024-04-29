@@ -5,10 +5,10 @@
     <string name="fondo_gimnasio">fondo_gimnasio</string>
 
     <!-- InicioSesion, Registro -->
-    <string name="nombre_de_usuario">NOMBRE DE USUARIO</string>
-    <string name="contrasena_mayusculas">CONTRASEÑA</string>
-    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string>
-    <string name="registrarse_mayusculas">REGISTRARSE</string>
+    <string name="nombre_de_usuario_m">NOMBRE DE USUARIO</string>
+    <string name="contrasena_mayusculas_m">CONTRASEÑA</string>
+    <string name="iniciar_sesion_mayusculas_m">INICIAR SESIÓN</string>
+    <string name="registrarse_mayusculas_m">REGISTRARSE</string>
 
 
     <!-- InicioSesion -->
@@ -19,9 +19,15 @@
 
     <!-- RegistroSesion -->
     <string name="registrarse">Registrarse</string>
-    <string name="repetir_contrasena">REPETIR CONTRASEÑA</string>
-    <string name="ejemplo_error_registro">Error. El nombre de usuario ya está en uso.</string>
+
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="correo">Correo</string>
+    <string name="contrasena">Contraseña</string>
+
+    <string name="registrarse_mayusculas">REGISTRARSE</string>
     <string name="tienes_cuenta">¿Tienes cuenta?</string>
+    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string>
+
 
 
     <!-- PreguntasRegistro -->
@@ -194,7 +200,7 @@
 
     <string name="imagen_subir">imagen_subir</string>
     <string name="nombre_ejemplo">Nombre ejemplo</string>
-    <string name="contrasena">Contraseña</string>
+    <string name="contrasena_m">Contraseña</string>
     <string name="contrasena_ejemplo">ContrasenaEjemplo</string>
 
 

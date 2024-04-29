@@ -16,14 +16,21 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/atras"
+        <FrameLayout
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/atras"
-            app:shapeAppearanceOverlay="@style/radius" />
+            tools:ignore="NestedWeights">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/atras"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/atras_gris"
+                app:shapeAppearanceOverlay="@style/radius" />
+        </FrameLayout>
 
         <EditText
             android:id="@+id/textView"
@@ -39,7 +46,7 @@
             android:maxLines="2"
             android:minLines="1"
             android:padding="10dp"
-            android:text="@string/nombre_rutina_largo"
+            android:text="Nombre rutina"
             android:textColor="@color/blanco"
             android:textSize="16sp"
             android:textStyle="bold|italic"
