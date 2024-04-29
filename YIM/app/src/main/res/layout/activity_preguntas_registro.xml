@@ -4,6 +4,395 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PreguntasRegistro">
+    tools:context=".vista.vista.PreguntasRegistro">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_gimnasio"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/fondo_gimnasio" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="380dp"
+        android:layout_height="550dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/azul_clarito"
+        android:padding="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck">
+
+        <!-- COMENCEMOS -->
+        <LinearLayout
+            android:id="@+id/linearlayout_comencemos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="280dp"
+                    android:contentDescription="@string/imagen_silueta_hombre"
+                    android:src="@drawable/silueta_hombre" />
+
+                <TextView
+                    android:id="@+id/comencemos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center|center_vertical"
+                    android:padding="20dp"
+                    android:text="@string/comencemos"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/omitir_comencemos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/omitir"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/siguiente_comencemos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/siguiente"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded,TextContrastCheck" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- COMENCEMOS -->
+
+        <!-- Preguntas -->
+        <LinearLayout
+            android:id="@+id/linearlayout_preguntas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:visibility="invisible">
+
+            <com.uncopt.android.widget.text.justify.JustifiedTextView
+                android:id="@+id/pregunta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/pregunta_ejemplo"
+                android:textColor="@color/negro_oscuro"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+
+            <RadioGroup
+                android:id="@+id/respuestas"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <RadioButton
+                    android:id="@+id/respuesta1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/_preguntas_radiobutton"
+                    android:button="@null"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/respuesta_ejemplo1"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/respuesta2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/_preguntas_radiobutton"
+                    android:button="@null"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/respuesta_ejemplo2"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/respuesta3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/_preguntas_radiobutton"
+                    android:button="@null"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/respuesta_ejemplo3"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/respuesta4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/_preguntas_radiobutton"
+                    android:button="@null"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/respuesta_ejemplo4"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:text="@string/ejemplo_error_pregunta"
+                android:textColor="@color/rojo_clarito"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/omitir_preguntas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/omitir"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/siguiente_preguntas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/siguiente"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Preguntas -->
+
+        <!-- EMPEZAR -->
+        <LinearLayout
+            android:id="@+id/linearlayout_empezar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:contentDescription="@string/imagen_silueta_mujer"
+                    android:src="@drawable/silueta_mujer" />
+
+                <TextView
+                    android:id="@+id/empezar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center|center_vertical"
+                    android:padding="20dp"
+                    android:text="@string/empezar"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/siguiente_empezar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="right"
+                    android:text="@string/siguiente"
+                    android:textColor="@color/azul_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- EMPEZAR -->
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Omitir -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_omitir"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@android:color/transparent"
+        android:visibility="invisible"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/omitir_fondo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            tools:ignore="VisualLintButtonSize" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/titulo_omitir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/titulo_omitir"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mensaje_omitir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:text="@string/mensaje_omitir"
+                    android:textColor="@color/negro"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/cancelar"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_verde"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="@string/cancelar"
+                        android:textColor="@color/verde"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/continuar"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_rectangulo_verde__borde_verde"
+                        android:fontFamily="@font/merriweather_light"
+                        android:foregroundGravity="right"
+                        android:text="@string/aceptar"
+                        android:textColor="@color/azul_clarito"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+    <!-- Omitir -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

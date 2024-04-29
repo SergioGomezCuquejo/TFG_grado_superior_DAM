@@ -1,9 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Logros">
+    android:background="@color/fondo"
+    android:orientation="vertical"
+    tools:context=".vista.vista.Logros">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/_style_borde_blanco_arriba_abajo"
+        android:fontFamily="@font/merriweather_light"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/logros"
+        android:textColor="@color/blanco"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false">
+
+            <FrameLayout
+                android:id="@+id/logro_50_flexiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_50_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_50_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_50_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/logro_100_flexiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toEndOf="@+id/logro_50_flexiones">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_100_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_100_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_100_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/logro_150_flexiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toEndOf="@+id/logro_100_flexiones">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_150_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/logro_150_flexiones"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_150_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/logro_250_flexiones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toEndOf="@+id/logro_150_flexiones">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_logro_250_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/biceps"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <View
+                    android:id="@+id/progreso_logro_250_flexiones"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/_style_rectangulo_gris_translucido" />
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/_style_borde_negro_arriba"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        android:baselineAligned="false">
+
+        <FrameLayout
+            android:id="@+id/imagen_casa"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/imagen_casa"
+                android:scaleType="fitCenter"
+                android:src="@drawable/casa" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/imagen_calendario"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/calendario"
+                android:contentDescription="@string/imagen_casa" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_estadisticas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_derecha_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/estadisticas"
+                android:contentDescription="@string/imagen_estadisticas" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_usuario"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/usuario"
+                android:contentDescription="@string/imagen_usuario" />
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

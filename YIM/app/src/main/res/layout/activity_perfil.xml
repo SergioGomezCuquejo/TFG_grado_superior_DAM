@@ -4,6 +4,503 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Perfil">
+    android:background="@color/fondo"
+    tools:context=".vista.vista.Perfil">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/perfil"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imagen_perfil"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/usuario"
+                            android:contentDescription="@string/imagen_usuario" />
+
+                        <ImageView
+                            android:id="@+id/subir_imagen"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignEnd="@id/imagen_perfil"
+                            android:layout_alignBottom="@id/imagen_perfil"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_50"
+                            android:src="@drawable/subir_imagen_negra"
+                            android:contentDescription="@string/imagen_subir" />
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/nombre"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/nombre"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/nombre_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Nombre"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="text"
+                            android:text="@string/nombre_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/contrasena"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/contrasena_m"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/contrasena_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Contraseña"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="textPassword"
+                            android:text="@string/contrasena_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/logros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/merriweather_light"
+                        android:padding="10dp"
+                        android:text="@string/logros"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:contentDescription="@string/imagen_mayor_que"
+                        android:src="@drawable/mayor_que" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/objetivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/merriweather_light"
+                        android:padding="10dp"
+                        android:text="@string/objetivo"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/ganancia"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/ganancia"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/mayor_que_ganancia"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/mayor_que"
+                            android:contentDescription="@string/imagen_mayor_que" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/informacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/merriweather_light"
+                        android:padding="10dp"
+                        android:text="@string/informacion"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/genero"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/genero"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/genero_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Genero"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="text"
+                            android:text="@string/genero_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/unidades"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/unidades"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/unidades_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Unidades"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="number"
+                            android:text="@string/unidades_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/peso"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/peso"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/peso_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Peso"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="number"
+                            android:text="@string/peso_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/altura"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/altura"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/altura_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Altura"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="number"
+                            android:text="@string/altura_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,VisualLintTextFieldSize,TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/_style_borde_gris_arriba"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/edad"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:padding="10dp"
+                            android:text="@string/edad"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/edad_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Edad"
+                            android:background="@null"
+                            android:ems="10"
+                            android:gravity="right|center_vertical"
+                            android:inputType="number"
+                            android:text="@string/edad_ejemplo"
+                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/_style_borde_negro_arriba"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:id="@+id/imagen_casa"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/casa"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/imagen_calendario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_izquierda"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/calendario"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagen_estadisticas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_derecha_izquierda"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/estadisticas"
+                    android:contentDescription="@string/imagen_estadisticas" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagen_usuario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/negro_traslucido"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/usuario"
+                    android:contentDescription="@string/imagen_usuario" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
