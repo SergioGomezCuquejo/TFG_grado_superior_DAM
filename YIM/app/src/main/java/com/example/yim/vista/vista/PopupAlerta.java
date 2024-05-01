@@ -13,8 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
+    FirebaseAuth auth;
+    Intent intent;
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
     String titulo, texto, iraA;
@@ -24,18 +27,14 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_alerta);
 
-        //Creación de variables.
-        DisplayMetrics medidasVentana;
-        int ancho, alto;
-        Intent intent;
 
 
         //Cambiar el tamaño de la pantalla para que sea como un popup.
-        medidasVentana = new DisplayMetrics();
+        DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
-        ancho = medidasVentana.widthPixels;
-        alto = medidasVentana.heightPixels;
+        int ancho = medidasVentana.widthPixels;
+        int alto = medidasVentana.heightPixels;
 
         getWindow().setLayout((int)(ancho * 0.80), (int) (alto * 0.30));
 
@@ -96,6 +95,12 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                         break;
                     case "ir_a_ejercicios_rutina":
                         cambiarActivity(EjerciciosRutinas.class);
+                        break;
+                    case "cerrar_sesion":
+                        auth = FirebaseAuth.getInstance();
+                        auth.signOut();
+                        finish();
+                        cambiarActivity(InicioSesion.class);
                         break;
                     default:
                         finish();

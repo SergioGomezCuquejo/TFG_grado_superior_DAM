@@ -1,23 +1,20 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.Validar.validarContrasena;
-import static com.example.yim.vista.controlador.Validar.validarEmail;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.controlador.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +22,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class RegistroSesion extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
@@ -98,8 +94,8 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     //Registrar al usuario.
     private void registro(String nombreUsuario, String emailUsuario, String contrasenaUsuario){
         try{
-            boolean emailCorrecto = validarEmail(emailUsuario);
-            boolean contrasenaCorrecta = validarContrasena(contrasenaUsuario);
+            boolean emailCorrecto = Validar.validarEmail(emailUsuario);
+            boolean contrasenaCorrecta = Validar.validarContrasena(contrasenaUsuario);
 
             if ( emailCorrecto && contrasenaCorrecta){
                 auth.createUserWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -111,14 +107,14 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
                             firebaseManager.agregarUsuario(id, contrasenaUsuario, emailUsuario, nombreUsuario);
 
-                            mostrarToast("Usuario registrado correctamente");
+                            MostratToast.mostrarToast(RegistroSesion.this, "Usuario registrado correctamente");
                         }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        mostrarToast("Error al registrar sesión");
+                        MostratToast.mostrarToast(RegistroSesion.this, "Error al registrar sesión");
                     }
                 });
             } else if(!emailCorrecto){
@@ -132,7 +128,8 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
                 }
             }
         }catch (Exception ex){
-            mostrarToast("Error al registrar sesión");
+            MostratToast.mostrarToast(this, "Error al registrar sesión");
+            ex.printStackTrace();
         }
     }
 
@@ -147,11 +144,6 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     //Cambiar a otra interfaz.
     private void cambiarActivity(Class<?> activity) {
         finish();
-        cambiar(this, activity);
-    }
-
-    //Mostrar alertas (Toasts)
-    private void mostrarToast(String mensaje){
-        Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+        CambiarActivity.cambiar(this, activity);
     }
 }

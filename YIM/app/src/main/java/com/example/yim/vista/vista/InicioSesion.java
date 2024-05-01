@@ -1,9 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.Validar.validarContrasena;
-import static com.example.yim.vista.controlador.Validar.validarEmail;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yim.R;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.controlador.Validar;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -87,15 +85,15 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
     //Iniciar sesión del usuario
     private void iniciarSesion(String emailUsuario, String contrasenaUsuario){
         try{
-            boolean emailCorrecto = validarEmail(emailUsuario);
-            boolean contrasenaCorrecta = validarContrasena(contrasenaUsuario);
+            boolean emailCorrecto = Validar.validarEmail(emailUsuario);
+            boolean contrasenaCorrecta = Validar.validarContrasena(contrasenaUsuario);
 
             if ( emailCorrecto && contrasenaCorrecta){
                 auth.signInWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Bienvenido.", Toast.LENGTH_SHORT).show();
+                            MostratToast.mostrarToast(InicioSesion.this, "Bienvenido.");
                             cambiarActivity(Inicio.class);
                         }
                     }
@@ -117,7 +115,8 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }catch (Exception ex){
-            Toast.makeText(getApplicationContext(), "Error al registrar sesión", Toast.LENGTH_SHORT).show();
+            MostratToast.mostrarToast(this, "Error al registrar sesión");
+            ex.printStackTrace();
         }
     }
 
@@ -129,8 +128,6 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         error.setText(mensaje);
     }
 
-
-    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -141,12 +138,10 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-     */
-
 
     //Cambiar a otra interfaz.
     private void cambiarActivity(Class<?> activity) {
         finish();
-        cambiar(this, activity);
+        CambiarActivity.cambiar(this, activity);
     }
 }

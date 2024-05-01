@@ -2,30 +2,28 @@ package com.example.yim.modelo.tablas;
 
 public class TablaPerfil {
     private int altura, edad, peso;
-    private String contrasena, correo, genero, imagen, nombre, unidades;
+    private String contrasena, email, genero, imagen, nombre;
 
     public TablaPerfil() {
         altura = 0;
         contrasena = "";
-        correo = "";
         edad = 0;
+        email = "";
         genero = "";
         imagen = "";
         nombre = "";
         peso = 0;
-        unidades = "";
     }
 
-    public TablaPerfil(int altura, String contrasena, String correo, int edad, String genero, String imagen, String nombre, int peso, String unidades) {
+    public TablaPerfil(int altura, String contrasena, int edad, String email, String genero, String imagen, String nombre, int peso) {
         this.altura = altura;
         this.contrasena = contrasena;
-        this.correo = correo;
         this.edad = edad;
+        this.email = email;
         this.genero = genero;
         this.imagen = imagen;
         this.nombre = nombre;
         this.peso = peso;
-        this.unidades = unidades;
     }
 
     public int getAltura() {
@@ -44,16 +42,8 @@ public class TablaPerfil {
         this.contrasena = contrasena;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public int getEdad() {
-        return edad;
+    public String getEmail() {
+        return email;
     }
 
     public void setEdad(int edad) {
@@ -62,6 +52,14 @@ public class TablaPerfil {
 
     public String getGenero() {
         return genero;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getEdad() {
+        return edad;
     }
 
     public void setGenero(String genero) {
@@ -90,13 +88,5 @@ public class TablaPerfil {
 
     public void setPeso(int peso) {
         this.peso = peso;
-    }
-
-    public String getUnidades() {
-        return unidades;
-    }
-
-    public void setUnidades(String unidades) {
-        this.unidades = unidades;
     }
 }

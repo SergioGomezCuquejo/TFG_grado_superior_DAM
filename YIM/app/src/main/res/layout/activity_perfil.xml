@@ -81,9 +81,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/_style_borde_gris_arriba"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:layout_marginEnd="10dp"
+                            android:text="Nombre:"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/nombre"
@@ -91,58 +101,38 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
-                            android:padding="10dp"
-                            android:text="@string/nombre"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp"/>
 
-                        <EditText
-                            android:id="@+id/nombre_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Nombre"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="text"
-                            android:text="@string/nombre_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/_style_borde_gris_arriba"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:padding="10dp">
 
                         <TextView
-                            android:id="@+id/contrasena"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
-                            android:padding="10dp"
-                            android:text="@string/contrasena_m"
+                            android:text="Email:"
+                            android:layout_marginEnd="10dp"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/contrasena_tv"
+
+                        <TextView
+                            android:id="@+id/email"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:autofillHints="Contraseña"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="textPassword"
-                            android:text="@string/contrasena_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -186,57 +176,6 @@
                     android:paddingRight="5dp">
 
                     <TextView
-                        android:id="@+id/objetivo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:padding="10dp"
-                        android:text="@string/objetivo"
-                        android:textColor="@color/negro_oscuro"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/_style_borde_gris_arriba"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
-
-                        <TextView
-                            android:id="@+id/ganancia"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/merriweather_light"
-                            android:padding="10dp"
-                            android:text="@string/ganancia"
-                            android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:id="@+id/mayor_que_ganancia"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_marginEnd="5dp"
-                            android:src="@drawable/mayor_que"
-                            android:contentDescription="@string/imagen_mayor_que" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_10"
-                    android:orientation="vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp">
-
-                    <TextView
-                        android:id="@+id/informacion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/merriweather_light"
@@ -254,7 +193,6 @@
                         android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/genero"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -265,53 +203,16 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/genero_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Genero"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="text"
-                            android:text="@string/genero_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/_style_borde_gris_arriba"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
-
                         <TextView
-                            android:id="@+id/unidades"
-                            android:layout_width="0dp"
+                            android:id="@+id/genero"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
-                            android:padding="10dp"
-                            android:text="@string/unidades"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:layout_marginEnd="10dp"
+                            android:text="Masculino"
+                            android:textSize="20sp"/>
 
-                        <EditText
-                            android:id="@+id/unidades_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Unidades"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="number"
-                            android:text="@string/unidades_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -323,7 +224,6 @@
                         android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/peso"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -334,18 +234,23 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/peso_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Peso"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="number"
-                            android:text="@string/peso_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                        <TextView
+                            android:id="@+id/peso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="0"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:text="kg"
+                            android:textSize="20sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -357,7 +262,6 @@
                         android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/altura"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -368,18 +272,23 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/altura_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Altura"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="number"
-                            android:text="@string/altura_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,VisualLintTextFieldSize,TouchTargetSizeCheck" />
+                        <TextView
+                            android:id="@+id/altura"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="0"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:text="cm"
+                            android:textSize="20sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -391,7 +300,6 @@
                         android:paddingRight="5dp">
 
                         <TextView
-                            android:id="@+id/edad"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -402,20 +310,54 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/edad_tv"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:autofillHints="Edad"
-                            android:background="@null"
-                            android:ems="10"
-                            android:gravity="right|center_vertical"
-                            android:inputType="number"
-                            android:text="@string/edad_ejemplo"
-                            tools:ignore="LabelFor,RtlHardcoded,TouchTargetSizeCheck" />
+                        <TextView
+                            android:id="@+id/edad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="0"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:text="años"
+                            android:textSize="20sp"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/politica"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Política de privacidad"
+                    android:textColor="@color/azul_clarito"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cerrar_sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Cerrar sesión"
+                    android:textColor="@color/rojo_clarito"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </ScrollView>
