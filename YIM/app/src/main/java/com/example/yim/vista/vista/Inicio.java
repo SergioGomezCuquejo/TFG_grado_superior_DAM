@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.vista.controlador.CambiarActivity;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
-
     LinearLayout continuar_linearlayout, musculos_linearlayout, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView ejercicios, rutinas;
     ImageView lupa_ejercicios, mas_ejercicios_pequeno, lupa_rutinas, mas_rutinas_pequeno;
@@ -91,7 +93,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             cambiarActivity(VerRutinas.class);
 
         } else if (id == R.id.mas_ejercicios_pequeno || id == R.id.mas_ejercicios_grande) {
-            cambiarActivity(PopupCrearEjercicios.class);
+            CambiarActivity.cambiarAlerta(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
 
         } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
             cambiarActivity(CrearRutinas.class);

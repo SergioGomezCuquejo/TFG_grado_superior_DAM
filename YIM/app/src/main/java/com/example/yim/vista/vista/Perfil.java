@@ -20,10 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseManager firebaseManager;
+    FirebaseUser user;
     TextView nombre, email, genero, peso, altura, edad, politica, cerrarSesion;
     LinearLayout logros, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    FirebaseUser user;
-    String idUsuario;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -104,7 +103,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     //Mostrar los datos del usuario.
     public void mostrarDatos(){
         try{
-            firebaseManager.obternerPerfil(this, new FirebaseCallbackPerfil() {
+            firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
                 @Override
                 public void onCallback(TablaPerfil perfil) {
                     nombre.setText(perfil.getNombre());

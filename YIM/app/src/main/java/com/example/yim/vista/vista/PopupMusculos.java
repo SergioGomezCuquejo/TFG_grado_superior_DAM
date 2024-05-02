@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yim.R;
+import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.vista.controlador.MostratToast;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -45,6 +48,10 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
+        Intent intent = getIntent();
+        String musculoUsuario = intent.getStringExtra("musculoUsuario");
+
+        MostratToast.mostrarToast(this, musculoUsuario);
 
         //Referencias de las vistas
         cancelar = findViewById(R.id.cancelar);

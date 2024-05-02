@@ -52,29 +52,21 @@
         android:paddingRight="20dp"
         tools:ignore="UselessParent">
 
-        <FrameLayout
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/musculo"
+            android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_weight="1"
-            android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-            android:padding="1dp"
-            tools:ignore="NestedWeights">
-
-            <EditText
-                android:id="@+id/musculo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                android:fontFamily="@font/merriweather_light"
-                android:gravity="center"
-                android:text="@string/biceps"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize"
-                android:autofillHints="Musculo"
-                android:inputType="text" />
-        </FrameLayout>
+            android:background="@drawable/_style2_borde_blanco_10"
+            android:backgroundTintMode="add"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:text="@string/biceps"
+            android:textColor="@color/negro_oscuro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize"
+            android:autofillHints="Musculo"
+            android:inputType="text" />
     </LinearLayout>
 
     <ScrollView
@@ -260,6 +252,7 @@
                     tools:ignore="NestedWeights" />
 
                 <TextView
+                    android:id="@+id/ejercicos_en_rutina_activa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -294,6 +287,7 @@
                     tools:ignore="HardcodedText,NestedWeights" />
 
                 <TextView
+                    android:id="@+id/ejercicios_reailizados"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -328,6 +322,7 @@
                     tools:ignore="NestedWeights" />
 
                 <TextView
+                    android:id="@+id/ejercicios_sin_realizar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -362,6 +357,7 @@
                     tools:ignore="NestedWeights" />
 
                 <TextView
+                    android:id="@+id/ejercicios_totales"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -396,6 +392,7 @@
                     tools:ignore="NestedWeights" />
 
                 <TextView
+                    android:id="@+id/ejercicos_en_rutinas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

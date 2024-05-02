@@ -15,7 +15,8 @@ public class TablaPerfil {
         peso = 0;
     }
 
-    public TablaPerfil(int altura, String contrasena, int edad, String email, String genero, String imagen, String nombre, int peso) {
+    public TablaPerfil(int altura, String contrasena, int edad, String email, String genero,
+                       String imagen, String nombre, int peso) {
         this.altura = altura;
         this.contrasena = contrasena;
         this.edad = edad;

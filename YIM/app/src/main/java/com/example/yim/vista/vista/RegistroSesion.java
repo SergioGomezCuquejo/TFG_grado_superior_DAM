@@ -40,7 +40,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
         //Inicializar instancias.
         auth = FirebaseAuth.getInstance();
-        firebaseManager = new FirebaseManager();;
+        firebaseManager = new FirebaseManager();
 
         //Referencias de las vistas.
         nombre = findViewById(R.id.nombre);
@@ -105,7 +105,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             String id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
-                            firebaseManager.agregarUsuario(id, contrasenaUsuario, emailUsuario, nombreUsuario);
+                            firebaseManager.agregarUsuario(RegistroSesion.this, id, contrasenaUsuario, emailUsuario, nombreUsuario);
 
                             MostratToast.mostrarToast(RegistroSesion.this, "Usuario registrado correctamente");
                         }
