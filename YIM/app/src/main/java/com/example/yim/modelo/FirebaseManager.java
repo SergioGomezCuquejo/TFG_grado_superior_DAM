@@ -122,15 +122,15 @@ public class FirebaseManager {
 
                             for (DataSnapshot musculoSnapshot : musculosSnapshot.getChildren()) {
                                 TablaMusculosUsuario musculo = musculoSnapshot.getValue(TablaMusculosUsuario.class);
+                                musculo.setID(musculoSnapshot.getKey());
                                 musculosUsuarios.add(musculo);
                             }
                         }
                     } else {
-                        MostratToast.mostrarToast(context, "No se encontró el usuario.");
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
                     }
 
                     callback.onCallback(musculosUsuarios);
-
                 }
 
                 @Override
@@ -138,10 +138,26 @@ public class FirebaseManager {
                     MostratToast.mostrarToast(context, "Error al obtener los músculos del usuario");
                 }
             });
-        } catch (Exception e) {
+        } catch (Exception ex) {
             MostratToast.mostrarToast(context, "Error al obtener los músculos del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean actualizarColoresMusculosUsuario(Context context, String idMusculo, String colorFondo, String colorFuente){
+        boolean actualizado = false;
+        try{
+            DatabaseReference musculoReference = usuarioReference.child(idUsuario).child("musculos").child(idMusculo);
+
+            musculoReference.child("color_fondo").setValue(colorFondo);
+            musculoReference.child("color_fuente").setValue(colorFuente);
+
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar los colores del músculo.");
             e.printStackTrace();
         }
+        return actualizado;
     }
 
 

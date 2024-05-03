@@ -3,6 +3,7 @@ package com.example.yim.modelo.tablas;
 import java.io.Serializable;
 
 public class TablaMusculosUsuario implements Serializable {
+    private String ID;
     private String color_fondo;
     private String color_fuente;
     private int ejercicios_en_rutinaActual;
@@ -33,6 +34,14 @@ public class TablaMusculosUsuario implements Serializable {
         this.ejercicios_sin_realizar = ejercicios_sin_realizar;
         this.ejercicios_totales = ejercicios_totales;
         this.nombre = nombre;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getColor_fondo() {

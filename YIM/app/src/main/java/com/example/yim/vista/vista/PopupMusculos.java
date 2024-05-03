@@ -21,12 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yim.R;
+import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class PopupMusculos extends AppCompatActivity implements View.OnClickListener {
+    FirebaseManager firebaseManager;
     TablaMusculosUsuario musculoUsuario;
     ImageView cancelar, guardar;
     EditText musculo;
@@ -50,6 +52,8 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         int alto = medidasVentana.heightPixels;
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
+
+        firebaseManager = new FirebaseManager();
 
         Intent intent = getIntent();
         musculoUsuario = (TablaMusculosUsuario) intent.getSerializableExtra("musculoUsuario");
@@ -99,11 +103,19 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         } else if (id == R.id.guardar) {
 
             if(datosCambiados){
+                musculoUsuario.setColor_fondo("#" + Integer.toHexString(colorFondo).toUpperCase());
+                musculoUsuario.setColor_fuente("#" + Integer.toHexString(colorLetras).toUpperCase());
 
+                if(firebaseManager.actualizarColoresMusculosUsuario(this, musculoUsuario.getID(),
+                        musculoUsuario.getColor_fondo(), musculoUsuario.getColor_fuente())){
+                    MostratToast.mostrarToast(this, "Datos guardados correctamente.");
+                    finish();
+                }else{
+                    MostratToast.mostrarToast(this, "error");
+                }
             }else{
                 MostratToast.mostrarToast(this, "No hay cambios que guardar");
             }
-            Toast.makeText(getApplicationContext(), "Datos guardados correctamente.", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.color_fondo) {
             cambiarColor("fondo", colorFondo);
@@ -155,7 +167,9 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         musculo.setTextColor(Color.parseColor(musculoUsuario.getColor_fuente()));
 
         color_fondo_tv.setText(musculoUsuario.getColor_fondo());
+        colorFondo = Color.parseColor(musculoUsuario.getColor_fondo());
         color_letras_tv.setText(musculoUsuario.getColor_fuente());
+        colorLetras = Color.parseColor(musculoUsuario.getColor_fuente());
 
         ejercicosEnRutinaActiva.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinaActual()));
         ejerciciosRealizados.setText(String.valueOf(musculoUsuario.getEjercicios_realizados()));
