@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,13 +27,15 @@ import com.example.yim.vista.controlador.MostratToast;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class PopupMusculos extends AppCompatActivity implements View.OnClickListener {
+    TablaMusculosUsuario musculoUsuario;
     ImageView cancelar, guardar;
     EditText musculo;
     LinearLayout color_fondo, color_letras;
     TextView color_fondo_tv, color_letras_tv;
-    Button borrar;
-    Drawable shape;
+    //Button borrar;
     int colorFondo, colorLetras;
+    TextView ejercicosEnRutinaActiva, ejerciciosRealizados, ejerciciosSinRealizar, ejerciciosTotales, ejercicosEnRutinas;
+    boolean datosCambiados;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,46 +52,57 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
         Intent intent = getIntent();
-        String musculoUsuario = intent.getStringExtra("musculoUsuario");
+        musculoUsuario = (TablaMusculosUsuario) intent.getSerializableExtra("musculoUsuario");
 
-        MostratToast.mostrarToast(this, musculoUsuario);
 
         //Referencias de las vistas
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar);
+
+        ejercicosEnRutinaActiva = findViewById(R.id.ejercicos_en_rutina_activa);
+        ejerciciosRealizados = findViewById(R.id.ejercicios_realizados);
+        ejerciciosSinRealizar = findViewById(R.id.ejercicios_sin_realizar);
+        ejerciciosTotales = findViewById(R.id.ejercicios_totales);
+        ejercicosEnRutinas = findViewById(R.id.ejercicos_en_rutinas);
+
         musculo = findViewById(R.id.musculo);
         color_fondo = findViewById(R.id.color_fondo);
         color_fondo_tv = findViewById(R.id.color_fondo_tv);
-        borrar = findViewById(R.id.borrar);
+        //borrar = findViewById(R.id.borrar);
         color_letras = findViewById(R.id.color_letras);
         color_letras_tv = findViewById(R.id.color_letras_tv);
+
 
         //Listeners
         cancelar.setOnClickListener(this);
         guardar.setOnClickListener(this);
         color_fondo.setOnClickListener(this);
         color_letras.setOnClickListener(this);
-        borrar.setOnClickListener(this);
+        //borrar.setOnClickListener(this);
 
 
-        //Poner fondo verde
-        shape = (Drawable) musculo.getBackground();
-        shape.setColorFilter(Color.parseColor( "#00c143"), android.graphics.PorterDuff.Mode.SRC);
-
-        colorFondo = Color.parseColor( "#00c143");
-        color_fondo_tv.setText("#" + Integer.toHexString(colorFondo).toUpperCase());
-        colorLetras = ContextCompat.getColor(PopupMusculos.this, R.color.negro_oscuro);
-        color_letras_tv.setText("#" + Integer.toHexString(colorLetras).toUpperCase());
+        mostrarDatos();
+        datosCambiados = false;
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.cancelar){
-            cambiarActivity( "Descartar cambios no guardados.",
-                    "¿Desea descartar los cambios no guardados?");
+            if(datosCambiados){
+                cambiarActivity( "Descartar cambios.",
+                        "¿Desea descartar los cambios no guardados?");
+            }else{
+                finish();
+            }
 
         } else if (id == R.id.guardar) {
+
+            if(datosCambiados){
+
+            }else{
+                MostratToast.mostrarToast(this, "No hay cambios que guardar");
+            }
             Toast.makeText(getApplicationContext(), "Datos guardados correctamente.", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.color_fondo) {
@@ -97,11 +111,11 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         } else if (id == R.id.color_letras) {
             cambiarColor("letras", colorLetras);
 
-        } else if (id == R.id.borrar) {
+        } /*else if (id == R.id.borrar) {
             cambiarActivity("Borrar músculo.",
                     "¿Desea eliminar el músculo 'Biceps'?");
 
-        }
+        }*/
     }
 
     private void cambiarActivity(String titulo, String texto) {
@@ -121,7 +135,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 if(cambiar.equals("fondo")){
-                    shape.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC);
+                    musculo.setBackgroundTintList(ColorStateList.valueOf(color));
                     colorFondo = color;
                     color_fondo_tv.setText("#" + Integer.toHexString(color).toUpperCase());
                 } else if (cambiar.equals("letras")) {
@@ -129,8 +143,25 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
                     colorLetras = color;
                     color_letras_tv.setText("#" + Integer.toHexString(color).toUpperCase());
                 }
+                datosCambiados = true;
             }
         });
         ambilWarnaDialog.show();
+    }
+
+    private void mostrarDatos(){
+        musculo.setText(musculoUsuario.getNombre());
+        musculo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculoUsuario.getColor_fondo())));
+        musculo.setTextColor(Color.parseColor(musculoUsuario.getColor_fuente()));
+
+        color_fondo_tv.setText(musculoUsuario.getColor_fondo());
+        color_letras_tv.setText(musculoUsuario.getColor_fuente());
+
+        ejercicosEnRutinaActiva.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinaActual()));
+        ejerciciosRealizados.setText(String.valueOf(musculoUsuario.getEjercicios_realizados()));
+        ejerciciosSinRealizar.setText(String.valueOf(musculoUsuario.getEjercicios_sin_realizar()));
+        ejerciciosTotales.setText(String.valueOf(musculoUsuario.getEjercicios_totales()));
+        ejercicosEnRutinas.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinas()));
+
     }
 }

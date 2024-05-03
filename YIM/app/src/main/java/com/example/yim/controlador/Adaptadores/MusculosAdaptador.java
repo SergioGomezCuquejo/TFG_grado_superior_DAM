@@ -52,7 +52,7 @@ public class MusculosAdaptador extends RecyclerView.Adapter<MusculosAdaptador.Mu
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PopupMusculos.class);
-                intent.putExtra("musculoUsuario", musculosUsuario.getNombre());
+                intent.putExtra("musculoUsuario", musculosUsuario);
                 context.startActivity(intent);
             }
         });
