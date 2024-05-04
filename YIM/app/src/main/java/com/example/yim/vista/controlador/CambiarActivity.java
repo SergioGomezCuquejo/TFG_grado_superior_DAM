@@ -5,9 +5,6 @@ import android.content.Intent;
 
 import com.example.yim.vista.vista.PopupAlerta;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 public class CambiarActivity {
     public static void cambiar(Context context, Class<?> activity) {
         Intent intent = new Intent(context, activity);

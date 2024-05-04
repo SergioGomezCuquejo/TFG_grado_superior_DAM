@@ -13,6 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicios;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaEjercicios;
+import com.example.yim.modelo.tablas.TablaMusculos;
+import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.modelo.tablas.TablaUsuario;
+import com.example.yim.vista.controlador.MostratToast;
+
+import java.util.ArrayList;
 
 public class VerEjercicios extends AppCompatActivity implements View.OnClickListener {
     RelativeLayout ejercicio1;
@@ -44,6 +55,16 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
         imagen_usuario.setOnClickListener(this);
+
+        FirebaseManager firebaseManager = new FirebaseManager();
+        firebaseManager.obtenerEjercicios(this, new FirebaseCallbackEjercicios() {
+            @Override
+            public void onCallback(ArrayList<TablaEjercicios> ejercicios) {
+                for (TablaEjercicios ejercicio : ejercicios){
+                    MostratToast.mostrarToast(VerEjercicios.this, ejercicio.toString());
+                }
+            }
+        });
     }
 
     @Override

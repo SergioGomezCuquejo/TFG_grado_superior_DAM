@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.yim.R;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.controlador.Validar;
+import com.example.yim.vista.controlador.ValidarDatos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -85,8 +85,8 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
     //Iniciar sesión del usuario
     private void iniciarSesion(String emailUsuario, String contrasenaUsuario){
         try{
-            boolean emailCorrecto = Validar.validarEmail(emailUsuario);
-            boolean contrasenaCorrecta = Validar.validarContrasena(contrasenaUsuario);
+            boolean emailCorrecto = ValidarDatos.validarEmail(emailUsuario);
+            boolean contrasenaCorrecta = ValidarDatos.validarContrasena(contrasenaUsuario);
 
             if ( emailCorrecto && contrasenaCorrecta){
                 auth.signInWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

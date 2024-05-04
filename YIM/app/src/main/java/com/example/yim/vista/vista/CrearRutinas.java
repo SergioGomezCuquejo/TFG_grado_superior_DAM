@@ -91,7 +91,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             finish();
 
         } else if (id == R.id.preguntas){
-            cambiarActivity(PreguntasRegistro.class);
+            cambiarActivity(Cuestionario.class);
 
         } else if (id == R.id.dia1){
             cambiarActivity(EjerciciosRutinas.class);

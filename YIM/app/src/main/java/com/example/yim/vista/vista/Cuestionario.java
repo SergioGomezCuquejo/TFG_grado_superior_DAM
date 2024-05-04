@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.yim.R;
 
-public class PreguntasRegistro extends AppCompatActivity implements View.OnClickListener {
+public class Cuestionario extends AppCompatActivity implements View.OnClickListener {
     //TODO solucionar el que no se pueda marcar opciones al darle a omitir
 
     TextView omitir_comencemos, omitir_preguntas, siguiente_comencemos, siguiente_preguntas, siguiente_empezar;
@@ -30,7 +30,7 @@ public class PreguntasRegistro extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preguntas_registro);
+        setContentView(R.layout.activity_cuestionario);
 
         //Referencias de las vistas
         cardview_omitir = findViewById(R.id.cardview_omitir);

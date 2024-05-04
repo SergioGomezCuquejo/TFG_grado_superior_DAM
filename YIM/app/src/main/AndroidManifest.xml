@@ -84,7 +84,7 @@
             android:exported="false"
             android:theme="@style/AppTheme.PopupCerrable" />
         <activity
-            android:name=".vista.vista.PreguntasRegistro"
+            android:name=".vista.vista.Cuestionario"
             android:exported="false" />
         <activity
             android:name=".vista.vista.RegistroSesion"

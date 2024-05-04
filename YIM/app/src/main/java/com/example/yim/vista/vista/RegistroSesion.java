@@ -14,7 +14,7 @@ import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.controlador.Validar;
+import com.example.yim.vista.controlador.ValidarDatos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -94,10 +94,10 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     //Registrar al usuario.
     private void registro(String nombreUsuario, String emailUsuario, String contrasenaUsuario){
         try{
-            boolean emailCorrecto = Validar.validarEmail(emailUsuario);
-            boolean contrasenaCorrecta = Validar.validarContrasena(contrasenaUsuario);
+            boolean emailCorrecto = ValidarDatos.validarEmail(emailUsuario);
+            boolean contrasenaCorrecta = ValidarDatos.validarContrasena(contrasenaUsuario);
 
-            if ( emailCorrecto && contrasenaCorrecta){
+            if ( emailCorrecto /*&& contrasenaCorrecta*/){
                 auth.createUserWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

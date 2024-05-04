@@ -7,15 +7,18 @@ import java.util.Map;
 public class TablaUsuario {
     private TablaPerfil perfil;
     private ArrayList<TablaMusculosUsuario> musculos;
+    private ArrayList<TablaEjerciciosUsuario> ejercicios;
 
     public TablaUsuario() {
         perfil = new TablaPerfil();
-        musculos = new ArrayList<>();
+        musculos = new ArrayList<TablaMusculosUsuario>();
+        ejercicios = new ArrayList<TablaEjerciciosUsuario>();
     }
 
-    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaMusculosUsuario> musculos) {
+    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaMusculosUsuario> musculos, ArrayList<TablaEjerciciosUsuario> ejercicios) {
         this.perfil = perfil;
         this.musculos = musculos;
+        this.ejercicios = ejercicios;
     }
 
     public TablaPerfil getPerfil() {
@@ -32,5 +35,13 @@ public class TablaUsuario {
 
     public void setMusculos( ArrayList<TablaMusculosUsuario> musculos) {
         this.musculos = musculos;
+    }
+
+    public ArrayList<TablaEjerciciosUsuario> getEjercicios() {
+        return ejercicios;
+    }
+
+    public void setEjercicios(ArrayList<TablaEjerciciosUsuario> ejercicios) {
+        this.ejercicios = ejercicios;
     }
 }

@@ -4,7 +4,7 @@ import android.util.Patterns;
 
 import java.util.regex.Pattern;
 
-public class Validar {
+public class ValidarDatos {
 
 
     //Comprobar si la estructura del email es correcta.
