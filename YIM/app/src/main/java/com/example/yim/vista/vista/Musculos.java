@@ -25,10 +25,10 @@ import java.util.ArrayList;
 public class Musculos extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseManager firebaseManager;
-    RecyclerView recyclerView;
     FirebaseUser user;
+    RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    private MusculosAdaptador adaptador;
+    MusculosAdaptador adaptador;
 
 
     @SuppressLint("MissingInflatedId")

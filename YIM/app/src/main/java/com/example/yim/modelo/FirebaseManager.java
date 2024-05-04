@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.yim.controlador.Adaptadores.MusculosAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicios;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
@@ -274,7 +275,42 @@ public class FirebaseManager {
         return actualizado;
     }
 
+    public void obtenerEjerciciosUsuario(Context context, FirebaseCallbackEjerciciosUsuario callback) {
+        try {
+            usuarioReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios = new ArrayList<TablaEjerciciosUsuario>();
 
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot ejerciciosSnapshot = usuarioSnapshot.child("ejercicios");
+
+                            for (DataSnapshot ejercicioSnapshot : ejerciciosSnapshot.getChildren()) {
+                                TablaEjerciciosUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjerciciosUsuario.class);
+                                ejercicio.setID(ejercicioSnapshot.getKey());
+                                ejerciciosUsuarios.add(ejercicio);
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
+                    }
+
+                    callback.onCallback(ejerciciosUsuarios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
 
 }

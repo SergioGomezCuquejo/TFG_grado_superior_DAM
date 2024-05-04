@@ -40,17 +40,17 @@ public class MusculosAdaptador extends RecyclerView.Adapter<MusculosAdaptador.Mu
 
     @Override
     public void onBindViewHolder(@NonNull MusculosViewHolder holder, int position) {
-        TablaMusculosUsuario musculosUsuario = musculos.get(position);
+        TablaMusculosUsuario musculoUsuario = musculos.get(position);
 
-        holder.musculo.setText(musculosUsuario.getNombre());
-        holder.musculo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculosUsuario.getColor_fondo())));
-        holder.musculo.setTextColor(Color.parseColor(musculosUsuario.getColor_fuente()));
+        holder.musculo.setText(musculoUsuario.getNombre());
+        holder.musculo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculoUsuario.getColor_fondo())));
+        holder.musculo.setTextColor(Color.parseColor(musculoUsuario.getColor_fuente()));
 
         holder.musculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PopupMusculos.class);
-                intent.putExtra("musculoUsuario", musculosUsuario);
+                intent.putExtra("musculoUsuario", musculoUsuario);
                 context.startActivity(intent);
             }
         });

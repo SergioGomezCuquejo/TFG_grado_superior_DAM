@@ -3,6 +3,7 @@ package com.example.yim.modelo.tablas;
 import java.util.ArrayList;
 
 public class TablaEjerciciosUsuario {
+    private String ID;
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
     private String imagen;
@@ -19,6 +20,9 @@ public class TablaEjerciciosUsuario {
     private int veces_realizado;
     private int veces_usado_en_rutian_activa;
     private int veces_usado_en_rutinas;
+
+    public TablaEjerciciosUsuario() {
+    }
 
     public TablaEjerciciosUsuario(ArrayList<String> consejos_clave, ArrayList<String> ejecucion, String imagen, ArrayList<String> musculos, String nombre, String notas, int peso_maximo,
                                   int repeticiones_maximas, int repeticiones_recomendadas, int series_maximas, int series_recomendadas,
@@ -58,6 +62,14 @@ public class TablaEjerciciosUsuario {
         veces_realizado = 0;
         veces_usado_en_rutian_activa = 0;
         veces_usado_en_rutinas = 0;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public ArrayList<String> getConsejos_clave() {
@@ -186,5 +198,27 @@ public class TablaEjerciciosUsuario {
 
     public void setVeces_usado_en_rutinas(int veces_usado_en_rutinas) {
         this.veces_usado_en_rutinas = veces_usado_en_rutinas;
+    }
+
+    @Override
+    public String toString() {
+        return "TablaEjerciciosUsuario{" +
+                "consejos_clave=" + consejos_clave +
+                ", ejecucion=" + ejecucion +
+                ", imagen='" + imagen + '\'' +
+                ", musculos=" + musculos +
+                ", nombre='" + nombre + '\'' +
+                ", notas='" + notas + '\'' +
+                ", peso_maximo=" + peso_maximo +
+                ", repeticiones_maximas=" + repeticiones_maximas +
+                ", repeticiones_recomendadas=" + repeticiones_recomendadas +
+                ", series_maximas=" + series_maximas +
+                ", series_recomendadas=" + series_recomendadas +
+                ", tiempo_descanso=" + tiempo_descanso +
+                ", veces_no_realizado=" + veces_no_realizado +
+                ", veces_realizado=" + veces_realizado +
+                ", veces_usado_en_rutian_activa=" + veces_usado_en_rutian_activa +
+                ", veces_usado_en_rutinas=" + veces_usado_en_rutinas +
+                '}';
     }
 }
