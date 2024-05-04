@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.vista.PopupMusculos;
 
 import java.util.ArrayList;
@@ -49,9 +50,7 @@ public class MusculosAdaptador extends RecyclerView.Adapter<MusculosAdaptador.Mu
         holder.musculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PopupMusculos.class);
-                intent.putExtra("musculoUsuario", musculoUsuario);
-                context.startActivity(intent);
+                CambiarActivity.cambiar(context, musculoUsuario);
             }
         });
     }

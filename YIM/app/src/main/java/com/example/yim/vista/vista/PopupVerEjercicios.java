@@ -1,14 +1,13 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,12 +17,20 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
+import com.example.yim.controlador.Adaptadores.ApartadoPopupVerEjerciciosAdaptador;
+import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 
 public class PopupVerEjercicios extends AppCompatActivity implements View.OnClickListener {
+    Intent intent;
+    TablaEjerciciosUsuario ejercicioUsuario;
     TextView instruciones, informacion;
     ImageView cerrar;
     ViewFlipper viewFlipper;
     int flipperActivo;
+    ImageView imagen;
+    TextView nombre, musculosTV, peso, repeticiones, serieNum, vecesRealizado, vecesNoRealizado, vecesEnRutinas, vecesEnRutinaActiva;
+    RecyclerView ejecucion, consejos;
+    ApartadoPopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +47,29 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         getWindow().setLayout((int)(ancho * 0.95), (int) (alto * 0.85));
 
 
+        intent = getIntent();
+        ejercicioUsuario = (TablaEjerciciosUsuario) intent.getSerializableExtra("ejercicioUsuario");
+
         //Referencias de las vistas
         instruciones = findViewById(R.id.instruciones);
         informacion = findViewById(R.id.informacion);
         cerrar = findViewById(R.id.cerrar);
         viewFlipper = findViewById(R.id.viewFlipper);
+
+        imagen = findViewById(R.id.imagen);
+        nombre = findViewById(R.id.nombre);
+        musculosTV = findViewById(R.id.musculos_tv);
+
+        ejecucion = findViewById(R.id.ejecucion);
+        consejos = findViewById(R.id.consejos);
+
+        peso = findViewById(R.id.peso);
+        repeticiones = findViewById(R.id.repeticiones);
+        serieNum = findViewById(R.id.serie_num);
+        vecesRealizado = findViewById(R.id.veces_realizado);
+        vecesNoRealizado = findViewById(R.id.veces_no_realizado);
+        vecesEnRutinas = findViewById(R.id.veces_en_rutinas);
+        vecesEnRutinaActiva = findViewById(R.id.veces_en_rutina_activa);
 
         //Listeners
         instruciones.setOnClickListener(this);
@@ -52,10 +77,14 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         informacion.setOnClickListener(this);
         viewFlipper.setOnClickListener(this);
 
-        
+
         //Poner por defecto la opción de instrucciones
         cambiarColores(instruciones, R.color.fondo_oscuro, R.color.blanco);
         flipperActivo  = 1;
+
+
+        mostrarDatos();
+
     }
 
     public void onClick(View view) {
@@ -96,4 +125,37 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         }
         textView.setTextColor(colorLetras);
     }
+
+
+    public void mostrarDatos(){
+        String musculos = "";
+
+        imagen.setImageResource(R.drawable.curl_realizar);
+
+        nombre.setText(ejercicioUsuario.getNombre());
+
+        for(String musculo : ejercicioUsuario.getMusculos()){
+            musculos += musculo + ", ";
+        }
+        musculos = musculos.substring(0, musculos.length() - 2);
+        musculosTV.setText(musculos);
+
+        ejecucion.setLayoutManager(new LinearLayoutManager(this));
+        adaptadorEjecucion = new ApartadoPopupVerEjerciciosAdaptador(this, ejercicioUsuario.getEjecucion());
+        ejecucion.setAdapter(adaptadorEjecucion);
+
+        consejos.setLayoutManager(new LinearLayoutManager(this));
+        adaptadorConsejos = new ApartadoPopupVerEjerciciosAdaptador(this, ejercicioUsuario.getConsejos_clave());
+        consejos.setAdapter(adaptadorConsejos);
+
+        peso.setText(String.valueOf(ejercicioUsuario.getPeso_maximo()));
+        repeticiones.setText(String.valueOf(ejercicioUsuario.getRepeticiones_maximas()));
+        serieNum.setText(String.valueOf(ejercicioUsuario.getSeries_maximas()));
+        vecesRealizado.setText(String.valueOf(ejercicioUsuario.getVeces_realizado()));
+        vecesRealizado.setText(String.valueOf(ejercicioUsuario.getVeces_no_realizado()));
+        vecesEnRutinas.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutinas()));
+        vecesEnRutinaActiva.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutina_activa()));
+
+    }
+
 }

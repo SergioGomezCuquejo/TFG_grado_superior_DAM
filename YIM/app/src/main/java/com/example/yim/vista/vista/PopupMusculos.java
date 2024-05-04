@@ -25,6 +25,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class PopupMusculos extends AppCompatActivity implements View.OnClickListener {
     FirebaseManager firebaseManager;
+    Intent intent;
     TablaMusculosUsuario musculoUsuario;
     ImageView cancelar, guardar;
     EditText musculo;
@@ -51,7 +52,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
 
         firebaseManager = new FirebaseManager();
 
-        Intent intent = getIntent();
+        intent = getIntent();
         musculoUsuario = (TablaMusculosUsuario) intent.getSerializableExtra("musculoUsuario");
 
 

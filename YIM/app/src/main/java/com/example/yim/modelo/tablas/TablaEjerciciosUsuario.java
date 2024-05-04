@@ -1,8 +1,9 @@
 package com.example.yim.modelo.tablas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TablaEjerciciosUsuario {
+public class TablaEjerciciosUsuario implements Serializable {
     private String ID;
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
@@ -18,7 +19,7 @@ public class TablaEjerciciosUsuario {
     private int tiempo_descanso;
     private int veces_no_realizado;
     private int veces_realizado;
-    private int veces_usado_en_rutian_activa;
+    private int veces_usado_en_rutina_activa;
     private int veces_usado_en_rutinas;
 
     public TablaEjerciciosUsuario() {
@@ -41,7 +42,7 @@ public class TablaEjerciciosUsuario {
         this.tiempo_descanso = tiempo_descanso;
         this.veces_no_realizado = veces_no_realizado;
         this.veces_realizado = veces_realizado;
-        this.veces_usado_en_rutian_activa = veces_usado_en_rutian_activa;
+        this.veces_usado_en_rutina_activa = veces_usado_en_rutian_activa;
         this.veces_usado_en_rutinas = veces_usado_en_rutinas;
     }
 
@@ -60,7 +61,7 @@ public class TablaEjerciciosUsuario {
         tiempo_descanso = 0;
         veces_no_realizado = 0;
         veces_realizado = 0;
-        veces_usado_en_rutian_activa = 0;
+        veces_usado_en_rutina_activa = 0;
         veces_usado_en_rutinas = 0;
     }
 
@@ -184,12 +185,12 @@ public class TablaEjerciciosUsuario {
         this.veces_realizado = veces_realizado;
     }
 
-    public int getVeces_usado_en_rutian_activa() {
-        return veces_usado_en_rutian_activa;
+    public int getVeces_usado_en_rutina_activa() {
+        return veces_usado_en_rutina_activa;
     }
 
-    public void setVeces_usado_en_rutian_activa(int veces_usado_en_rutian_activa) {
-        this.veces_usado_en_rutian_activa = veces_usado_en_rutian_activa;
+    public void setVeces_usado_en_rutina_activa(int veces_usado_en_rutina_activa) {
+        this.veces_usado_en_rutina_activa = veces_usado_en_rutina_activa;
     }
 
     public int getVeces_usado_en_rutinas() {
@@ -217,7 +218,7 @@ public class TablaEjerciciosUsuario {
                 ", tiempo_descanso=" + tiempo_descanso +
                 ", veces_no_realizado=" + veces_no_realizado +
                 ", veces_realizado=" + veces_realizado +
-                ", veces_usado_en_rutian_activa=" + veces_usado_en_rutian_activa +
+                ", veces_usado_en_rutian_activa=" + veces_usado_en_rutina_activa +
                 ", veces_usado_en_rutinas=" + veces_usado_en_rutinas +
                 '}';
     }

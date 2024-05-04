@@ -82,19 +82,18 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/imagen"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/curl_realizar" />
+                    android:layout_marginTop="20dp"/>
 
                 <TextView
+                    android:id="@+id/nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
-                    android:text="Curl de biceps concentrado con mancuernas"
                     android:textColor="@color/blanco"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -118,11 +117,11 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/musculos_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/merriweather_light"
-                        android:text="Bíceps, Antebrazos."
                         android:textColor="@color/negro_clarito"
                         android:textSize="17sp"
                         android:textStyle="bold"
@@ -162,99 +161,11 @@
                         android:background="@drawable/_style_rectangulo_gris" />
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ejecucion"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="1. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Siéntate en el borde del banco mientras sostienes una mancuerna en una mano. Inclínate hacia delante y apoya el codo contra la cara interna del muslo, lo más cerca posible de la rodilla."
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:background="@drawable/_style_borde_fondo_oscuro_arriba"
-                    android:paddingTop="10dp"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="2. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Sosteniendo la mancuerna con la palma hacia ti, levántala hasta el punto de contracción másxima. Sostenla por un momento en el punto más alto y luego bájala suavemente."
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:background="@drawable/_style_borde_fondo_oscuro_arriba"
-                    android:paddingTop="10dp"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="3. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Después de terminar la series con un brazo, procede a entrenar con el otro brazo."
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -289,99 +200,11 @@
                         android:background="@drawable/_style_rectangulo_gris" />
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/consejos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="1. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Mientras realizas este ejercicio, presta atención al movimiento de los brazos e intenta no usar la inercia."
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="2. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Al bajar la mancuerna a la posición inicial, extiende completamente el brazo que está trabajando."
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="3. "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
-                        tools:ignore="NestedWeights"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Asegúrate de que tu espalda esté simepre recta y tu pecho esté elevado"
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:layout_marginBottom="50dp"/>
 
             </LinearLayout>
         </ScrollView>
@@ -420,7 +243,7 @@
                         android:layout_weight="2"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
-                        android:text="Máximos"
+                        android:text="Máximo peso"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -452,12 +275,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/peso"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="888kg x 888 reps."
                         android:textColor="@color/blanco"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -485,12 +308,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/repeticiones"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="888kg x 888 reps."
                         android:textColor="@color/blanco"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -511,18 +334,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:fontFamily="@font/merriweather_light"
-                        android:text="Series: "
+                        android:text="Serie nº: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/serie_num"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="@string/_888"
                         android:textColor="@color/blanco"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -583,12 +406,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/veces_realizado"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="@string/_888"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -615,12 +438,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/veces_no_realizado"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="@string/_888"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -649,12 +472,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/veces_en_rutinas"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="@string/_888"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -681,12 +504,12 @@
                         tools:ignore="NestedWeights" />
 
                     <TextView
+                        android:id="@+id/veces_en_rutina_activa"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="right"
-                        android:text="@string/_888"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
                         android:textStyle="bold"
