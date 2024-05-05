@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TablaEjerciciosUsuario implements Serializable {
+    //private ArrayList<TablaHistorial> historial;
+    private ArrayList<TablaEstadisticas> estadisticas;
     private String ID;
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
@@ -26,9 +28,12 @@ public class TablaEjerciciosUsuario implements Serializable {
     public TablaEjerciciosUsuario() {
     }
 
-    public TablaEjerciciosUsuario(ArrayList<String> consejos_clave, ArrayList<String> ejecucion, String imagen, ArrayList<String> musculos, String nombre, String notas,
-                                  int peso_maximo, int peso_recomendado, int repeticiones_maximas, int repeticiones_recomendadas, int series_maximas, int series_recomendadas,
-                                  int tiempo_descanso, int veces_no_realizado, int veces_realizado, int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
+    public TablaEjerciciosUsuario(ArrayList<TablaEstadisticas> estadisticas, /*ArrayList<TablaHistorial> historial, */ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
+                                  String imagen, ArrayList<String> musculos, String nombre, String notas, int peso_maximo, int peso_recomendado, int repeticiones_maximas,
+                                  int repeticiones_recomendadas, int series_maximas, int series_recomendadas, int tiempo_descanso, int veces_no_realizado, int veces_realizado,
+                                  int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
+        this.estadisticas = estadisticas;
+        //this.historial = historial;
         this.consejos_clave = consejos_clave;
         this.ejecucion = ejecucion;
         this.imagen = imagen;
@@ -66,6 +71,25 @@ public class TablaEjerciciosUsuario implements Serializable {
         this.series_recomendadas = series_recomendadas;
         this.tiempo_descanso = tiempo_descanso;
     }
+
+    public ArrayList<TablaEstadisticas> getEstadisticas() {
+        return estadisticas;
+    }
+
+    public void setEstadisticas(ArrayList<TablaEstadisticas> estadisticas) {
+        this.estadisticas = estadisticas;
+    }
+
+    /*
+    public ArrayList<TablaHistorial> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ArrayList<TablaHistorial> historial) {
+        this.historial = historial;
+    }
+
+     */
 
     public String getID() {
         return ID;

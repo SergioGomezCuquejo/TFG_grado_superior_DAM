@@ -3,7 +3,6 @@ package com.example.yim.modelo.tablas;
 import java.util.ArrayList;
 
 public class TablaEjercicios {
-
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
     private String imagen;

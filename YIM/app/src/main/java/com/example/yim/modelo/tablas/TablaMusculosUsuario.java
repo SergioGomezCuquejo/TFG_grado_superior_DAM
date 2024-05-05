@@ -14,18 +14,10 @@ public class TablaMusculosUsuario implements Serializable {
     private String nombre;
 
     public TablaMusculosUsuario() {
-        color_fondo = "";
-        color_fuente = "";
-        ejercicios_en_rutinaActual = 0;
-        ejercicios_en_rutinas = 0;
-        ejercicios_realizados = 0;
-        ejercicios_sin_realizar = 0;
-        ejercicios_totales = 0;
-        nombre = "";
     }
 
     public TablaMusculosUsuario(String color_fondo, String color_fuente, int ejercicios_en_rutinaActual, int ejercicios_en_rutinas,
-                               int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String nombre) {
+                                int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String nombre) {
         this.color_fondo = color_fondo;
         this.color_fuente = color_fuente;
         this.ejercicios_en_rutinaActual = ejercicios_en_rutinaActual;
@@ -35,15 +27,9 @@ public class TablaMusculosUsuario implements Serializable {
         this.ejercicios_totales = ejercicios_totales;
         this.nombre = nombre;
     }
-
     public TablaMusculosUsuario(String color_fondo, String color_fuente, String nombre) {
         this.color_fondo = color_fondo;
         this.color_fuente = color_fuente;
-        ejercicios_en_rutinaActual = 0;
-        ejercicios_en_rutinas = 0;
-        ejercicios_realizados = 0;
-        ejercicios_sin_realizar = 0;
-        ejercicios_totales = 0;
         this.nombre = nombre;
     }
 

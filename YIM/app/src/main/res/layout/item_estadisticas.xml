@@ -1,0 +1,248 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/_style2_borde_blanco_10"
+    android:backgroundTint="@color/fondo_clarito"
+    android:backgroundTintMode="add"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:textColor="@color/blanco"
+            android:textSize="18sp"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+            <View
+                android:layout_width="15dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/_style2_borde_blanco_20"
+                android:backgroundTint="@color/blanco"
+                android:backgroundTintMode="add"
+                android:padding="2dp"
+                android:rotation="-10" />
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/_style2_borde_blanco_20"
+                android:backgroundTint="#CE79FD"
+                android:backgroundTintMode="add"
+                android:padding="2dp"
+                android:rotation="-10" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_style_rectangulo_gris" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="3dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/_style2_borde_blanco_20"
+            android:backgroundTint="@color/fondo_clarito"
+            android:backgroundTintMode="add">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:text="Kg"
+                android:background="@drawable/_style_borde_blanco_derecha"
+                android:textColor="@color/blanco"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:text="Reps"
+                android:textColor="@color/blanco"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_style2_borde_blanco_20"
+        android:backgroundTintMode="add"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/semana1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/peso1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:background="@drawable/_style_borde_blanco_derecha_izquierda"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/repeticiones1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"  />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_style2_borde_blanco_20"
+        android:backgroundTint="@color/fondo_clarito"
+        android:backgroundTintMode="add"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/semana2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/peso2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:background="@drawable/_style_borde_blanco_derecha_izquierda"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/repeticiones2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/_style2_borde_blanco_20"
+        android:backgroundTint="@color/fondo_clarito"
+        android:backgroundTintMode="add"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/semana3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/peso3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:background="@drawable/_style_borde_blanco_derecha_izquierda"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/repeticiones3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
