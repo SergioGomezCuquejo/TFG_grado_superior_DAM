@@ -14,27 +14,27 @@ import com.example.yim.R;
 import java.util.ArrayList;
 
 
-public class ApartadoPopupVerEjerciciosAdaptador extends RecyclerView.Adapter<ApartadoPopupVerEjerciciosAdaptador.ApartadoPopupVerEjerciciosViewHolder> {
+public class PopupVerEjerciciosAdaptador extends RecyclerView.Adapter<PopupVerEjerciciosAdaptador.PopupVerEjerciciosViewHolder> {
 
     private ArrayList<String> textos;
 
     private Context context;
 
-    public ApartadoPopupVerEjerciciosAdaptador(Context context, ArrayList<String> textos) {
+    public PopupVerEjerciciosAdaptador(Context context, ArrayList<String> textos) {
         this.context = context;
         this.textos = textos;
     }
 
     @NonNull
     @Override
-    public ApartadoPopupVerEjerciciosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_apartados_popup_ver_ejercicios, parent, false);
+    public PopupVerEjerciciosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_popup_ver_ejercicios, parent, false);
 
-        return new ApartadoPopupVerEjerciciosViewHolder(view);
+        return new PopupVerEjerciciosViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ApartadoPopupVerEjerciciosViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PopupVerEjerciciosViewHolder holder, int position) {
         String texto = textos.get(position);
 
         holder.numeroTV.setText(String.valueOf(position+1));
@@ -47,10 +47,10 @@ public class ApartadoPopupVerEjerciciosAdaptador extends RecyclerView.Adapter<Ap
         return textos.size();
     }
 
-    public static class ApartadoPopupVerEjerciciosViewHolder extends RecyclerView.ViewHolder {
+    public static class PopupVerEjerciciosViewHolder extends RecyclerView.ViewHolder {
         TextView numeroTV, textoTV;
 
-        public ApartadoPopupVerEjerciciosViewHolder(@NonNull View itemView) {
+        public PopupVerEjerciciosViewHolder(@NonNull View itemView) {
             super(itemView);
             numeroTV = itemView.findViewById(R.id.numero_tv);
             textoTV = itemView.findViewById(R.id.texto_tv);

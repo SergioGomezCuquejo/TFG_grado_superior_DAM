@@ -262,10 +262,10 @@ public class FirebaseManager {
     public boolean actualizarColoresMusculosUsuario(Context context, String idMusculo, String colorFondo, String colorFuente){
         boolean actualizado = false;
         try{
-            DatabaseReference musculoReference = usuarioReference.child(idUsuario).child("musculos").child(idMusculo);
+            DatabaseReference musculosUsuarioReference = usuarioReference.child(idUsuario).child("musculos").child(idMusculo);
 
-            musculoReference.child("color_fondo").setValue(colorFondo);
-            musculoReference.child("color_fuente").setValue(colorFuente);
+            musculosUsuarioReference.child("color_fondo").setValue(colorFondo);
+            musculosUsuarioReference.child("color_fuente").setValue(colorFuente);
 
             actualizado = true;
         } catch (Exception e) {
@@ -310,6 +310,22 @@ public class FirebaseManager {
             MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario.");
             ex.printStackTrace();
         }
+    }
+
+    public boolean agregarEjercicio(Context context, TablaEjerciciosUsuario nuevoEjercicio){
+        boolean actualizado = false;
+        try{
+            DatabaseReference ejerciciosUsuarioReference = usuarioReference.child(idUsuario).child("ejercicios");
+            String idEjercicio = ejerciciosUsuarioReference.push().getKey();
+
+            ejerciciosUsuarioReference.child(idEjercicio).setValue(nuevoEjercicio);
+
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar los colores del músculo.");
+            e.printStackTrace();
+        }
+        return actualizado;
     }
 
 

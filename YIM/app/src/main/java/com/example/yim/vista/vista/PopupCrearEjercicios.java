@@ -24,26 +24,39 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.controlador.ValidarDatos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class PopupCrearEjercicios extends AppCompatActivity implements View.OnClickListener {
+    FirebaseManager firebaseManager;
     ViewFlipper viewFlipper;
     ImageView cancelar, guardar, atras;
-    FrameLayout imagen_rutina;
-    TextView imagen_ejercicio, musculos_tv, musculos_et;
-    EditText nombre_et;
+    FrameLayout imagenFL;
+    TextView imagen, musculosTV;
+    EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
     String inicialesNombre;
-    CheckBox todo_el_cuerpo, tren_superior, espalda, biceps, cuadriceps;
+    CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     HashSet<String> musculos = new HashSet<>();
     StringBuilder musculosString;
+    TablaEjerciciosUsuario ejercicioUsuario;
+    String imagenEjercicio, nombreEjercicio, notasEjercicio, musculosEjercicio;
+    int descansoEjercicio, seriesEjercicio, repeticionesEjercicio;
+    ArrayList<String> musculosArray;
+    boolean nombreVacio, musculosVacios, descansoVacio, seriesVacias, repeticionesVacias;
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_crear_ejercicios);
+
+        firebaseManager = new FirebaseManager();
 
         //Creación de variables.
         DisplayMetrics medidasVentana;
@@ -70,13 +83,16 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar);
 
-        imagen_rutina = findViewById(R.id.imagen_rutina);
-        imagen_ejercicio = findViewById(R.id.imagen_ejercicio);
+        imagenFL = findViewById(R.id.imagen_fl);
+        imagen = findViewById(R.id.imagen_ejercicio);
 
-        nombre_et = findViewById(R.id.nombre_et);
+        nombreET = findViewById(R.id.nombre_et);
+        descansoET = findViewById(R.id.descanso_et);
+        seriesET = findViewById(R.id.series_et);
+        repeticionesET = findViewById(R.id.repeticiones_et);
+        notasET = findViewById(R.id.notas_et);
 
-        musculos_tv = findViewById(R.id.musculos_tv);
-        musculos_et = findViewById(R.id.musculos_et);
+        musculosTV = findViewById(R.id.musculos_tv);
 
         atras = findViewById(R.id.atras);
 
@@ -85,15 +101,14 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         cancelar.setOnClickListener(this);
         guardar.setOnClickListener(this);
 
-        imagen_rutina.setOnClickListener(this);
+        imagenFL.setOnClickListener(this);
 
-        musculos_tv.setOnClickListener(this);
-        musculos_et.setOnClickListener(this);
+        musculosTV.setOnClickListener(this);
 
         atras.setOnClickListener(this);
 
-        todo_el_cuerpo = findViewById(R.id.todo_el_cuerpo);
-        tren_superior = findViewById(R.id.tren_superior);
+        todoElCuerpo = findViewById(R.id.todo_el_cuerpo);
+        trenSuperior = findViewById(R.id.tren_superior);
         espalda = findViewById(R.id.espalda);
         biceps = findViewById(R.id.biceps);
         cuadriceps = findViewById(R.id.cuadriceps);
@@ -101,7 +116,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
 
         //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
-        nombre_et.addTextChangedListener(new TextWatcher() {
+        nombreET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
@@ -120,7 +135,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
                     inicialesNombre = s.toString().substring(0,2);
 
                 }
-                imagen_ejercicio.setText( inicialesNombre.toUpperCase() );
+                imagen.setText( inicialesNombre.toUpperCase() );
 
             }
         });
@@ -138,20 +153,20 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
                     cambiarColores((TextView) buttonView, getResources().getColor(R.color.blanco));
                     if (id == R.id.todo_el_cuerpo) {
-                        tren_superior.setChecked(false);
+                        trenSuperior.setChecked(false);
                         espalda.setChecked(false);
                         biceps.setChecked(false);
                         cuadriceps.setChecked(false);
 
                     } else{
-                        todo_el_cuerpo.setChecked(false);
+                        todoElCuerpo.setChecked(false);
 
                         if (id == R.id.tren_superior) {
                             espalda.setChecked(false);
                             biceps.setChecked(false);
 
                         } else if (id == R.id.biceps || id == R.id.espalda) {
-                            tren_superior.setChecked(false);
+                            trenSuperior.setChecked(false);
                         }
                     }
                 } else {
@@ -163,8 +178,8 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             }
         };
 
-        todo_el_cuerpo.setOnCheckedChangeListener(checkBoxListener);
-        tren_superior.setOnCheckedChangeListener(checkBoxListener);
+        todoElCuerpo.setOnCheckedChangeListener(checkBoxListener);
+        trenSuperior.setOnCheckedChangeListener(checkBoxListener);
         espalda.setOnCheckedChangeListener(checkBoxListener);
         biceps.setOnCheckedChangeListener(checkBoxListener);
         cuadriceps.setOnCheckedChangeListener(checkBoxListener);
@@ -180,7 +195,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
                     "¿Desea descartar los cambios no guardados?");
 
         } else if (id == R.id.guardar) {
-            Toast.makeText(getApplicationContext(), "Datos guardados correctamente.", Toast.LENGTH_SHORT).show();
+            guardarEjercicio();
 
         } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
@@ -194,7 +209,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         } else if (id == R.id.imagen_usuario) {
             cambiarActivity(this.getClass());
 
-        } else if (id == R.id.musculos_tv || id == R.id.musculos_et) {
+        } else if (id == R.id.musculos_tv) {
             viewFlipper.showNext();
 
         } else if (id == R.id.atras) {
@@ -203,9 +218,9 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
                 for (String musculo : musculos) {
                     musculosString.append(musculo).append(", ");
                 }
-                musculos_et.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
+                musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
             } else {
-                musculos_et.setText("Selecciona los músculos");
+                musculosTV.setText("Selecciona los músculos");
             }
             viewFlipper.showPrevious();
 
@@ -239,5 +254,63 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         }
 
         return musculo;
+    }
+
+    public void guardarEjercicio(){
+        imagenEjercicio = imagen.getText().toString();
+
+        nombreEjercicio = nombreET.getText().toString();
+        nombreVacio = ValidarDatos.campoVacio(nombreEjercicio);
+
+        notasEjercicio = notasET.getText().toString();
+
+        musculosEjercicio = musculosTV.getText().toString();
+        if(musculosEjercicio.equals("Selecciona los músculos")){
+            musculosVacios = true;
+        }else{
+            musculosVacios = false;
+        }
+
+        if(descansoET.getText().toString().isEmpty()){
+            descansoEjercicio = 0;
+            descansoVacio = true;
+        }else{
+            descansoEjercicio = Integer.parseInt(descansoET.getText().toString());
+            descansoVacio = false;
+        }
+
+        if(seriesET.getText().toString().isEmpty()){
+            seriesEjercicio = 0;
+            seriesVacias = true;
+        }else{
+            seriesEjercicio = Integer.parseInt(seriesET.getText().toString());
+            seriesVacias = false;
+
+        }
+
+        if(repeticionesET.getText().toString().isEmpty()){
+            repeticionesEjercicio = 0;
+            repeticionesVacias = true;
+        }else{
+            repeticionesEjercicio = Integer.parseInt(repeticionesET.getText().toString());
+            repeticionesVacias = false;
+        }
+
+        if(!musculosVacios){
+            musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
+            musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(",")));
+        }
+
+
+        if(!nombreVacio && !musculosVacios && !descansoVacio && !seriesVacias && !repeticionesVacias){
+
+            ejercicioUsuario = new TablaEjerciciosUsuario(imagenEjercicio, musculosArray, nombreEjercicio, notasEjercicio,
+                    repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
+            firebaseManager.agregarEjercicio(this, ejercicioUsuario);
+            Toast.makeText(getApplicationContext(), "Datos guardados correctamente.", Toast.LENGTH_SHORT).show();
+        }else{
+            MostratToast.mostrarToast(this, "Completa todos los campos");
+        }
+
     }
 }

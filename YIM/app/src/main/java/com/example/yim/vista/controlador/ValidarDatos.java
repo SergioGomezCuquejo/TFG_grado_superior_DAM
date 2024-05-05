@@ -27,4 +27,9 @@ public class ValidarDatos {
         }
         return correcta;
     }
+
+    //Comprobar si el String esta vacío.
+    public static boolean campoVacio(String texto){
+        return texto.isEmpty() || texto.equals(" ");
+    }
 }

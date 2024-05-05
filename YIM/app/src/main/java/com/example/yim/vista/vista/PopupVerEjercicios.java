@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
-import com.example.yim.controlador.Adaptadores.ApartadoPopupVerEjerciciosAdaptador;
+import com.example.yim.controlador.Adaptadores.PopupVerEjerciciosAdaptador;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 
 public class PopupVerEjercicios extends AppCompatActivity implements View.OnClickListener {
@@ -30,7 +30,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
     ImageView imagen;
     TextView nombre, musculosTV, peso, repeticiones, serieNum, vecesRealizado, vecesNoRealizado, vecesEnRutinas, vecesEnRutinaActiva;
     RecyclerView ejecucion, consejos;
-    ApartadoPopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
+    PopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,11 +141,11 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         musculosTV.setText(musculos);
 
         ejecucion.setLayoutManager(new LinearLayoutManager(this));
-        adaptadorEjecucion = new ApartadoPopupVerEjerciciosAdaptador(this, ejercicioUsuario.getEjecucion());
+        adaptadorEjecucion = new PopupVerEjerciciosAdaptador(this, ejercicioUsuario.getEjecucion());
         ejecucion.setAdapter(adaptadorEjecucion);
 
         consejos.setLayoutManager(new LinearLayoutManager(this));
-        adaptadorConsejos = new ApartadoPopupVerEjerciciosAdaptador(this, ejercicioUsuario.getConsejos_clave());
+        adaptadorConsejos = new PopupVerEjerciciosAdaptador(this, ejercicioUsuario.getConsejos_clave());
         consejos.setAdapter(adaptadorConsejos);
 
         peso.setText(String.valueOf(ejercicioUsuario.getPeso_maximo()));

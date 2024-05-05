@@ -12,6 +12,7 @@ public class TablaEjerciciosUsuario implements Serializable {
     private String nombre;
     private String notas;
     private int peso_maximo;
+    private int peso_recomendado;
     private int repeticiones_maximas;
     private int repeticiones_recomendadas;
     private int series_maximas;
@@ -25,8 +26,8 @@ public class TablaEjerciciosUsuario implements Serializable {
     public TablaEjerciciosUsuario() {
     }
 
-    public TablaEjerciciosUsuario(ArrayList<String> consejos_clave, ArrayList<String> ejecucion, String imagen, ArrayList<String> musculos, String nombre, String notas, int peso_maximo,
-                                  int repeticiones_maximas, int repeticiones_recomendadas, int series_maximas, int series_recomendadas,
+    public TablaEjerciciosUsuario(ArrayList<String> consejos_clave, ArrayList<String> ejecucion, String imagen, ArrayList<String> musculos, String nombre, String notas,
+                                  int peso_maximo, int peso_recomendado, int repeticiones_maximas, int repeticiones_recomendadas, int series_maximas, int series_recomendadas,
                                   int tiempo_descanso, int veces_no_realizado, int veces_realizado, int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
         this.consejos_clave = consejos_clave;
         this.ejecucion = ejecucion;
@@ -35,6 +36,7 @@ public class TablaEjerciciosUsuario implements Serializable {
         this.nombre = nombre;
         this.notas = notas;
         this.peso_maximo = peso_maximo;
+        this.peso_recomendado = peso_recomendado;
         this.repeticiones_maximas = repeticiones_maximas;
         this.repeticiones_recomendadas = repeticiones_recomendadas;
         this.series_maximas = series_maximas;
@@ -52,17 +54,17 @@ public class TablaEjerciciosUsuario implements Serializable {
         imagen = ejercicio.getImagen();
         musculos = ejercicio.getMusculos();
         nombre = ejercicio.getNombre();
-        notas = "";
-        peso_maximo = 0;
-        repeticiones_maximas = 0;
-        repeticiones_recomendadas = 0;
-        series_maximas = 0;
-        series_recomendadas = 0;
-        tiempo_descanso = 0;
-        veces_no_realizado = 0;
-        veces_realizado = 0;
-        veces_usado_en_rutina_activa = 0;
-        veces_usado_en_rutinas = 0;
+    }
+
+    public TablaEjerciciosUsuario(String imagen, ArrayList<String> musculos, String nombre, String notas,
+                                  int repeticiones_recomendadas, int series_recomendadas, int tiempo_descanso) {
+        this.imagen = imagen;
+        this.musculos = musculos;
+        this.nombre = nombre;
+        this.notas = notas;
+        this.repeticiones_recomendadas = repeticiones_recomendadas;
+        this.series_recomendadas = series_recomendadas;
+        this.tiempo_descanso = tiempo_descanso;
     }
 
     public String getID() {
@@ -127,6 +129,14 @@ public class TablaEjerciciosUsuario implements Serializable {
 
     public void setPeso_maximo(int peso_maximo) {
         this.peso_maximo = peso_maximo;
+    }
+
+    public int getPeso_recomendado() {
+        return peso_recomendado;
+    }
+
+    public void setPeso_recomendado(int peso_recomendado) {
+        this.peso_recomendado = peso_recomendado;
     }
 
     public int getRepeticiones_maximas() {
