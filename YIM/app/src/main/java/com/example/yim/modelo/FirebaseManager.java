@@ -322,11 +322,38 @@ public class FirebaseManager {
 
             actualizado = true;
         } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar los colores del músculo.");
+            MostratToast.mostrarToast(context, "Error al agregar el ejercicio.");
             e.printStackTrace();
         }
         return actualizado;
     }
 
+    public boolean eliminarEjercicio(Context context, String ID){
+        boolean eliminado = false;
+        try{
+            DatabaseReference ejerciciosUsuarioReference = usuarioReference.child(idUsuario).child("ejercicios");
+
+            ejerciciosUsuarioReference.child(ID).removeValue();
+            eliminado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al eliminar el ejercicio.");
+            e.printStackTrace();
+        }
+        return eliminado;
+    }
+
+    public boolean actualizarEjercicio(Context context, TablaEjerciciosUsuario ejercicio){
+        boolean eliminado = false;
+        try{
+            DatabaseReference ejerciciosUsuarioReference = usuarioReference.child(idUsuario).child("ejercicios");
+
+            ejerciciosUsuarioReference.child(ejercicio.getID()).setValue(ejercicio);
+            eliminado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar el ejercicio.");
+            e.printStackTrace();
+        }
+        return eliminado;
+    }
 
 }

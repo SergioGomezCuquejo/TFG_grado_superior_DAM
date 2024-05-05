@@ -15,6 +15,8 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.vista.PopupVerEjercicios;
+import com.example.yim.vista.vista.PopupVerEjerciciosCreados;
+import com.example.yim.vista.vista.VerEjercicios;
 
 import java.util.ArrayList;
 
@@ -42,16 +44,32 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
     public void onBindViewHolder(@NonNull VerEjerciciosViewHolder holder, int position) {
         String musculos = "";
         TablaEjerciciosUsuario ejercicioUsuario = ejercicios.get(position);
+        String nombreEjercicio = ejercicioUsuario.getNombre();
 
-        holder.ejercicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CambiarActivity.cambiar(context, ejercicioUsuario);
-            }
-        });
 
-        holder.imagen.setImageResource(R.drawable.curl_de_biceps_hombre);
-        holder.nombre.setText(ejercicioUsuario.getNombre());
+
+
+        if (nombreEjercicio.charAt(0) == '-' ){  //Creado por el usuario
+            holder.ejercicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CambiarActivity.cambiar(context, PopupVerEjerciciosCreados.class, ejercicioUsuario);
+                }
+            });
+            holder.imagenTexto.setVisibility(View.VISIBLE);
+            holder.imagenTexto.setText(ejercicioUsuario.getImagen());
+            holder.nombre.setText(nombreEjercicio.substring(1));
+
+        }else{ //Creados atomáticamente
+            holder.ejercicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CambiarActivity.cambiar(context, PopupVerEjercicios.class, ejercicioUsuario);
+                }
+            });
+            holder.imagen.setImageResource(R.drawable.curl_de_biceps_hombre);
+            holder.nombre.setText(nombreEjercicio);
+        }
 
         for(String musculo : ejercicioUsuario.getMusculos()){
             musculos += musculo + ", ";
@@ -69,12 +87,14 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
     public static class VerEjerciciosViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout ejercicio;
         ImageView imagen;
-        TextView nombre, musculos;
+        TextView nombre, musculos, imagenTexto;
+
 
         public VerEjerciciosViewHolder(@NonNull View itemView) {
             super(itemView);
             ejercicio = itemView.findViewById(R.id.ejercicio);
             imagen = itemView.findViewById(R.id.imagen);
+            imagenTexto = itemView.findViewById(R.id.imagen_texto);
             nombre = itemView.findViewById(R.id.nombre);
             musculos = itemView.findViewById(R.id.musculos);
         }

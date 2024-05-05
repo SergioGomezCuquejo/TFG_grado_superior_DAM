@@ -97,7 +97,6 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
             firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
                 @Override
                 public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
-
                     recyclerView.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
                     adaptador = new VerEjerciciosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
                     recyclerView.setAdapter(adaptador);

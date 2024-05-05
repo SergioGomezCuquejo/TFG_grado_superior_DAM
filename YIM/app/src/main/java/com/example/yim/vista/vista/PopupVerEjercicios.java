@@ -75,7 +75,6 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         instruciones.setOnClickListener(this);
         cerrar.setOnClickListener(this);
         informacion.setOnClickListener(this);
-        viewFlipper.setOnClickListener(this);
 
 
         //Poner por defecto la opción de instrucciones

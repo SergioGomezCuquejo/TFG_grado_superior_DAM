@@ -13,10 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
+    FirebaseManager firebaseManager;
     Intent intent;
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
@@ -26,7 +31,6 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_alerta);
-
 
 
         //Cambiar el tamaño de la pantalla para que sea como un popup.
@@ -80,32 +84,7 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
             if(titulo.equals("OOPS.")){
                 finish();
             }else{
-                switch (iraA){
-                    case "ir_a_musculos":
-                        cambiarActivity(Musculos.class);
-                        break;
-                    case "ir_a_ver_rutinas":
-                        cambiarActivity(VerRutinas.class);
-                        break;
-                    case "ir_a_ejercicios":
-                        cambiarActivity(VerEjercicios.class);
-                        break;
-                    case "ir_a_inicio":
-                        cambiarActivity(Inicio.class);
-                        break;
-                    case "ir_a_ejercicios_rutina":
-                        cambiarActivity(EjerciciosRutinas.class);
-                        break;
-                    case "cerrar_sesion":
-                        auth = FirebaseAuth.getInstance();
-                        auth.signOut();
-                        finish();
-                        cambiarActivity(InicioSesion.class);
-                        break;
-                    default:
-                        finish();
-                        break;
-                }
+                aceptar();
             }
 
         }
@@ -113,5 +92,60 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
 
     private void cambiarActivity(Class<?> activity) {
         cambiar(this, activity);
+    }
+
+    private void aceptar(){
+        if(iraA.startsWith("ID")){
+            firebaseManager = new FirebaseManager();
+            String ID = iraA.substring(2, iraA.length()-2);
+            boolean eliminado = false;
+            String mensaje = "";
+
+            if (iraA.endsWith("EJ")){
+                eliminado = firebaseManager.eliminarEjercicio(this, ID);
+                if(eliminado){
+                    mensaje = "Ejercicio eliminado correctamente";
+                }
+            }
+
+            if(eliminado){
+                CambiarActivity.cambiar(this, VerEjercicios.class);
+                MostratToast.mostrarToast(this, mensaje);
+            }else{
+                finish();
+            }
+
+        }else{
+            switch (iraA){
+                case "ir_a_musculos":
+                    cambiarActivity(Musculos.class);
+                    break;
+                case "ir_a_ver_rutinas":
+                    cambiarActivity(VerRutinas.class);
+                    break;
+                case "ir_a_ejercicios":
+                    cambiarActivity(VerEjercicios.class);
+                    break;
+                case "ir_a_inicio":
+                    cambiarActivity(Inicio.class);
+                    break;
+                case "ir_a_ejercicios_rutina":
+                    cambiarActivity(EjerciciosRutinas.class);
+                    break;
+                case "ir_a_ver_ejercicios":
+                    cambiarActivity(VerEjercicios.class);
+                    break;
+                case "cerrar_sesion":
+                    auth = FirebaseAuth.getInstance();
+                    auth.signOut();
+                    finish();
+                    cambiarActivity(InicioSesion.class);
+                    break;
+                default:
+                    finish();
+                    break;
+            }
+        }
+
     }
 }

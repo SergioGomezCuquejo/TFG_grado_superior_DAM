@@ -21,8 +21,8 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    public static void cambiar(Context context, TablaEjerciciosUsuario ejercicioUsuario) {
-        Intent intent = new Intent(context, PopupVerEjercicios.class);
+    public static void cambiar(Context context, Class<?> activity, TablaEjerciciosUsuario ejercicioUsuario) {
+        Intent intent = new Intent(context, activity);
         intent.putExtra("ejercicioUsuario", ejercicioUsuario);
         context.startActivity(intent);
     }
