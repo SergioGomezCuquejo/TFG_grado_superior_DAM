@@ -15,13 +15,15 @@ import android.widget.Spinner;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.EstadisticasAdaptador;
-import com.example.yim.controlador.Adaptadores.VerEjerciciosAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Estadisticas extends AppCompatActivity implements View.OnClickListener {
     FirebaseManager firebaseManager;
@@ -29,6 +31,7 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     EstadisticasAdaptador adaptador;
+    HashMap<String, String> musculosHM = new HashMap<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -89,9 +92,18 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
             firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
                 @Override
                 public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
-                    adaptador = new EstadisticasAdaptador(Estadisticas.this, ejerciciosUsuarios);
-                    recyclerView.setAdapter(adaptador);
+                    firebaseManager.obtenerMusculosUsuario(Estadisticas.this, new FirebaseCallbackMusculosUsuario() {
+                        @Override
+                        public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
+
+                            for (TablaMusculosUsuario musculo : musculosUsuarios){
+                                musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
+                            }
+                            recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
+                            adaptador = new EstadisticasAdaptador(Estadisticas.this, ejerciciosUsuarios, musculosHM);
+                            recyclerView.setAdapter(adaptador);
+                        }
+                    });
                 }
             });
 
