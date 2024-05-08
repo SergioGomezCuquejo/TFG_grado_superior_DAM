@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class FirebaseManager {
     private DatabaseReference ejerciciosReference, logrosReference, musculosReference, usuariosReference;
@@ -251,23 +252,42 @@ public class FirebaseManager {
         }
     }
 
-    public void obtenerPerfil(Context context, FirebaseCallbackPerfil callback){
-        try{
-            obtenerUsuario(context, new FirebaseCallbackUsuario() {
+    public void obtenerPerfil(Context context, FirebaseCallbackPerfil callback) {
+        try {
+            usuariosReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onCallback(TablaUsuario usuario) {
-                    TablaPerfil perfil = null;
-                    if (usuario != null){
-                        perfil = usuario.getPerfil();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaPerfil perfil = new TablaPerfil();
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot perfilSnapshot = usuarioSnapshot.child("perfil");
+
+                            if (perfilSnapshot.exists()) {
+                                perfil = perfilSnapshot.getValue(TablaPerfil.class);
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
                     }
+
                     callback.onCallback(perfil);
                 }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener el perfil del usuario");
+                }
             });
-        } catch (Exception e) {
+        } catch (Exception ex) {
             MostratToast.mostrarToast(context, "Error al obtener el perfil del usuario.");
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
+
+
 
     public void obtenerMusculosUsuario(Context context, FirebaseCallbackMusculosUsuario callback) {
         try {
@@ -390,17 +410,17 @@ public class FirebaseManager {
     }
 
     public boolean actualizarEjercicio(Context context, TablaEjerciciosUsuario ejercicio){
-        boolean eliminado = false;
+        boolean actualizado = false;
         try{
             DatabaseReference ejerciciosUsuarioReference = usuariosReference.child(idUsuario).child("ejercicios");
 
             ejerciciosUsuarioReference.child(ejercicio.getID()).setValue(ejercicio);
-            eliminado = true;
+            actualizado = true;
         } catch (Exception e) {
             MostratToast.mostrarToast(context, "Error al actualizar el ejercicio.");
             e.printStackTrace();
         }
-        return eliminado;
+        return actualizado;
     }
     public void obtenerLogrosUsuario(Context context, FirebaseCallbackLogrosUsuario callback) {
         try {
@@ -439,5 +459,61 @@ public class FirebaseManager {
         }
     }
 
+    public void obtenerLogrosUsuario(Context context, ArrayList<String> titulos, FirebaseCallbackLogrosUsuario callback) {
+        try {
+            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaLogrosUsuario> logrosUsuario = new ArrayList<TablaLogrosUsuario>();
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot logrosSnapshot = usuarioSnapshot.child("logros");
+
+                            Iterator<DataSnapshot> iterator = logrosSnapshot.getChildren().iterator();
+                            while (iterator.hasNext() && logrosUsuario.size() < titulos.size()) {
+                                DataSnapshot logroSnapshot = iterator.next();
+                                TablaLogrosUsuario logro = logroSnapshot.getValue(TablaLogrosUsuario.class);
+                                if(titulos.contains(logro.getTitulo())){
+                                    logro.setID(logroSnapshot.getKey());
+                                    logrosUsuario.add(logro);
+                                }
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
+                    }
+
+                    callback.onCallback(logrosUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener los logros del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            MostratToast.mostrarToast(context, "Error al obtener los logros del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean actualizarLogros(Context context, ArrayList<TablaLogrosUsuario> logros){
+        boolean actualizados = false;
+        try{
+            DatabaseReference logrosUsuarioReference = usuariosReference.child(idUsuario).child("logros");
+
+            for (TablaLogrosUsuario logro : logros) {
+                logrosUsuarioReference.child(logro.getID()).setValue(logro);
+            }
+            actualizados = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar el logro.");
+            e.printStackTrace();
+        }
+        return actualizados;
+    }
 
 }

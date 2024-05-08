@@ -9,7 +9,6 @@ import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
-import com.example.yim.vista.vista.PopupVerEjercicios;
 
 public class CambiarActivity {
     public static void cambiar(Context context, Class<?> activity) {

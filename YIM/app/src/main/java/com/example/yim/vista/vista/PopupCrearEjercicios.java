@@ -24,6 +24,7 @@ import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
@@ -296,7 +297,9 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             ejercicioUsuario = new TablaEjerciciosUsuario(imagenEjercicio, musculosArray, "-" + nombreEjercicio, notasEjercicio,
                     repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
             if(firebaseManager.agregarEjercicio(this, ejercicioUsuario)){
-                MostratToast.mostrarToast(this, "Datos guardados correctamente");
+                MostratToast.mostrarToast(this, "Ejercicio creado correctamente");
+                ObtenerLogro obtenerLogro = new ObtenerLogro();
+                obtenerLogro.obtenerLogro(this, "Crear ejercicio");
                 finish();
                 datosGuardados = true;
             }else{

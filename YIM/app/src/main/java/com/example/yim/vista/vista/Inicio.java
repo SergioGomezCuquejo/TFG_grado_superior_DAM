@@ -96,7 +96,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             CambiarActivity.cambiarAlerta(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
 
         } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
-            cambiarActivity(CrearRutinas.class);
+            cambiarActivity(Logros.class);
 
         } else if (id == R.id.rutina2) {
             cambiarActivity(EjerciciosRutinas.class);
