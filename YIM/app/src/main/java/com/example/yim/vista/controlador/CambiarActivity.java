@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.vista.vista.PopupAlerta;
+import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
 import com.example.yim.vista.vista.PopupVerEjercicios;
 
@@ -18,6 +20,12 @@ public class CambiarActivity {
     public static void cambiar(Context context, TablaMusculosUsuario musculoUsuario) {
         Intent intent = new Intent(context, PopupMusculos.class);
         intent.putExtra("musculoUsuario", musculoUsuario);
+        context.startActivity(intent);
+    }
+
+    public static void cambiar(Context context, TablaLogrosUsuario logroUsuario) {
+        Intent intent = new Intent(context, PopupLogros.class);
+        intent.putExtra("logroUsuario", logroUsuario);
         context.startActivity(intent);
     }
 

@@ -68,7 +68,7 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/buscar"
                         android:layout_width="35dp"
                         android:layout_height="match_parent"
                         android:backgroundTint="@color/fondo_clarito"

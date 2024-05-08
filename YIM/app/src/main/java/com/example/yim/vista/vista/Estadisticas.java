@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.yim.R;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 
 public class Estadisticas extends AppCompatActivity implements View.OnClickListener {
     FirebaseManager firebaseManager;
+    ImageButton buscar;
     Spinner tipo;
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
@@ -42,6 +45,7 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         firebaseManager = new FirebaseManager();
 
         //Referencias de las vistas
+        buscar = findViewById(R.id.buscar);
         tipo = findViewById(R.id.tipo);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -52,6 +56,8 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         imagen_usuario = findViewById(R.id.imagen_usuario);
 
         //Listeners
+        buscar.setOnClickListener(this);
+
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
@@ -60,6 +66,7 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Estadisticas.this, R.layout.spinner_items, getResources().getStringArray(R.array.tipos_busqueda));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         tipo.setAdapter(adapter);
+
 
         mostrarEjercicios();
     }
@@ -79,6 +86,9 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
 
         } else if (id == R.id.imagen_usuario) {
             cambiarActivity(Perfil.class);
+
+        } else if (id == R.id.buscar) {
+            MostratToast.mostrarToast(this, String.valueOf(tipo.getSelectedItemPosition()));
 
         }
     }

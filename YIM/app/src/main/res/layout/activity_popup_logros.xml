@@ -23,42 +23,42 @@
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/merriweather_light"
             android:gravity="center"
-            android:text="@string/titulo_logro_50_flexiones"
             android:textColor="@color/blanco"
             android:textSize="30sp"
             android:textStyle="bold" />
 
 
         <FrameLayout
-            android:id="@+id/logro_50_flexiones"
+            android:id="@+id/logro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titulo"
-            android:padding="10dp"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:padding="10dp">
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/logro_50_flexiones"
-                app:shapeAppearanceOverlay="@style/radius"
-                tools:ignore="ImageContrastCheck" />
+                app:shapeAppearanceOverlay="@style/radius" />
 
             <View
-                android:id="@+id/mascara"
+                android:id="@+id/progreso_view"
+                android:visibility="gone"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:background="@drawable/_style_rectangulo_gris_translucido" />
+
         </FrameLayout>
 
 
 
 
         <LinearLayout
-            android:id="@+id/progreso"
+            android:id="@+id/progreso_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logro_50_flexiones"
+            android:layout_below="@+id/logro"
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
 
@@ -69,6 +69,7 @@
                 android:background="@drawable/_style_rectangulo_gris" />
 
             <TextView
+                android:id="@+id/progreso_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -76,7 +77,6 @@
                 android:layout_weight="1.5"
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
-                android:text="@string/porcentaje_logro_50_flexiones"
                 android:textColor="@color/negro_clarito"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -90,12 +90,12 @@
 
 
         <TextView
+            android:id="@+id/descripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/progreso"
+            android:layout_below="@+id/progreso_ll"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/merriweather_light"
-            android:text="@string/descripcion_logro_50_flexiones"
             android:textColor="@color/negro_clarito"
             android:textSize="20sp"
             tools:ignore="NestedWeights" />

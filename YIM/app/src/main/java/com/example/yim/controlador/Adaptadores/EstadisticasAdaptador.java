@@ -50,8 +50,6 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
 
         holder.nombre.setText(ejercicio.getNombre());
 
-        //TODO Arreglar
-        MostratToast.mostrarToast(context, musculosHM.toString());
         for(int i = 0; i < ejercicio.getMusculos().size(); i++ ){
             if(i == 0){
                 if(musculosHM.containsKey(ejercicio.getMusculos().get(i))){
@@ -69,7 +67,6 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
                 }
             }
         }
-        //TODO Arreglar
 
         int peso1 = estadisticas.get(0).getPeso();
         int peso2 = estadisticas.get(1).getPeso();

@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class TablaUsuario {
     private TablaPerfil perfil;
-    private ArrayList<TablaMusculosUsuario> musculos;
     private ArrayList<TablaEjerciciosUsuario> ejercicios;
+    private ArrayList<TablaLogrosUsuario> logros;
+    private ArrayList<TablaMusculosUsuario> musculos;
 
     public TablaUsuario() {
         perfil = new TablaPerfil();
@@ -15,10 +16,12 @@ public class TablaUsuario {
         ejercicios = new ArrayList<TablaEjerciciosUsuario>();
     }
 
-    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaMusculosUsuario> musculos, ArrayList<TablaEjerciciosUsuario> ejercicios) {
+    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaEjerciciosUsuario> ejercicios, ArrayList<TablaLogrosUsuario> logros,
+                        ArrayList<TablaMusculosUsuario> musculos) {
         this.perfil = perfil;
-        this.musculos = musculos;
         this.ejercicios = ejercicios;
+        this.logros = logros;
+        this.musculos = musculos;
     }
 
     public TablaPerfil getPerfil() {
@@ -29,19 +32,27 @@ public class TablaUsuario {
         this.perfil = perfil;
     }
 
-    public  ArrayList<TablaMusculosUsuario> getMusculos() {
-        return musculos;
-    }
-
-    public void setMusculos( ArrayList<TablaMusculosUsuario> musculos) {
-        this.musculos = musculos;
-    }
-
     public ArrayList<TablaEjerciciosUsuario> getEjercicios() {
         return ejercicios;
     }
 
     public void setEjercicios(ArrayList<TablaEjerciciosUsuario> ejercicios) {
         this.ejercicios = ejercicios;
+    }
+
+    public ArrayList<TablaLogrosUsuario> getLogros() {
+        return logros;
+    }
+
+    public void setLogros(ArrayList<TablaLogrosUsuario> logros) {
+        this.logros = logros;
+    }
+
+    public  ArrayList<TablaMusculosUsuario> getMusculos() {
+        return musculos;
+    }
+
+    public void setMusculos( ArrayList<TablaMusculosUsuario> musculos) {
+        this.musculos = musculos;
     }
 }
