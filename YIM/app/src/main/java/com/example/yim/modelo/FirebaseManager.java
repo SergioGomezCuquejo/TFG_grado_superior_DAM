@@ -12,6 +12,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackLogrosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicios;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
@@ -20,6 +21,7 @@ import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculos;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.modelo.tablas.TablaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -514,6 +516,44 @@ public class FirebaseManager {
             e.printStackTrace();
         }
         return actualizados;
+    }
+
+    public void obtenerRutinasUsuario(Context context, FirebaseCallbackRutinasUsuario callback){
+        try {
+            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaRutinasUsuario> rutinasUsuario = new ArrayList<TablaRutinasUsuario>();
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot rutinasSnapshot = usuarioSnapshot.child("rutinas");
+
+                            for (DataSnapshot rutinaSnapshot : rutinasSnapshot.getChildren()) {
+                                TablaRutinasUsuario rutina = rutinaSnapshot.getValue(TablaRutinasUsuario.class);
+                                MostratToast.mostrarToast(context, rutina.getSemana().get(0).getEjercicios().get(0).getNombre());
+                                rutina.setID(rutinaSnapshot.getKey());
+                                rutinasUsuario.add(rutina);
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
+                    }
+
+                    callback.onCallback(rutinasUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener las rutinas del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            MostratToast.mostrarToast(context, "Error al obtener las rutians del usuario.");
+            ex.printStackTrace();
+        }
     }
 
 }

@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -16,13 +15,23 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.tablas.TablaInfoRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.google.android.material.imageview.ShapeableImageView;
 
 public class PopupRutinas extends AppCompatActivity implements View.OnClickListener {
+    Intent intent;
+    TablaRutinasUsuario rutinaUsuario;
     ImageView cancelar, editar;
+    ShapeableImageView imagen;
     LinearLayout activo_ll;
     SwitchCompat activo;
+    TextView diasDescansados, diasDeDescanso, diasTotales, diasCompletados, musculosTotales, musculosActivos,
+            ejerciciosSinRealizar, ejerciciosRealizados, vecesActivada, vecesCompletadas;
     Button borrar;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,12 +48,30 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
+        intent = getIntent();
+        rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
 
         //Referencias de las vistas
         cancelar = findViewById(R.id.cancelar);
         editar = findViewById(R.id.editar);
+
+        imagen = findViewById(R.id.imagen);
+
         activo_ll = findViewById(R.id.activo_ll);
         activo = findViewById(R.id.activo);
+
+        diasDescansados = findViewById(R.id.dias_descansados);
+        diasDeDescanso = findViewById(R.id.dias_de_descanso);
+        diasTotales = findViewById(R.id.dias_totales);
+        diasCompletados = findViewById(R.id.dias_completados);
+        musculosTotales = findViewById(R.id.musculos_totales);
+        musculosActivos = findViewById(R.id.musculos_activos);
+        ejerciciosSinRealizar = findViewById(R.id.ejercicios_sin_realizar);
+        ejerciciosRealizados = findViewById(R.id.ejercicios_realizados);
+        vecesActivada = findViewById(R.id.veces_activada);
+        vecesCompletadas = findViewById(R.id.veces_completadas);
+
+
         borrar = findViewById(R.id.borrar);
 
         //Listeners
@@ -60,8 +87,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        activo.setChecked(true); //Poner en activo
-        cambiarActivo(activo.isChecked());
+        mostrarInfo();
     }
 
     @Override
@@ -72,7 +98,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                     "¿Desea descartar los cambios no guardados?");
 
         } else if (id == R.id.editar) {
-            cambiarActivity(CrearRutinas.class);
+            CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
 
         } else if (id == R.id.activo_ll) {
             activo.setChecked(!activo.isChecked());
@@ -102,5 +128,25 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     }
     private void cambiarActivity(String titulo, String texto) {
         cambiarAlerta(this, titulo, texto, "ir_a_ver_rutinas");
+    }
+
+    private void mostrarInfo(){
+        TablaInfoRutinasUsuario infoRutina = rutinaUsuario.getInformacion();
+
+        activo.setChecked(infoRutina.isActivo());
+        cambiarActivo(activo.isChecked());
+
+        imagen.setImageResource(R.drawable.pierna);
+
+        diasDescansados.setText(String.valueOf(infoRutina.getDias_descansados()));
+        diasDeDescanso.setText(String.valueOf(infoRutina.getDias_descanso()));
+        diasTotales.setText(String.valueOf(infoRutina.getDias_totales()));
+        diasCompletados.setText(String.valueOf(infoRutina.getDias_completados()));
+        musculosTotales.setText(String.valueOf(infoRutina.getMusculos_totales()));
+        musculosActivos.setText(String.valueOf(infoRutina.getMusculos_activos()));
+        ejerciciosSinRealizar.setText(String.valueOf(infoRutina.getEjercicios_sin_realizar()));
+        ejerciciosRealizados.setText(String.valueOf(infoRutina.getEjercicios_realizados()));
+        vecesActivada.setText(String.valueOf(infoRutina.getVeces_activada()));
+        vecesCompletadas.setText(String.valueOf(infoRutina.getVeces_completada()));
     }
 }

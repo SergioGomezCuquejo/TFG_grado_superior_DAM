@@ -47,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_izquierda"
+                android:background="@drawable/_style2_borde_blanco_izquierda"
                 android:padding="1dp"
                 tools:ignore="NestedWeights">
 
@@ -55,7 +55,7 @@
                     android:id="@+id/espalda"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_izquierda"
+                    android:background="@drawable/_style2_borde_blanco_izquierda"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
                     android:text="@string/espalda"
@@ -69,14 +69,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_derecha"
+                android:background="@drawable/_style2_borde_blanco_derecha"
                 android:padding="1dp">
 
                 <TextView
                     android:id="@+id/biceps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_derecha"
+                    android:background="@drawable/_style2_borde_blanco_derecha"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
                     android:text="@string/biceps"

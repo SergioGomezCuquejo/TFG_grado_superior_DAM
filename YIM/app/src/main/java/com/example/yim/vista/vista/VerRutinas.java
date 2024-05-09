@@ -3,19 +3,27 @@ package com.example.yim.vista.vista;
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.example.yim.R;
-import com.google.android.material.imageview.ShapeableImageView;
+import com.example.yim.controlador.Adaptadores.VerRutinasAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+
+import java.util.ArrayList;
 
 public class VerRutinas extends AppCompatActivity implements View.OnClickListener {
-    ShapeableImageView rutina1;
+    FirebaseManager firebaseManager;
+    RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    VerRutinasAdaptador adaptador;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,8 +31,10 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_rutinas);
 
+        firebaseManager = new FirebaseManager();
+
         //Referencias de las vistas
-        rutina1 = findViewById(R.id.rutina1);
+        recyclerView = findViewById(R.id.rutinas);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -32,21 +42,18 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
         imagen_usuario = findViewById(R.id.imagen_usuario);
 
         //Listeners
-        rutina1.setOnClickListener(this);
-
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
         imagen_usuario.setOnClickListener(this);
+
+        mostrarRutinas();
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.rutina1){
-            cambiarActivity(PopupRutinas.class);
-
-        } else if (id == R.id.imagen_casa) {
+        if (id == R.id.imagen_casa) {
             cambiarActivity(Inicio.class);
 
         }else if (id == R.id.imagen_calendario) {
@@ -63,5 +70,16 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
 
     private void cambiarActivity(Class<?> activity) {
         cambiar(this, activity);
+    }
+
+    private void mostrarRutinas(){
+        firebaseManager.obtenerRutinasUsuario(this, new FirebaseCallbackRutinasUsuario() {
+            @Override
+            public void onCallback(ArrayList<TablaRutinasUsuario> rutinas) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(VerRutinas.this));
+                adaptador = new VerRutinasAdaptador(VerRutinas.this, rutinas);
+                recyclerView.setAdapter(adaptador);
+            }
+        });
     }
 }

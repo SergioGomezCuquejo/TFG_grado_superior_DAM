@@ -127,7 +127,7 @@
     <string name="activar_rutina">Activar rutina</string>
     <string name="rutina_activa">Rutina activa</string>
 
-    <string name="veces_activadas">Veces activadas:</string>
+    <string name="veces_activadas">Veces activada:</string>
     <string name="musculos_activos">Músculos activos:</string>
     <string name="musculos_totales">Músculos totales:</string>
     <string name="dias_completados">Días completados:</string>

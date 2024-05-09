@@ -22,7 +22,6 @@
         android:backgroundTintMode="add"
         android:fontFamily="@font/merriweather_light"
         android:gravity="center"
-        android:text="@string/biceps"
         android:textSize="20sp"
         android:textStyle="bold" />
 
