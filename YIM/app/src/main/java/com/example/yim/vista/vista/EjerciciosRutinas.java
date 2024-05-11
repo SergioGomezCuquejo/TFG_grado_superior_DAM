@@ -4,34 +4,42 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.controlador.Adaptadores.EjerciciosRutinasAdaptador;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
+import com.example.yim.vista.controlador.MostratToast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EjerciciosRutinas extends AppCompatActivity implements View.OnClickListener {
+    Intent intent;
+    TablaDiaRutinaUsuario diaRutinaUsuario;
+    HashMap<String, ColoresMusculoUsuario> musculosSemana;
     ImageView atras;
-    LinearLayout musculos, editar, opciones;
+    LinearLayout musculos;
+    RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    TextView espalda, biceps;
+    TextView musculoIzquierda, musculoCentro, musculoDerecha;
     ImageView agregar_ejercicio;
-    Button borrar;
-
-    RelativeLayout ejercicio1;
-    boolean visible;
+    EjerciciosRutinasAdaptador adaptador;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -39,17 +47,19 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejercicios_rutinas);
 
+        intent = getIntent();
+        diaRutinaUsuario = (TablaDiaRutinaUsuario) intent.getSerializableExtra("diaRutinaUsuario");
+        musculosSemana = (HashMap<String, ColoresMusculoUsuario>) intent.getSerializableExtra("musculosSemana");
+
         //Referencias de las vistas
         atras = findViewById(R.id.atras);
 
         musculos = findViewById(R.id.musculos);
-        espalda = findViewById(R.id.espalda);
-        biceps = findViewById(R.id.biceps);
+        musculoIzquierda = findViewById(R.id.musculo_izquierda);
+        musculoCentro = findViewById(R.id.musculo_centro);
+        musculoDerecha = findViewById(R.id.musculo_derecha);
 
-        ejercicio1 = findViewById(R.id.ejercicio1);
-        editar = findViewById(R.id.editar);
-        opciones = findViewById(R.id.opciones);
-        borrar = findViewById(R.id.borrar);
+        recyclerView = findViewById(R.id.ejericicos);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -63,9 +73,6 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
         musculos.setOnClickListener(this);
 
-        ejercicio1.setOnClickListener(this);
-        borrar.setOnClickListener(this);
-
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
@@ -73,32 +80,11 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
         agregar_ejercicio.setOnClickListener(this);
 
-
-
-
-        //Poner color al fondo y letras de los músculos
-        cambiarColores(espalda, "#233284", "white");
-        cambiarColores(biceps, "#00c143", "black");
-
-        visible = false;
-
+        mostrarMusculos();
+        mostrarEjercicios();
     }
 
-    private void cambiarVisibilidad() {
-        Animation animation;
-        if (visible) {
-            animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_abajo);
-            editar.setVisibility(View.GONE);
-            opciones.setVisibility(View.GONE);
-        } else {
-            animation = AnimationUtils.loadAnimation(this, R.anim.deslizar_arriba);
-            editar.setVisibility(View.VISIBLE);
-            opciones.setVisibility(View.VISIBLE);
-        }
-        editar.startAnimation(animation);
-        opciones.startAnimation(animation);
-        visible = !visible;
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -121,12 +107,6 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         } else if (id == R.id.imagen_usuario) {
             cambiarActivity(Perfil.class);
 
-        } else if (id == R.id.ejercicio1) {
-            cambiarVisibilidad();
-
-        } else if (id == R.id.borrar) {
-            cambiarAlerta(this, "Eliminar ejercicio", "Se eleminará el ejercicio 'Ejercicio' de este día.", "ir_a_ejercicios_rutina");
-
         } else if (id == R.id.agregar_ejercicio) {
             cambiarActivity(PopupAgregarEjercicio.class);
 
@@ -137,15 +117,45 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         cambiar(this, activity);
     }
 
-    public void cambiarColores(View view, String colorFondo, String colorLetras){
-        TextView textView = (TextView) view;
-        Drawable shape = (Drawable) textView.getBackground();
-
-        shape.setColorFilter(Color.parseColor(colorFondo), android.graphics.PorterDuff.Mode.SRC);
-        textView.setTextColor(Color.parseColor(colorLetras));
-
-        if (textView.getText().equals("_DESCANSO_")) {
-            textView.setTypeface(null, Typeface.ITALIC);
+    private void mostrarMusculos(){
+        ArrayList<String> musculosUsuario = diaRutinaUsuario.getMusculos();
+        if (musculosUsuario.size() >= 2){
+            musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
+            musculoCentro.setVisibility(View.VISIBLE);
+            if(musculosUsuario.size() == 3){
+                musculoCentro.setBackgroundResource(R.drawable._style2_borde_blanco_0);
+                musculoDerecha.setVisibility(View.VISIBLE);
+            }
         }
+        String musculo;
+        String fondo = "#FFFFFFFF";
+        String fuente = "#FF000000";
+        for (int i = 0; i < musculosUsuario.size(); i++){
+            musculo = musculosUsuario.get(i);
+            if(musculosSemana.containsKey(musculo)){
+                fondo = musculosSemana.get(musculo).getColor_fondo();
+                fuente = musculosSemana.get(musculo).getColor_fuente();
+                musculosSemana.put(musculo, musculosSemana.get(musculo));
+            }
+            musculo = musculo.toUpperCase();
+            if(i == 0){
+                musculoIzquierda.setText(musculo);
+                musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                musculoIzquierda.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            } else if (i == 1) {
+                musculoCentro.setText(musculo);
+                musculoCentro.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                musculoCentro.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            }else {
+                musculoDerecha.setText(musculo);
+                musculoDerecha.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                musculoDerecha.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            }
+        }
+    }
+    private void mostrarEjercicios(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(EjerciciosRutinas.this));
+        adaptador = new EjerciciosRutinasAdaptador(EjerciciosRutinas.this, diaRutinaUsuario);
+        recyclerView.setAdapter(adaptador);
     }
 }

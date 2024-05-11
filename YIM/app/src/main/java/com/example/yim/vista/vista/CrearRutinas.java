@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -29,6 +30,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     Intent intent;
     TablaRutinasUsuario rutinaUsuario;
     ImageView atras, preguntas;
+    EditText nombre;
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     CrearRutinasAdaptador adaptador;
@@ -48,6 +50,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         //Referencias de las vistas
         atras = findViewById(R.id.atras);
         preguntas = findViewById(R.id.preguntas);
+
+        nombre = findViewById(R.id.nombre);
 
         recyclerView = findViewById(R.id.dias);
 
@@ -96,6 +100,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     }
 
     private void mostrarSemana(){
+        nombre.setText(rutinaUsuario.getInformacion().getNombre());
         firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {

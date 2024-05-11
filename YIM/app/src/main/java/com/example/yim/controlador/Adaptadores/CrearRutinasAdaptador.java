@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +27,14 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
     private TablaRutinasUsuario rutinasUsuario;
     private Context context;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
+    HashMap<String, ColoresMusculoUsuario> musculosSemana;
 
     public CrearRutinasAdaptador(Context context, TablaRutinasUsuario rutinasUsuario, HashMap<String, ColoresMusculoUsuario> musculosHM) {
         this.context = context;
         this.rutinasUsuario = rutinasUsuario;
         this.musculosHM = musculosHM;
         this.rutinasUsuario.ordenarSemana();
+        musculosSemana = new HashMap<>();
     }
 
     @NonNull
@@ -41,10 +45,17 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
         return new CrearRutinasViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
         TablaDiaRutinaUsuario diaRutinaUsuario = rutinasUsuario.getSemana().get(position);
+
+        holder.dia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CambiarActivity.cambiar(context, diaRutinaUsuario, musculosSemana);
+            }
+        });
 
         holder.numeroDia.setText(String.valueOf(diaRutinaUsuario.getDia()));
 
@@ -65,6 +76,7 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
             if(musculosHM.containsKey(musculo)){
                 fondo = musculosHM.get(musculo).getColor_fondo();
                 fuente = musculosHM.get(musculo).getColor_fuente();
+                musculosSemana.put(musculo, musculosHM.get(musculo));
             }
             musculo = musculo.toUpperCase();
             if(i == 0){
@@ -90,10 +102,12 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
     }
 
     public static class CrearRutinasViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout dia;
         TextView numeroDia, musculoIzquierda, musculoCentro, musculoDerecha;
 
         public CrearRutinasViewHolder(@NonNull View itemView) {
             super(itemView);
+            dia = itemView.findViewById(R.id.dia);
             numeroDia = itemView.findViewById(R.id.numero_dia);
             musculoIzquierda = itemView.findViewById(R.id.musculo_izquierda);
             musculoCentro = itemView.findViewById(R.id.musculo_centro);

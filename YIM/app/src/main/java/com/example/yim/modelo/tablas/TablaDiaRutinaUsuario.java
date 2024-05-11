@@ -3,6 +3,7 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TablaDiaRutinaUsuario implements Serializable, Comparable<TablaDiaRutinaUsuario> {
     private int dia;
@@ -53,5 +54,8 @@ public class TablaDiaRutinaUsuario implements Serializable, Comparable<TablaDiaR
             valor = -1;
         }
         return valor;
+    }
+    public void ordenarSemana(){
+        Collections.sort(ejercicios);
     }
 }

@@ -33,7 +33,7 @@
         </FrameLayout>
 
         <EditText
-            android:id="@+id/textView"
+            android:id="@+id/nombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,11 +46,10 @@
             android:maxLines="2"
             android:minLines="1"
             android:padding="10dp"
-            android:text="Nombre rutina"
             android:textColor="@color/blanco"
             android:textSize="16sp"
             android:textStyle="bold|italic"
-            tools:ignore="LabelFor,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+            tools:ignore="LabelFor,TouchTargetSizeCheck,VisualLintTextFieldSize,SpeakableTextPresentCheck" />
 
 
         <com.google.android.material.imageview.ShapeableImageView

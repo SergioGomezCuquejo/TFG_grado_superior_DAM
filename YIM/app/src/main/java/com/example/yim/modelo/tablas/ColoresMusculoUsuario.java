@@ -1,6 +1,8 @@
 package com.example.yim.modelo.tablas;
 
-public class ColoresMusculoUsuario {
+import java.io.Serializable;
+
+public class ColoresMusculoUsuario implements Serializable {
     private String color_fondo;
     private String color_fuente;
 

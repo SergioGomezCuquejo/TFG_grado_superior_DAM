@@ -3,13 +3,18 @@ package com.example.yim.vista.controlador;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.vista.vista.EjerciciosRutinas;
 import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
+
+import java.util.HashMap;
 
 public class CambiarActivity {
     public static void cambiar(Context context, Class<?> activity) {
@@ -41,6 +46,13 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
+    public static void cambiar(Context context, TablaDiaRutinaUsuario diaRutinaUsuario, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
+        Intent intent = new Intent(context, EjerciciosRutinas.class);
+        intent.putExtra("diaRutinaUsuario", diaRutinaUsuario);
+        intent.putExtra("musculosSemana", musculosSemana);
+        context.startActivity(intent);
+    }
+
     public static void cambiarAlerta(Context context, String titulo, String texto, String iraA) {
         Intent intent = new Intent(context, PopupAlerta.class);
         intent.putExtra("titulo", titulo);
@@ -49,5 +61,4 @@ public class CambiarActivity {
         context.startActivity(intent);
 
     }
-
 }
