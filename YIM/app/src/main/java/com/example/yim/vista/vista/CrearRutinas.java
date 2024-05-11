@@ -3,28 +3,36 @@ package com.example.yim.vista.vista;
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.controlador.Adaptadores.CrearRutinasAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
-import com.example.yim.vista.controlador.MostratToast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CrearRutinas extends AppCompatActivity implements View.OnClickListener {
+    FirebaseManager firebaseManager;
     Intent intent;
     TablaRutinasUsuario rutinaUsuario;
     ImageView atras, preguntas;
+    RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    CrearRutinasAdaptador adaptador;
+    HashMap<String, ColoresMusculoUsuario> musculosHM = new HashMap<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,12 +40,16 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutinas);
 
+        firebaseManager = new FirebaseManager();
+
         intent = getIntent();
         rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
 
         //Referencias de las vistas
         atras = findViewById(R.id.atras);
         preguntas = findViewById(R.id.preguntas);
+
+        recyclerView = findViewById(R.id.dias);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -53,6 +65,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         imagen_estadisticas.setOnClickListener(this);
         imagen_usuario.setOnClickListener(this);
 
+        mostrarSemana();
     }
 
     @Override
@@ -63,9 +76,6 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
         } else if (id == R.id.preguntas){
             cambiarActivity(Cuestionario.class);
-
-        } else if (id == R.id.dia1){
-            cambiarActivity(EjerciciosRutinas.class);
 
         } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
@@ -85,18 +95,19 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         cambiar(this, activity);
     }
 
+    private void mostrarSemana(){
+        firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
+            @Override
+            public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
 
-
-    public void cambiarColores(View view, String colorFondo, String colorLetras){
-        TextView textView = (TextView) view;
-        Drawable shape = (Drawable) textView.getBackground();
-
-        shape.setColorFilter(Color.parseColor(colorFondo), android.graphics.PorterDuff.Mode.SRC);
-        textView.setTextColor(Color.parseColor(colorLetras));
-
-        if (textView.getText().equals("_DESCANSO_")) {
-            textView.setTypeface(null, Typeface.ITALIC);
-        }
+                for (TablaMusculosUsuario musculo : musculosUsuarios){
+                    musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
+                }
+                recyclerView.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
+                adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutinaUsuario, musculosHM);
+                recyclerView.setAdapter(adaptador);
+            }
+        });
     }
 
 }

@@ -51,7 +51,6 @@ public class VerRutinasAdaptador extends RecyclerView.Adapter<VerRutinasAdaptado
             @Override
             public void onClick(View v) {
                 CambiarActivity.cambiar(context, PopupRutinas.class, rutinaUsuario);
-                MostratToast.mostrarToast(context, "klk");
             }
         });
 

@@ -14,6 +14,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicios;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogros;
@@ -24,6 +25,7 @@ import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.modelo.tablas.TablaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.vista.VerRutinas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -533,7 +535,6 @@ public class FirebaseManager {
 
                             for (DataSnapshot rutinaSnapshot : rutinasSnapshot.getChildren()) {
                                 TablaRutinasUsuario rutina = rutinaSnapshot.getValue(TablaRutinasUsuario.class);
-                                MostratToast.mostrarToast(context, rutina.getSemana().get(0).getEjercicios().get(0).getNombre());
                                 rutina.setID(rutinaSnapshot.getKey());
                                 rutinasUsuario.add(rutina);
                             }

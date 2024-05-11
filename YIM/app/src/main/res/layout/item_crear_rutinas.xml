@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/_style2_borde_blanco_izquierda"
+            android:background="@drawable/_style2_borde_blanco_10"
             android:backgroundTintMode="add"
             android:fontFamily="@font/merriweather_light"
             android:gravity="center"
@@ -45,11 +45,12 @@
 
         <TextView
             android:id="@+id/musculo_centro"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginStart="3dp"
-            android:background="@drawable/_style2_borde_blanco_0"
+            android:background="@drawable/_style2_borde_blanco_derecha"
             android:backgroundTintMode="add"
             android:fontFamily="@font/merriweather_light"
             android:gravity="center"
@@ -58,6 +59,7 @@
 
         <TextView
             android:id="@+id/musculo_derecha"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

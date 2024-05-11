@@ -2,34 +2,35 @@ package com.example.yim.controlador.Adaptadores;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.vista.PopupRutinas;
-import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdaptador.CrearRutinasViewHolder> {
-    private ArrayList<TablaRutinasUsuario> rutinasUsuario;
+    private TablaRutinasUsuario rutinasUsuario;
     private Context context;
-    HashMap<String, String> musculosHM;
+    HashMap<String, ColoresMusculoUsuario> musculosHM;
 
-    public CrearRutinasAdaptador(Context context, ArrayList<TablaRutinasUsuario> rutinasUsuario, HashMap<String, String> musculosHM) {
+    public CrearRutinasAdaptador(Context context, TablaRutinasUsuario rutinasUsuario, HashMap<String, ColoresMusculoUsuario> musculosHM) {
         this.context = context;
         this.rutinasUsuario = rutinasUsuario;
         this.musculosHM = musculosHM;
+        this.rutinasUsuario.ordenarSemana();
     }
 
     @NonNull
@@ -43,39 +44,60 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
-        TablaRutinasUsuario rutinaUsuario = rutinasUsuario.get(position);
+        TablaDiaRutinaUsuario diaRutinaUsuario = rutinasUsuario.getSemana().get(position);
 
-        if(rutinaUsuario.getInformacion().isActivo()){
-            holder.rutina.setBackgroundResource(R.drawable._style2_borde_amarillo_20__padding_10);
-        }
+        holder.numeroDia.setText(String.valueOf(diaRutinaUsuario.getDia()));
 
-        holder.rutina.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CambiarActivity.cambiar(context, PopupRutinas.class, rutinaUsuario);
+        ArrayList<String> musculosUsuario = diaRutinaUsuario.getMusculos();
+        if (musculosUsuario.size() >= 2){
+            holder.musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
+            holder.musculoCentro.setVisibility(View.VISIBLE);
+            if(musculosUsuario.size() == 3){
+                holder.musculoCentro.setBackgroundResource(R.drawable._style2_borde_blanco_0);
+                holder.musculoDerecha.setVisibility(View.VISIBLE);
             }
-        });
-
-        holder.imagen.setImageResource(R.drawable.pierna);
-        holder.nombre.setText(rutinaUsuario.getInformacion().getNombre());
+        }
+        String musculo;
+        String fondo = "#FFFFFFFF";
+        String fuente = "#FF000000";
+        for (int i = 0; i < musculosUsuario.size(); i++){
+            musculo = musculosUsuario.get(i);
+            if(musculosHM.containsKey(musculo)){
+                fondo = musculosHM.get(musculo).getColor_fondo();
+                fuente = musculosHM.get(musculo).getColor_fuente();
+            }
+            musculo = musculo.toUpperCase();
+            if(i == 0){
+                holder.musculoIzquierda.setText(musculo);
+                holder.musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                holder.musculoIzquierda.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            } else if (i == 1) {
+                holder.musculoCentro.setText(musculo);
+                holder.musculoCentro.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                holder.musculoCentro.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            }else {
+                holder.musculoDerecha.setText(musculo);
+                holder.musculoDerecha.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                holder.musculoDerecha.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+            }
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return rutinasUsuario.size();
+        return rutinasUsuario.getSemana().size();
     }
 
     public static class CrearRutinasViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout rutina;
-        ShapeableImageView imagen;
-        TextView nombre;
+        TextView numeroDia, musculoIzquierda, musculoCentro, musculoDerecha;
 
         public CrearRutinasViewHolder(@NonNull View itemView) {
             super(itemView);
-            rutina = itemView.findViewById(R.id.rutina);
-            imagen = itemView.findViewById(R.id.imagen);
-            nombre = itemView.findViewById(R.id.nombre);
+            numeroDia = itemView.findViewById(R.id.numero_dia);
+            musculoIzquierda = itemView.findViewById(R.id.musculo_izquierda);
+            musculoCentro = itemView.findViewById(R.id.musculo_centro);
+            musculoDerecha = itemView.findViewById(R.id.musculo_derecha);
         }
     }
 }

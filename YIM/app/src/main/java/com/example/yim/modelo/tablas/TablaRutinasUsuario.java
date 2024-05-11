@@ -2,6 +2,7 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TablaRutinasUsuario implements Serializable {
     private String ID;
@@ -11,8 +12,7 @@ public class TablaRutinasUsuario implements Serializable {
     public TablaRutinasUsuario() {
     }
 
-    public TablaRutinasUsuario(String ID, TablaInfoRutinasUsuario informacion, ArrayList<TablaDiaRutinaUsuario> semana) {
-        this.ID = ID;
+    public TablaRutinasUsuario(TablaInfoRutinasUsuario informacion, ArrayList<TablaDiaRutinaUsuario> semana) {
         this.informacion = informacion;
         this.semana = semana;
     }
@@ -41,4 +41,10 @@ public class TablaRutinasUsuario implements Serializable {
     public void setSemana(ArrayList<TablaDiaRutinaUsuario> semana) {
         this.semana = semana;
     }
+    public void ordenarSemana(){
+        Collections.sort(semana);
+    }
+
+
+
 }
