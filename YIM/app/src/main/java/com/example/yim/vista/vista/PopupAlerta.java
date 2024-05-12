@@ -98,22 +98,25 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
     private void aceptar(){
         if(iraA.startsWith("ID")){
             String ID = iraA.substring(2, iraA.length()-2);
-            boolean eliminado = false;
             String mensaje = "";
 
             if (iraA.endsWith("EJ")){
-                eliminado = firebaseManager.eliminarEjercicio(this, ID);
-                if(eliminado){
+                if(firebaseManager.eliminarEjercicio(this, ID)){
                     mensaje = "Ejercicio eliminado correctamente";
+                }else{
+                    mensaje = "Error al eliminar el ejercicio";
+                }
+            }else if (iraA.endsWith("RU")) {
+                if (firebaseManager.eliminarRutina(this, ID)) {
+                    mensaje = "Rutina eliminada correctamente";
+                    CambiarActivity.cambiar(this, VerRutinas.class);
+                } else {
+                    mensaje = "Error al eliminar la rutina";
                 }
             }
 
-            if(eliminado){
-                CambiarActivity.cambiar(this, VerEjercicios.class);
-                MostratToast.mostrarToast(this, mensaje);
-            }else{
-                finish();
-            }
+            MostratToast.mostrarToast(this, mensaje);
+            finish();
 
         }else{
             switch (iraA){

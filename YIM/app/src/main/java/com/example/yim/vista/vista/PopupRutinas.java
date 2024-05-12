@@ -94,8 +94,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.cancelar) {
-            cambiarActivity( "Descartar cambios no guardados.",
-                    "¿Desea descartar los cambios no guardados?");
+            finish();
 
         } else if (id == R.id.editar) {
             CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
@@ -105,8 +104,8 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             cambiarActivo(activo.isChecked());
 
         } else if (id == R.id.borrar) {
-            cambiarActivity("Borrar rutina.",
-                    "¿Desea eliminar la rutina 'Nombre de la rutina'?");
+            CambiarActivity.cambiarAlerta(this, "Borrar rutina.",
+                    "¿Desea eliminar la rutina '" + rutinaUsuario.getInformacion().getNombre() + "'?", "ID" + rutinaUsuario.getID() + "RU");
 
         }
     }
@@ -121,13 +120,6 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             activo.setBackgroundResource(R.drawable._style_rectangulo_fondo_clarito__borde_blanco_50);
             activo.setThumbTintList(getResources().getColorStateList(R.color.gris));
         }
-    }
-
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
-    }
-    private void cambiarActivity(String titulo, String texto) {
-        cambiarAlerta(this, titulo, texto, "ir_a_ver_rutinas");
     }
 
     private void mostrarInfo(){

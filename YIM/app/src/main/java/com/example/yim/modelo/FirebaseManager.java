@@ -630,4 +630,18 @@ public class FirebaseManager {
         }
         return actualizado;
     }
+
+    public boolean eliminarRutina(Context context, String ID){
+        boolean eliminada = false;
+        try{
+            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutinas");
+
+            rutinasUsuarioReference.child(ID).removeValue();
+            eliminada = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al eliminar la rutina.");
+            e.printStackTrace();
+        }
+        return eliminada;
+    }
 }
