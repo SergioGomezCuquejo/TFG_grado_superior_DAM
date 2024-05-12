@@ -16,7 +16,6 @@ import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
@@ -32,7 +31,6 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_alerta);
 
-
         //Cambiar el tamaño de la pantalla para que sea como un popup.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
@@ -41,6 +39,9 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         int alto = medidasVentana.heightPixels;
 
         getWindow().setLayout((int)(ancho * 0.80), (int) (alto * 0.30));
+
+
+        firebaseManager = new FirebaseManager();
 
 
         //Obtener datos de la anterior activity.
@@ -96,7 +97,6 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
 
     private void aceptar(){
         if(iraA.startsWith("ID")){
-            firebaseManager = new FirebaseManager();
             String ID = iraA.substring(2, iraA.length()-2);
             boolean eliminado = false;
             String mensaje = "";

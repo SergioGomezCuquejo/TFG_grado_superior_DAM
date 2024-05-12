@@ -14,7 +14,6 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
-import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicios;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogros;
@@ -25,7 +24,6 @@ import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.modelo.tablas.TablaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.vista.VerRutinas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -522,7 +520,7 @@ public class FirebaseManager {
 
     public void obtenerRutinasUsuario(Context context, FirebaseCallbackRutinasUsuario callback){
         try {
-            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            usuariosReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     ArrayList<TablaRutinasUsuario> rutinasUsuario = new ArrayList<TablaRutinasUsuario>();
@@ -557,4 +555,79 @@ public class FirebaseManager {
         }
     }
 
+    public boolean agregarRutina(Context context, TablaRutinasUsuario nuevaRutina){
+        boolean agregada = false;
+        try{
+            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutinas");
+            String idRutina = rutinasUsuarioReference.push().getKey();
+
+            rutinasUsuarioReference.child(idRutina).setValue(nuevaRutina);
+
+            agregada = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al agregar la rutina.");
+            e.printStackTrace();
+        }
+        return agregada;
+    }
+
+    public void desactivarRutinas(Context context){
+        try {
+            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaRutinasUsuario rutinaUsuario = new TablaRutinasUsuario();
+                    boolean desactivadas = false;
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot rutinasSnapshot = usuarioSnapshot.child("rutinas");
+
+                            Iterator<DataSnapshot> iterator = rutinasSnapshot.getChildren().iterator();
+                            while (iterator.hasNext() && !desactivadas) {
+                                DataSnapshot rutinaSnapshot = iterator.next();
+                                rutinaUsuario = rutinaSnapshot.getValue(TablaRutinasUsuario.class);
+
+                                if(rutinaUsuario.getInformacion().isActivo()){
+                                    rutinaUsuario.setID(rutinaSnapshot.getKey());
+                                    rutinaUsuario.getInformacion().setActivo(false);
+                                    if(actualizarRutina(context, rutinaUsuario)){
+                                        desactivadas = true;
+                                    }else{
+                                        MostratToast.mostrarToast(context, "Error al desactivar rutinas");
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener los logros del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            MostratToast.mostrarToast(context, "Error al obtener los logros del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean actualizarRutina(Context context, TablaRutinasUsuario rutina){
+        boolean actualizado = false;
+        try{
+            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutinas");
+
+            rutinasUsuarioReference.child(rutina.getID()).setValue(rutina);
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar la rutina.");
+            e.printStackTrace();
+        }
+        return actualizado;
+    }
 }

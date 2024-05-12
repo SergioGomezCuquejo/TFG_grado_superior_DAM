@@ -50,7 +50,7 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         }
 
         //Referencias de las vistas.
-        recyclerView = findViewById(R.id.musculos);
+        recyclerView = findViewById(R.id.ejercicios);
 
         agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
 

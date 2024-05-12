@@ -18,6 +18,7 @@ import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,40 +60,44 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
 
         holder.numeroDia.setText(String.valueOf(diaRutinaUsuario.getDia()));
 
-        ArrayList<String> musculosUsuario = diaRutinaUsuario.getMusculos();
-        if (musculosUsuario.size() >= 2){
-            holder.musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
-            holder.musculoCentro.setVisibility(View.VISIBLE);
-            if(musculosUsuario.size() == 3){
-                holder.musculoCentro.setBackgroundResource(R.drawable._style2_borde_blanco_0);
-                holder.musculoDerecha.setVisibility(View.VISIBLE);
+        if(diaRutinaUsuario.getMusculos() != null){
+            ArrayList<String> musculosUsuario = diaRutinaUsuario.getMusculos();
+            if (musculosUsuario.size() >= 2){
+                holder.musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
+                holder.musculoCentro.setVisibility(View.VISIBLE);
+                if(musculosUsuario.size() == 3){
+                    holder.musculoCentro.setBackgroundResource(R.drawable._style2_borde_blanco_0);
+                    holder.musculoDerecha.setVisibility(View.VISIBLE);
+                }
+            }
+            String musculo;
+            String fondo = "#FFFFFFFF";
+            String fuente = "#FF000000";
+            for (int i = 0; i < musculosUsuario.size(); i++){
+                musculo = musculosUsuario.get(i);
+                if(musculosHM.containsKey(musculo)){
+                    fondo = musculosHM.get(musculo).getColor_fondo();
+                    fuente = musculosHM.get(musculo).getColor_fuente();
+                    musculosSemana.put(musculo, musculosHM.get(musculo));
+                }
+                musculo = musculo.toUpperCase();
+                if(i == 0){
+                    holder.musculoIzquierda.setText(musculo);
+                    holder.musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                    holder.musculoIzquierda.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+                } else if (i == 1) {
+                    holder.musculoCentro.setText(musculo);
+                    holder.musculoCentro.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                    holder.musculoCentro.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+                }else {
+                    holder.musculoDerecha.setText(musculo);
+                    holder.musculoDerecha.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
+                    holder.musculoDerecha.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
+                }
             }
         }
-        String musculo;
-        String fondo = "#FFFFFFFF";
-        String fuente = "#FF000000";
-        for (int i = 0; i < musculosUsuario.size(); i++){
-            musculo = musculosUsuario.get(i);
-            if(musculosHM.containsKey(musculo)){
-                fondo = musculosHM.get(musculo).getColor_fondo();
-                fuente = musculosHM.get(musculo).getColor_fuente();
-                musculosSemana.put(musculo, musculosHM.get(musculo));
-            }
-            musculo = musculo.toUpperCase();
-            if(i == 0){
-                holder.musculoIzquierda.setText(musculo);
-                holder.musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
-                holder.musculoIzquierda.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
-            } else if (i == 1) {
-                holder.musculoCentro.setText(musculo);
-                holder.musculoCentro.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
-                holder.musculoCentro.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
-            }else {
-                holder.musculoDerecha.setText(musculo);
-                holder.musculoDerecha.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
-                holder.musculoDerecha.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
-            }
-        }
+
+
 
     }
 

@@ -15,8 +15,14 @@ public class TablaDiaRutinaUsuario implements Serializable, Comparable<TablaDiaR
 
     public TablaDiaRutinaUsuario(int dia, ArrayList<TablaEjercicioRutinaUsuario> ejercicios, ArrayList<String> musculos) {
         this.dia = dia;
-        //this.ejercicios = ejercicios;
+        this.ejercicios = ejercicios;
         this.musculos = musculos;
+    }
+
+    public TablaDiaRutinaUsuario(int dia) {
+        this.dia = dia;
+        musculos = new ArrayList<>();
+        musculos.add("Descanso");
     }
 
     public int getDia() {
@@ -57,5 +63,14 @@ public class TablaDiaRutinaUsuario implements Serializable, Comparable<TablaDiaR
     }
     public void ordenarSemana(){
         Collections.sort(ejercicios);
+    }
+
+    @Override
+    public String toString() {
+        return "TablaDiaRutinaUsuario{" +
+                "dia=" + dia +
+                ", ejercicios=" + ejercicios +
+                ", musculos=" + musculos +
+                '}';
     }
 }

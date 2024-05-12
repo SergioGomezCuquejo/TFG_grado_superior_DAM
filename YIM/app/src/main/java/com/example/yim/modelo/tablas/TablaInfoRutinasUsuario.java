@@ -40,6 +40,10 @@ public class TablaInfoRutinasUsuario implements Serializable {
         this.veces_completada = veces_completada;
     }
 
+    public TablaInfoRutinasUsuario(String nombre) {
+        this.nombre = nombre;
+    }
+
     public boolean isActivo() {
         return activo;
     }

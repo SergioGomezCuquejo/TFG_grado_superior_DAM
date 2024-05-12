@@ -19,8 +19,11 @@ import com.example.yim.controlador.Adaptadores.CrearRutinasAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaInfoRutinasUsuario;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +32,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     FirebaseManager firebaseManager;
     Intent intent;
     TablaRutinasUsuario rutinaUsuario;
-    ImageView atras, preguntas;
+    ImageView atras, guardar;
     EditText nombre;
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
@@ -45,11 +48,21 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         firebaseManager = new FirebaseManager();
 
         intent = getIntent();
-        rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+
+        if(intent.hasExtra("rutinaUsuario")) {
+            rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+        } else {
+            rutinaUsuario = new TablaRutinasUsuario();
+            ArrayList<TablaDiaRutinaUsuario> semana = new ArrayList<TablaDiaRutinaUsuario>();
+            for(int i = 0; i < 7; i++){
+                semana.add(new TablaDiaRutinaUsuario(i+1));
+            }
+            rutinaUsuario.setSemana(semana);
+        }
 
         //Referencias de las vistas
         atras = findViewById(R.id.atras);
-        preguntas = findViewById(R.id.preguntas);
+        guardar = findViewById(R.id.guardar);
 
         nombre = findViewById(R.id.nombre);
 
@@ -62,14 +75,14 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
         //Listeners
         atras.setOnClickListener(this);
-        preguntas.setOnClickListener(this);
+        guardar.setOnClickListener(this);
 
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
         imagen_usuario.setOnClickListener(this);
 
-        mostrarSemana();
+        mostrarSemana(rutinaUsuario);
     }
 
     @Override
@@ -78,8 +91,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.atras){
             finish();
 
-        } else if (id == R.id.preguntas){
-            cambiarActivity(Cuestionario.class);
+        } else if (id == R.id.guardar){
+            guardar();
 
         } else if (id == R.id.imagen_casa){
             cambiarActivity(Inicio.class);
@@ -99,8 +112,10 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         cambiar(this, activity);
     }
 
-    private void mostrarSemana(){
-        nombre.setText(rutinaUsuario.getInformacion().getNombre());
+    private void mostrarSemana(TablaRutinasUsuario rutina){
+        if(rutina.getInformacion() != null){
+            nombre.setText(rutina.getInformacion().getNombre());
+        }
         firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
@@ -109,10 +124,38 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
                     musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
-                adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutinaUsuario, musculosHM);
+                adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutina, musculosHM);
                 recyclerView.setAdapter(adaptador);
             }
         });
+    }
+
+    private void guardar(){
+        boolean nueva = false;
+        if(nombre.getText().toString().equals("")){
+            MostratToast.mostrarToast(this, "Escribe un nombre de rutina");
+        }else{
+            if (rutinaUsuario.getInformacion() == null){
+                nueva = true;
+            }
+            rutinaUsuario.setInformacion(new TablaInfoRutinasUsuario(nombre.getText().toString()));
+            if(nueva){
+                crearRutina();
+            }else{
+                MostratToast.mostrarToast(this, "actualizar");
+            }
+        }
+    }
+
+    private void crearRutina(){
+        if(firebaseManager.agregarRutina(this, rutinaUsuario)){
+            MostratToast.mostrarToast(this, "Rutina creada correctamente");
+            finish();
+            cambiarActivity(VerRutinas.class);
+
+        }else {
+            MostratToast.mostrarToast(this, "Error al crear la rutina");
+        }
     }
 
 }

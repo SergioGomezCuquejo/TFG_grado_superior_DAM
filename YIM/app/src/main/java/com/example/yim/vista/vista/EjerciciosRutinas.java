@@ -37,7 +37,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
     LinearLayout musculos;
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    TextView musculoIzquierda, musculoCentro, musculoDerecha;
+    TextView musculoIzquierda, musculoCentro, musculoDerecha, descanso;
     ImageView agregar_ejercicio;
     EjerciciosRutinasAdaptador adaptador;
 
@@ -59,6 +59,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculoCentro = findViewById(R.id.musculo_centro);
         musculoDerecha = findViewById(R.id.musculo_derecha);
 
+        descanso = findViewById(R.id.descanso);
         recyclerView = findViewById(R.id.ejericicos);
 
         imagen_casa = findViewById(R.id.imagen_casa);
@@ -154,8 +155,12 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         }
     }
     private void mostrarEjercicios(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(EjerciciosRutinas.this));
-        adaptador = new EjerciciosRutinasAdaptador(EjerciciosRutinas.this, diaRutinaUsuario);
-        recyclerView.setAdapter(adaptador);
+        if(diaRutinaUsuario.getEjercicios() != null){
+            recyclerView.setLayoutManager(new LinearLayoutManager(EjerciciosRutinas.this));
+            adaptador = new EjerciciosRutinasAdaptador(EjerciciosRutinas.this, diaRutinaUsuario);
+            recyclerView.setAdapter(adaptador);
+        }else {
+            descanso.setVisibility(View.VISIBLE);
+        }
     }
 }
