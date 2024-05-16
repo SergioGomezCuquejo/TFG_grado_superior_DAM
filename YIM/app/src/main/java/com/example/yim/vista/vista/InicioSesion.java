@@ -88,7 +88,7 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
             boolean emailCorrecto = ValidarDatos.validarEmail(emailUsuario);
             boolean contrasenaCorrecta = ValidarDatos.validarContrasena(contrasenaUsuario);
 
-            if ( emailCorrecto && contrasenaCorrecta){
+            if ( emailCorrecto /*&& contrasenaCorrecta*/){
                 auth.signInWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

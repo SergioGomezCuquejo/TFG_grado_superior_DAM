@@ -78,7 +78,7 @@
         <activity
             android:name=".vista.vista.PopupRutinas"
             android:exported="false"
-            android:theme="@style/AppTheme.PopupNoCerrable" />
+            android:theme="@style/AppTheme.PopupCerrable" />
         <activity
             android:name=".vista.vista.PopupVerEjercicios"
             android:exported="false"

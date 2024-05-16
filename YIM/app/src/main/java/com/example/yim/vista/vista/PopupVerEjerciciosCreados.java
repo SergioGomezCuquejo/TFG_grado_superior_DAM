@@ -173,6 +173,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
                 } else {
                     musculos.remove(musculo);
 
+
                     cambiarColores((TextView) buttonView, getResources().getColor(R.color.negro_oscuro));
                 }
 

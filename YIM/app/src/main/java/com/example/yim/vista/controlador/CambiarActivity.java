@@ -13,6 +13,7 @@ import com.example.yim.vista.vista.EjerciciosRutinas;
 import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
+import com.example.yim.vista.vista.PopupRutinas;
 
 import java.util.HashMap;
 
@@ -46,9 +47,10 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    public static void cambiar(Context context, TablaDiaRutinaUsuario diaRutinaUsuario, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
+    public static void cambiar(Context context, TablaRutinasUsuario rutinaUsuario, int dia, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
         Intent intent = new Intent(context, EjerciciosRutinas.class);
-        intent.putExtra("diaRutinaUsuario", diaRutinaUsuario);
+        intent.putExtra("rutinaUsuario", rutinaUsuario);
+        intent.putExtra("dia", dia);
         intent.putExtra("musculosSemana", musculosSemana);
         context.startActivity(intent);
     }
@@ -58,6 +60,17 @@ public class CambiarActivity {
         intent.putExtra("titulo", titulo);
         intent.putExtra("texto", texto);
         intent.putExtra("iraA", iraA);
+        context.startActivity(intent);
+
+    }
+
+    public static void cambiarAlerta(Context context, String titulo, String texto, String iraA, String ID, String accion) {
+        Intent intent = new Intent(context, PopupAlerta.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("texto", texto);
+        intent.putExtra("iraA", iraA);
+        intent.putExtra("ID", ID);
+        intent.putExtra("accion", accion);
         context.startActivity(intent);
 
     }

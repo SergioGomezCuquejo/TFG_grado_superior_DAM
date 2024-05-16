@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<TablaEjercicioRutinaUsuario> {
+    private String ID;
     private ArrayList<String> musculos;
     private String nombre;
     private int posicion;
@@ -21,6 +22,14 @@ public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<Tab
         this.repeticiones = repeticiones;
         this.series = series;
         this.tiempo_descanso = tiempo_descanso;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public ArrayList<String> getMusculos() {

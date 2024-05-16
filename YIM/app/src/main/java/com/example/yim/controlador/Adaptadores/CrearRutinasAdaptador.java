@@ -1,6 +1,7 @@
 package com.example.yim.controlador.Adaptadores;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -50,11 +51,12 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
     @Override
     public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
         TablaDiaRutinaUsuario diaRutinaUsuario = rutinasUsuario.getSemana().get(position);
+        int dia = position;
 
         holder.dia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CambiarActivity.cambiar(context, diaRutinaUsuario, musculosSemana);
+                CambiarActivity.cambiar(context, rutinasUsuario, dia, musculosSemana);
             }
         });
 

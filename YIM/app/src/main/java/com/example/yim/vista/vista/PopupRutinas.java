@@ -33,6 +33,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     TextView diasDescansados, diasDeDescanso, diasTotales, diasCompletados, musculosTotales, musculosActivos,
             ejerciciosSinRealizar, ejerciciosRealizados, vecesActivada, vecesCompletadas;
     Button borrar;
+    boolean primeraVez;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
         intent = getIntent();
         rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+
+        primeraVez = true;
 
         //Referencias de las vistas
         cancelar = findViewById(R.id.cancelar);
@@ -80,14 +83,26 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         borrar.setOnClickListener(this);
 
         activo_ll.setOnClickListener(this);
+
+
         activo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean estaActivo) {
                 cambiarActivo(estaActivo);
+                if(!primeraVez){
+
+                    if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
+                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario.getID(), "activar");
+
+                    } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
+                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario.getID(), "desactivar");
+                    }
+                }
             }
         });
 
         mostrarInfo();
+        primeraVez = false;
     }
 
     @Override
@@ -98,10 +113,6 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
         } else if (id == R.id.editar) {
             CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
-
-        } else if (id == R.id.activo_ll) {
-            activo.setChecked(!activo.isChecked());
-            cambiarActivo(activo.isChecked());
 
         } else if (id == R.id.borrar) {
             CambiarActivity.cambiarAlerta(this, "Borrar rutina.",

@@ -18,198 +18,68 @@
         android:layout_margin="20dp"
         android:src="@drawable/cancelar" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linear_layout_musculos"
             android:layout_width="match_parent"
             android:layout_height="90dp"
+            android:baselineAligned="false"
             android:layout_marginBottom="12dp"
             android:orientation="horizontal"
             android:padding="12dp">
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/_style2_borde_blanco_izquierda"
-                android:padding="1dp"
-                tools:ignore="NestedWeights">
-
-                <TextView
-                    android:id="@+id/musculo1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/_style2_borde_blanco_izquierda"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/espalda"
-                    android:textColor="@color/negro_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="NestedWeights" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/_style2_borde_blanco_derecha"
-                android:padding="1dp">
-
-                <TextView
-                    android:id="@+id/musculo2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/_style2_borde_blanco_derecha"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/biceps"
-                    android:textColor="@color/negro_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="NestedWeights" />
-            </FrameLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/texto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_below="@+id/linear_layout_musculos"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris" />
-
             <TextView
+                android:id="@+id/musculo_izquierda"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style2_borde_blanco_10"
+                android:backgroundTintMode="add"
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
-                android:text="Cambiar músculos"
-                android:textColor="@color/negro_clarito"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="NestedWeights" />
+
+            <TextView
+                android:id="@+id/musculo_centro"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="3dp"
+                android:background="@drawable/_style2_borde_blanco_derecha"
+                android:backgroundTintMode="add"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <View
+            <TextView
+                android:id="@+id/musculo_derecha"
+                android:visibility="gone"
                 android:layout_width="0dp"
-                android:layout_height="3dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris" />
+                android:layout_marginStart="3dp"
+                android:background="@drawable/_style2_borde_blanco_derecha"
+                android:backgroundTintMode="add"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linear_layout_muscculos_elegidos_1y2"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_below="@+id/texto"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="25dp"
-                android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                android:padding="1dp"
-                tools:ignore="NestedWeights">
-
-                <TextView
-                    android:id="@+id/musculo_elegido_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/espalda"
-                    android:textColor="@color/negro_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="NestedWeights" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                android:padding="1dp">
-
-                <TextView
-                    android:id="@+id/musculo_elegido_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/biceps"
-                    android:textColor="@color/negro_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="NestedWeights" />
-            </FrameLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_muscculos_elegidos_3"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/linear_layout_muscculos_elegidos_1y2"
-            android:orientation="horizontal"
-            android:padding="12dp">
 
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5" />
 
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="25dp"
-                android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                android:padding="1dp"
-                tools:ignore="NestedWeights">
-
-                <TextView
-                    android:id="@+id/musculo_elegido_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/_style_rectangulo_gris_oscuro__borde_blanco_10"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/negro_oscuro"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="NestedWeights" />
-            </FrameLayout>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5" />
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

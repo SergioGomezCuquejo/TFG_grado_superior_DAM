@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,7 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
     Intent intent;
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
-    String titulo, texto, iraA;
+    String titulo, texto, iraA, ID, accion;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
             titulo = intent.getStringExtra("titulo");
             texto = intent.getStringExtra("texto");
             iraA = intent.getStringExtra("iraA");
+            if(intent.hasExtra("ID")) {
+                ID = intent.getStringExtra("ID");
+                accion = intent.getStringExtra("accion");
+            }
 
         }else{
             titulo = "OOPS.";
@@ -124,6 +129,15 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                     cambiarActivity(Musculos.class);
                     break;
                 case "ir_a_ver_rutinas":
+                    if(ID != null){
+                        if(accion.equals("activar")){
+                            firebaseManager.desactivarRutinas(this);
+                            firebaseManager.modificarActivoRutina(this, ID, true);
+                        } else if (accion.equals("desactivar")) {
+                            firebaseManager.modificarActivoRutina(this, ID, false);
+                        }
+
+                    }
                     cambiarActivity(VerRutinas.class);
                     break;
                 case "ir_a_ejercicios":
@@ -138,6 +152,14 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                 case "ir_a_ver_ejercicios":
                     cambiarActivity(VerEjercicios.class);
                     break;
+                case "ir_a_rutina_semanal":
+                    cambiarActivity(RutinaSemanal.class);
+                    break;
+                case "ir_a_estadisticas":
+                    cambiarActivity(Estadisticas.class);
+                case "ir_a_perfil":
+                    cambiarActivity(Perfil.class);
+                    break;
                 case "cerrar_sesion":
                     auth = FirebaseAuth.getInstance();
                     auth.signOut();
@@ -149,6 +171,7 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                     break;
             }
         }
+        finish();
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.yim.vista.vista;
 
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
+import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -95,22 +96,27 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             guardar();
 
         } else if (id == R.id.imagen_casa){
-            cambiarActivity(Inicio.class);
+            cambiarActivity("ir_a_inicio");
 
-        }  else if (id == R.id.imagen_calendario) {
-            cambiarActivity(RutinaSemanal.class);
+        } else if (id == R.id.imagen_calendario) {
+            cambiarActivity("ir_a_rutina_semanal");
 
         } else if (id == R.id.imagen_estadisticas) {
-            cambiarActivity(Estadisticas.class);
+            cambiarActivity("ir_a_estadisticas");
 
         } else if (id == R.id.imagen_usuario) {
-            cambiarActivity(Perfil.class);
+            cambiarActivity("ir_a_perfil");
 
         }
     }
     private void cambiarActivity(Class<?> activity) {
         cambiar(this, activity);
     }
+
+    private void cambiarActivity(String ira) {
+        cambiarAlerta(this, "Descartar cambios", "¿Desea descartar los cambios no guradados?", ira);
+    }
+
 
     private void mostrarSemana(TablaRutinasUsuario rutina){
         if(rutina.getInformacion() != null){
@@ -140,22 +146,26 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             }
             rutinaUsuario.setInformacion(new TablaInfoRutinasUsuario(nombre.getText().toString()));
             if(nueva){
-                crearRutina();
+                if(firebaseManager.agregarRutina(this, rutinaUsuario)){
+                    MostratToast.mostrarToast(this, "Rutina creada correctamente");
+                    finish();
+                    cambiarActivity(VerRutinas.class);
+
+                }else {
+                    MostratToast.mostrarToast(this, "Error al crear la rutina");
+                }
             }else{
-                MostratToast.mostrarToast(this, "actualizar");
+                if(firebaseManager.actualizarRutina(this, rutinaUsuario)){
+                    MostratToast.mostrarToast(this, "Rutina actualizada correctamente");
+                    finish();
+                    cambiarActivity(VerRutinas.class);
+
+                }else {
+                    MostratToast.mostrarToast(this, "Error al actualizar la rutina");
+                }
             }
         }
     }
 
-    private void crearRutina(){
-        if(firebaseManager.agregarRutina(this, rutinaUsuario)){
-            MostratToast.mostrarToast(this, "Rutina creada correctamente");
-            finish();
-            cambiarActivity(VerRutinas.class);
-
-        }else {
-            MostratToast.mostrarToast(this, "Error al crear la rutina");
-        }
-    }
 
 }
