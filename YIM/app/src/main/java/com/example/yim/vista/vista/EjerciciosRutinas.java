@@ -94,7 +94,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculoElegidoCentro = findViewById(R.id.musculo_elegido_centro);
         musculoElegidoDerecha = findViewById(R.id.musculo_elegido_derecha);
 
-        descanso = findViewById(R.id.descanso);
+        descanso = findViewById(R.id.descanso_bt);
         recyclerView = findViewById(R.id.ejericicos);
 
         imagen_casa = findViewById(R.id.imagen_casa);

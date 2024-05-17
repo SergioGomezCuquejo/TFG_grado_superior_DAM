@@ -9,7 +9,6 @@
     tools:context=".vista.vista.EjercicioActivo">
 
     <LinearLayout
-        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
@@ -31,6 +30,7 @@
                 app:shapeAppearanceOverlay="@style/radius" />
         </FrameLayout>
         <TextView
+            android:id="@+id/ejercios_totales_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,14 +41,12 @@
             android:padding="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Ejercicio 1 de 4"
             android:textColor="@color/blanco"
             android:textSize="16sp"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
@@ -87,17 +85,17 @@
                     android:layout_alignParentEnd="true"
                     android:layout_margin="10dp"
                     android:background="@color/fondo_clarito"
-                    app:srcCompat="@android:drawable/ic_dialog_info" />
+                    app:srcCompat="@android:drawable/ic_dialog_info"
+                    android:contentDescription="informacion" />
 
                 <TextView
                     android:id="@+id/titulo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imagen"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
-                    android:text="@string/nombre_ejercicio_1"
                     android:textColor="@color/blanco"
                     android:textSize="23sp" />
 
@@ -122,16 +120,16 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/repeticiones_necesarias"
+                        android:id="@+id/repeticiones_necesarias_bt"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/_style_circulo_fondo_oscuro__borde_verde_clarito"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
-                        android:text="888"
                         android:textColor="@color/blanco"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -153,15 +151,15 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/descanso"
+                        android:id="@+id/descanso_bt"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@drawable/_style_circulo_fondo_oscuro__borde_rojo_clarito"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
-                        android:text="88:88"
                         android:textColor="@color/blanco"
-                        android:textSize="23sp" />
+                        android:textSize="23sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -183,16 +181,16 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/series"
+                        android:id="@+id/series_bt"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/_style_circulo_fondo_oscuro__borde_naranja"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
-                        android:text="88/88"
                         android:textColor="@color/blanco"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -226,7 +224,7 @@
                     android:gravity="center|center_horizontal|center_vertical">
 
                     <TextView
-                        android:id="@+id/serie"
+                        android:id="@+id/serie_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/merriweather_light"

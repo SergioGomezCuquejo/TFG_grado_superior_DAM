@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.vista.vista.EjercicioActivo;
+import com.example.yim.vista.vista.EjerciciosDiarios;
 import com.example.yim.vista.vista.EjerciciosRutinas;
 import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
@@ -52,6 +56,20 @@ public class CambiarActivity {
         intent.putExtra("rutinaUsuario", rutinaUsuario);
         intent.putExtra("dia", dia);
         intent.putExtra("musculosSemana", musculosSemana);
+        context.startActivity(intent);
+    }
+    public static void cambiar(Context context, TablaDiaRutinaActiva diaRutinaActiva) {
+        Intent intent = new Intent(context, EjerciciosDiarios.class);
+        intent.putExtra("diaRutinaActiva", diaRutinaActiva);
+        context.startActivity(intent);
+    }
+
+
+    public static void cambiar(Context context, TablaEjercicioActivo ejercicioActivo, String ejerciciosTotales) {
+
+        Intent intent = new Intent(context, EjercicioActivo.class);
+        intent.putExtra("ejercicioActivo", ejercicioActivo);
+        intent.putExtra("ejerciciosTotales", ejerciciosTotales);
         context.startActivity(intent);
     }
 

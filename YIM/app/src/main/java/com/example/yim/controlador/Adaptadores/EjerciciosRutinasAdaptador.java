@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioRutinaUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -204,7 +203,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
 
             minutos = itemView.findViewById(R.id.minutos);
             segundos = itemView.findViewById(R.id.segundos);
-            series = itemView.findViewById(R.id.series);
+            series = itemView.findViewById(R.id.series_bt);
             repeticiones = itemView.findViewById(R.id.repeticiones);
 
             subirIB = itemView.findViewById(R.id.subir);

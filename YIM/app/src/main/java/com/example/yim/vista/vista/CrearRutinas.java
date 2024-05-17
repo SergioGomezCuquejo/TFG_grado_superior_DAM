@@ -38,7 +38,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     CrearRutinasAdaptador adaptador;
-    HashMap<String, ColoresMusculoUsuario> musculosHM = new HashMap<>();
+    HashMap<String, ColoresMusculoUsuario> musculosHM;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,7 +47,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_crear_rutinas);
 
         firebaseManager = new FirebaseManager();
-
+        musculosHM = new HashMap<>();
         intent = getIntent();
 
         if(intent.hasExtra("rutinaUsuario")) {
