@@ -93,7 +93,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                         CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "activar");
 
                     } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario.getID(), "desactivar");
+                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "desactivar");
                     }
                 }
             }

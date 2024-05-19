@@ -634,7 +634,6 @@ public class FirebaseManager {
                                     rutinaUsuario.getInformacion().setActivo(false);
                                     if(actualizarRutina(context, rutinaUsuario)){
                                         desactivadas = true;
-                                        MostratToast.mostrarToast(context, "Desactivada la rutina " + rutinaUsuario.getInformacion().getNombre());
                                     }else{
                                         MostratToast.mostrarToast(context, "Error al desactivar rutinas");
                                     }
@@ -782,4 +781,20 @@ public class FirebaseManager {
         }
         return agregada;
     }
+
+    public boolean eliminarRutinaActiva(Context context){
+        boolean eliminada = false;
+        try{
+            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa");
+
+            rutinasUsuarioReference.removeValue();
+            eliminada = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al eliminar la rutina.");
+            e.printStackTrace();
+        }
+        return eliminada;
+    }
+
+
 }

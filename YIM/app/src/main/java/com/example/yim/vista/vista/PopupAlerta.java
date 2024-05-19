@@ -56,10 +56,6 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
             titulo = intent.getStringExtra("titulo");
             texto = intent.getStringExtra("texto");
             iraA = intent.getStringExtra("iraA");
-            if(intent.hasExtra("ID")) {
-                ID = intent.getStringExtra("ID");
-                accion = intent.getStringExtra("accion");
-            }
             if(intent.hasExtra("rutinaUsuario")) {
                 rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
                 accion = intent.getStringExtra("accion");
@@ -138,18 +134,13 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                     cambiarActivity(Musculos.class);
                     break;
                 case "ir_a_ver_rutinas":
-                    if(ID != null){
-                        if(accion.equals("activar")){
-                            firebaseManager.desactivarRutinas(this);
-                            firebaseManager.modificarActivoRutina(this, ID, true);
 
-                        } else if (accion.equals("desactivar")) {
-                            firebaseManager.modificarActivoRutina(this, ID, false);
-                        }
-                    }
                     if(rutinaUsuario != null){
+                        firebaseManager.desactivarRutinas(this);
+                        firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), false);
+                        firebaseManager.eliminarRutinaActiva(this);
+                        
                         if(accion.equals("activar")){
-                            firebaseManager.desactivarRutinas(this);
                             firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
 
                             ArrayList<TablaDiaRutinaActiva> rutinaActiva = new ArrayList<>();
@@ -158,8 +149,6 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                             }
                             firebaseManager.agregarRutinaActiva(this, rutinaActiva);
 
-                        } else if (accion.equals("desactivar")) {
-                            firebaseManager.modificarActivoRutina(this, ID, false);
                         }
                     }
 
