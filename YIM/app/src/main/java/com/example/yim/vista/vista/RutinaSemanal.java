@@ -22,7 +22,6 @@ import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class RutinaSemanal extends AppCompatActivity implements View.OnClickListener {
@@ -92,8 +91,6 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
 
     @SuppressLint("SetTextI18n")
     private void mostrarSemana(ArrayList<TablaDiaRutinaActiva> rutinaActiva){
-        Collections.sort(rutinaActiva);
-
         semanaTV.setText("Semana " + ((rutinaActiva.get(0).getDia() - 1) / 7 + 1));
 
         firebaseManager.obtenerMusculosUsuario(RutinaSemanal.this, new FirebaseCallbackMusculosUsuario() {

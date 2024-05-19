@@ -19,6 +19,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicios;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaHistorial;
 import com.example.yim.modelo.tablas.TablaLogros;
 import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculos;
@@ -731,5 +732,34 @@ public class FirebaseManager {
             MostratToast.mostrarToast(context, "Error al obtener la rutina del usuario.");
             ex.printStackTrace();
         }
+    }
+
+    public boolean modificarEjercicioRutinaActiva(Context context, int numDia, int numEjercicio, ArrayList<TablaHistorial> historial){
+        boolean actualizado = false;
+        try{
+            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa").
+                    child(String.valueOf(numDia-1)).child("ejercicios").child(String.valueOf(numEjercicio-1));
+
+            rutinaUsuarioReference.child("historial").setValue(historial);
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar la rutina.");
+            e.printStackTrace();
+        }
+        return actualizado;
+    }
+    public boolean modificarEjercicioRutinaActiva(Context context, int numDia, int numEjercicio, int seriesRealizadas){
+        boolean actualizado = false;
+        try{
+            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa").
+                    child(String.valueOf(numDia-1)).child("ejercicios").child(String.valueOf(numEjercicio-1));
+
+            rutinaUsuarioReference.child("series_realizadas").setValue(seriesRealizadas+1);
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar la rutina.");
+            e.printStackTrace();
+        }
+        return actualizado;
     }
 }

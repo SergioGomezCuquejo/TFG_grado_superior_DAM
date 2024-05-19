@@ -65,11 +65,11 @@ public class CambiarActivity {
     }
 
 
-    public static void cambiar(Context context, TablaEjercicioActivo ejercicioActivo, String ejerciciosTotales) {
+    public static void cambiar(Context context, TablaDiaRutinaActiva diaRutinaActiva, int numEjercicio) {
 
         Intent intent = new Intent(context, EjercicioActivo.class);
-        intent.putExtra("ejercicioActivo", ejercicioActivo);
-        intent.putExtra("ejerciciosTotales", ejerciciosTotales);
+        intent.putExtra("diaRutinaActiva", diaRutinaActiva);
+        intent.putExtra("numEjercicio", numEjercicio);
         context.startActivity(intent);
     }
 

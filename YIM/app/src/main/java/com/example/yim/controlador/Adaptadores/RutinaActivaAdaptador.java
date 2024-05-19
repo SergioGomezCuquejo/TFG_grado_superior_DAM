@@ -19,13 +19,12 @@ import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.vista.controlador.CambiarActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 //TODO intentar junar con CrearRutinasAdaptador
 public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdaptador.CrearRutinasViewHolder> {
-    private ArrayList<TablaDiaRutinaActiva> rutinaActiva;
-    private Context context;
+    private final ArrayList<TablaDiaRutinaActiva> rutinaActiva;
+    private final Context context;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
     HashMap<String, ColoresMusculoUsuario> musculosSemana;
 
@@ -48,7 +47,6 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
     @Override
     public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
         TablaDiaRutinaActiva diaRutinaActiva = rutinaActiva.get(position);
-        int dia = position;
 
         holder.dia.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,8 @@ package com.example.yim.modelo.tablas;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TablaEjercicioActivo implements Serializable, Comparable<TablaEjercicioActivo> {
+public class TablaEjercicioActivo implements Serializable {
+    private ArrayList<TablaHistorial> historial;
     private String id_ejercicio;
     private ArrayList<String> musculos;
     private String nombre;
@@ -16,8 +17,9 @@ public class TablaEjercicioActivo implements Serializable, Comparable<TablaEjerc
     public TablaEjercicioActivo() {
     }
 
-    public TablaEjercicioActivo(String id_ejercicio, ArrayList<String> musculos, String nombre, int posicion,
-                                int repeticiones, int series_necesarias, int series_realizadas, int tiempo_descanso) {
+    public TablaEjercicioActivo(ArrayList<TablaHistorial> historial, String id_ejercicio, ArrayList<String> musculos, String nombre,
+                                int posicion, int repeticiones, int series_necesarias, int series_realizadas, int tiempo_descanso) {
+        this.historial = historial;
         this.id_ejercicio = id_ejercicio;
         this.musculos = musculos;
         this.nombre = nombre;
@@ -26,6 +28,14 @@ public class TablaEjercicioActivo implements Serializable, Comparable<TablaEjerc
         this.series_necesarias = series_necesarias;
         this.series_realizadas = series_realizadas;
         this.tiempo_descanso = tiempo_descanso;
+    }
+
+    public ArrayList<TablaHistorial> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ArrayList<TablaHistorial> historial) {
+        this.historial = historial;
     }
 
     public String getId_ejercicio() {
@@ -90,17 +100,6 @@ public class TablaEjercicioActivo implements Serializable, Comparable<TablaEjerc
 
     public void setTiempo_descanso(int tiempo_descanso) {
         this.tiempo_descanso = tiempo_descanso;
-    }
-    @Override
-    public int compareTo(TablaEjercicioActivo o) {
-        int valor = 0;
-        if (this.posicion > o.getPosicion()) {
-            valor = 1;
-        }
-        if (this.posicion < o.getPosicion()) {
-            valor = -1;
-        }
-        return valor;
     }
 }
 

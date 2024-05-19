@@ -83,10 +83,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/fondo_clarito"
+                    android:contentDescription="informacion"
                     app:srcCompat="@android:drawable/ic_dialog_info"
-                    android:contentDescription="informacion" />
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/titulo"
@@ -180,8 +184,8 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/series_bt"
+                    <TextView
+                        android:id="@+id/series_tv"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="15dp"
@@ -234,11 +238,10 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/coste"
+                        android:id="@+id/coste_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/merriweather_light"
-                        android:text=" (Subir)"
                         android:textColor="@color/verde_clarito"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -261,7 +264,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/peso"
+                            android:id="@+id/peso_et"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -276,7 +279,7 @@
                             tools:ignore="Autofill,HardcodedText,LabelFor,NestedWeights,SpUsage,TouchTargetSizeCheck" />
 
                         <EditText
-                            android:id="@+id/repeticiones"
+                            android:id="@+id/repeticiones_et"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -290,6 +293,7 @@
                             tools:ignore="Autofill,HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck" />
 
                         <ImageButton
+                            android:id="@+id/coste_ib"
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_weight="0.3"
@@ -301,7 +305,7 @@
 
 
                     <ImageView
-                        android:id="@+id/agregar_ejercicio"
+                        android:id="@+id/agregar_repeticion"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignEnd="@id/scrollView"
@@ -316,6 +320,80 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/coste_ll"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/informacion"
+                android:paddingEnd="20dp"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:ignore="NestedWeights" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+
+                        <RadioGroup
+                            android:id="@+id/coste_rg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/_style2_borde_blanco_10"
+                            android:backgroundTintMode="add"
+                            android:backgroundTint="@color/fondo_clarito"
+                            android:padding="7dp">
+
+                            <RadioButton
+                                android:id="@+id/subir_rb"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:button="@null"
+                                android:fontFamily="@font/merriweather_light"
+                                android:gravity="center"
+                                android:text="Subir" />
+
+                            <RadioButton
+                                android:id="@+id/mantener_rb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@null"
+                                android:layout_weight="1"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:gravity="center"
+                                android:fontFamily="@font/merriweather_light"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:checked="true"
+                                android:text="Mantener" />
+
+                            <RadioButton
+                                android:id="@+id/bajar_rb"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:button="@null"
+                                android:fontFamily="@font/merriweather_light"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Bajar" />
+
+                        </RadioGroup>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/historial"
@@ -324,6 +402,7 @@
                 android:layout_below="@+id/serie_activa"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -333,7 +412,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/merriweather_light"
                     android:foregroundGravity="center"
                     android:text="Historial"
@@ -341,250 +419,27 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/historial_rv"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="Día 88/88/8888"
-                    android:textColor="@color/blanco"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Subir"
-                        android:textColor="@color/verde_clarito"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Mantener"
-                        android:textColor="@color/naranja"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Bajar"
-                        android:textColor="@color/rojo_clarito"
-                        android:textSize="17sp" />
-                </LinearLayout>
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:id="@+id/historial_tv"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:gravity="center"
                     android:fontFamily="@font/merriweather_light"
-                    android:text="Día 88/88/8888"
-                    android:textColor="@color/blanco"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:text="Aún no se ha realizado el ejercicio."
+                    android:textColor="@color/gris" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Mantener"
-                        android:textColor="@color/naranja"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Subir"
-                        android:textColor="@color/verde_clarito"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie 88:"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/blanco"
-                        android:textStyle="bold"
-                        android:textSize="17sp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text=" 888kg x 88 reps"
-                        android:textColor="@color/gris_clarito"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="end"
-                        android:text="Bajar"
-                        android:textColor="@color/rojo_clarito"
-                        android:textSize="17sp" />
-                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

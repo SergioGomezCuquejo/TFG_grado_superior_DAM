@@ -37,6 +37,7 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
         diaRutinaActiva = (TablaDiaRutinaActiva) intent.getSerializableExtra("diaRutinaActiva");
 
         //Referencias de las vistas
+        //TOdo intentar hacer
         //agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
         atras = findViewById(R.id.atras);
         diaTV = findViewById(R.id.dia_tv);
@@ -85,7 +86,7 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
 
     private void mostrarEjercicios(){
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adaptador = new EjerciciosDiariosAdaptador(this, diaRutinaActiva.getEjercicios());
+        adaptador = new EjerciciosDiariosAdaptador(this, diaRutinaActiva);
         recyclerView.setAdapter(adaptador);
     }
 }

@@ -1,20 +1,19 @@
 package com.example.yim.modelo.tablas;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TablaHistorial {
-
+public class TablaHistorial implements Serializable, Comparable<TablaHistorial>  {
     private String dia;
-    private ArrayList<Integer> peso;
-    private ArrayList<Integer> repeticiones;
+    private ArrayList<TablaSeries> series;
 
     public TablaHistorial() {
     }
 
-    public TablaHistorial(String dia, ArrayList<Integer> peso, ArrayList<Integer> repeticiones) {
+    public TablaHistorial(String dia, ArrayList<TablaSeries> series) {
         this.dia = dia;
-        this.peso = peso;
-        this.repeticiones = repeticiones;
+        this.series = series;
     }
 
     public String getDia() {
@@ -25,19 +24,16 @@ public class TablaHistorial {
         this.dia = dia;
     }
 
-    public ArrayList<Integer> getPeso() {
-        return peso;
+    public ArrayList<TablaSeries> getSeries() {
+        return series;
     }
 
-    public void setPeso(ArrayList<Integer> peso) {
-        this.peso = peso;
+    public void setSeries(ArrayList<TablaSeries> series) {
+        this.series = series;
     }
 
-    public ArrayList<Integer> getRepeticiones() {
-        return repeticiones;
-    }
-
-    public void setRepeticiones(ArrayList<Integer> repeticiones) {
-        this.repeticiones = repeticiones;
+    @Override
+    public int compareTo(TablaHistorial o) {
+        return o.getDia().compareTo(dia);
     }
 }

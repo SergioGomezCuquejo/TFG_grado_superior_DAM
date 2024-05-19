@@ -3,7 +3,7 @@ package com.example.yim.modelo.tablas;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TablaDiaRutinaActiva implements Serializable, Comparable<TablaDiaRutinaActiva> {
+public class TablaDiaRutinaActiva implements Serializable {
     private int dia;
     private ArrayList<TablaEjercicioActivo> ejercicios;
     private ArrayList<String> musculos;
@@ -39,17 +39,5 @@ public class TablaDiaRutinaActiva implements Serializable, Comparable<TablaDiaRu
 
     public void setMusculos(ArrayList<String> musculos) {
         this.musculos = musculos;
-    }
-
-    @Override
-    public int compareTo(TablaDiaRutinaActiva o) {
-        int valor = 0;
-        if (this.dia > o.getDia()) {
-            valor = 1;
-        }
-        if (this.dia < o.getDia()) {
-            valor = -1;
-        }
-        return valor;
     }
 }

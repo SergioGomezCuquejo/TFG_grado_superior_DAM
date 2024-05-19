@@ -1,6 +1,7 @@
 package com.example.yim.controlador.Adaptadores;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +14,22 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosDiariosAdaptador.EjerciciosRutinasViewHolder> {
-    private ArrayList<TablaEjercicioActivo> ejerciciosActivos;
-    private Context context;
+    private final TablaDiaRutinaActiva diaRutinaActiva;
+    private final ArrayList<TablaEjercicioActivo> ejerciciosActivos;
+    private final Context context;
 
-    public EjerciciosDiariosAdaptador(Context context, ArrayList<TablaEjercicioActivo> ejerciciosActivos) {
+    public EjerciciosDiariosAdaptador(Context context, TablaDiaRutinaActiva diaRutinaActiva) {
         this.context = context;
-        this.ejerciciosActivos = ejerciciosActivos;
-        Collections.sort(ejerciciosActivos);
+        this.diaRutinaActiva = diaRutinaActiva;
+        ejerciciosActivos = diaRutinaActiva.getEjercicios();
     }
 
     @NonNull
@@ -42,7 +44,7 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
     @Override
     public void onBindViewHolder(@NonNull EjerciciosRutinasViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TablaEjercicioActivo ejercicioActivo = ejerciciosActivos.get(position);
-        String musculos = "";
+        StringBuilder musculos = new StringBuilder();
         int seriesRealizadas = ejercicioActivo.getSeries_realizadas();
         int seriesNecesarias = ejercicioActivo.getSeries_necesarias();
         int color;
@@ -50,7 +52,8 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
         holder.ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CambiarActivity.cambiar(context, ejercicioActivo,(position+1) + " de " + ejerciciosActivos.size());
+                CambiarActivity.cambiar(context, diaRutinaActiva, (position+1));
+                ((Activity) context).finish();
             }
         });
 
@@ -58,14 +61,14 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
         holder.nombre.setText(ejercicioActivo.getNombre());
 
         for(String musculo : ejercicioActivo.getMusculos()){
-            musculos += musculo + ", ";
+            musculos.append(musculo).append(", ");
         }
-        musculos = musculos.substring(0, musculos.length() - 2);
-        holder.musculos.setText(musculos);
+        musculos = new StringBuilder(musculos.substring(0, musculos.length() - 2));
+        holder.musculos.setText(musculos.toString());
 
 
         holder.progreso.setText( seriesRealizadas + "/" + seriesNecesarias);
-        if (seriesRealizadas == seriesNecesarias){
+        if (seriesRealizadas >= seriesNecesarias){
             color = R.color.verde_clarito;
         } else if (seriesRealizadas >= seriesNecesarias/2){
             color = R.color.naranja;
