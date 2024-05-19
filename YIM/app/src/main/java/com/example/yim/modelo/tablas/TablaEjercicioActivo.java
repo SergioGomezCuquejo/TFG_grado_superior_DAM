@@ -30,6 +30,18 @@ public class TablaEjercicioActivo implements Serializable {
         this.tiempo_descanso = tiempo_descanso;
     }
 
+    public TablaEjercicioActivo(TablaEjercicioRutinaUsuario ejercicio) {
+        //this.historial = ejercicio.getHistorial(); TODO hacer
+        this.id_ejercicio = ejercicio.getID();
+        this.musculos = ejercicio.getMusculos();
+        this.nombre = ejercicio.getNombre();
+        this.posicion = ejercicio.getPosicion();
+        this.repeticiones = ejercicio.getRepeticiones();
+        this.series_necesarias = ejercicio.getSeries();
+        this.series_realizadas = 0;
+        this.tiempo_descanso = ejercicio.getTiempo_descanso();
+    }
+
     public ArrayList<TablaHistorial> getHistorial() {
         return historial;
     }

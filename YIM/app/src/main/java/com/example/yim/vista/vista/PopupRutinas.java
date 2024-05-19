@@ -1,7 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -92,7 +90,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                 if(!primeraVez){
 
                     if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario.getID(), "activar");
+                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "activar");
 
                     } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
                         CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario.getID(), "desactivar");

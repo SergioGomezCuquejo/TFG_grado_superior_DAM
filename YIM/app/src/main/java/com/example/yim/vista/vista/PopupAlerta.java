@@ -14,10 +14,14 @@ import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
@@ -26,6 +30,7 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
     String titulo, texto, iraA, ID, accion;
+    TablaRutinasUsuario rutinaUsuario;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,10 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
             iraA = intent.getStringExtra("iraA");
             if(intent.hasExtra("ID")) {
                 ID = intent.getStringExtra("ID");
+                accion = intent.getStringExtra("accion");
+            }
+            if(intent.hasExtra("rutinaUsuario")) {
+                rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
                 accion = intent.getStringExtra("accion");
             }
 
@@ -133,11 +142,27 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                         if(accion.equals("activar")){
                             firebaseManager.desactivarRutinas(this);
                             firebaseManager.modificarActivoRutina(this, ID, true);
+
                         } else if (accion.equals("desactivar")) {
                             firebaseManager.modificarActivoRutina(this, ID, false);
                         }
-
                     }
+                    if(rutinaUsuario != null){
+                        if(accion.equals("activar")){
+                            firebaseManager.desactivarRutinas(this);
+                            firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
+
+                            ArrayList<TablaDiaRutinaActiva> rutinaActiva = new ArrayList<>();
+                            for(TablaDiaRutinaUsuario diaRutinaUsuario : rutinaUsuario.getSemana()){
+                                rutinaActiva.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
+                            }
+                            firebaseManager.agregarRutinaActiva(this, rutinaActiva);
+
+                        } else if (accion.equals("desactivar")) {
+                            firebaseManager.modificarActivoRutina(this, ID, false);
+                        }
+                    }
+
                     cambiarActivity(VerRutinas.class);
                     break;
                 case "ir_a_ejercicios":

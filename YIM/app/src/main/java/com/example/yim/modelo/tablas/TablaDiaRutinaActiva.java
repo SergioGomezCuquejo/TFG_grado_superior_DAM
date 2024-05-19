@@ -17,6 +17,19 @@ public class TablaDiaRutinaActiva implements Serializable {
         this.musculos = musculos;
     }
 
+    public TablaDiaRutinaActiva(TablaDiaRutinaUsuario diaRutinaUsuario) {
+        this.dia = diaRutinaUsuario.getDia();
+
+        if(diaRutinaUsuario.getEjercicios() != null){
+            this.ejercicios = new ArrayList<>();
+            for(TablaEjercicioRutinaUsuario ejercicio : diaRutinaUsuario.getEjercicios()){
+                this.ejercicios.add(new TablaEjercicioActivo(ejercicio));
+            }
+        }
+
+        this.musculos = diaRutinaUsuario.getMusculos();
+    }
+
     public int getDia() {
         return dia;
     }

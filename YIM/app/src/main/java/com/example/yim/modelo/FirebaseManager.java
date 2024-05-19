@@ -634,6 +634,7 @@ public class FirebaseManager {
                                     rutinaUsuario.getInformacion().setActivo(false);
                                     if(actualizarRutina(context, rutinaUsuario)){
                                         desactivadas = true;
+                                        MostratToast.mostrarToast(context, "Desactivada la rutina " + rutinaUsuario.getInformacion().getNombre());
                                     }else{
                                         MostratToast.mostrarToast(context, "Error al desactivar rutinas");
                                     }
@@ -761,5 +762,24 @@ public class FirebaseManager {
             e.printStackTrace();
         }
         return actualizado;
+    }
+
+
+    public boolean agregarRutinaActiva(Context context, ArrayList<TablaDiaRutinaActiva> nuevaRutinaActiva){
+        boolean agregada = false;
+        try{
+            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa");
+
+            for (int i=0; i < nuevaRutinaActiva.size(); i++){
+                rutinasUsuarioReference.child(String.valueOf(i)).setValue(nuevaRutinaActiva.get(i));
+            }
+
+
+            agregada = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al agregar la rutina.");
+            e.printStackTrace();
+        }
+        return agregada;
     }
 }

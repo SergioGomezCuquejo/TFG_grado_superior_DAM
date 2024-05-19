@@ -92,4 +92,15 @@ public class CambiarActivity {
         context.startActivity(intent);
 
     }
+
+    public static void cambiarAlerta(Context context, String titulo, String texto, String iraA, TablaRutinasUsuario rutinaUsuario, String accion) {
+        Intent intent = new Intent(context, PopupAlerta.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("texto", texto);
+        intent.putExtra("iraA", iraA);
+        intent.putExtra("rutinaUsuario", rutinaUsuario);
+        intent.putExtra("accion", accion);
+        context.startActivity(intent);
+
+    }
 }
