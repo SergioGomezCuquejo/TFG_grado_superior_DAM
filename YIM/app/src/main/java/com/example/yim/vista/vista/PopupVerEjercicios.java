@@ -57,7 +57,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         viewFlipper = findViewById(R.id.viewFlipper);
 
         imagen = findViewById(R.id.imagen);
-        nombre = findViewById(R.id.nombre);
+        nombre = findViewById(R.id.nombreTV);
         musculosTV = findViewById(R.id.musculos_tv);
 
         ejecucion = findViewById(R.id.ejecucion);

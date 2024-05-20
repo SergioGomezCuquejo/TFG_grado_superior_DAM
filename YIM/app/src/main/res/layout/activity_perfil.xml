@@ -51,16 +51,19 @@
                     android:paddingRight="5dp">
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:id="@+id/relativeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/imagen_perfil"
                             android:layout_width="200dp"
                             android:layout_height="200dp"
+                            android:layout_centerInParent="true"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/usuario"
-                            android:contentDescription="@string/imagen_usuario" />
+                            android:contentDescription="@string/imagen_usuario"
+                            android:src="@drawable/usuario" />
 
                         <ImageView
                             android:id="@+id/subir_imagen"
@@ -68,11 +71,56 @@
                             android:layout_height="45dp"
                             android:layout_alignEnd="@id/imagen_perfil"
                             android:layout_alignBottom="@id/imagen_perfil"
-                            android:layout_marginBottom="5dp"
                             android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="5dp"
                             android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_50"
-                            android:src="@drawable/subir_imagen_negra"
-                            android:contentDescription="@string/imagen_subir" />
+                            android:contentDescription="@string/imagen_subir"
+                            android:src="@drawable/subir_imagen_negra" />
+
+                        <Space
+                            android:id="@+id/space"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+
+                        <ImageButton
+                            android:id="@+id/guardar_ib"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_50"
+                            android:padding="7dp"
+                            app:srcCompat="@android:drawable/ic_menu_save"
+                            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+                        <ImageButton
+                            android:id="@+id/editar_ib"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@id/space"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="7dp"
+                            android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_50"
+                            android:padding="7dp"
+                            app:srcCompat="@android:drawable/ic_menu_edit"
+                            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                        <ImageButton
+                            android:id="@+id/cancelar_ib"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@id/space"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="7dp"
+                            android:background="@drawable/_style_rectangulo_gris_clarito__borde_negro_50"
+                            android:padding="7dp"
+                            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+                            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
 
                     </RelativeLayout>
 
@@ -96,13 +144,25 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/nombre"
+                            android:id="@+id/nombre_tv"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"/>
+
+                        <EditText
+                            android:id="@+id/nombre_et"
+                            android:visibility="gone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="20sp"
+                            android:background="@android:color/transparent"
+                            tools:ignore="Autofill,LabelFor,TextFields" />
 
                     </LinearLayout>
 
@@ -210,7 +270,6 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="10dp"
-                            android:text="Masculino"
                             android:textSize="20sp"/>
 
                     </LinearLayout>
@@ -234,8 +293,21 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
+                        <EditText
+                            android:id="@+id/peso_et"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="00,000"
+                            android:inputType="numberDecimal"
+                            android:textSize="20sp"
+                            android:maxLength="5"/>
                         <TextView
-                            android:id="@+id/peso"
+                            android:id="@+id/peso_tv"
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/merriweather_light"
@@ -251,6 +323,7 @@
                             android:textColor="@color/negro_oscuro"
                             android:text="kg"
                             android:textSize="20sp"/>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -272,8 +345,22 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
+
+                        <EditText
+                            android:id="@+id/altura_et"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="00,000"
+                            android:inputType="numberDecimal"
+                            android:textSize="20sp"
+                            android:maxLength="5"/>
+
                         <TextView
-                            android:id="@+id/altura"
+                            android:id="@+id/altura_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/merriweather_light"
@@ -310,8 +397,21 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
+                        <EditText
+                            android:id="@+id/edad_et"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/merriweather_light"
+                            android:textColor="@color/negro_oscuro"
+                            android:layout_marginEnd="5dp"
+                            android:text="00"
+                            android:inputType="number"
+                            android:textSize="20sp"
+                            android:maxLength="2"/>
+
                         <TextView
-                            android:id="@+id/edad"
+                            android:id="@+id/edad_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/merriweather_light"

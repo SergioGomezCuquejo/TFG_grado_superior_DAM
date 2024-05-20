@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.vista.PopupRutinas;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -73,7 +72,7 @@ public class VerRutinasAdaptador extends RecyclerView.Adapter<VerRutinasAdaptado
             super(itemView);
             rutina = itemView.findViewById(R.id.rutina);
             imagen = itemView.findViewById(R.id.imagen);
-            nombre = itemView.findViewById(R.id.nombre);
+            nombre = itemView.findViewById(R.id.nombreTV);
         }
     }
 }

@@ -94,7 +94,7 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
 
             imagen = itemView.findViewById(R.id.imagen);
 
-            nombre = itemView.findViewById(R.id.nombre);
+            nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);
             progreso = itemView.findViewById(R.id.progreso);
         }

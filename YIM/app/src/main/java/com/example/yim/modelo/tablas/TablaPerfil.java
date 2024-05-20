@@ -1,7 +1,8 @@
 package com.example.yim.modelo.tablas;
 
 public class TablaPerfil {
-    private int altura, edad, peso;
+    private double altura, peso;
+    private int edad;
     private String contrasena, email, genero, imagen, nombre;
 
     public TablaPerfil() {
@@ -15,8 +16,8 @@ public class TablaPerfil {
         peso = 0;
     }
 
-    public TablaPerfil(int altura, String contrasena, int edad, String email, String genero,
-                       String imagen, String nombre, int peso) {
+    public TablaPerfil(double altura, String contrasena, int edad, String email, String genero,
+                       String imagen, String nombre, double peso) {
         this.altura = altura;
         this.contrasena = contrasena;
         this.edad = edad;
@@ -27,11 +28,11 @@ public class TablaPerfil {
         this.peso = peso;
     }
 
-    public int getAltura() {
+    public double getAltura() {
         return altura;
     }
 
-    public void setAltura(int altura) {
+    public void setAltura(double altura) {
         this.altura = altura;
     }
 
@@ -83,11 +84,10 @@ public class TablaPerfil {
         this.nombre = nombre;
     }
 
-    public int getPeso() {
+    public double getPeso() {
         return peso;
     }
-
-    public void setPeso(int peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 }

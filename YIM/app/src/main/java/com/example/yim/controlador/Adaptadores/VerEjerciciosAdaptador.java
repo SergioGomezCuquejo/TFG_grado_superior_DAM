@@ -16,7 +16,6 @@ import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.vista.PopupVerEjercicios;
 import com.example.yim.vista.vista.PopupVerEjerciciosCreados;
-import com.example.yim.vista.vista.VerEjercicios;
 
 import java.util.ArrayList;
 
@@ -95,7 +94,7 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
             ejercicio = itemView.findViewById(R.id.ejercicio);
             imagen = itemView.findViewById(R.id.imagen);
             imagenTexto = itemView.findViewById(R.id.imagen_texto);
-            nombre = itemView.findViewById(R.id.nombre);
+            nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);
         }
     }

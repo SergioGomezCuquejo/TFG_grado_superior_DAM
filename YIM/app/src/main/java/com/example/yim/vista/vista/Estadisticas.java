@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.EstadisticasAdaptador;
@@ -33,6 +34,8 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
     Spinner tipo;
     RecyclerView recyclerView;
     FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+    ScrollView scrollView;
+    TextView noEstadisticasTV;
     EstadisticasAdaptador adaptador;
     HashMap<String, String> musculosHM = new HashMap<>();
 
@@ -49,6 +52,9 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         tipo = findViewById(R.id.tipo);
 
         recyclerView = findViewById(R.id.recyclerView);
+
+        scrollView = findViewById(R.id.scrollView);
+        noEstadisticasTV = findViewById(R.id.no_estadisticas_tv);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -68,7 +74,12 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         tipo.setAdapter(adapter);
 
 
-        mostrarEjercicios();
+        try{
+            obtenerEjercicios();
+        }catch (Exception ex) {
+            MostratToast.mostrarToast(this, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
     }
 
 
@@ -97,29 +108,32 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         cambiar(this, activity);
     }
 
-    public void mostrarEjercicios(){
-        try{
-            firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
-                @Override
-                public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
-                    firebaseManager.obtenerMusculosUsuario(Estadisticas.this, new FirebaseCallbackMusculosUsuario() {
-                        @Override
-                        public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
-
-                            for (TablaMusculosUsuario musculo : musculosUsuarios){
-                                musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
-                            }
-                            recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
-                            adaptador = new EstadisticasAdaptador(Estadisticas.this, ejerciciosUsuarios, musculosHM);
-                            recyclerView.setAdapter(adaptador);
-                        }
-                    });
+    public void obtenerEjercicios(){
+        firebaseManager.obtenerEjerciciosUsuarioConEstadisticas(this, new FirebaseCallbackEjerciciosUsuario() {
+            @Override
+            public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
+                if(ejerciciosUsuarios != null && ejerciciosUsuarios.size() > 0){
+                    obtenerMusculos(ejerciciosUsuarios);
+                }else{
+                    scrollView.setVisibility(View.GONE);
+                    noEstadisticasTV.setVisibility(View.VISIBLE);
                 }
-            });
+            }
+        });
+    }
 
-        }catch (Exception ex){
-            MostratToast.mostrarToast(this, "Error al obtener los musculos del usuario.");
-            ex.printStackTrace();
-        }
+    public void obtenerMusculos(ArrayList<TablaEjerciciosUsuario> ejercicios){
+        firebaseManager.obtenerMusculosUsuario(Estadisticas.this, new FirebaseCallbackMusculosUsuario() {
+            @Override
+            public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
+
+                for (TablaMusculosUsuario musculo : musculosUsuarios){
+                    musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
+                }
+                recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
+                adaptador = new EstadisticasAdaptador(Estadisticas.this, ejercicios, musculosHM);
+                recyclerView.setAdapter(adaptador);
+            }
+        });
     }
 }

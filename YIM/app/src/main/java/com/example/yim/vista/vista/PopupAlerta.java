@@ -139,7 +139,7 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                         firebaseManager.desactivarRutinas(this);
                         firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), false);
                         firebaseManager.eliminarRutinaActiva(this);
-                        
+
                         if(accion.equals("activar")){
                             firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
 

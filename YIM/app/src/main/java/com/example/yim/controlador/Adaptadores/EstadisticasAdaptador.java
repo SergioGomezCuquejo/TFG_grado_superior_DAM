@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaEstadisticas;
-import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +46,6 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
     public void onBindViewHolder(@NonNull EstadisticasViewHolder holder, int position) {
         TablaEjerciciosUsuario ejercicio = ejerciciosUsuarios.get(position);
         ArrayList<TablaEstadisticas> estadisticas = ejercicio.getEstadisticas();
-
         holder.nombre.setText(ejercicio.getNombre());
 
         for(int i = 0; i < ejercicio.getMusculos().size(); i++ ){
@@ -93,8 +91,6 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
         holder.repeticiones1.setText(String.valueOf(estadisticas.get(0).getRepeticiones()));
         holder.repeticiones2.setText(String.valueOf(estadisticas.get(1).getRepeticiones()));
         holder.repeticiones3.setText(String.valueOf(estadisticas.get(2).getRepeticiones()));
-
-
     }
 
     @Override
@@ -109,7 +105,7 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
 
         public EstadisticasViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombre = itemView.findViewById(R.id.nombre);
+            nombre = itemView.findViewById(R.id.nombreTV);
 
             musculo1 = itemView.findViewById(R.id.musculo1);
             musculo2 = itemView.findViewById(R.id.musculo2);

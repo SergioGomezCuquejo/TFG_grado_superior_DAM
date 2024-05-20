@@ -65,7 +65,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         atras = findViewById(R.id.atras);
         guardar = findViewById(R.id.guardar);
 
-        nombre = findViewById(R.id.nombre);
+        nombre = findViewById(R.id.nombreTV);
 
         recyclerView = findViewById(R.id.dias);
 

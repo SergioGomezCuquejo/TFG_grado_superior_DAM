@@ -195,7 +195,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
 
             imagen = itemView.findViewById(R.id.imagen);
 
-            nombre = itemView.findViewById(R.id.nombre);
+            nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);
 
             editar = itemView.findViewById(R.id.editar);

@@ -385,6 +385,45 @@ public class FirebaseManager {
         }
     }
 
+    public void obtenerEjerciciosUsuarioConEstadisticas(Context context, FirebaseCallbackEjerciciosUsuario callback) {
+        try {
+            usuariosReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios = new ArrayList<TablaEjerciciosUsuario>();
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
+
+                        if (usuarioSnapshot.exists()) {
+                            DataSnapshot ejerciciosSnapshot = usuarioSnapshot.child("ejercicios");
+
+                            for (DataSnapshot ejercicioSnapshot : ejerciciosSnapshot.getChildren()) {
+                                TablaEjerciciosUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjerciciosUsuario.class);
+                                if(ejercicio.getEstadisticas() != null){
+                                    ejercicio.setID(ejercicioSnapshot.getKey());
+                                    ejerciciosUsuarios.add(ejercicio);
+                                }
+                            }
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
+                    }
+
+                    callback.onCallback(ejerciciosUsuarios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
     public void obtenerEjercicioUsuario(Context context, String idEjercicio, FirebaseCallbackEjercicioUsuario callback) {
         try {
             usuariosReference.addValueEventListener(new ValueEventListener() {
@@ -795,6 +834,21 @@ public class FirebaseManager {
         }
         return eliminada;
     }
+
+    public boolean modificarPerfil(Context context, TablaPerfil perfil){
+        boolean actualizado = false;
+        try{
+            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("perfil");
+
+            rutinaUsuarioReference.setValue(perfil);
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
+            e.printStackTrace();
+        }
+        return actualizado;
+    }
+
 
 
 }

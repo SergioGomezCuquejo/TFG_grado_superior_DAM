@@ -43,7 +43,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
         firebaseManager = new FirebaseManager();
 
         //Referencias de las vistas.
-        nombre = findViewById(R.id.nombre);
+        nombre = findViewById(R.id.nombreTV);
         email = findViewById(R.id.email);
         contrasena = findViewById(R.id.contrasena);
 

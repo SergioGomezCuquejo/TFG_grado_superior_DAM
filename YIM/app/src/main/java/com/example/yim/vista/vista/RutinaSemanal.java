@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.yim.R;
@@ -28,7 +29,8 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     FirebaseManager firebaseManager;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
     RecyclerView recyclerView;
-    TextView semanaTV;
+    TextView semanaTV, noRutinaTV;
+    ScrollView scrollView;
     LinearLayout  imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     RutinaActivaAdaptador adaptador;
     @SuppressLint("MissingInflatedId")
@@ -43,6 +45,9 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         //Referencias de las vistas
         semanaTV = findViewById(R.id.semana_tv);
         recyclerView = findViewById(R.id.dias);
+
+        scrollView = findViewById(R.id.scrollView);
+        noRutinaTV = findViewById(R.id.no_rutina_tv);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -83,7 +88,12 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         firebaseManager.obtenerRutinaActiva(this, new FirebaseCallbackRutinaActiva() {
             @Override
             public void onCallback(ArrayList<TablaDiaRutinaActiva> rutinaActiva) {
-                mostrarSemana(rutinaActiva);
+                if(!rutinaActiva.isEmpty()){
+                    mostrarSemana(rutinaActiva);
+                }else{
+                    scrollView.setVisibility(View.GONE);
+                    noRutinaTV.setVisibility(View.VISIBLE);
+                }
 
             }
         });

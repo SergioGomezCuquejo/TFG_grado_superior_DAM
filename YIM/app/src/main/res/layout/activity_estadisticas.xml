@@ -21,7 +21,28 @@
         android:textSize="16sp"
         android:textStyle="bold|italic" />
 
+    <TextView
+        android:id="@+id/no_estadisticas_tv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/_style2_borde_gris_oscuro_10"
+        android:backgroundTintMode="add"
+        android:backgroundTint="@color/fondo_clarito"
+        android:fontFamily="@font/merriweather_light"
+        android:text="Aún no hay estadísticas disponibles"
+        android:textColor="@color/gris_oscuro"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
