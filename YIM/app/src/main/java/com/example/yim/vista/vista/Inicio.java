@@ -13,23 +13,42 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
+    FirebaseAuth auth;
+    FirebaseManager firebaseManager;
+    FirebaseUser user;
     LinearLayout continuar_linearlayout, musculos_linearlayout, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     TextView ejercicios, rutinas;
     ImageView lupa_ejercicios, mas_ejercicios_pequeno, lupa_rutinas, mas_rutinas_pequeno;
     FrameLayout mas_ejercicios_grande, mas_rutinas_grande;
     ShapeableImageView rutina1, rutina2;
+    ImageView imagenPerfilMenu;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
+
+        //Inicializar instancias.
+        auth = FirebaseAuth.getInstance();
+        firebaseManager = new FirebaseManager();
+
+
+        //Controlar que no se ha cerrado sesión.
+        user = auth.getCurrentUser();
+        if(user == null){
+            cambiarActivity(InicioSesion.class);
+        }
 
         //Referencias de las vistas
         continuar_linearlayout = findViewById(R.id.continuar_linearlayout);
@@ -49,6 +68,9 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         rutina1 = findViewById(R.id.rutina1);
         rutina2 = findViewById(R.id.rutina2);
 
+
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
+
         //Listeners
         continuar_linearlayout.setOnClickListener(this);
         musculos_linearlayout.setOnClickListener(this);
@@ -66,6 +88,8 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         mas_rutinas_grande.setOnClickListener(this);
         rutina1.setOnClickListener(this);
         rutina2.setOnClickListener(this);
+
+        mostrarImagenPerfil();
     }
 
     @Override
@@ -107,4 +131,19 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     private void cambiarActivity(Class<?> activity) {
         cambiar(this, activity);
     }
+
+    private void mostrarImagenPerfil(){
+        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+            @Override
+            public void onCallback(TablaPerfil perfil) {
+                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                    Imagenes.urlImagenPerfil = perfil.getImagen();
+                    Imagenes.mostrarImagenPerfil(Inicio.this, imagenPerfilMenu);
+                }
+
+            }
+        });
+
+    }
+
 }

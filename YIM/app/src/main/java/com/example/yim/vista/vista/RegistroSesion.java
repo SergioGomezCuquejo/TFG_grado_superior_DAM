@@ -105,7 +105,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             String id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
-                            firebaseManager.agregarUsuario(RegistroSesion.this, id, contrasenaUsuario, emailUsuario, nombreUsuario);
+                            firebaseManager.agregarUsuario(RegistroSesion.this, id, emailUsuario, nombreUsuario);
 
                             MostratToast.mostrarToast(RegistroSesion.this, "Usuario registrado correctamente");
                         }

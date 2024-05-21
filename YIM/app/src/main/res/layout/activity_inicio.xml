@@ -470,12 +470,12 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_perfil_menu"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitCenter"
                     android:src="@drawable/usuario"
-                    android:contentDescription="@string/imagen_usuario" />
+                    app:shapeAppearanceOverlay="@style/radius" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,13 +1,17 @@
 package com.example.yim.vista.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
 import android.annotation.SuppressLint;
-import android.opengl.Visibility;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,20 +21,22 @@ import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.CambiarVisibilidad;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseManager firebaseManager;
     FirebaseUser user;
     ImageButton guardarIB, editarIB, cancelarIB;
+    ImageView imagenPerfil, imagenPerfilMenu;
     TextView nombreTV, email, genero, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
     EditText nombreET, pesoET, alturaET, edadET;
     LinearLayout logros, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
+
+    ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,6 +61,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         editarIB = findViewById(R.id.editar_ib);
         cancelarIB = findViewById(R.id.cancelar_ib);
 
+        imagenPerfil = findViewById(R.id.imagen_perfil);
+
         nombreTV = findViewById(R.id.nombre_tv);
         nombreET = findViewById(R.id.nombre_et);
         email = findViewById(R.id.email);
@@ -75,12 +83,15 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         imagen_calendario = findViewById(R.id.imagen_calendario);
         imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
         imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
 
         //Listeners.
         guardarIB.setOnClickListener(this);
         editarIB.setOnClickListener(this);
         cancelarIB.setOnClickListener(this);
+
+        imagenPerfil.setOnClickListener(this);
 
         logros.setOnClickListener(this);
 
@@ -138,6 +149,10 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 cambiarVisibilidad(edadET, View.VISIBLE);
                 break;
 
+            case "imagen_perfil":
+                subirImagen();
+                break;
+
             case "cerrar_sesion":
                 CambiarActivity.cambiarAlerta(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
                 break;
@@ -183,11 +198,15 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                     alturaET.setText(String.valueOf(perfil.getAltura()));
                     edadTV.setText(String.valueOf(perfil.getEdad()));
                     edadET.setText(String.valueOf(perfil.getEdad()));
+
+                    Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfil);
+                    Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfilMenu);
                 }
             });
 
+
         }catch (Exception ex){
-            MostratToast.mostrarToast(this, "Error al obtener los datos del usuario.");
+            mostrarToast("Error al obtener los datos del usuario.");
             ex.printStackTrace();
         }
 
@@ -204,9 +223,38 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     private void guardarDatos(TablaPerfil perfil) {
         if(firebaseManager.modificarPerfil(this, perfil)){
-            MostratToast.mostrarToast(this, "Datos actualizados correctamente");
+            mostrarToast("Datos actualizados correctamente");
         }else{
-            MostratToast.mostrarToast(this, "Error al actualizar los datos");
+            mostrarToast("Error al actualizar los datos");
         }
     }
+
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
+    }
+
+
+    ////
+    private void subirImagen(){
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+
+        startActivityForResult(i, 300);
+        progressDialog = new ProgressDialog(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if (requestCode == 300){
+                Uri image_url = data.getData();
+                Imagenes.subirImagen(this, progressDialog, "Actualizando foto de perfil..", "perfil/" + auth.getUid(), image_url);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
+
 }

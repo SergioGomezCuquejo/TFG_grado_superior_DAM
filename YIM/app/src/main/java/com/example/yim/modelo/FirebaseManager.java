@@ -150,7 +150,7 @@ public class FirebaseManager {
     }
 
 
-    public void agregarUsuario(Context context, String idAuth, String contrasena, String email, String nombre) {
+    public void agregarUsuario(Context context, String idAuth, String email, String nombre) {
         try{
 
             obtenerEjercicios(context, new FirebaseCallbackEjercicios() {
@@ -166,7 +166,7 @@ public class FirebaseManager {
                                     @Override
                                     public void onCallback(ArrayList<TablaMusculos> musculos) {
 
-                                        agregarUsuario(context, idAuth, contrasena, email, nombre, ejercicios, logros, musculos);
+                                        agregarUsuario(context, idAuth, email, nombre, ejercicios, logros, musculos);
 
                                     }
                                 });
@@ -181,13 +181,12 @@ public class FirebaseManager {
         }
     }
 
-    public void agregarUsuario(Context context, String idAuth, String contrasena, String email, String nombre,
+    public void agregarUsuario(Context context, String idAuth, String email, String nombre,
                                ArrayList<TablaEjercicios> ejercicios, ArrayList<TablaLogros> logros, ArrayList<TablaMusculos> musculos){
         try{
             TablaUsuario nuevoUsuario = new TablaUsuario();
 
             //Perfil
-            nuevoUsuario.getPerfil().setContrasena(contrasena);
             nuevoUsuario.getPerfil().setEmail(email);
             nuevoUsuario.getPerfil().setNombre(nombre);
 
@@ -291,6 +290,20 @@ public class FirebaseManager {
             MostratToast.mostrarToast(context, "Error al obtener el perfil del usuario.");
             ex.printStackTrace();
         }
+    }
+
+    public boolean modificarPerfil(Context context, String urlImagen){
+        boolean actualizado = false;
+        try{
+            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("perfil");
+
+            rutinaUsuarioReference.child("imagen").setValue(urlImagen);
+            actualizado = true;
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
+            e.printStackTrace();
+        }
+        return actualizado;
     }
 
 
