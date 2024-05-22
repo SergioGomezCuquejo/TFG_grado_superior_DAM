@@ -4,7 +4,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.yim.controlador.Adaptadores.RutinaActivaAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicios;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
@@ -14,9 +16,12 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaActiva;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicios;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaHistorial;
@@ -25,9 +30,11 @@ import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculos;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
 import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.modelo.tablas.TablaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.vista.RutinaSemanal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -646,6 +653,39 @@ public class FirebaseManager {
         }
     }
 
+    public void obtenerRutinaUsuario(Context context, String idRutina, FirebaseCallbackRutinaUsuario callback){
+        try{
+            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaRutinasUsuario rutinaUsuario = new TablaRutinasUsuario();
+
+                    if (dataSnapshot.exists()) {
+                        DataSnapshot rutinaSnapshot = dataSnapshot.child(idUsuario).child("rutinas").child(idRutina);
+
+                        if (rutinaSnapshot.exists()) {
+                            rutinaUsuario = rutinaSnapshot.getValue(TablaRutinasUsuario.class);
+                        }
+                    } else {
+                        MostratToast.mostrarToast(context, "No hay rutinas.");
+                    }
+
+                    callback.onCallback(rutinaUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener las rutinas");
+                }
+            });
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al obtener la rutina.");
+            e.printStackTrace();
+        }
+    }
+
+
+
     public boolean agregarRutina(Context context, TablaRutinasUsuario nuevaRutina){
         boolean agregada = false;
         try{
@@ -755,7 +795,7 @@ public class FirebaseManager {
             usuariosReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaDiaRutinaActiva> rutinaActiva = new ArrayList<>();
+                    TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
 
                     if (dataSnapshot.exists()) {
                         DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
@@ -763,10 +803,7 @@ public class FirebaseManager {
                         if (usuarioSnapshot.exists()) {
                             DataSnapshot rutinaActivaSnapshot = usuarioSnapshot.child("rutina_activa");
 
-                            for (DataSnapshot rutinaSnapshot : rutinaActivaSnapshot.getChildren()) {
-                                TablaDiaRutinaActiva rutina = rutinaSnapshot.getValue(TablaDiaRutinaActiva.class);
-                                rutinaActiva.add(rutina);
-                            }
+                            rutinaActiva = rutinaActivaSnapshot.getValue(TablaRutinaActiva.class);
                         }
                     } else {
                         MostratToast.mostrarToast(context, "Usuario no encontrado.");
@@ -816,15 +853,12 @@ public class FirebaseManager {
     }
 
 
-    public boolean agregarRutinaActiva(Context context, ArrayList<TablaDiaRutinaActiva> nuevaRutinaActiva){
+    public boolean agregarRutinaActiva(Context context, TablaRutinaActiva nuevaRutinaActiva){
         boolean agregada = false;
         try{
             DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa");
 
-            for (int i=0; i < nuevaRutinaActiva.size(); i++){
-                rutinasUsuarioReference.child(String.valueOf(i)).setValue(nuevaRutinaActiva.get(i));
-            }
-
+            rutinasUsuarioReference.setValue(nuevaRutinaActiva);
 
             agregada = true;
         } catch (Exception e) {
@@ -832,6 +866,39 @@ public class FirebaseManager {
             e.printStackTrace();
         }
         return agregada;
+    }
+
+    public void modificarRutinaActiva(Context context, String idRutina){
+        try{
+
+            obtenerRutinaUsuario(context, idRutina, new FirebaseCallbackRutinaUsuario() {
+                @Override
+                public void onCallback(TablaRutinasUsuario rutina) {
+
+                    DatabaseReference rutinaActivaReference = usuariosReference.child(idUsuario).child("rutina_activa").child("semana");
+                    rutinaActivaReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            long id = dataSnapshot.getChildrenCount();
+
+                            for(TablaDiaRutinaUsuario diaRutinaUsuario : rutina.getSemana()){
+                                diaRutinaUsuario.setDia((int) id+1);
+                                rutinaActivaReference.child(String.valueOf(id)).setValue(diaRutinaUsuario);
+                                id++;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            MostratToast.mostrarToast(context, "Error al obtener la rutina activa del usuario");
+                        }
+                    });
+                }
+            });
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
+            e.printStackTrace();
+        }
     }
 
     public boolean eliminarRutinaActiva(Context context){

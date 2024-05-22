@@ -47,6 +47,14 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
     @Override
     public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
         TablaDiaRutinaActiva diaRutinaActiva = rutinaActiva.get(position);
+        int dia = diaRutinaActiva.getDia();
+
+        if(dia % 7 == 1){
+            holder.semanaTV.setVisibility(View.VISIBLE);
+            holder.semanaTV.setText("Semana " + ((dia - 1) / 7 + 1));
+        }else{
+            holder.semanaTV.setVisibility(View.GONE);
+        }
 
         holder.dia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,7 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
             }
         });
 
-        holder.numeroDia.setText(String.valueOf(diaRutinaActiva.getDia()));
+        holder.numeroDia.setText(String.valueOf(dia));
 
         if(diaRutinaActiva.getMusculos() != null){
             ArrayList<String> musculosUsuario = diaRutinaActiva.getMusculos();
@@ -105,10 +113,12 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
 
     public static class CrearRutinasViewHolder extends RecyclerView.ViewHolder {
         LinearLayout dia;
-        TextView numeroDia, musculoIzquierda, musculoCentro, musculoDerecha;
+        TextView semanaTV, numeroDia, musculoIzquierda, musculoCentro, musculoDerecha;
 
         public CrearRutinasViewHolder(@NonNull View itemView) {
             super(itemView);
+            semanaTV = itemView.findViewById(R.id.semana_tv);
+
             dia = itemView.findViewById(R.id.dia);
             numeroDia = itemView.findViewById(R.id.numero_dia);
             musculoIzquierda = itemView.findViewById(R.id.musculo_izquierda);

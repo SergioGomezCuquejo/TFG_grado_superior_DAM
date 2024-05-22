@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
@@ -21,6 +22,7 @@ import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +31,12 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     FirebaseManager firebaseManager;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
     RecyclerView recyclerView;
-    TextView semanaTV, noRutinaTV;
-    ScrollView scrollView;
+    TextView noRutinaTV;
+    RelativeLayout relativeLayout;
+    ImageView agregarSemana;
     LinearLayout  imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     RutinaActivaAdaptador adaptador;
+    String idRutina;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +47,11 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         musculosHM = new HashMap<>();
 
         //Referencias de las vistas
-        semanaTV = findViewById(R.id.semana_tv);
         recyclerView = findViewById(R.id.dias);
 
-        scrollView = findViewById(R.id.scrollView);
+        relativeLayout = findViewById(R.id.relativeLayout);
         noRutinaTV = findViewById(R.id.no_rutina_tv);
+        agregarSemana = findViewById(R.id.agregar_semana);
 
         imagen_casa = findViewById(R.id.imagen_casa);
         imagen_calendario = findViewById(R.id.imagen_calendario);
@@ -55,6 +59,7 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         imagen_usuario = findViewById(R.id.imagen_usuario);
 
         //Listeners
+        agregarSemana.setOnClickListener(this);
         imagen_casa.setOnClickListener(this);
         imagen_calendario.setOnClickListener(this);
         imagen_estadisticas.setOnClickListener(this);
@@ -68,10 +73,10 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         if (id == R.id.imagen_casa) {
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
-            cambiarActivity(this.getClass());
+        } else if (id == R.id.agregar_semana) {
+            agregarSemana();
 
-        } else if (id == R.id.imagen_estadisticas) {
+        }  else if (id == R.id.imagen_estadisticas) {
             cambiarActivity(Estadisticas.class);
 
         } else if (id == R.id.imagen_usuario) {
@@ -87,11 +92,12 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     private void obtenerSemana () {
         firebaseManager.obtenerRutinaActiva(this, new FirebaseCallbackRutinaActiva() {
             @Override
-            public void onCallback(ArrayList<TablaDiaRutinaActiva> rutinaActiva) {
-                if(!rutinaActiva.isEmpty()){
-                    mostrarSemana(rutinaActiva);
+            public void onCallback(TablaRutinaActiva rutinaActiva) {
+                if(rutinaActiva != null){
+                    idRutina = rutinaActiva.getIdRutina();
+                    mostrarSemana(rutinaActiva.getSemana());
                 }else{
-                    scrollView.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.GONE);
                     noRutinaTV.setVisibility(View.VISIBLE);
                 }
 
@@ -101,8 +107,6 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
 
     @SuppressLint("SetTextI18n")
     private void mostrarSemana(ArrayList<TablaDiaRutinaActiva> rutinaActiva){
-        semanaTV.setText("Semana " + ((rutinaActiva.get(0).getDia() - 1) / 7 + 1));
-
         firebaseManager.obtenerMusculosUsuario(RutinaSemanal.this, new FirebaseCallbackMusculosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
@@ -116,5 +120,9 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
                 recyclerView.setAdapter(adaptador);
             }
         });
+    }
+
+    private void agregarSemana(){
+        firebaseManager.modificarRutinaActiva(this, idRutina);
     }
 }

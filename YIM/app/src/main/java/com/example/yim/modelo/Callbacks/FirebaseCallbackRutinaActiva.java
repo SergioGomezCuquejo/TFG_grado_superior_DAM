@@ -1,10 +1,9 @@
 package com.example.yim.modelo.Callbacks;
 
-import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 
-import java.util.ArrayList;
 
 public interface FirebaseCallbackRutinaActiva {
-    void onCallback(ArrayList<TablaDiaRutinaActiva> rutinaActiva);
+    void onCallback(TablaRutinaActiva rutinaActiva);
 }
 

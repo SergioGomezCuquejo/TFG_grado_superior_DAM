@@ -16,6 +16,7 @@ import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaRutinasUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
@@ -143,10 +144,14 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                         if(accion.equals("activar")){
                             firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
 
-                            ArrayList<TablaDiaRutinaActiva> rutinaActiva = new ArrayList<>();
+                            TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
+                            rutinaActiva.setIdRutina(rutinaUsuario.getID());
+
+                            ArrayList<TablaDiaRutinaActiva> semana = new ArrayList<>();
                             for(TablaDiaRutinaUsuario diaRutinaUsuario : rutinaUsuario.getSemana()){
-                                rutinaActiva.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
+                                semana.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
                             }
+                            rutinaActiva.setSemana(semana);
                             firebaseManager.agregarRutinaActiva(this, rutinaActiva);
 
                         }

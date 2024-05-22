@@ -5,8 +5,6 @@ import android.content.Intent;
 
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
-import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
-import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogrosUsuario;
 import com.example.yim.modelo.tablas.TablaMusculosUsuario;
@@ -17,7 +15,6 @@ import com.example.yim.vista.vista.EjerciciosRutinas;
 import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
-import com.example.yim.vista.vista.PopupRutinas;
 
 import java.util.HashMap;
 
