@@ -39,6 +39,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+
         //Inicializar instancias.
         auth = FirebaseAuth.getInstance();
         firebaseManager = new FirebaseManager();
@@ -53,10 +54,10 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         //Referencias de las vistas
         continuar_linearlayout = findViewById(R.id.continuar_linearlayout);
         musculos_linearlayout = findViewById(R.id.musculos_linearlayout);
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
         ejercicios = findViewById(R.id.ejercicios);
         rutinas = findViewById(R.id.rutinas);
         lupa_ejercicios = findViewById(R.id.lupa_ejercicios);
@@ -90,24 +91,25 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         rutina2.setOnClickListener(this);
 
         mostrarImagenPerfil();
+
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.continuar_linearlayout || id == R.id.rutina1 || id == R.id.imagen_calendario) {
+        if (id == R.id.continuar_linearlayout || id == R.id.rutina1 || id == R.id.imagen_calendario_menu) {
             cambiarActivity(RutinaSemanal.class);
 
         } else if (id == R.id.musculos_linearlayout) {
             cambiarActivity(Musculos.class);
 
-        } else if (id == R.id.imagen_casa) {
+        } else if (id == R.id.imagen_casa_menu) {
             cambiarActivity(this.getClass());
 
-        } else if (id == R.id.imagen_estadisticas) {
+        } else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(Estadisticas.class);
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         } else if (id == R.id.ejercicios || id == R.id.lupa_ejercicios) {
@@ -117,7 +119,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             cambiarActivity(VerRutinas.class);
 
         } else if (id == R.id.mas_ejercicios_pequeno || id == R.id.mas_ejercicios_grande) {
-            CambiarActivity.cambiarAlerta(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
+            CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
 
         } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
             cambiarActivity(Logros.class);

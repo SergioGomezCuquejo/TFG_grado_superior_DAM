@@ -12,12 +12,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaLogrosUsuario;
+import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class PopupLogros extends AppCompatActivity {
     Intent intent;
-    TablaLogrosUsuario logroUsuario;
+    TablaLogroUsuario logroUsuario;
     TextView titulo, progresoTV, descripcion;
     ShapeableImageView imagen;
     View progresoView;
@@ -38,7 +38,7 @@ public class PopupLogros extends AppCompatActivity {
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.67));
 
         intent = getIntent();
-        logroUsuario = (TablaLogrosUsuario) intent.getSerializableExtra("logroUsuario");
+        logroUsuario = (TablaLogroUsuario) intent.getSerializableExtra("logroUsuario");
 
         //Referencias de las vistas
         progresoView = findViewById(R.id.progreso_view);

@@ -18,11 +18,11 @@ import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.PopupVerEjerciciosAdaptador;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 
 public class PopupVerEjercicios extends AppCompatActivity implements View.OnClickListener {
     Intent intent;
-    TablaEjerciciosUsuario ejercicioUsuario;
+    TablaEjercicioUsuario ejercicioUsuario;
     TextView instruciones, informacion;
     ImageView cerrar;
     ViewFlipper viewFlipper;
@@ -48,7 +48,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
 
 
         intent = getIntent();
-        ejercicioUsuario = (TablaEjerciciosUsuario) intent.getSerializableExtra("ejercicioUsuario");
+        ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
 
         //Referencias de las vistas
         instruciones = findViewById(R.id.instruciones);

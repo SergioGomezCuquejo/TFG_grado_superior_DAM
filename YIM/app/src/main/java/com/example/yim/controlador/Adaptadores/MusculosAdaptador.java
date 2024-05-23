@@ -1,7 +1,6 @@
 package com.example.yim.controlador.Adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -13,20 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.vista.PopupMusculos;
 
 import java.util.ArrayList;
 
 
 public class MusculosAdaptador extends RecyclerView.Adapter<MusculosAdaptador.MusculosViewHolder> {
 
-    private ArrayList<TablaMusculosUsuario> musculos;
+    private ArrayList<TablaMusculoUsuario> musculos;
 
     private Context context;
 
-    public MusculosAdaptador(Context context, ArrayList<TablaMusculosUsuario> musculos) {
+    public MusculosAdaptador(Context context, ArrayList<TablaMusculoUsuario> musculos) {
         this.context = context;
         this.musculos = musculos;
     }
@@ -41,7 +39,7 @@ public class MusculosAdaptador extends RecyclerView.Adapter<MusculosAdaptador.Mu
 
     @Override
     public void onBindViewHolder(@NonNull MusculosViewHolder holder, int position) {
-        TablaMusculosUsuario musculoUsuario = musculos.get(position);
+        TablaMusculoUsuario musculoUsuario = musculos.get(position);
 
         holder.musculo.setText(musculoUsuario.getNombre());
         holder.musculo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculoUsuario.getColor_fondo())));

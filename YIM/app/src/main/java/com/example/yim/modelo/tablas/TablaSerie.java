@@ -2,16 +2,16 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 
-public class TablaSeries implements Serializable {
+public class TablaSerie implements Serializable {
     private String coste;
     private int peso;
     private int repeticiones;
     private int serie;
 
-    public TablaSeries() {
+    public TablaSerie() {
     }
 
-    public TablaSeries(String coste, int peso, int repeticiones, int serie) {
+    public TablaSerie(String coste, int peso, int repeticiones, int serie) {
         this.coste = coste;
         this.peso = peso;
         this.repeticiones = repeticiones;

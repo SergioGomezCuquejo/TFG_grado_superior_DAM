@@ -21,7 +21,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaActiva;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
-import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaRutinaActiva;
 
 import java.util.ArrayList;
@@ -53,10 +53,10 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
         noRutinaTV = findViewById(R.id.no_rutina_tv);
         agregarSemana = findViewById(R.id.agregar_semana);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
 
         //Listeners
         agregarSemana.setOnClickListener(this);
@@ -70,16 +70,16 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imagen_casa) {
+        if (id == R.id.imagen_casa_menu) {
             cambiarActivity(Inicio.class);
 
         } else if (id == R.id.agregar_semana) {
             agregarSemana();
 
-        }  else if (id == R.id.imagen_estadisticas) {
+        }  else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(Estadisticas.class);
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         }
@@ -109,9 +109,9 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     private void mostrarSemana(ArrayList<TablaDiaRutinaActiva> rutinaActiva){
         firebaseManager.obtenerMusculosUsuario(RutinaSemanal.this, new FirebaseCallbackMusculosUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
+            public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
 
-                for (TablaMusculosUsuario musculo : musculosUsuarios){
+                for (TablaMusculoUsuario musculo : musculosUsuarios){
                     musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
                 }
 

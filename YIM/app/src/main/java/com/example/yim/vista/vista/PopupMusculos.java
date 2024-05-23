@@ -1,6 +1,6 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
+import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +18,8 @@ import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaMusculoUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -26,7 +27,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class PopupMusculos extends AppCompatActivity implements View.OnClickListener {
     FirebaseManager firebaseManager;
     Intent intent;
-    TablaMusculosUsuario musculoUsuario;
+    TablaMusculoUsuario musculoUsuario;
     ImageView cancelar, guardar;
     EditText musculo;
     LinearLayout color_fondo, color_letras;
@@ -53,12 +54,12 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         firebaseManager = new FirebaseManager();
 
         intent = getIntent();
-        musculoUsuario = (TablaMusculosUsuario) intent.getSerializableExtra("musculoUsuario");
+        musculoUsuario = (TablaMusculoUsuario) intent.getSerializableExtra("musculoUsuario");
 
 
         //Referencias de las vistas
         cancelar = findViewById(R.id.cancelar);
-        guardar = findViewById(R.id.guardar);
+        guardar = findViewById(R.id.guardar_iv);
 
         ejercicosEnRutinaActiva = findViewById(R.id.ejercicos_en_rutina_activa);
         ejerciciosRealizados = findViewById(R.id.ejercicios_realizados);
@@ -97,7 +98,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
                 finish();
             }
 
-        } else if (id == R.id.guardar) {
+        } else if (id == R.id.guardar_iv) {
 
             if(datosCambiados){
                 musculoUsuario.setColor_fondo("#" + Integer.toHexString(colorFondo).toUpperCase());
@@ -128,7 +129,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
     }
 
     private void cambiarActivity(String titulo, String texto) {
-        cambiarAlerta(this, titulo, texto, "ir_a_musculos");
+        CambiarActivity.cambiar(this, titulo, texto, "ir_a_musculos");
     }
 
 

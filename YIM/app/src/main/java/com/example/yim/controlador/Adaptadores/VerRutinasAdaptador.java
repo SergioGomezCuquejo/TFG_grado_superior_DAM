@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.vista.PopupRutinas;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 
 public class VerRutinasAdaptador extends RecyclerView.Adapter<VerRutinasAdaptador.VerRutinasViewHolder> {
-    private ArrayList<TablaRutinasUsuario> rutinasUsuario;
+    private ArrayList<TablaRutinaUsuario> rutinasUsuario;
     private Context context;
 
-    public VerRutinasAdaptador(Context context, ArrayList<TablaRutinasUsuario> rutinasUsuario) {
+    public VerRutinasAdaptador(Context context, ArrayList<TablaRutinaUsuario> rutinasUsuario) {
         this.context = context;
         this.rutinasUsuario = rutinasUsuario;
     }
@@ -40,7 +40,7 @@ public class VerRutinasAdaptador extends RecyclerView.Adapter<VerRutinasAdaptado
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull VerRutinasViewHolder holder, int position) {
-        TablaRutinasUsuario rutinaUsuario = rutinasUsuario.get(position);
+        TablaRutinaUsuario rutinaUsuario = rutinasUsuario.get(position);
 
         if(rutinaUsuario.getInformacion().isActivo()){
             holder.rutina.setBackgroundResource(R.drawable._style2_borde_amarillo_20__padding_10);

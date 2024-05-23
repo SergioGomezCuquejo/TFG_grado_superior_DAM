@@ -1,10 +1,10 @@
 package com.example.yim.modelo.Callbacks;
 
-import com.example.yim.modelo.tablas.TablaEjercicios;
+import com.example.yim.modelo.tablas.TablaEjercicio;
 
 import java.util.ArrayList;
 
 public interface FirebaseCallbackEjercicios {
-    void onCallback(ArrayList<TablaEjercicios> ejercicios);
+    void onCallback(ArrayList<TablaEjercicio> ejercicios);
 }
 

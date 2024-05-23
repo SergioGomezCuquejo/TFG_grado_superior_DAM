@@ -17,7 +17,7 @@ import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinaActiva;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,20 +25,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth auth;
-    FirebaseManager firebaseManager;
-    Intent intent;
+
+    //Variables de instancias.
+    private FirebaseAuth auth;
+    private FirebaseManager firebaseManager;
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
-    String titulo, texto, iraA, ID, accion;
-    TablaRutinasUsuario rutinaUsuario;
+    String titulo, texto, iraA, accion;
+    TablaRutinaUsuario rutinaUsuario;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup_alerta);
 
-        //Cambiar el tamaño de la pantalla para que sea como un popup.
+        //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
@@ -48,17 +49,18 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         getWindow().setLayout((int)(ancho * 0.80), (int) (alto * 0.30));
 
 
+        //Inicializar instancias.
+        Intent intent = getIntent();
         firebaseManager = new FirebaseManager();
 
 
-        //Obtener datos de la anterior activity.
-        intent = getIntent();
+        //Obtener datos del anterior activity.
         if(intent != null) {
             titulo = intent.getStringExtra("titulo");
             texto = intent.getStringExtra("texto");
             iraA = intent.getStringExtra("iraA");
             if(intent.hasExtra("rutinaUsuario")) {
-                rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+                rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
                 accion = intent.getStringExtra("accion");
             }
 
@@ -75,12 +77,13 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         titulo_tv = findViewById(R.id.titulo);
         texto_tv = findViewById(R.id.texto);
 
+
         //Listeners.
         cancelar_btn.setOnClickListener(this);
         aceptar.setOnClickListener(this);
 
 
-        //Cambiar los textos por los obtenidos.
+        //Mostrar los mensajes del acivity anterior.
         titulo_tv.setText(titulo);
         texto_tv.setText(texto);
 
@@ -102,95 +105,123 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
-    }
-
+    //Método que se acciona al dar al boton de aceptar.
     private void aceptar(){
-        if(iraA.startsWith("ID")){
-            String ID = iraA.substring(2, iraA.length()-2);
-            String mensaje = "";
-
-            if (iraA.endsWith("EJ")){
-                if(firebaseManager.eliminarEjercicio(this, ID)){
-                    mensaje = "Ejercicio eliminado correctamente";
-                }else{
-                    mensaje = "Error al eliminar el ejercicio";
-                }
-            }else if (iraA.endsWith("RU")) {
-                if (firebaseManager.eliminarRutina(this, ID)) {
-                    mensaje = "Rutina eliminada correctamente";
-                    CambiarActivity.cambiar(this, VerRutinas.class);
-                } else {
-                    mensaje = "Error al eliminar la rutina";
-                }
-            }
-
-            MostratToast.mostrarToast(this, mensaje);
-            finish();
+        if(iraA.startsWith("ID")){//TOdo haer otra variable mejor
+            crudID();
 
         }else{
-            switch (iraA){
-                case "ir_a_musculos":
-                    cambiarActivity(Musculos.class);
-                    break;
-                case "ir_a_ver_rutinas":
-
-                    if(rutinaUsuario != null){
-                        firebaseManager.desactivarRutinas(this);
-                        firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), false);
-                        firebaseManager.eliminarRutinaActiva(this);
-
-                        if(accion.equals("activar")){
-                            firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
-
-                            TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
-                            rutinaActiva.setIdRutina(rutinaUsuario.getID());
-
-                            ArrayList<TablaDiaRutinaActiva> semana = new ArrayList<>();
-                            for(TablaDiaRutinaUsuario diaRutinaUsuario : rutinaUsuario.getSemana()){
-                                semana.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
-                            }
-                            rutinaActiva.setSemana(semana);
-                            firebaseManager.agregarRutinaActiva(this, rutinaActiva);
-
-                        }
-                    }
-
-                    cambiarActivity(VerRutinas.class);
-                    break;
-                case "ir_a_ejercicios":
-                    cambiarActivity(VerEjercicios.class);
-                    break;
-                case "ir_a_inicio":
-                    cambiarActivity(Inicio.class);
-                    break;
-                case "ir_a_ejercicios_rutina":
-                    cambiarActivity(EjerciciosRutinas.class);
-                    break;
-                case "ir_a_ver_ejercicios":
-                    cambiarActivity(VerEjercicios.class);
-                    break;
-                case "ir_a_rutina_semanal":
-                    cambiarActivity(RutinaSemanal.class);
-                    break;
-                case "ir_a_estadisticas":
-                    cambiarActivity(Estadisticas.class);
-                case "ir_a_perfil":
-                    cambiarActivity(Perfil.class);
-                    break;
-                case "cerrar_sesion":
-                    auth = FirebaseAuth.getInstance();
-                    auth.signOut();
-                    finish();
-                    cambiarActivity(InicioSesion.class);
-                    break;
-                default:
-                    finish();
-                    break;
-            }
+            irA();
         }
         finish();
 
     }
+
+    //Método para redireccionar a otro acivity.
+    private void irA(){
+        switch (iraA){
+            case "ir_a_inicio":
+                cambiarActivity(Inicio.class);
+                break;
+            case "ir_a_rutina_semanal":
+                cambiarActivity(RutinaSemanal.class);
+                break;
+            case "ir_a_estadisticas":
+                cambiarActivity(Estadisticas.class);
+            case "ir_a_perfil":
+                cambiarActivity(Perfil.class);
+                break;
+            case "ir_a_ver_rutinas":
+
+                if(rutinaUsuario != null) { //TOdo haer otra variable mejor
+                    activarRutina();
+                }
+
+                cambiarActivity(VerRutinas.class);
+                break;
+
+
+            //////
+            case "ir_a_musculos":
+                cambiarActivity(Musculos.class);
+                break;
+            case "ir_a_ejercicios":
+                cambiarActivity(VerEjercicios.class);
+                break;
+            case "ir_a_ejercicios_rutina":
+                cambiarActivity(EjerciciosRutinas.class);
+                break;
+            case "ir_a_ver_ejercicios":
+                cambiarActivity(VerEjercicios.class);
+                break;
+            case "cerrar_sesion":
+                auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                finish();
+                cambiarActivity(InicioSesion.class);
+                break;
+            default:
+                finish();
+                break;
+        }
+    }
+
+
+    private void activarRutina(){
+        firebaseManager.desactivarRutinas(this);
+        firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), false);
+        firebaseManager.eliminarRutinaActiva(this);
+
+        if(accion.equals("activar")){
+            firebaseManager.modificarActivoRutina(this, rutinaUsuario.getID(), true);
+
+            TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
+            rutinaActiva.setIdRutina(rutinaUsuario.getID());
+
+            ArrayList<TablaDiaRutinaActiva> semana = new ArrayList<>();
+            for(TablaDiaRutinaUsuario diaRutinaUsuario : rutinaUsuario.getSemana()){
+                semana.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
+            }
+            rutinaActiva.setSemana(semana);
+            firebaseManager.agregarRutinaActiva(this, rutinaActiva);
+
+        }
+    }
+
+
+    private void crudID(){
+        String ID = iraA.substring(2, iraA.length()-2);
+        String mensaje = "";
+
+        if (iraA.endsWith("EJ")){
+            if(firebaseManager.eliminarEjercicio(this, ID)){
+                mensaje = "Ejercicio eliminado correctamente";
+            }else{
+                mensaje = "Error al eliminar el ejercicio";
+            }
+        }else if (iraA.endsWith("RU")) {
+            if (firebaseManager.eliminarRutina(this, ID)) {
+                mensaje = "Rutina eliminada correctamente";
+                CambiarActivity.cambiar(this, VerRutinas.class);
+            } else {
+                mensaje = "Error al eliminar la rutina";
+            }
+        }
+
+        mostrarToast(mensaje);
+    }
+
+
+
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        cambiar(this, activity);
+    }
+
+
+    //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
+    }
+
 }

@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TablaRutinasUsuario implements Serializable {
+public class TablaRutinaUsuario implements Serializable {
     private String ID;
-    private TablaInfoRutinasUsuario informacion;
+    private TablaInfoRutinaUsuario informacion;
     private ArrayList<TablaDiaRutinaUsuario> semana;
 
-    public TablaRutinasUsuario() {
+    public TablaRutinaUsuario() {
     }
 
-    public TablaRutinasUsuario(TablaInfoRutinasUsuario informacion, ArrayList<TablaDiaRutinaUsuario> semana) {
+    public TablaRutinaUsuario(TablaInfoRutinaUsuario informacion, ArrayList<TablaDiaRutinaUsuario> semana) {
         this.informacion = informacion;
         this.semana = semana;
     }
@@ -26,11 +26,11 @@ public class TablaRutinasUsuario implements Serializable {
     }
 
 
-    public TablaInfoRutinasUsuario getInformacion() {
+    public TablaInfoRutinaUsuario getInformacion() {
         return informacion;
     }
 
-    public void setInformacion(TablaInfoRutinasUsuario informacion) {
+    public void setInformacion(TablaInfoRutinaUsuario informacion) {
         this.informacion = informacion;
     }
 

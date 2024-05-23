@@ -16,14 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaInfoRutinasUsuario;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaInfoRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class PopupRutinas extends AppCompatActivity implements View.OnClickListener {
     Intent intent;
-    TablaRutinasUsuario rutinaUsuario;
+    TablaRutinaUsuario rutinaUsuario;
     ImageView cancelar, editar;
     ShapeableImageView imagen;
     LinearLayout activo_ll;
@@ -48,7 +48,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
         intent = getIntent();
-        rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+        rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
 
         primeraVez = true;
 
@@ -90,10 +90,10 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                 if(!primeraVez){
 
                     if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "activar");
+                        CambiarActivity.cambiar(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "activar");
 
                     } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiarAlerta(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "desactivar");
+                        CambiarActivity.cambiar(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "desactivar");
                     }
                 }
             }
@@ -113,7 +113,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
 
         } else if (id == R.id.borrar) {
-            CambiarActivity.cambiarAlerta(this, "Borrar rutina.",
+            CambiarActivity.cambiar(this, "Borrar rutina.",
                     "¿Desea eliminar la rutina '" + rutinaUsuario.getInformacion().getNombre() + "'?", "ID" + rutinaUsuario.getID() + "RU");
 
         }
@@ -132,7 +132,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     }
 
     private void mostrarInfo(){
-        TablaInfoRutinasUsuario infoRutina = rutinaUsuario.getInformacion();
+        TablaInfoRutinaUsuario infoRutina = rutinaUsuario.getInformacion();
 
         activo.setChecked(infoRutina.isActivo());
         cambiarActivo(activo.isChecked());

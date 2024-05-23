@@ -52,7 +52,7 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
         holder.ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CambiarActivity.cambiar(context, diaRutinaActiva, (position+1));
+                CambiarActivity.cambiar(context, diaRutinaActiva, position);
                 ((Activity) context).finish();
             }
         });

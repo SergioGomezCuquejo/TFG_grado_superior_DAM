@@ -2,7 +2,7 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 
-public class TablaLogrosUsuario implements Serializable {
+public class TablaLogroUsuario implements Serializable {
     private String ID;
     private String descripcion;
     private String dificultad;
@@ -11,10 +11,10 @@ public class TablaLogrosUsuario implements Serializable {
     private String titulo;
     private int total;
 
-    public TablaLogrosUsuario() {
+    public TablaLogroUsuario() {
     }
 
-    public TablaLogrosUsuario(String descripcion, String dificultad, String imagen, int progreso, String titulo, int total) {
+    public TablaLogroUsuario(String descripcion, String dificultad, String imagen, int progreso, String titulo, int total) {
         this.descripcion = descripcion;
         this.dificultad = dificultad;
         this.imagen = imagen;
@@ -23,7 +23,7 @@ public class TablaLogrosUsuario implements Serializable {
         this.total = total;
     }
 
-    public TablaLogrosUsuario(TablaLogros logro) {
+    public TablaLogroUsuario(TablaLogro logro) {
         descripcion = logro.getDescripcion();
         dificultad = logro.getDificultad();
         imagen = logro.getImagen();

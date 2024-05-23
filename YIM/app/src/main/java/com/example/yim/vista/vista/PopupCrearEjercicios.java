@@ -1,7 +1,7 @@
 package com.example.yim.vista.vista;
 
 import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
+import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,13 +19,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.ObtenerLogro;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.controlador.ValidarDatos;
@@ -45,7 +44,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     HashSet<String> musculos = new HashSet<>();
     StringBuilder musculosString;
-    TablaEjerciciosUsuario ejercicioUsuario;
+    TablaEjercicioUsuario ejercicioUsuario;
     String imagenEjercicio, nombreEjercicio, notasEjercicio, musculosEjercicio;
     int descansoEjercicio, seriesEjercicio, repeticionesEjercicio;
     ArrayList<String> musculosArray;
@@ -80,7 +79,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         viewFlipper = findViewById(R.id.viewFlipper);
 
         cancelar = findViewById(R.id.cancelar);
-        guardar = findViewById(R.id.guardar);
+        guardar = findViewById(R.id.guardar_iv);
 
         imagenFL = findViewById(R.id.imagen_fl);
         imagen = findViewById(R.id.imagen_ejercicio);
@@ -93,7 +92,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
         musculosTV = findViewById(R.id.musculos_tv);
 
-        atras = findViewById(R.id.atras);
+        atras = findViewById(R.id.atras_iv);
 
 
         //Listeners
@@ -196,13 +195,13 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             }else{
                 finish();
             }
-        } else if (id == R.id.guardar) {
+        } else if (id == R.id.guardar_iv) {
             guardarEjercicio();
 
         } else if (id == R.id.musculos_tv) {
             viewFlipper.showNext();
 
-        } else if (id == R.id.atras) {
+        } else if (id == R.id.atras_iv) {
             if (musculos != null && !musculos.isEmpty()) {
                 musculosString = new StringBuilder();
                 for (String musculo : musculos) {
@@ -222,7 +221,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
     }
 
     private void cambiarActivity(String titulo, String texto) {
-        cambiarAlerta(this, titulo, texto, "ir_a_ejercicios");
+        CambiarActivity.cambiar(this, titulo, texto, "ir_a_ejercicios");
     }
 
     public void cambiarColores(View view, int color){
@@ -294,7 +293,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
         if(!nombreVacio && !musculosVacios && !descansoVacio && !seriesVacias && !repeticionesVacias){
 
-            ejercicioUsuario = new TablaEjerciciosUsuario(imagenEjercicio, musculosArray, "-" + nombreEjercicio, notasEjercicio,
+            ejercicioUsuario = new TablaEjercicioUsuario(imagenEjercicio, musculosArray, "-" + nombreEjercicio, notasEjercicio,
                     repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
             if(firebaseManager.agregarEjercicio(this, ejercicioUsuario)){
                 MostratToast.mostrarToast(this, "Ejercicio creado correctamente");

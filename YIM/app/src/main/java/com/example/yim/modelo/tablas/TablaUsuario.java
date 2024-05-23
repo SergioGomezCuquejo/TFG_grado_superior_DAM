@@ -1,23 +1,21 @@
 package com.example.yim.modelo.tablas;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TablaUsuario {
     private TablaPerfil perfil;
-    private ArrayList<TablaEjerciciosUsuario> ejercicios;
-    private ArrayList<TablaLogrosUsuario> logros;
-    private ArrayList<TablaMusculosUsuario> musculos;
+    private ArrayList<TablaEjercicioUsuario> ejercicios;
+    private ArrayList<TablaLogroUsuario> logros;
+    private ArrayList<TablaMusculoUsuario> musculos;
 
     public TablaUsuario() {
         perfil = new TablaPerfil();
-        musculos = new ArrayList<TablaMusculosUsuario>();
-        ejercicios = new ArrayList<TablaEjerciciosUsuario>();
+        musculos = new ArrayList<TablaMusculoUsuario>();
+        ejercicios = new ArrayList<TablaEjercicioUsuario>();
     }
 
-    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaEjerciciosUsuario> ejercicios, ArrayList<TablaLogrosUsuario> logros,
-                        ArrayList<TablaMusculosUsuario> musculos) {
+    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaEjercicioUsuario> ejercicios, ArrayList<TablaLogroUsuario> logros,
+                        ArrayList<TablaMusculoUsuario> musculos) {
         this.perfil = perfil;
         this.ejercicios = ejercicios;
         this.logros = logros;
@@ -32,27 +30,27 @@ public class TablaUsuario {
         this.perfil = perfil;
     }
 
-    public ArrayList<TablaEjerciciosUsuario> getEjercicios() {
+    public ArrayList<TablaEjercicioUsuario> getEjercicios() {
         return ejercicios;
     }
 
-    public void setEjercicios(ArrayList<TablaEjerciciosUsuario> ejercicios) {
+    public void setEjercicios(ArrayList<TablaEjercicioUsuario> ejercicios) {
         this.ejercicios = ejercicios;
     }
 
-    public ArrayList<TablaLogrosUsuario> getLogros() {
+    public ArrayList<TablaLogroUsuario> getLogros() {
         return logros;
     }
 
-    public void setLogros(ArrayList<TablaLogrosUsuario> logros) {
+    public void setLogros(ArrayList<TablaLogroUsuario> logros) {
         this.logros = logros;
     }
 
-    public  ArrayList<TablaMusculosUsuario> getMusculos() {
+    public  ArrayList<TablaMusculoUsuario> getMusculos() {
         return musculos;
     }
 
-    public void setMusculos( ArrayList<TablaMusculosUsuario> musculos) {
+    public void setMusculos( ArrayList<TablaMusculoUsuario> musculos) {
         this.musculos = musculos;
     }
 }

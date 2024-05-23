@@ -1,13 +1,13 @@
 package com.example.yim.modelo.tablas;
 
-public class TablaMusculos {
+public class TablaMusculo {
     private String color_fondo;
     private String color_letras;
     private String nombre;
 
-    public TablaMusculos() {
+    public TablaMusculo() {
     }
-    public TablaMusculos(String color_fondo, String color_letras, String nombre) {
+    public TablaMusculo(String color_fondo, String color_letras, String nombre) {
         this.color_fondo = color_fondo;
         this.color_letras = color_letras;
         this.nombre = nombre;

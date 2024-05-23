@@ -16,7 +16,7 @@ import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.VerEjerciciosAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,10 +54,10 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
 
         agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
 
         //Listeners
         agregar_ejercicio.setOnClickListener(this);
@@ -77,16 +77,16 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         if (id == R.id.agregar_ejercicio) {
             cambiarActivity(PopupCrearEjercicios.class);
 
-        } else if (id == R.id.imagen_casa){
+        } else if (id == R.id.imagen_casa_menu){
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
+        } else if (id == R.id.imagen_calendario_menu) {
             cambiarActivity(RutinaSemanal.class);
 
-        } else if (id == R.id.imagen_estadisticas) {
+        } else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(Estadisticas.class);
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         }
@@ -96,7 +96,7 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         try{
             firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
                 @Override
-                public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
+                public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
                     recyclerView.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
                     adaptador = new VerEjerciciosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
                     recyclerView.setAdapter(adaptador);

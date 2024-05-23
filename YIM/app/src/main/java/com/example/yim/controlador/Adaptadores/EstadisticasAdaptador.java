@@ -15,19 +15,19 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
-import com.example.yim.modelo.tablas.TablaEstadisticas;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEstadistica;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdaptador.EstadisticasViewHolder> {
-    private ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios;
+    private ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios;
     private Context context;
     HashMap<String, String> musculosHM;
 
-    public EstadisticasAdaptador(Context context, ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios, HashMap<String, String> musculosHM) {
+    public EstadisticasAdaptador(Context context, ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios, HashMap<String, String> musculosHM) {
         this.context = context;
         this.ejerciciosUsuarios = ejerciciosUsuarios;
         this.musculosHM = musculosHM;
@@ -44,8 +44,8 @@ public class EstadisticasAdaptador extends RecyclerView.Adapter<EstadisticasAdap
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull EstadisticasViewHolder holder, int position) {
-        TablaEjerciciosUsuario ejercicio = ejerciciosUsuarios.get(position);
-        ArrayList<TablaEstadisticas> estadisticas = ejercicio.getEstadisticas();
+        TablaEjercicioUsuario ejercicio = ejerciciosUsuarios.get(position);
+        ArrayList<TablaEstadistica> estadisticas = ejercicio.getEstadisticas();
         holder.nombre.setText(ejercicio.getNombre());
 
         for(int i = 0; i < ejercicio.getMusculos().size(); i++ ){

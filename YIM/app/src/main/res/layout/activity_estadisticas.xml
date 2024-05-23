@@ -130,7 +130,7 @@
         android:baselineAligned="false">
 
         <FrameLayout
-            android:id="@+id/imagen_casa"
+            android:id="@+id/imagen_casa_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -147,7 +147,7 @@
 
 
         <FrameLayout
-            android:id="@+id/imagen_calendario"
+            android:id="@+id/imagen_calendario_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -164,7 +164,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/imagen_estadisticas"
+            android:id="@+id/imagen_estadisticas_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -181,7 +181,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/imagen_usuario"
+            android:id="@+id/imagen_usuario_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

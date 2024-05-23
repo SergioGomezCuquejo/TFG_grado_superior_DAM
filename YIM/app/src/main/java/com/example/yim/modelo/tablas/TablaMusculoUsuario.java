@@ -2,7 +2,7 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 
-public class TablaMusculosUsuario implements Serializable {
+public class TablaMusculoUsuario implements Serializable {
     private String ID;
     private String color_fondo;
     private String color_fuente;
@@ -13,11 +13,11 @@ public class TablaMusculosUsuario implements Serializable {
     private int ejercicios_totales;
     private String nombre;
 
-    public TablaMusculosUsuario() {
+    public TablaMusculoUsuario() {
     }
 
-    public TablaMusculosUsuario(String color_fondo, String color_fuente, int ejercicios_en_rutinaActual, int ejercicios_en_rutinas,
-                                int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String nombre) {
+    public TablaMusculoUsuario(String color_fondo, String color_fuente, int ejercicios_en_rutinaActual, int ejercicios_en_rutinas,
+                               int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String nombre) {
         this.color_fondo = color_fondo;
         this.color_fuente = color_fuente;
         this.ejercicios_en_rutinaActual = ejercicios_en_rutinaActual;
@@ -27,7 +27,7 @@ public class TablaMusculosUsuario implements Serializable {
         this.ejercicios_totales = ejercicios_totales;
         this.nombre = nombre;
     }
-    public TablaMusculosUsuario(String color_fondo, String color_fuente, String nombre) {
+    public TablaMusculoUsuario(String color_fondo, String color_fuente, String nombre) {
         this.color_fondo = color_fondo;
         this.color_fuente = color_fuente;
         this.nombre = nombre;

@@ -26,7 +26,7 @@
             tools:ignore="NestedWeights">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/atras"
+                android:id="@+id/atras_iv"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/atras_gris"
@@ -143,7 +143,8 @@
                     android:text="Cambiar músculos"
                     android:textColor="@color/negro_clarito"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <View
                     android:layout_width="0dp"
@@ -263,7 +264,8 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -283,7 +285,8 @@
                         android:text="Todo el cuerpo"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <CheckBox
                         android:id="@+id/tren_superior"
@@ -298,7 +301,8 @@
                         android:text="Tren superior"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <CheckBox
                         android:id="@+id/espalda"
@@ -313,7 +317,8 @@
                         android:text="Espalda"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <CheckBox
                         android:id="@+id/biceps"
@@ -328,7 +333,8 @@
                         android:text="Bíceps"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <CheckBox
                         android:id="@+id/cuadriceps"
@@ -343,7 +349,8 @@
                         android:text="Cuádriceps"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
@@ -375,7 +382,8 @@
             android:textColor="@color/gris_oscuro"
             android:gravity="center"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -403,6 +411,15 @@
             android:contentDescription="@string/agregar_ejercicio"
             android:padding="15dp"
             android:src="@drawable/mas" />
+
+        <ProgressBar
+            android:id="@+id/cargando"
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/gris_clarito" />
     </RelativeLayout>
 
     <LinearLayout
@@ -414,7 +431,7 @@
         android:paddingTop="2dp">
 
         <FrameLayout
-            android:id="@+id/imagen_casa"
+            android:id="@+id/imagen_casa_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -431,7 +448,7 @@
 
 
         <FrameLayout
-            android:id="@+id/imagen_calendario"
+            android:id="@+id/imagen_calendario_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -448,7 +465,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/imagen_estadisticas"
+            android:id="@+id/imagen_estadisticas_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -465,18 +482,18 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/imagen_usuario"
+            android:id="@+id/imagen_usuario_menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_perfil_menu"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/imagen_usuario"
-                android:scaleType="fitCenter"
-                android:src="@drawable/usuario" />
+                android:src="@drawable/usuario"
+                app:shapeAppearanceOverlay="@style/radius" />
 
         </FrameLayout>
     </LinearLayout>

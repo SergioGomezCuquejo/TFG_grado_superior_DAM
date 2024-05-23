@@ -10,8 +10,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.yim.R;
@@ -47,6 +45,7 @@ public class Logo extends AppCompatActivity {
             @Override
             public void run() {
                 cambiar(Logo.this, InicioSesion.class);
+                finish();
             }
         }, 4000);
     }

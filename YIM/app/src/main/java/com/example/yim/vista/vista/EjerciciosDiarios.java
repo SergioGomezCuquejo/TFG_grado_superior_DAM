@@ -1,7 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,20 +10,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.EjerciciosDiariosAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
+import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
+import com.example.yim.vista.controlador.MostratToast;
 
 public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClickListener {
-    Intent intent;
-    TablaDiaRutinaActiva diaRutinaActiva;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    private TablaDiaRutinaActiva diaRutinaActiva;
+    ImageView atras, imagenPerfilMenu;
     RecyclerView recyclerView;
-    ImageView atras;
+    ProgressBar cargando;
     TextView diaTV;
-    FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    EjerciciosDiariosAdaptador adaptador;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -33,60 +40,117 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ejercicios_diarios);
 
-        intent = getIntent();
-        diaRutinaActiva = (TablaDiaRutinaActiva) intent.getSerializableExtra("diaRutinaActiva");
+        //Inicializar instancias.
+        firebaseManager = new FirebaseManager();
+        Intent intent = getIntent();
 
-        //Referencias de las vistas
-        //TOdo intentar hacer
-        //agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
-        atras = findViewById(R.id.atras);
+
+        //Obtener la rutina que se ha seleccionado.
+        if(intent.hasExtra("diaRutinaActiva")) {
+            diaRutinaActiva = (TablaDiaRutinaActiva) intent.getSerializableExtra("diaRutinaActiva");
+        }else{
+            diaRutinaActiva = null;
+            //todo hacer
+        }
+
+
+        //Referencias de las vistas.
+        cargando = findViewById(R.id.cargando);
+
+        //agregar_ejercicio = findViewById(R.id.agregar_ejercicio);//TOdo intentar hacer
+        atras = findViewById(R.id.atras_iv);
         diaTV = findViewById(R.id.dia_tv);
         recyclerView = findViewById(R.id.ejercicios);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
-        //Listeners
+        //Listeners.
         atras.setOnClickListener(this);
 
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
 
+
+        //Mostrar datos.
         diaTV.setText("Ejercicios del día " + diaRutinaActiva.getDia());
-        mostrarEjercicios();
+        try{
+            mostrarImagenPerfil();
+            mostrarEjercicios();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los ejercicios de la rutina.");
+            ex.printStackTrace();
+        }
+
+        //Ocultar barra de progreso.
+        cargando.setVisibility(View.GONE);
     }
+
+
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.imagen_casa){
-            cambiarActivity(Inicio.class);
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.imagen_calendario) {
-            cambiarActivity(RutinaSemanal.class);
+        switch (id){
+            case "imagen_casa_menu":
+                cambiarActivity(Inicio.class);
+                break;
+            case "imagen_calendario_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
 
-        } else if (id == R.id.imagen_estadisticas) {
-            cambiarActivity(Estadisticas.class);
-
-        } else if (id == R.id.imagen_usuario) {
-            cambiarActivity(Perfil.class);
-
-        } else if (id == R.id.atras) {
-            finish();
-
+            case "atras_iv":
+            case "imagen_estadisticas_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
+            case "imagen_usuario_menu":
+                cambiarActivity(Perfil.class);
+                break;
         }
     }
 
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
+
+    //Método para mostrar los ejercicios desde un adaptador.
+    private void mostrarEjercicios(){
+        if(diaRutinaActiva != null) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            EjerciciosDiariosAdaptador adaptador = new EjerciciosDiariosAdaptador(this, diaRutinaActiva);
+            recyclerView.setAdapter(adaptador);
+        }else{
+            //todo
+        }
     }
 
-    private void mostrarEjercicios(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adaptador = new EjerciciosDiariosAdaptador(this, diaRutinaActiva);
-        recyclerView.setAdapter(adaptador);
+    //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    private void mostrarImagenPerfil(){
+        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+            @Override
+            public void onCallback(TablaPerfil perfil) {
+                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                    Imagenes.urlImagenPerfil = perfil.getImagen();
+                    Imagenes.mostrarImagenPerfil(EjerciciosDiarios.this, imagenPerfilMenu);
+                }
+
+            }
+        });
+
+    }
+
+
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        CambiarActivity.cambiar(this, activity);
+    }
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

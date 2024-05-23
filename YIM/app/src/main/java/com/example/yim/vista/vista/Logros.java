@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,7 +15,7 @@ import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.LogrosAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogrosUsuario;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaLogrosUsuario;
+import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
@@ -40,10 +39,10 @@ public class Logros extends AppCompatActivity implements View.OnClickListener {
         //Referencias de las vistas
         logros = findViewById(R.id.logros);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
 
         //Listeners
         imagen_casa.setOnClickListener(this);
@@ -60,16 +59,16 @@ public class Logros extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imagen_casa){
+        if (id == R.id.imagen_casa_menu){
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
+        } else if (id == R.id.imagen_calendario_menu) {
             cambiarActivity(RutinaSemanal.class);
 
-        } else if (id == R.id.imagen_estadisticas) {
+        } else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(this.getClass());
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         }
@@ -83,7 +82,7 @@ public class Logros extends AppCompatActivity implements View.OnClickListener {
         try{
             firebaseManager.obtenerLogrosUsuario(this, new FirebaseCallbackLogrosUsuario() {
                 @Override
-                public void onCallback(ArrayList<TablaLogrosUsuario> logrosUsuario) {
+                public void onCallback(ArrayList<TablaLogroUsuario> logrosUsuario) {
 
                     columnas = 4;
 

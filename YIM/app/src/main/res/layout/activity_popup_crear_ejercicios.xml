@@ -45,7 +45,7 @@
                 android:textStyle="bold|italic" />
 
             <ImageView
-                android:id="@+id/guardar"
+                android:id="@+id/guardar_iv"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:contentDescription="@string/imagen_guardar"
@@ -342,7 +342,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/atras"
+            android:id="@+id/atras_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/atras"

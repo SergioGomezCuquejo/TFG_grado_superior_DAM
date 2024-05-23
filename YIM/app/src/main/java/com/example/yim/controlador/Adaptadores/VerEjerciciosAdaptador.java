@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.vista.PopupVerEjercicios;
 import com.example.yim.vista.vista.PopupVerEjerciciosCreados;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 
 public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAdaptador.VerEjerciciosViewHolder> {
 
-    private ArrayList<TablaEjerciciosUsuario> ejercicios;
+    private ArrayList<TablaEjercicioUsuario> ejercicios;
 
     private Context context;
 
-    public VerEjerciciosAdaptador(Context context, ArrayList<TablaEjerciciosUsuario> ejercicios) {
+    public VerEjerciciosAdaptador(Context context, ArrayList<TablaEjercicioUsuario> ejercicios) {
         this.context = context;
         this.ejercicios = ejercicios;
     }
@@ -42,7 +42,7 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
     @Override
     public void onBindViewHolder(@NonNull VerEjerciciosViewHolder holder, int position) {
         String musculos = "";
-        TablaEjerciciosUsuario ejercicioUsuario = ejercicios.get(position);
+        TablaEjercicioUsuario ejercicioUsuario = ejercicios.get(position);
         String nombreEjercicio = ejercicioUsuario.getNombre();
 
 

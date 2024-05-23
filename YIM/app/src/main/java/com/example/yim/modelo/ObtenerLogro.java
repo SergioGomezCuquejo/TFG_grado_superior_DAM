@@ -3,7 +3,7 @@ package com.example.yim.modelo;
 import android.content.Context;
 
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogrosUsuario;
-import com.example.yim.modelo.tablas.TablaLogrosUsuario;
+import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ public class ObtenerLogro {
     private void crearEjercicio(Context context){
         firebaseManager.obtenerLogrosUsuario(context, titulos, new FirebaseCallbackLogrosUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaLogrosUsuario> logrosUsuario) {
-                ArrayList<TablaLogrosUsuario> logrosActualizados  = new ArrayList<TablaLogrosUsuario>();
-                for (TablaLogrosUsuario logro : logrosUsuario){
+            public void onCallback(ArrayList<TablaLogroUsuario> logrosUsuario) {
+                ArrayList<TablaLogroUsuario> logrosActualizados  = new ArrayList<TablaLogroUsuario>();
+                for (TablaLogroUsuario logro : logrosUsuario){
 
 
                     if(logro.getProgreso() < logro.getTotal()){

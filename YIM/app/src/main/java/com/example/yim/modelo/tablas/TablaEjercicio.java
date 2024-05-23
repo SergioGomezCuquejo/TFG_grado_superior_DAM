@@ -2,18 +2,18 @@ package com.example.yim.modelo.tablas;
 
 import java.util.ArrayList;
 
-public class TablaEjercicios {
+public class TablaEjercicio {
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
     private String imagen;
     private ArrayList<String> musculos;
     private String nombre;
 
-    public TablaEjercicios() {
+    public TablaEjercicio() {
     }
 
-    public TablaEjercicios(ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
-                           String imagen, ArrayList<String> musculos, String nombre) {
+    public TablaEjercicio(ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
+                          String imagen, ArrayList<String> musculos, String nombre) {
         this.consejos_clave = consejos_clave;
         this.ejecucion = ejecucion;
         this.imagen = imagen;

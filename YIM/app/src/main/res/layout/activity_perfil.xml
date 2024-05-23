@@ -471,7 +471,7 @@
             android:baselineAligned="false">
 
             <LinearLayout
-                android:id="@+id/imagen_casa"
+                android:id="@+id/imagen_casa_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -489,7 +489,7 @@
 
 
             <LinearLayout
-                android:id="@+id/imagen_calendario"
+                android:id="@+id/imagen_calendario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -507,7 +507,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/imagen_estadisticas"
+                android:id="@+id/imagen_estadisticas_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -525,7 +525,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/imagen_usuario"
+                android:id="@+id/imagen_usuario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@color/negro_traslucido"

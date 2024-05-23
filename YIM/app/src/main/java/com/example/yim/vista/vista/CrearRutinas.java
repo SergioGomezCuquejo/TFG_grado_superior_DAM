@@ -1,8 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.CambiarActivity.cambiarAlerta;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,31 +11,38 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.CrearRutinasAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
-import com.example.yim.modelo.tablas.TablaInfoRutinasUsuario;
-import com.example.yim.modelo.tablas.TablaMusculosUsuario;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaInfoRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CrearRutinas extends AppCompatActivity implements View.OnClickListener {
-    FirebaseManager firebaseManager;
-    Intent intent;
-    TablaRutinasUsuario rutinaUsuario;
-    ImageView atras, guardar;
-    EditText nombre;
-    RecyclerView recyclerView;
-    FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    CrearRutinasAdaptador adaptador;
-    HashMap<String, ColoresMusculoUsuario> musculosHM;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    private TablaRutinaUsuario rutinaUsuario;
+    ImageView atrasIV, guardarIV, imagenPerfilMenu;
+    EditText nombreET;
+    RecyclerView diasRV;
+    ProgressBar cargando;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,14 +50,19 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutinas);
 
+        //Inicializar instancias.
+        Intent intent = getIntent();
         firebaseManager = new FirebaseManager();
-        musculosHM = new HashMap<>();
-        intent = getIntent();
 
+
+        //Obtener la rutina que se ha seleccionado.
         if(intent.hasExtra("rutinaUsuario")) {
-            rutinaUsuario = (TablaRutinasUsuario) intent.getSerializableExtra("rutinaUsuario");
+            rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
+
+
+        //Si no existe se creará una nueva rutina con 7 días.
         } else {
-            rutinaUsuario = new TablaRutinasUsuario();
+            rutinaUsuario = new TablaRutinaUsuario();
             ArrayList<TablaDiaRutinaUsuario> semana = new ArrayList<TablaDiaRutinaUsuario>();
             for(int i = 0; i < 7; i++){
                 semana.add(new TablaDiaRutinaUsuario(i+1));
@@ -61,110 +70,200 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             rutinaUsuario.setSemana(semana);
         }
 
-        //Referencias de las vistas
-        atras = findViewById(R.id.atras);
-        guardar = findViewById(R.id.guardar);
 
-        nombre = findViewById(R.id.nombreTV);
+        //Referencias de las vistas.
+        cargando = findViewById(R.id.cargando);
 
-        recyclerView = findViewById(R.id.dias);
+        atrasIV = findViewById(R.id.atras_iv);
+        guardarIV = findViewById(R.id.guardar_iv);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        nombreET = findViewById(R.id.nombre_et);
 
-        //Listeners
-        atras.setOnClickListener(this);
-        guardar.setOnClickListener(this);
+        diasRV = findViewById(R.id.dias_rv);
 
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
-        mostrarSemana(rutinaUsuario);
+
+        //Listeners.
+        atrasIV.setOnClickListener(this);
+        guardarIV.setOnClickListener(this);
+
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
+
+
+        //Mostrar datos.
+        try{
+            mostrarRutina(rutinaUsuario);
+            mostrarImagenPerfil();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener los datos de la rutina.");
+            ex.printStackTrace();
+        }
+
+        //Ocultar barra de progreso.
+        cargando.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.atras){
-            finish();
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.guardar){
-            guardar();
+        switch (id){
+            case "atras_iv":
+                cambiarActivity("ir_a_ver_rutinas");
+                break;
 
-        } else if (id == R.id.imagen_casa){
-            cambiarActivity("ir_a_inicio");
+            case "guardar_iv":
+                guardarRutina();
+                break;
 
-        } else if (id == R.id.imagen_calendario) {
-            cambiarActivity("ir_a_rutina_semanal");
-
-        } else if (id == R.id.imagen_estadisticas) {
-            cambiarActivity("ir_a_estadisticas");
-
-        } else if (id == R.id.imagen_usuario) {
-            cambiarActivity("ir_a_perfil");
-
+            case "imagen_casa_menu":
+                cambiarActivity("ir_a_inicio");
+                break;
+            case "imagen_calendario_menu":
+                cambiarActivity("ir_a_rutina_semanal");
+                break;
+            case "imagen_estadisticas_menu":
+                cambiarActivity("ir_a_estadisticas");
+                break;
+            case "imagen_usuario_menu":
+                cambiarActivity("ir_a_perfil");
+                break;
         }
     }
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
-    }
-
-    private void cambiarActivity(String ira) {
-        cambiarAlerta(this, "Descartar cambios", "¿Desea descartar los cambios no guradados?", ira);
-    }
 
 
-    private void mostrarSemana(TablaRutinasUsuario rutina){
+    //Métodos para mostrar los datos de la rutina.
+    private void mostrarRutina(TablaRutinaUsuario rutina){
+
         if(rutina.getInformacion() != null){
-            nombre.setText(rutina.getInformacion().getNombre());
+            nombreET.setText(rutina.getInformacion().getNombre());
         }
+
+        mostrarSemana(rutina);
+    }
+    private void mostrarSemana(TablaRutinaUsuario rutina){
+        //Obtenemos los colores de los músculos del usuario.
         firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
+            public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
+                HashMap<String, ColoresMusculoUsuario> musculosHM = new HashMap<>();
 
-                for (TablaMusculosUsuario musculo : musculosUsuarios){
+                for (TablaMusculoUsuario musculo : musculosUsuarios){
                     musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
                 }
-                recyclerView.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
-                adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutina, musculosHM);
-                recyclerView.setAdapter(adaptador);
+
+                //Mostramos la semana desde un adaptador.
+                CrearRutinasAdaptador adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutina, musculosHM);
+                diasRV.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
+                diasRV.setAdapter(adaptador);
             }
         });
     }
 
-    private void guardar(){
+
+    //Método para guardar la rutina.
+    private void guardarRutina(){
+        String nombreRutina = nombreET.getText().toString();
         boolean nueva = false;
-        if(nombre.getText().toString().equals("")){
-            MostratToast.mostrarToast(this, "Escribe un nombre de rutina");
+        TablaInfoRutinaUsuario infoRutinaUsuario;
+
+        if(nombreRutina.equals("")){
+            mostrarToast("Escribe un nombre de rutina");
+
         }else{
+            //Comprobar si es una creación o modificación de rutina.
             if (rutinaUsuario.getInformacion() == null){
                 nueva = true;
-            }
-            rutinaUsuario.setInformacion(new TablaInfoRutinasUsuario(nombre.getText().toString()));
-            if(nueva){
-                if(firebaseManager.agregarRutina(this, rutinaUsuario)){
-                    MostratToast.mostrarToast(this, "Rutina creada correctamente");
-                    finish();
-                    cambiarActivity(VerRutinas.class);
-
-                }else {
-                    MostratToast.mostrarToast(this, "Error al crear la rutina");
-                }
+                infoRutinaUsuario = new TablaInfoRutinaUsuario(nombreRutina);
             }else{
-                if(firebaseManager.actualizarRutina(this, rutinaUsuario)){
-                    MostratToast.mostrarToast(this, "Rutina actualizada correctamente");
-                    finish();
-                    cambiarActivity(VerRutinas.class);
+                infoRutinaUsuario = rutinaUsuario.getInformacion();
+                infoRutinaUsuario.setNombre(nombreRutina);
+            }
+            rutinaUsuario.setInformacion(infoRutinaUsuario);
 
-                }else {
-                    MostratToast.mostrarToast(this, "Error al actualizar la rutina");
-                }
+            //Si no existe la rutina se creará.
+            if(nueva){
+                crearRutina();
+
+            //Si ya existe la rutina se actualizarán sus datos.
+            }else{
+                actualizarRutina();
             }
         }
+    }
+
+
+    //Método para crear la rutina.
+    private void crearRutina(){
+        firebaseManager.agregarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+                if (accionRealizada) {
+                    mostrarToast("Rutina creada correctamente");
+                    finish();
+                    cambiarActivity();
+                } else {
+                    mostrarToast("Error al crear la rutina");
+                }
+            }
+        });
+    }
+
+
+    //Método para actualizar la rutina.
+    private void actualizarRutina(){
+        firebaseManager.actualizarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+                if (accionRealizada) {
+                    mostrarToast("Rutina actualizada correctamente");
+                    finish();
+                    cambiarActivity();
+                } else {
+                    mostrarToast("Error al actualizar la rutina");
+                }
+            }
+        });
+    }
+
+
+    //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    private void mostrarImagenPerfil(){
+        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+            @Override
+            public void onCallback(TablaPerfil perfil) {
+                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                    Imagenes.urlImagenPerfil = perfil.getImagen();
+                    Imagenes.mostrarImagenPerfil(CrearRutinas.this, imagenPerfilMenu);
+                }
+
+            }
+        });
+
+    }
+
+
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity() {
+        CambiarActivity.cambiar(this, VerRutinas.class);
+    }
+    private void cambiarActivity(String ira) {
+        CambiarActivity.cambiar(this, "Descartar cambios", "¿Desea descartar los cambios no guardados?", ira);
+    }
+
+
+    //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 
 

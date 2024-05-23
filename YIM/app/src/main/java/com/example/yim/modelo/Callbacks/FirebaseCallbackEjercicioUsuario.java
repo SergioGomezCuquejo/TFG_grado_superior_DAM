@@ -1,8 +1,8 @@
 package com.example.yim.modelo.Callbacks;
 
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 
 public interface FirebaseCallbackEjercicioUsuario {
-    void onCallback(TablaEjerciciosUsuario ejercicio);
+    void onCallback(TablaEjercicioUsuario ejercicio);
 }
 

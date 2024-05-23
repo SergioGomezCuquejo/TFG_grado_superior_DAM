@@ -12,18 +12,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaSeries;
+import com.example.yim.modelo.tablas.TablaSerie;
 
 import java.util.ArrayList;
 
 
 public class HistorialAdaptador extends RecyclerView.Adapter<HistorialAdaptador.HistorialViewHolder> {
     private final ArrayList<String> dias;
-    private final ArrayList<TablaSeries> series;
+    private final ArrayList<TablaSerie> series;
     private final Context context;
     private int posicionDia;
 
-    public HistorialAdaptador(Context context, ArrayList<String> dias, ArrayList<TablaSeries> series) {
+    public HistorialAdaptador(Context context, ArrayList<String> dias, ArrayList<TablaSerie> series) {
         this.dias = dias;
         this.series = series;
         this.context = context;
@@ -41,7 +41,7 @@ public class HistorialAdaptador extends RecyclerView.Adapter<HistorialAdaptador.
     @SuppressLint({"SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull HistorialViewHolder holder, int position) {
-        TablaSeries serie = series.get(position);
+        TablaSerie serie = series.get(position);
         String coste = serie.getCoste();
         int color;
 

@@ -2,39 +2,28 @@ package com.example.yim.controlador.Adaptadores;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
-import com.example.yim.modelo.tablas.TablaLogros;
-import com.example.yim.modelo.tablas.TablaLogrosUsuario;
+import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.vista.PopupLogros;
-import com.example.yim.vista.vista.PopupVerEjerciciosCreados;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class LogrosAdaptador extends RecyclerView.Adapter<LogrosAdaptador.LogrosViewHolder> {
-    private ArrayList<TablaLogrosUsuario> logrosUsuario;
+    private ArrayList<TablaLogroUsuario> logrosUsuario;
     private Context context;
 
-    public LogrosAdaptador(Context context, ArrayList<TablaLogrosUsuario> logrosUsuario) {
+    public LogrosAdaptador(Context context, ArrayList<TablaLogroUsuario> logrosUsuario) {
         this.context = context;
         this.logrosUsuario = logrosUsuario;
     }
@@ -50,7 +39,7 @@ public class LogrosAdaptador extends RecyclerView.Adapter<LogrosAdaptador.Logros
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull LogrosViewHolder holder, int position) {
-        TablaLogrosUsuario logro = logrosUsuario.get(position);
+        TablaLogroUsuario logro = logrosUsuario.get(position);
 
         holder.logro.setOnClickListener(new View.OnClickListener() {
             @Override

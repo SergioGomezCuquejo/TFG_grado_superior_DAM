@@ -1,14 +1,14 @@
 package com.example.yim.modelo.tablas;
 
-public class TablaEstadisticas {
+public class TablaEstadistica {
     private int peso;
     private int repeticiones;
     private int semana;
 
-    public TablaEstadisticas() {
+    public TablaEstadistica() {
     }
 
-    public TablaEstadisticas(int peso, int repeticiones, int semana) {
+    public TablaEstadistica(int peso, int repeticiones, int semana) {
         this.peso = peso;
         this.repeticiones = repeticiones;
         this.semana = semana;

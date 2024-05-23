@@ -21,14 +21,15 @@ import com.example.yim.controlador.Adaptadores.EstadisticasAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
-import com.example.yim.modelo.tablas.TablaMusculosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Estadisticas extends AppCompatActivity implements View.OnClickListener {
+    //todo hacer este, este petaba acuerdate
     FirebaseManager firebaseManager;
     ImageButton buscar;
     Spinner tipo;
@@ -56,10 +57,10 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         scrollView = findViewById(R.id.scrollView);
         noEstadisticasTV = findViewById(R.id.no_estadisticas_tv);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
 
         //Listeners
         buscar.setOnClickListener(this);
@@ -86,16 +87,16 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imagen_casa){
+        if (id == R.id.imagen_casa_menu){
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
+        } else if (id == R.id.imagen_calendario_menu) {
             cambiarActivity(RutinaSemanal.class);
 
-        } else if (id == R.id.imagen_estadisticas) {
+        } else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(this.getClass());
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         } else if (id == R.id.buscar) {
@@ -111,7 +112,7 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
     public void obtenerEjercicios(){
         firebaseManager.obtenerEjerciciosUsuarioConEstadisticas(this, new FirebaseCallbackEjerciciosUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaEjerciciosUsuario> ejerciciosUsuarios) {
+            public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
                 if(ejerciciosUsuarios != null && ejerciciosUsuarios.size() > 0){
                     obtenerMusculos(ejerciciosUsuarios);
                 }else{
@@ -122,12 +123,12 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public void obtenerMusculos(ArrayList<TablaEjerciciosUsuario> ejercicios){
+    public void obtenerMusculos(ArrayList<TablaEjercicioUsuario> ejercicios){
         firebaseManager.obtenerMusculosUsuario(Estadisticas.this, new FirebaseCallbackMusculosUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaMusculosUsuario> musculosUsuarios) {
+            public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
 
-                for (TablaMusculosUsuario musculo : musculosUsuarios){
+                for (TablaMusculoUsuario musculo : musculosUsuarios){
                     musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));

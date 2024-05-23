@@ -1,7 +1,6 @@
 package com.example.yim.controlador.Adaptadores;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -17,21 +16,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdaptador.CrearRutinasViewHolder> {
-    private TablaRutinasUsuario rutinasUsuario;
+    private TablaRutinaUsuario rutinasUsuario;
     private Context context;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
     HashMap<String, ColoresMusculoUsuario> musculosSemana;
 
-    public CrearRutinasAdaptador(Context context, TablaRutinasUsuario rutinasUsuario, HashMap<String, ColoresMusculoUsuario> musculosHM) {
+    public CrearRutinasAdaptador(Context context, TablaRutinaUsuario rutinasUsuario, HashMap<String, ColoresMusculoUsuario> musculosHM) {
         this.context = context;
         this.rutinasUsuario = rutinasUsuario;
         this.musculosHM = musculosHM;

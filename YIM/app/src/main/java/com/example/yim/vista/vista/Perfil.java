@@ -79,10 +79,10 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         logros = findViewById(R.id.logros);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
         imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
 
@@ -154,7 +154,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case "cerrar_sesion":
-                CambiarActivity.cambiarAlerta(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
+                CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
                 break;
             case "imagen_casa":
                 cambiarActivity(Inicio.class);

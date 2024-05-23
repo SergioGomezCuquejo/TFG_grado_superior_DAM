@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class TablaHistorial implements Serializable, Comparable<TablaHistorial>  {
     private String dia;
-    private ArrayList<TablaSeries> series;
+    private ArrayList<TablaSerie> series;
 
     public TablaHistorial() {
     }
 
-    public TablaHistorial(String dia, ArrayList<TablaSeries> series) {
+    public TablaHistorial(String dia, ArrayList<TablaSerie> series) {
         this.dia = dia;
         this.series = series;
     }
@@ -24,11 +24,11 @@ public class TablaHistorial implements Serializable, Comparable<TablaHistorial> 
         this.dia = dia;
     }
 
-    public ArrayList<TablaSeries> getSeries() {
+    public ArrayList<TablaSerie> getSeries() {
         return series;
     }
 
-    public void setSeries(ArrayList<TablaSeries> series) {
+    public void setSeries(ArrayList<TablaSerie> series) {
         this.series = series;
     }
 

@@ -2,7 +2,7 @@ package com.example.yim.modelo.tablas;
 
 import java.io.Serializable;
 
-public class TablaInfoRutinasUsuario implements Serializable {
+public class TablaInfoRutinaUsuario implements Serializable {
     private boolean activo;
     private int dias_completados;
     private int dias_descansados;
@@ -18,12 +18,12 @@ public class TablaInfoRutinasUsuario implements Serializable {
     private int veces_activada;
     private int veces_completada;
 
-    public TablaInfoRutinasUsuario() {
+    public TablaInfoRutinaUsuario() {
     }
 
-    public TablaInfoRutinasUsuario(boolean activo, int dias_completados, int dias_descansados, int dias_descanso, int dias_totales,
-                                   int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String imagen,
-                                   int musculos_activos, int musculos_totales, String nombre, int veces_activada, int veces_completada) {
+    public TablaInfoRutinaUsuario(boolean activo, int dias_completados, int dias_descansados, int dias_descanso, int dias_totales,
+                                  int ejercicios_realizados, int ejercicios_sin_realizar, int ejercicios_totales, String imagen,
+                                  int musculos_activos, int musculos_totales, String nombre, int veces_activada, int veces_completada) {
         this.activo = activo;
         this.dias_completados = dias_completados;
         this.dias_descansados = dias_descansados;
@@ -40,7 +40,7 @@ public class TablaInfoRutinasUsuario implements Serializable {
         this.veces_completada = veces_completada;
     }
 
-    public TablaInfoRutinasUsuario(String nombre) {
+    public TablaInfoRutinaUsuario(String nombre) {
         this.nombre = nombre;
     }
 

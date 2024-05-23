@@ -11,14 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.VerRutinasAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaRutinasUsuario;
-import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 
 import java.util.ArrayList;
 
@@ -42,10 +40,10 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
 
         agregarRutina = findViewById(R.id.agregar_rutina);
 
-        imagen_casa = findViewById(R.id.imagen_casa);
-        imagen_calendario = findViewById(R.id.imagen_calendario);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas);
-        imagen_usuario = findViewById(R.id.imagen_usuario);
+        imagen_casa = findViewById(R.id.imagen_casa_menu);
+        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
+        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
+        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
 
         //Listeners
         agregarRutina.setOnClickListener(this);
@@ -64,16 +62,16 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
         if(id == R.id.agregar_rutina){
             cambiarActivity(CrearRutinas.class);
 
-        } else if (id == R.id.imagen_casa) {
+        } else if (id == R.id.imagen_casa_menu) {
             cambiarActivity(Inicio.class);
 
-        } else if (id == R.id.imagen_calendario) {
+        } else if (id == R.id.imagen_calendario_menu) {
             cambiarActivity(RutinaSemanal.class);
 
-        } else if (id == R.id.imagen_estadisticas) {
+        } else if (id == R.id.imagen_estadisticas_menu) {
             cambiarActivity(Estadisticas.class);
 
-        } else if (id == R.id.imagen_usuario) {
+        } else if (id == R.id.imagen_usuario_menu) {
             cambiarActivity(Perfil.class);
 
         }
@@ -86,7 +84,7 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
     private void mostrarRutinas(){
         firebaseManager.obtenerRutinasUsuario(this, new FirebaseCallbackRutinasUsuario() {
             @Override
-            public void onCallback(ArrayList<TablaRutinasUsuario> rutinas) {
+            public void onCallback(ArrayList<TablaRutinaUsuario> rutinas) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(VerRutinas.this));
                 adaptador = new VerRutinasAdaptador(VerRutinas.this, rutinas);
                 recyclerView.setAdapter(adaptador);

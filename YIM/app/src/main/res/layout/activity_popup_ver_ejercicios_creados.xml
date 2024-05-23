@@ -110,7 +110,7 @@
                     </FrameLayout>
 
                     <ImageView
-                        android:id="@+id/guardar"
+                        android:id="@+id/guardar_iv"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_marginEnd="10dp"
@@ -383,7 +383,7 @@
 
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/atras"
+                    android:id="@+id/atras_iv"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/atras"

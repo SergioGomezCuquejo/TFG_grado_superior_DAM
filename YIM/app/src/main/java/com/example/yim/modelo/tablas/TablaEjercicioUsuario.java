@@ -3,9 +3,9 @@ package com.example.yim.modelo.tablas;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TablaEjerciciosUsuario implements Serializable {
+public class TablaEjercicioUsuario implements Serializable {
     //private ArrayList<TablaHistorial> historial;
-    private ArrayList<TablaEstadisticas> estadisticas;
+    private ArrayList<TablaEstadistica> estadisticas;
     private String ID;
     private ArrayList<String> consejos_clave;
     private ArrayList<String> ejecucion;
@@ -25,13 +25,13 @@ public class TablaEjerciciosUsuario implements Serializable {
     private int veces_usado_en_rutina_activa;
     private int veces_usado_en_rutinas;
 
-    public TablaEjerciciosUsuario() {
+    public TablaEjercicioUsuario() {
     }
 
-    public TablaEjerciciosUsuario(ArrayList<TablaEstadisticas> estadisticas, /*ArrayList<TablaHistorial> historial, */ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
-                                  String imagen, ArrayList<String> musculos, String nombre, String notas, int peso_maximo, int peso_recomendado, int repeticiones_maximas,
-                                  int repeticiones_recomendadas, int series_maximas, int series_recomendadas, int tiempo_descanso, int veces_no_realizado, int veces_realizado,
-                                  int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
+    public TablaEjercicioUsuario(ArrayList<TablaEstadistica> estadisticas, /*ArrayList<TablaHistorial> historial, */ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
+                                 String imagen, ArrayList<String> musculos, String nombre, String notas, int peso_maximo, int peso_recomendado, int repeticiones_maximas,
+                                 int repeticiones_recomendadas, int series_maximas, int series_recomendadas, int tiempo_descanso, int veces_no_realizado, int veces_realizado,
+                                 int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
         this.estadisticas = estadisticas;
         //this.historial = historial;
         this.consejos_clave = consejos_clave;
@@ -53,7 +53,7 @@ public class TablaEjerciciosUsuario implements Serializable {
         this.veces_usado_en_rutinas = veces_usado_en_rutinas;
     }
 
-    public TablaEjerciciosUsuario(TablaEjercicios ejercicio) {
+    public TablaEjercicioUsuario(TablaEjercicio ejercicio) {
         consejos_clave = ejercicio.getConsejos_clave();
         ejecucion = ejercicio.getEjecucion();
         imagen = ejercicio.getImagen();
@@ -61,8 +61,8 @@ public class TablaEjerciciosUsuario implements Serializable {
         nombre = ejercicio.getNombre();
     }
 
-    public TablaEjerciciosUsuario(String imagen, ArrayList<String> musculos, String nombre, String notas,
-                                  int repeticiones_recomendadas, int series_recomendadas, int tiempo_descanso) {
+    public TablaEjercicioUsuario(String imagen, ArrayList<String> musculos, String nombre, String notas,
+                                 int repeticiones_recomendadas, int series_recomendadas, int tiempo_descanso) {
         this.imagen = imagen;
         this.musculos = musculos;
         this.nombre = nombre;
@@ -72,11 +72,11 @@ public class TablaEjerciciosUsuario implements Serializable {
         this.tiempo_descanso = tiempo_descanso;
     }
 
-    public ArrayList<TablaEstadisticas> getEstadisticas() {
+    public ArrayList<TablaEstadistica> getEstadisticas() {
         return estadisticas;
     }
 
-    public void setEstadisticas(ArrayList<TablaEstadisticas> estadisticas) {
+    public void setEstadisticas(ArrayList<TablaEstadistica> estadisticas) {
         this.estadisticas = estadisticas;
     }
 

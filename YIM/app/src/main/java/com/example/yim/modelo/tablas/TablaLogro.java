@@ -1,16 +1,16 @@
 package com.example.yim.modelo.tablas;
 
-public class TablaLogros {
+public class TablaLogro {
     private String descripcion;
     private String dificultad;
     private String imagen;
     private String titulo;
     private int total;
 
-    public TablaLogros() {
+    public TablaLogro() {
     }
 
-    public TablaLogros(String descripcion, String dificultad, String imagen, String titulo, int total) {
+    public TablaLogro(String descripcion, String dificultad, String imagen, String titulo, int total) {
         this.descripcion = descripcion;
         this.dificultad = dificultad;
         this.imagen = imagen;

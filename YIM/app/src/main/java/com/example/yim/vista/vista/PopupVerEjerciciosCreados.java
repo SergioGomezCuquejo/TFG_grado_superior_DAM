@@ -22,7 +22,7 @@ import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.controlador.ValidarDatos;
@@ -34,7 +34,7 @@ import java.util.HashSet;
 public class PopupVerEjerciciosCreados extends AppCompatActivity implements View.OnClickListener {
     FirebaseManager firebaseManager;
     Intent intent;
-    TablaEjerciciosUsuario ejercicioUsuario;
+    TablaEjercicioUsuario ejercicioUsuario;
     ViewFlipper viewFlipper, instrucionesVF;
     TextView instrucionesTV, informacionTV, imagenTV, musculosTV, pesoMaxTV, repeticionesMaxTV, serieNumTV,
             vecesRealizadoTV, vecesNoRealizadoTV, vecesEnRutinasTV, vecesEnRutinaActivaTV;
@@ -66,7 +66,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         firebaseManager = new FirebaseManager();
 
         intent = getIntent();
-        ejercicioUsuario = (TablaEjerciciosUsuario) intent.getSerializableExtra("ejercicioUsuario");
+        ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
 
         //Referencias de las vistas.
         viewFlipper = findViewById(R.id.viewFlipper);
@@ -75,7 +75,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         informacionTV = findViewById(R.id.informacion_tv);
         cerrar = findViewById(R.id.cerrar);
 
-        guardar = findViewById(R.id.guardar);
+        guardar = findViewById(R.id.guardar_iv);
         instrucionesVF = findViewById(R.id.instruciones_vf);
         imagenTV = findViewById(R.id.imagen_ejercicio);
         nombreET = findViewById(R.id.nombre_et);
@@ -86,7 +86,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         musculosTV = findViewById(R.id.musculos_tv);
         borrar = findViewById(R.id.borrar);
 
-        atras = findViewById(R.id.atras);
+        atras = findViewById(R.id.atras_iv);
         todoElCuerpo = findViewById(R.id.todo_el_cuerpo);
         trenSuperior = findViewById(R.id.tren_superior);
         espalda = findViewById(R.id.espalda);
@@ -211,16 +211,16 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
             if(datosGuardados){
                 finish();
             }else{
-                CambiarActivity.cambiarAlerta(this, "Cerrar sin guardar", "¿Dessea descartar los cambios?", "ir_a_ver_ejercicios");
+                CambiarActivity.cambiar(this, "Cerrar sin guardar", "¿Dessea descartar los cambios?", "ir_a_ver_ejercicios");
             }
 
-        } else if (id == R.id.guardar) {
+        } else if (id == R.id.guardar_iv) {
             guardarEjercicio();
 
         } else if (id == R.id.musculos_tv) {
             instrucionesVF.showNext();
 
-        } else if (id == R.id.atras) {
+        } else if (id == R.id.atras_iv) {
             if (musculos != null && !musculos.isEmpty()) {
                 musculosString = new StringBuilder();
                 for (String musculo : musculos) {
@@ -233,7 +233,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
             instrucionesVF.showPrevious();
 
         } else if (id == R.id.borrar) {
-                CambiarActivity.cambiarAlerta(this, "¿Eliminar ejercicio?", "", "ID" + ejercicioUsuario.getID() + "EJ");
+                CambiarActivity.cambiar(this, "¿Eliminar ejercicio?", "", "ID" + ejercicioUsuario.getID() + "EJ");
         }
     }
 
