@@ -375,7 +375,8 @@
                     android:textColor="@color/negro_oscuro"
                     android:text="Todo el cuerpo"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <CheckBox
                     android:id="@+id/tren_superior"
@@ -390,7 +391,8 @@
                     android:text="Tren superior"
                     android:textColor="@color/negro_oscuro"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <CheckBox
                     android:id="@+id/espalda"
@@ -405,7 +407,8 @@
                     android:text="Espalda"
                     android:textColor="@color/negro_oscuro"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <CheckBox
                     android:id="@+id/biceps"
@@ -420,7 +423,8 @@
                     android:text="Bíceps"
                     android:textColor="@color/negro_oscuro"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <CheckBox
                     android:id="@+id/cuadriceps"
@@ -435,7 +439,8 @@
                     android:text="Cuádriceps"
                     android:textColor="@color/negro_oscuro"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

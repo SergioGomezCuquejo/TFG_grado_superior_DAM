@@ -35,7 +35,19 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    //De un activity a EjerciciosDiarios.java pasandoo por parámetro  un objeto TablaDiaRutinaActiva.
+    //De un activity a PopupAlerta.java pasa pasando por parámetros Strings y un objeto TablaRutinaUsuario.
+    public static void cambiar(Context context, String titulo, String texto, String iraA, TablaRutinaUsuario rutinaUsuario, String accion) {
+        Intent intent = new Intent(context, PopupAlerta.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("texto", texto);
+        intent.putExtra("iraA", iraA);
+        intent.putExtra("rutinaUsuario", rutinaUsuario);
+        intent.putExtra("accion", accion);
+        context.startActivity(intent);
+
+    }
+
+    //De un activity a EjerciciosDiarios.java pasando por parámetro  un objeto TablaDiaRutinaActiva.
     public static void cambiar(Context context, TablaDiaRutinaActiva diaRutinaActiva) {
         Intent intent = new Intent(context, EjerciciosDiarios.class);
         intent.putExtra("diaRutinaActiva", diaRutinaActiva);
@@ -54,6 +66,15 @@ public class CambiarActivity {
     public static void cambiar(Context context, Class<?> activity, TablaRutinaUsuario rutinaUsuario) {
         Intent intent = new Intent(context, activity);
         intent.putExtra("rutinaUsuario", rutinaUsuario);
+        context.startActivity(intent);
+    }
+
+    //De un activity a otro pasando por parámetros un objeto TablaRutinaUsuario, un día y un HashMap de String y objeto ColoresMusculoUsuario.
+    public static void cambiar(Context context, Class<?> activity, TablaRutinaUsuario rutinaUsuario, int dia, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
+        Intent intent = new Intent(context, activity);
+        intent.putExtra("rutinaUsuario", rutinaUsuario);
+        intent.putExtra("dia", dia);
+        intent.putExtra("musculosSemana", musculosSemana);
         context.startActivity(intent);
     }
 
@@ -78,27 +99,10 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    public static void cambiar(Context context, TablaRutinaUsuario rutinaUsuario, int dia, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
-        Intent intent = new Intent(context, EjerciciosRutinas.class);
-        intent.putExtra("rutinaUsuario", rutinaUsuario);
-        intent.putExtra("dia", dia);
-        intent.putExtra("musculosSemana", musculosSemana);
-        context.startActivity(intent);
-    }
 
 
 
 
-    public static void cambiar(Context context, String titulo, String texto, String iraA, TablaRutinaUsuario rutinaUsuario, String accion) {
-        Intent intent = new Intent(context, PopupAlerta.class);
-        intent.putExtra("titulo", titulo);
-        intent.putExtra("texto", texto);
-        intent.putExtra("iraA", iraA);
-        intent.putExtra("rutinaUsuario", rutinaUsuario);
-        intent.putExtra("accion", accion);
-        context.startActivity(intent);
-
-    }
 
 
 }

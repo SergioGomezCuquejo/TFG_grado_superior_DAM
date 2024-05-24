@@ -1,7 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -11,12 +9,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
@@ -25,24 +23,23 @@ import com.example.yim.vista.controlador.MostratToast;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class PopupMusculos extends AppCompatActivity implements View.OnClickListener {
-    FirebaseManager firebaseManager;
-    Intent intent;
-    TablaMusculoUsuario musculoUsuario;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    private TablaMusculoUsuario musculoUsuario;
     ImageView cancelar, guardar;
-    EditText musculo;
     LinearLayout color_fondo, color_letras;
-    TextView color_fondo_tv, color_letras_tv;
-    //Button borrar;
-    int colorFondo, colorLetras;
+    TextView musculoTV, color_fondo_tv, color_letras_tv;
     TextView ejercicosEnRutinaActiva, ejerciciosRealizados, ejerciciosSinRealizar, ejerciciosTotales, ejercicosEnRutinas;
+    int colorFondo, colorLetras;
     boolean datosCambiados;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_musculos);
+        setContentView(R.layout.popup_musculos);
 
-        //Cambiar el tamaño de la pantalla para que sea como un popup
+        //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
@@ -51,13 +48,14 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
-        firebaseManager = new FirebaseManager();
 
-        intent = getIntent();
+        //Inicializar instancias.
+        firebaseManager = new FirebaseManager();
+        Intent intent = getIntent();
         musculoUsuario = (TablaMusculoUsuario) intent.getSerializableExtra("musculoUsuario");
 
 
-        //Referencias de las vistas
+        //Referencias de las vistas.
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar_iv);
 
@@ -67,74 +65,115 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         ejerciciosTotales = findViewById(R.id.ejercicios_totales);
         ejercicosEnRutinas = findViewById(R.id.ejercicos_en_rutinas);
 
-        musculo = findViewById(R.id.musculo);
+        musculoTV = findViewById(R.id.musculo_tv);
         color_fondo = findViewById(R.id.color_fondo);
         color_fondo_tv = findViewById(R.id.color_fondo_tv);
-        //borrar = findViewById(R.id.borrar);
         color_letras = findViewById(R.id.color_letras);
         color_letras_tv = findViewById(R.id.color_letras_tv);
 
 
-        //Listeners
+        //Listeners.
         cancelar.setOnClickListener(this);
         guardar.setOnClickListener(this);
         color_fondo.setOnClickListener(this);
         color_letras.setOnClickListener(this);
-        //borrar.setOnClickListener(this);
 
 
-        mostrarDatos();
-        datosCambiados = false;
+        //Mostrar datos.
+        try{
+            mostrarDatos();
+            datosCambiados = false;
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los músculos.");
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.cancelar){
-            if(datosCambiados){
-                cambiarActivity( "Descartar cambios.",
-                        "¿Desea descartar los cambios no guardados?");
-            }else{
-                finish();
-            }
+    public void onClick(View view) {String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.guardar_iv) {
-
-            if(datosCambiados){
-                musculoUsuario.setColor_fondo("#" + Integer.toHexString(colorFondo).toUpperCase());
-                musculoUsuario.setColor_fuente("#" + Integer.toHexString(colorLetras).toUpperCase());
-
-                if(firebaseManager.actualizarColoresMusculosUsuario(this, musculoUsuario.getID(),
-                        musculoUsuario.getColor_fondo(), musculoUsuario.getColor_fuente())){
-                    MostratToast.mostrarToast(this, "Datos guardados correctamente.");
-                    finish();
+        switch (id) {
+            case "cancelar":
+                if(datosCambiados){
+                    cambiarActivity();
                 }else{
-                    MostratToast.mostrarToast(this, "error");
+                    finish();
                 }
-            }else{
-                MostratToast.mostrarToast(this, "No hay cambios que guardar");
-            }
+                break;
+            case "guardar_iv":
 
-        } else if (id == R.id.color_fondo) {
-            cambiarColor("fondo", colorFondo);
+                if(datosCambiados){
+                    musculoUsuario.setColor_fondo("#" + Integer.toHexString(colorFondo).toUpperCase());
+                    musculoUsuario.setColor_fuente("#" + Integer.toHexString(colorLetras).toUpperCase());
 
-        } else if (id == R.id.color_letras) {
-            cambiarColor("letras", colorLetras);
+                    actualizarMusculo(musculoUsuario);
+                }else{
+                    mostrarToast("No hay cambios que guardar");
+                }
+                break;
 
-        } /*else if (id == R.id.borrar) {
-            cambiarActivity("Borrar músculo.",
-                    "¿Desea eliminar el músculo 'Biceps'?");
+            case "color_fondo":
+                cambiarColor("fondo", colorFondo);
+                break;
 
-        }*/
+            case "color_letras":
+                cambiarColor("letras", colorLetras);
+                break;
+        }
     }
 
-    private void cambiarActivity(String titulo, String texto) {
-        CambiarActivity.cambiar(this, titulo, texto, "ir_a_musculos");
+
+    //Método para mostrar toda la información del músculo.
+    private void mostrarDatos(){
+        musculoTV.setText(musculoUsuario.getNombre());
+        musculoTV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculoUsuario.getColor_fondo())));
+        musculoTV.setTextColor(Color.parseColor(musculoUsuario.getColor_fuente()));
+
+        color_fondo_tv.setText(musculoUsuario.getColor_fondo());
+        colorFondo = Color.parseColor(musculoUsuario.getColor_fondo());
+        color_fondo_tv.setTextColor(colorFondo);
+
+        color_letras_tv.setText(musculoUsuario.getColor_fuente());
+        colorLetras = Color.parseColor(musculoUsuario.getColor_fuente());
+        color_letras_tv.setTextColor(colorLetras);
+
+        ejercicosEnRutinaActiva.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinaActual()));
+        ejerciciosRealizados.setText(String.valueOf(musculoUsuario.getEjercicios_realizados()));
+        ejerciciosSinRealizar.setText(String.valueOf(musculoUsuario.getEjercicios_sin_realizar()));
+        ejerciciosTotales.setText(String.valueOf(musculoUsuario.getEjercicios_totales()));
+        ejercicosEnRutinas.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinas()));
+
     }
 
 
+    //Método para actualizar el músculo
+    private void actualizarMusculo(TablaMusculoUsuario musculo){
+        try{
+            firebaseManager.actualizarMusculoUsuario(this, musculo, new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if(accionRealizada){
+                        mostrarToast("Datos guardados correctamente");
+                        finish();
+                    }else{
+                        mostrarToast("No se ha podido actualizar el músculo correctamente");
+                    }
+
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al actualizar el músculo.");
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    //Método para cambiar el color de fondo y el de las letras.
     @SuppressLint("ResourceType")
-    public void cambiarColor(String cambiar, int defaultColor){
+    private void cambiarColor(String cambiar, int defaultColor){
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, defaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -145,13 +184,15 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 if(cambiar.equals("fondo")){
-                    musculo.setBackgroundTintList(ColorStateList.valueOf(color));
+                    musculoTV.setBackgroundTintList(ColorStateList.valueOf(color));
                     colorFondo = color;
                     color_fondo_tv.setText("#" + Integer.toHexString(color).toUpperCase());
+                    color_fondo_tv.setTextColor(color);
                 } else if (cambiar.equals("letras")) {
-                    musculo.setTextColor(color);
+                    musculoTV.setTextColor(color);
                     colorLetras = color;
                     color_letras_tv.setText("#" + Integer.toHexString(color).toUpperCase());
+                    color_letras_tv.setTextColor(color);
                 }
                 datosCambiados = true;
             }
@@ -159,21 +200,16 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         ambilWarnaDialog.show();
     }
 
-    private void mostrarDatos(){
-        musculo.setText(musculoUsuario.getNombre());
-        musculo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(musculoUsuario.getColor_fondo())));
-        musculo.setTextColor(Color.parseColor(musculoUsuario.getColor_fuente()));
 
-        color_fondo_tv.setText(musculoUsuario.getColor_fondo());
-        colorFondo = Color.parseColor(musculoUsuario.getColor_fondo());
-        color_letras_tv.setText(musculoUsuario.getColor_fuente());
-        colorLetras = Color.parseColor(musculoUsuario.getColor_fuente());
 
-        ejercicosEnRutinaActiva.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinaActual()));
-        ejerciciosRealizados.setText(String.valueOf(musculoUsuario.getEjercicios_realizados()));
-        ejerciciosSinRealizar.setText(String.valueOf(musculoUsuario.getEjercicios_sin_realizar()));
-        ejerciciosTotales.setText(String.valueOf(musculoUsuario.getEjercicios_totales()));
-        ejercicosEnRutinas.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinas()));
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity() {
+        CambiarActivity.cambiar(this, "Descartar cambios.", "¿Desea descartar los cambios no guardados?", "ir_a_musculos");
+    }
 
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

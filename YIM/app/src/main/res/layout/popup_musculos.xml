@@ -52,10 +52,11 @@
         android:paddingRight="20dp"
         tools:ignore="UselessParent">
 
-        <EditText
-            android:id="@+id/musculo"
+        <TextView
+            android:id="@+id/musculo_tv"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:autofillHints="Musculo"
             android:background="@drawable/_style2_borde_blanco_10"
             android:backgroundTintMode="add"
             android:fontFamily="@font/merriweather_light"
@@ -64,9 +65,7 @@
             android:textColor="@color/negro_oscuro"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize"
-            android:autofillHints="Musculo"
-            android:inputType="text" />
+            tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize,TextContrastCheck" />
     </LinearLayout>
 
     <ScrollView
@@ -184,6 +183,7 @@
                     android:id="@+id/color_letras_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1.5"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="right"
@@ -404,22 +404,6 @@
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
-
-            <!--
-            <Button
-                android:id="@+id/borrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_light"
-                android:layout_marginTop="30dp"
-                android:padding="15dp"
-                android:background="@drawable/_style_borde_rojo"
-                android:textColor="@color/blanco"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:text="@string/eliminar_musculo" />
-                -->
-
 
         </LinearLayout>
     </ScrollView>

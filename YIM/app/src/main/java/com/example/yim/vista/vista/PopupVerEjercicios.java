@@ -19,25 +19,26 @@ import android.widget.ViewFlipper;
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.PopupVerEjerciciosAdaptador;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.vista.controlador.MostratToast;
 
 public class PopupVerEjercicios extends AppCompatActivity implements View.OnClickListener {
-    Intent intent;
-    TablaEjercicioUsuario ejercicioUsuario;
+
+    //Variables de instancias.
+    private TablaEjercicioUsuario ejercicioUsuario;
     TextView instruciones, informacion;
     ImageView cerrar;
     ViewFlipper viewFlipper;
-    int flipperActivo;
     ImageView imagen;
     TextView nombre, musculosTV, peso, repeticiones, serieNum, vecesRealizado, vecesNoRealizado, vecesEnRutinas, vecesEnRutinaActiva;
     RecyclerView ejecucion, consejos;
-    PopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
+    int flipperActivo;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_ver_ejercicios);
+        setContentView(R.layout.ver_ejercicios);
 
-        //Cambiar el tamaño de la pantalla para que sea como un popup
+        //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
@@ -47,10 +48,21 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         getWindow().setLayout((int)(ancho * 0.95), (int) (alto * 0.85));
 
 
-        intent = getIntent();
-        ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+        //Inicializar instancias.
+        Intent intent = getIntent();
+        flipperActivo  = 1;
 
-        //Referencias de las vistas
+        //Obtener la rutina que se ha seleccionado.
+        if(intent.hasExtra("ejercicioUsuario")) {
+            ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+
+        }else {
+            mostrarToast("Error al obtener el ejercicio");
+            finish();
+        }
+
+
+        //Referencias de las vistas.
         instruciones = findViewById(R.id.instruciones);
         informacion = findViewById(R.id.informacion);
         cerrar = findViewById(R.id.cerrar);
@@ -71,7 +83,8 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         vecesEnRutinas = findViewById(R.id.veces_en_rutinas);
         vecesEnRutinaActiva = findViewById(R.id.veces_en_rutina_activa);
 
-        //Listeners
+
+        //Listeners.
         instruciones.setOnClickListener(this);
         cerrar.setOnClickListener(this);
         informacion.setOnClickListener(this);
@@ -79,40 +92,56 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
 
         //Poner por defecto la opción de instrucciones
         cambiarColores(instruciones, R.color.fondo_oscuro, R.color.blanco);
-        flipperActivo  = 1;
 
 
-        mostrarDatos();
+        //Mostrar datos.
+        try{
+            mostrarDatos();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los datos del ejercicio.");
+            ex.printStackTrace();
+        }
 
     }
 
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.instruciones && flipperActivo != 1) {
-            flipperActivo = 1;
-            viewFlipper.showNext();
+        String id = getResources().getResourceEntryName(view.getId());
 
-            cambiarColores(instruciones, R.color.fondo_oscuro, R.color.blanco);
-            cambiarColores(informacion, R.color.fondo_clarito, R.color.negro_clarito);
+        switch (id){
+            case "instruciones":
+                if(flipperActivo != 1){
+                    flipperActivo = 1;
+                    viewFlipper.showNext();
 
-        } else if (id == R.id.informacion && flipperActivo != 2) {
-            flipperActivo = 2;
-            viewFlipper.showPrevious();
+                    cambiarColores(instruciones, R.color.fondo_oscuro, R.color.blanco);
+                    cambiarColores(informacion, R.color.fondo_clarito, R.color.negro_clarito);
+                }
+                break;
 
-            cambiarColores(informacion, R.color.fondo_oscuro, R.color.blanco);
-            cambiarColores(instruciones, R.color.fondo_clarito, R.color.negro_clarito);
+            case "informacion":
+                if(flipperActivo != 2){
+                    flipperActivo = 2;
+                    viewFlipper.showPrevious();
 
-        } else if (id == R.id.cerrar) {
-            finish();
+                    cambiarColores(informacion, R.color.fondo_oscuro, R.color.blanco);
+                    cambiarColores(instruciones, R.color.fondo_clarito, R.color.negro_clarito);
+                }
+                break;
 
+            case "cerrar":
+                finish();
+                break;
         }
     }
 
+
+    //Método para cambiar los colores de la vista.
     public void cambiarColores(View view, @ColorRes int colorFondoRes, @ColorRes int colorLetrasRes){
         Drawable shape;
         TextView textView = (TextView) view;
 
-        // Obtener colores de los recursos
+        // Obtener colores de los recursos.
         int colorFondo = ContextCompat.getColor(this, colorFondoRes);
         int colorLetras = ContextCompat.getColor(this, colorLetrasRes);
 
@@ -126,8 +155,10 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
     }
 
 
+    //Método para mostrar la información del ejercicio.
     public void mostrarDatos(){
         String musculos = "";
+        PopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
 
         imagen.setImageResource(R.drawable.curl_realizar);
 
@@ -138,6 +169,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         }
         musculos = musculos.substring(0, musculos.length() - 2);
         musculosTV.setText(musculos);
+
 
         ejecucion.setLayoutManager(new LinearLayoutManager(this));
         adaptadorEjecucion = new PopupVerEjerciciosAdaptador(this, ejercicioUsuario.getEjecucion());
@@ -155,6 +187,12 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         vecesEnRutinas.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutinas()));
         vecesEnRutinaActiva.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutina_activa()));
 
+    }
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 
 }

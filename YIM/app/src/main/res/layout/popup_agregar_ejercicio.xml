@@ -35,7 +35,7 @@
                 android:inputType="text"
                 android:padding="10dp"
                 android:hint="Nombre del ejercicio"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
             <ImageButton
                 android:id="@+id/imageButton"

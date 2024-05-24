@@ -18,6 +18,7 @@ import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.vista.EjerciciosRutinas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
         holder.dia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CambiarActivity.cambiar(context, rutinasUsuario, dia, musculosSemana);
+                CambiarActivity.cambiar(context, EjerciciosRutinas.class, rutinasUsuario, dia, musculosSemana);
             }
         });
 

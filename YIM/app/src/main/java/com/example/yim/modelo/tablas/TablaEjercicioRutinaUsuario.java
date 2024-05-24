@@ -24,6 +24,15 @@ public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<Tab
         this.tiempo_descanso = tiempo_descanso;
     }
 
+    public TablaEjercicioRutinaUsuario(TablaEjercicioUsuario ejercicio, int posicion) {
+        this.musculos = ejercicio.getMusculos();
+        this.nombre = ejercicio.getNombre();
+        this.posicion = posicion;
+        this.repeticiones = ejercicio.getRepeticiones_recomendadas();
+        this.series = ejercicio.getSeries_recomendadas();
+        this.tiempo_descanso = ejercicio.getTiempo_descanso();
+    }
+
     public String getID() {
         return ID;
     }

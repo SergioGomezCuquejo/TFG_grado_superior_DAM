@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
@@ -32,9 +33,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class PopupVerEjerciciosCreados extends AppCompatActivity implements View.OnClickListener {
-    FirebaseManager firebaseManager;
-    Intent intent;
-    TablaEjercicioUsuario ejercicioUsuario;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    private TablaEjercicioUsuario ejercicioUsuario;
     ViewFlipper viewFlipper, instrucionesVF;
     TextView instrucionesTV, informacionTV, imagenTV, musculosTV, pesoMaxTV, repeticionesMaxTV, serieNumTV,
             vecesRealizadoTV, vecesNoRealizadoTV, vecesEnRutinasTV, vecesEnRutinaActivaTV;
@@ -52,9 +54,9 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_ver_ejercicios_creados);
+        setContentView(R.layout.popup_ver_ejercicios_creados);
 
-        //Cambiar el tamaño de la pantalla para que sea como un popup
+        //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
@@ -63,10 +65,21 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         getWindow().setLayout((int)(ancho * 0.95), (int) (alto * 0.85));
 
-        firebaseManager = new FirebaseManager();
 
-        intent = getIntent();
-        ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+        //Inicializar instancias.
+        firebaseManager = new FirebaseManager();
+        Intent intent = getIntent();
+        flipperActivo  = 1;
+
+
+        //Obtener la rutina que se ha seleccionado.
+        if(intent.hasExtra("ejercicioUsuario")) {
+            ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+        }else{
+            mostrarToast("Error al obtener el ejercicio");
+            finish();
+        }
+
 
         //Referencias de las vistas.
         viewFlipper = findViewById(R.id.viewFlipper);
@@ -102,7 +115,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         vecesEnRutinaActivaTV = findViewById(R.id.veces_en_rutina_activa_tv);
 
 
-        //Listeners
+        //Listeners.
         guardar.setOnClickListener(this);
         instrucionesTV.setOnClickListener(this);
         informacionTV.setOnClickListener(this);
@@ -114,7 +127,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         //Poner por defecto la opción de instrucciones
         cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
-        flipperActivo  = 1;
+
 
         //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
         nombreET.addTextChangedListener(new TextWatcher() {
@@ -186,74 +199,105 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         biceps.setOnCheckedChangeListener(checkBoxListener);
         cuadriceps.setOnCheckedChangeListener(checkBoxListener);
 
-        mostrarDatos();
+        //Mostrar datos.
+        try{
+            mostrarDatos();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los datos del ejercicio.");
+            ex.printStackTrace();
+        }
 
     }
 
     @SuppressLint("SetTextI18n")
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.instruciones_tv && flipperActivo != 1) {
-            flipperActivo = 1;
-            viewFlipper.showNext();
+        String id = getResources().getResourceEntryName(view.getId());
 
-            cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
-            cambiarColores(informacionTV, R.color.fondo_clarito, R.color.negro_clarito);
+        switch (id){
+            case "instruciones_tv":
+                if(flipperActivo != 1) {
+                    flipperActivo = 1;
+                    viewFlipper.showNext();
 
-        } else if (id == R.id.informacion_tv && flipperActivo != 2) {
-            flipperActivo = 2;
-            viewFlipper.showPrevious();
-
-            cambiarColores(informacionTV, R.color.fondo_oscuro, R.color.blanco);
-            cambiarColores(instrucionesTV, R.color.fondo_clarito, R.color.negro_clarito);
-
-        } else if (id == R.id.cerrar) {
-            if(datosGuardados){
-                finish();
-            }else{
-                CambiarActivity.cambiar(this, "Cerrar sin guardar", "¿Dessea descartar los cambios?", "ir_a_ver_ejercicios");
-            }
-
-        } else if (id == R.id.guardar_iv) {
-            guardarEjercicio();
-
-        } else if (id == R.id.musculos_tv) {
-            instrucionesVF.showNext();
-
-        } else if (id == R.id.atras_iv) {
-            if (musculos != null && !musculos.isEmpty()) {
-                musculosString = new StringBuilder();
-                for (String musculo : musculos) {
-                    musculosString.append(musculo).append(", ");
+                    cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
+                    cambiarColores(informacionTV, R.color.fondo_clarito, R.color.negro_clarito);
                 }
-                musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
-            } else {
-                musculosTV.setText("Selecciona los músculos");
-            }
-            instrucionesVF.showPrevious();
+                break;
 
-        } else if (id == R.id.borrar) {
+            case "informacion_tv":
+                if(flipperActivo != 2) {
+                    flipperActivo = 2;
+                    viewFlipper.showPrevious();
+
+                    cambiarColores(informacionTV, R.color.fondo_oscuro, R.color.blanco);
+                    cambiarColores(instrucionesTV, R.color.fondo_clarito, R.color.negro_clarito);
+                }
+                break;
+
+            case "cerrar":
+                if(datosGuardados){
+                    finish();
+                }else{
+                    cambiarActivity();
+                }
+                break;
+
+            case "guardar_iv":
+                guardarEjercicio();
+                break;
+
+            case "musculos_tv":
+                instrucionesVF.showNext();
+                break;
+
+            case "atras_iv":
+                if (musculos != null && !musculos.isEmpty()) {
+                    musculosString = new StringBuilder();
+                    for (String musculo : musculos) {
+                        musculosString.append(musculo).append(", ");
+                    }
+                    musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
+                } else {
+                    musculosTV.setText("Selecciona los músculos");
+                }
+                instrucionesVF.showPrevious();
+                break;
+
+            case "borrar": //todo
                 CambiarActivity.cambiar(this, "¿Eliminar ejercicio?", "", "ID" + ejercicioUsuario.getID() + "EJ");
+                break;
         }
     }
 
+    //Método para obtener el nombre del músculo marcado.
     private String obtenerMusculo(int id) {
         String musculo = "";
-        if(id == R.id.todo_el_cuerpo){
-            musculo = "Todo el cuerpo";
-        } else if (id == R.id.tren_superior){
-            musculo = "Tren superior";
-        } else if (id == R.id.espalda) {
-            musculo = "Espalda";
-        } else if (id == R.id.biceps) {
-            musculo = "Bíceps";
-        } else if (id == R.id.cuadriceps) {
-            musculo = "Cuádriceps";
+
+        String idString = getResources().getResourceEntryName(id);
+
+        switch (idString){
+            case "todo_el_cuerpo":
+                musculo = "Todo el cuerpo";
+                break;
+            case "tren_superior":
+                musculo = "Tren superior";
+                break;
+            case "espalda":
+                musculo = "Espalda";
+                break;
+            case "biceps":
+                musculo = "Bíceps";
+                break;
+            case "cuadriceps":
+                musculo = "Cuádriceps";
+                break;
         }
 
         return musculo;
     }
 
+    //Método para marcar los músculos seleccionados.
     private void marcarMusculo(String musculoMarcado) {
         switch (musculoMarcado) {
             case "Todo el cuerpo":
@@ -275,11 +319,11 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     }
 
 
+    //Métodos para cambiar los colores de la vista.
     public void cambiarColores(View view, @ColorRes int colorFondoRes, @ColorRes int colorLetrasRes){
         Drawable shape;
         TextView textView = (TextView) view;
 
-        // Obtener colores de los recursos
         int colorFondo = ContextCompat.getColor(this, colorFondoRes);
         int colorLetras = ContextCompat.getColor(this, colorLetrasRes);
 
@@ -291,11 +335,12 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         }
         textView.setTextColor(colorLetras);
     }
-
     public void cambiarColores(View view, int color){
         ((TextView) view).setTextColor(color);
     }
 
+
+    //Método para mostrar la información el ejercicio.
     @SuppressLint("SetTextI18n")
     public void mostrarDatos(){
         imagenTV.setText(ejercicioUsuario.getImagen());
@@ -322,6 +367,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         vecesEnRutinaActivaTV.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutina_activa()));
     }
 
+    //Método para guardar los datos del ejercicio.
     public void guardarEjercicio(){
         imagenEjercicio = imagenTV.getText().toString();
 
@@ -378,15 +424,43 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
             ejercicioUsuario.setSeries_recomendadas(seriesEjercicio);
             ejercicioUsuario.setTiempo_descanso(descansoEjercicio);
 
-            if(firebaseManager.actualizarEjercicio(this, ejercicioUsuario)){
-                MostratToast.mostrarToast(this, "Datos guardados correctamente");
-                datosGuardados = true;
-            }else{
-                datosGuardados = false;
-            }
+            actualizarEjercicio(ejercicioUsuario);
         }else{
-            MostratToast.mostrarToast(this, "Completa todos los campos");
+            mostrarToast("Completa todos los campos");
         }
 
+    }
+    private void actualizarEjercicio( TablaEjercicioUsuario ejercicio){
+        try{
+            firebaseManager.actualizarEjercicioUsuario(this, ejercicio, new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada){
+                        mostrarToast("Datos guardados correctamente");
+                        datosGuardados = true;
+                    }else{
+                        mostrarToast("No se han podido guardar los datos correctamente");
+                        datosGuardados = false;
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener los músculos.");
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity() {
+        CambiarActivity.cambiar(this, "Cerrar sin guardar", "¿Desea descartar los cambios?", "ir_a_ver_ejercicios");
+    }
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

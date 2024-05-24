@@ -19,11 +19,13 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaInfoRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class PopupRutinas extends AppCompatActivity implements View.OnClickListener {
-    Intent intent;
-    TablaRutinaUsuario rutinaUsuario;
+
+    //Variables de instancias.
+    private TablaRutinaUsuario rutinaUsuario;
     ImageView cancelar, editar;
     ShapeableImageView imagen;
     LinearLayout activo_ll;
@@ -36,9 +38,9 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_rutinas);
+        setContentView(R.layout.popup_rutinas);
 
-        //Cambiar el tamaño de la pantalla para que sea como un popup
+        //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
@@ -47,12 +49,22 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
         getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
 
-        intent = getIntent();
-        rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
 
+        //Inicializar instancias.
+        Intent intent = getIntent();
         primeraVez = true;
 
-        //Referencias de las vistas
+
+        //Obtener la rutina que se ha seleccionado.
+        if(intent.hasExtra("diaRutinaActiva")) {
+            rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
+        }else {
+            mostrarToast("Errror al obtener la rutina");
+            finish();
+        }
+
+
+        //Referencias de las vistas.
         cancelar = findViewById(R.id.cancelar);
         editar = findViewById(R.id.editar);
 
@@ -72,16 +84,15 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         vecesActivada = findViewById(R.id.veces_activada);
         vecesCompletadas = findViewById(R.id.veces_completadas);
 
-
         borrar = findViewById(R.id.borrar);
 
-        //Listeners
+
+        //Listeners.
         cancelar.setOnClickListener(this);
         editar.setOnClickListener(this);
         borrar.setOnClickListener(this);
 
         activo_ll.setOnClickListener(this);
-
 
         activo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,36 +100,51 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                 cambiarActivo(estaActivo);
                 if(!primeraVez){
 
+                    //TODO
                     if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiar(PopupRutinas.this, "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "activar");
+                        cambiarActivity( "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "activar");
 
                     } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
-                        CambiarActivity.cambiar(PopupRutinas.this, "¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "ir_a_ver_rutinas", rutinaUsuario, "desactivar");
+                        cambiarActivity("¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "desactivar");
                     }
+                }else {
+                    primeraVez = false;
                 }
             }
         });
 
+        //Mostrar datos
+        try{
+            mostrarInfo();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los datos de la rutina.");
+            ex.printStackTrace();
+        }
         mostrarInfo();
-        primeraVez = false;
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.cancelar) {
-            finish();
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.editar) {
-            CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
+        switch (id){
+            case "cancelar":
+                finish();
+                break;
 
-        } else if (id == R.id.borrar) {
-            CambiarActivity.cambiar(this, "Borrar rutina.",
-                    "¿Desea eliminar la rutina '" + rutinaUsuario.getInformacion().getNombre() + "'?", "ID" + rutinaUsuario.getID() + "RU");
+            case "editar":
+                cambiarActivity(CrearRutinas.class, rutinaUsuario);
+                break;
 
+            case "borrar"://todo
+                CambiarActivity.cambiar(this, "Borrar rutina.",
+                        "¿Desea eliminar la rutina '" + rutinaUsuario.getInformacion().getNombre() + "'?", "ID" + rutinaUsuario.getID() + "RU");
+                break;
         }
     }
 
+    //Método para cambiar el botón en marcado o desmarcado.
     @SuppressLint("UseCompatLoadingForColorStateLists")
     public void cambiarActivo(boolean estaActivo){
         if(estaActivo){
@@ -131,6 +157,8 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    //Método para mostrar los datos de la rutina.
     private void mostrarInfo(){
         TablaInfoRutinaUsuario infoRutina = rutinaUsuario.getInformacion();
 
@@ -150,4 +178,20 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         vecesActivada.setText(String.valueOf(infoRutina.getVeces_activada()));
         vecesCompletadas.setText(String.valueOf(infoRutina.getVeces_completada()));
     }
+
+
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity, TablaRutinaUsuario rutinaUsuario) {
+        CambiarActivity.cambiar(this, activity, rutinaUsuario);
+    }
+    private void cambiarActivity(String titulo, String texto, String accion) {
+        CambiarActivity.cambiar(this, titulo, texto, "ir_a_ver_rutinas", rutinaUsuario, accion);
+    }
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
+    }
+
 }

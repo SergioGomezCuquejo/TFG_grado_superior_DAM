@@ -1,5 +1,7 @@
 package com.example.yim.vista.vista;
 
+import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.controlador.ValidarDatos;
@@ -22,7 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class InicioSesion extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth auth;
+
+    //Variables de instancias.
+    private FirebaseAuth auth;
     EditText email, contrasena;
     TextView error;
     Button iniciarSesion, registrarse;
@@ -36,7 +43,8 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         //Inicializar instancias.
         auth = FirebaseAuth.getInstance();
 
-        //Referencias de las vistas
+
+        //Referencias de las vistas.
         email = findViewById(R.id.email);
         contrasena = findViewById(R.id.contrasena);
 
@@ -45,55 +53,51 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         iniciarSesion = findViewById(R.id.iniciar_sesion);
         registrarse = findViewById(R.id.registrarse);
 
-        //Listeners
+
+        //Listeners.
         iniciarSesion.setOnClickListener(this);
         registrarse.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.iniciar_sesion) {
+        String id = getResources().getResourceEntryName(view.getId());
+
+        if (id.equals("iniciar_sesion")) {
             emailUsuario = email.getText().toString();
             contrasenaUsuario = contrasena.getText().toString();
 
             if(!camposVacios(emailUsuario, contrasenaUsuario)){
                 iniciarSesion(emailUsuario, contrasenaUsuario);
 
+            } else {
+                mostrarToast("Ingrese todos los datos");
             }
 
-        } else if (id == R.id.registrarse) {
+        } else if (id.equals("registrarse")) {
             cambiarActivity(RegistroSesion.class);
 
         }
     }
 
-    //Comprueba que todos los campos estén rellenos.
+    //Método para comprobar si los campos están o no vacios.
     private boolean camposVacios(String emailUsuario, String contrasenaUsuario){
-        boolean vacio;
-
-        if(!emailUsuario.isEmpty() && !contrasenaUsuario.isEmpty() ){
-            vacio = false;
-        }else {
-            vacio = true;
-            mostrarError("Complete todos los campos");
-        }
-
-        return vacio;
+        return emailUsuario.isEmpty() || contrasenaUsuario.isEmpty();
     }
 
-    //Iniciar sesión del usuario
+
+    //Método que comprueba si los datos son o no correctos.
     private void iniciarSesion(String emailUsuario, String contrasenaUsuario){
         try{
             boolean emailCorrecto = ValidarDatos.validarEmail(emailUsuario);
             boolean contrasenaCorrecta = ValidarDatos.validarContrasena(contrasenaUsuario);
 
-            if ( emailCorrecto /*&& contrasenaCorrecta*/){
+            if ( emailCorrecto && contrasenaCorrecta){
                 auth.signInWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            MostratToast.mostrarToast(InicioSesion.this, "Bienvenido.");
+                            mostrarToast("Bienvenido a YIM");
                             cambiarActivity(Inicio.class);
                         }
                     }
@@ -115,12 +119,13 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }catch (Exception ex){
-            MostratToast.mostrarToast(this, "Error al registrar sesión");
+            mostrarToast( "Error al inicciar sesión");
             ex.printStackTrace();
         }
     }
 
-    //Mostrar el error por la interfaz.
+
+    //Método para mostrar el error por la interfaz.
     private void mostrarError(String mensaje){
         if(error.getVisibility() == View.GONE ){
             error.setVisibility(View.VISIBLE);
@@ -128,6 +133,8 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         error.setText(mensaje);
     }
 
+
+    //Se comprueba si ha iniciado sesión anteriormente y, si es así se redirige al inicio.
     @Override
     protected void onStart() {
         super.onStart();
@@ -139,9 +146,15 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Cambiar a otra interfaz.
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity(Class<?> activity) {
-        finish();
-        CambiarActivity.cambiar(this, activity);
+        cambiar(this, activity);
     }
+
+
+    //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
+    }
+
 }

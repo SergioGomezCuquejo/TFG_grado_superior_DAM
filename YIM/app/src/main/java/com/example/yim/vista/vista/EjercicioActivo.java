@@ -66,7 +66,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     private int numEjercicio, numEjercicios, dia, serieActual;
     private CountDownTimer countDownTimer;
     private String costeHoy;
-    //TODO intentar cambiar de ejerccio al terminar las series
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
@@ -491,6 +491,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
         pesoET.setText("");
         repeticionesET.setText("");
     }
+
 
     //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
     private void mostrarImagenPerfil(){

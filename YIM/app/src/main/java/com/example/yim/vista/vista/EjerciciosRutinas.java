@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -249,7 +250,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
             case "agregar_ejercicio":
                 actualizarRutina();
 
-                cambiarActivity(PopupAgregarEjercicio.class, rutinaUsuario);
+                cambiarActivity(PopupAgregarEjercicio.class, musculosSemana);
                 break;
 
             case "musculo_elegido_izquierda":
@@ -414,6 +415,10 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
     private void cambiarActivity(Class<?> activity, TablaRutinaUsuario rutina) {
         CambiarActivity.cambiar(this, activity, rutina);
+    }
+
+    private void cambiarActivity(Class<?> activity, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
+        CambiarActivity.cambiar(this, activity, rutinaUsuario, dia, musculosSemana);
     }
 
     private void cambiarActivity(String ira) {

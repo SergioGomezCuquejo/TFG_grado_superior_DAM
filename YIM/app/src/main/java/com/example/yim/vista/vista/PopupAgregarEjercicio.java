@@ -13,31 +13,33 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.yim.R;
-import com.example.yim.controlador.Adaptadores.EjerciciosDiariosAdaptador;
 import com.example.yim.controlador.Adaptadores.PopupAgregarEjercicioAdaptador;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnClickListener {
 
     //Variables de instancias.
     private FirebaseManager firebaseManager;
+    private TablaRutinaUsuario rutinaUsuario;
+    private HashMap<String, ColoresMusculoUsuario> musculosSemana;
     ImageView cancelar;
     ProgressBar cargando;
     RecyclerView recyclerView;
+    int dia;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_agregar_ejercicio);
+        setContentView(R.layout.popup_agregar_ejercicio);
 
         //Cambiar el tamaño del activity.
         DisplayMetrics medidasVentana = new DisplayMetrics();
@@ -51,6 +53,17 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
 
         //Inicializar instancias.
         firebaseManager = new FirebaseManager();
+        Intent intent = getIntent();
+
+
+        //Obtener la rutina que se ha seleccionado.
+        if (intent.hasExtra("rutinaUsuario")) {
+            rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
+            dia = intent.getIntExtra("dia", 0);
+            musculosSemana = (HashMap<String, ColoresMusculoUsuario>) intent.getSerializableExtra("musculosSemana");
+        } else {
+            finish();
+        }
 
 
         //Referencias de las vistas.
@@ -79,21 +92,20 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.cancelar) {
+        String id = getResources().getResourceEntryName(view.getId());
+        if (id.equals("cancelar")) {
             finish();
         }
     }
 
-    //Todo recibir la rutina para si se le da a un ejercicio se agreue a los ejercicios y luego llevar a otra actividad para mostrar todo ;) <3
-    //Método parar mostrar los ejercicios disponibles.
+    //Método parar mostrar los ejercicios disponibles desde un adaptador.
     private void mostrarEjercicios(){
         firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
                 if(ejerciciosUsuarios.size() > 0) {
                     recyclerView.setLayoutManager(new LinearLayoutManager(PopupAgregarEjercicio.this));
-                    PopupAgregarEjercicioAdaptador adaptador = new PopupAgregarEjercicioAdaptador(PopupAgregarEjercicio.this, ejerciciosUsuarios);
+                    PopupAgregarEjercicioAdaptador adaptador = new PopupAgregarEjercicioAdaptador(PopupAgregarEjercicio.this, ejerciciosUsuarios, rutinaUsuario, dia , musculosSemana);
                     recyclerView.setAdapter(adaptador);
 
                 }else{
@@ -102,7 +114,6 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
             }
         });
     }
-
 
 
     //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)

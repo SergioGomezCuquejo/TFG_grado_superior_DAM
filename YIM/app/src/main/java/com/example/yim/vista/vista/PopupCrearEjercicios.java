@@ -1,8 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -22,6 +19,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
@@ -34,7 +32,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class PopupCrearEjercicios extends AppCompatActivity implements View.OnClickListener {
-    FirebaseManager firebaseManager;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
     ViewFlipper viewFlipper;
     ImageView cancelar, guardar, atras;
     FrameLayout imagenFL;
@@ -42,37 +42,34 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
     EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
     String inicialesNombre;
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
-    HashSet<String> musculos = new HashSet<>();
     StringBuilder musculosString;
     TablaEjercicioUsuario ejercicioUsuario;
     String imagenEjercicio, nombreEjercicio, notasEjercicio, musculosEjercicio;
     int descansoEjercicio, seriesEjercicio, repeticionesEjercicio;
-    ArrayList<String> musculosArray;
+    HashSet<String> musculos = new HashSet<>();
     boolean nombreVacio, musculosVacios, descansoVacio, seriesVacias, repeticionesVacias, datosGuardados;
 
     @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup_crear_ejercicios);
+        setContentView(R.layout.popup_crear_ejercicios);
 
-        firebaseManager = new FirebaseManager();
-        datosGuardados = false;
-
-        //Creación de variables.
-        DisplayMetrics medidasVentana;
-        int ancho, alto;
-
-        //Cambiar el tamaño de la pantalla para que sea como un popup
-        medidasVentana = new DisplayMetrics();
+        //Cambiar el tamaño del activity.
+        DisplayMetrics medidasVentana = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(medidasVentana);
 
-        ancho = medidasVentana.widthPixels;
-        alto = medidasVentana.heightPixels;
+        int ancho = medidasVentana.widthPixels;
+        int alto = medidasVentana.heightPixels;
 
         Window ventana = getWindow();
-        ventana.setLayout((int)(ancho), (int) (alto * 0.90));
+        getWindow().setLayout((ancho), (int) (alto * 0.90));
         ventana.setGravity(Gravity.BOTTOM);
+
+
+        //Inicializar instancias.
+        firebaseManager = new FirebaseManager();
+        datosGuardados = false;
 
 
         //Referencias de las vistas
@@ -139,7 +136,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         });
 
 
-        //Cambiar los checkBox al marcarse
+        //Cambiar los checkBox al marcarse.
         CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -187,65 +184,71 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.cancelar){
-            if(!datosGuardados){
-                cambiarActivity( "Descartar cambios.",
-                        "¿Desea descartar los cambios no guardados?");
-            }else{
-                finish();
-            }
-        } else if (id == R.id.guardar_iv) {
-            guardarEjercicio();
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.musculos_tv) {
-            viewFlipper.showNext();
-
-        } else if (id == R.id.atras_iv) {
-            if (musculos != null && !musculos.isEmpty()) {
-                musculosString = new StringBuilder();
-                for (String musculo : musculos) {
-                    musculosString.append(musculo).append(", ");
+        switch (id){
+            case "cancelar":
+                if(!datosGuardados){
+                    cambiarActivity();
+                }else{
+                    finish();
                 }
-                musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
-            } else {
-                musculosTV.setText("Selecciona los músculos");
-            }
-            viewFlipper.showPrevious();
+                break;
 
+            case "guardar_iv":
+                guardarEjercicio();
+                break;
+
+            case "musculos_tv":
+                viewFlipper.showNext();
+                break;
+
+            case "atras_iv":
+                if (musculos != null && !musculos.isEmpty()) {
+                    musculosString = new StringBuilder();
+                    for (String musculo : musculos) {
+                        musculosString.append(musculo).append(", ");
+                    }
+                    musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
+                } else {
+                    musculosTV.setText("Selecciona los músculos");
+                }
+                viewFlipper.showPrevious();
+                break;
         }
     }
 
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
-    }
 
-    private void cambiarActivity(String titulo, String texto) {
-        CambiarActivity.cambiar(this, titulo, texto, "ir_a_ejercicios");
-    }
-
-    public void cambiarColores(View view, int color){
-        ((TextView) view).setTextColor(color);
-    }
-
+    //Método para identificar el músculo marcado.
     private String obtenerMusculo(int id) {
         String musculo = "";
-        if(id == R.id.todo_el_cuerpo){
-            musculo = "Todo el cuerpo";
-        } else if (id == R.id.tren_superior){
-            musculo = "Tren superior";
-        } else if (id == R.id.espalda) {
-            musculo = "Espalda";
-        } else if (id == R.id.biceps) {
-            musculo = "Bíceps";
-        } else if (id == R.id.cuadriceps) {
-            musculo = "Cuádriceps";
-        }
+        String idString = getResources().getResourceEntryName(id);
 
+        switch (idString) {
+            case "todo_el_cuerpo":
+                musculo = "Todo el cuerpo";
+                break;
+            case "tren_superior":
+                musculo = "Tren superior";
+                break;
+            case "espalda":
+                musculo = "Espalda";
+                break;
+            case "biceps":
+                musculo = "Bíceps";
+                break;
+            case "cuadriceps":
+                musculo = "Cuádriceps";
+                break;
+        }
         return musculo;
     }
 
+
+    //Método para el guardado de los datos del ejercicio.
     public void guardarEjercicio(){
+        ArrayList<String> musculosArray;
+
         imagenEjercicio = imagen.getText().toString();
 
         nombreEjercicio = nombreET.getText().toString();
@@ -254,11 +257,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         notasEjercicio = notasET.getText().toString();
 
         musculosEjercicio = musculosTV.getText().toString();
-        if(musculosEjercicio.equals("Selecciona los músculos")){
-            musculosVacios = true;
-        }else{
-            musculosVacios = false;
-        }
+        musculosVacios = musculosEjercicio.equals("Selecciona los músculos");
 
         if(descansoET.getText().toString().isEmpty()){
             descansoEjercicio = 0;
@@ -285,28 +284,64 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             repeticionesVacias = false;
         }
 
-        if(!musculosVacios){
-            musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
-            musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(", ")));
-        }
-
 
         if(!nombreVacio && !musculosVacios && !descansoVacio && !seriesVacias && !repeticionesVacias){
+            musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
+            musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(", ")));
 
             ejercicioUsuario = new TablaEjercicioUsuario(imagenEjercicio, musculosArray, "-" + nombreEjercicio, notasEjercicio,
                     repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
-            if(firebaseManager.agregarEjercicio(this, ejercicioUsuario)){
-                MostratToast.mostrarToast(this, "Ejercicio creado correctamente");
-                ObtenerLogro obtenerLogro = new ObtenerLogro();
-                obtenerLogro.obtenerLogro(this, "Crear ejercicio");
-                finish();
-                datosGuardados = true;
-            }else{
-                datosGuardados = false;
-            }
+
+
+            agregarEjercicio(ejercicioUsuario);
         }else{
-            MostratToast.mostrarToast(this, "Completa todos los campos");
+            mostrarToast("Completa todos los campos");
         }
 
+    }
+
+
+    //Método para crear el ejercicio.
+    private void agregarEjercicio(TablaEjercicioUsuario ejercicio){
+        try{
+            firebaseManager.agregarEjercicio(this, ejercicio, new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada) {
+                        mostrarToast("Ejercicio creado correctamente");
+                        ObtenerLogro obtenerLogro = new ObtenerLogro();
+                        obtenerLogro.obtenerLogro(PopupCrearEjercicios.this, "Crear ejercicio");
+                        finish();
+                        datosGuardados = true;
+                    } else {
+                        datosGuardados = false;
+                        mostrarToast("Error al crear la rutina");
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los ejercicios de la rutina.");
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    //Método que permite el cambiado de colores de una vista.
+    private void cambiarColores(View view, int color){
+        ((TextView) view).setTextColor(color);
+    }
+
+
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity() {
+        CambiarActivity.cambiar(this, "Descartar cambios.", "¿Desea descartar los cambios no guardados?", "ir_a_ejercicios");
+    }
+
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

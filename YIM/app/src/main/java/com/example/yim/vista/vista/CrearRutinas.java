@@ -150,23 +150,31 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
         mostrarSemana(rutina);
     }
+
+
+    //Obtenemos los colores de los músculos del usuario.
     private void mostrarSemana(TablaRutinaUsuario rutina){
-        //Obtenemos los colores de los músculos del usuario.
-        firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
-            @Override
-            public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
-                HashMap<String, ColoresMusculoUsuario> musculosHM = new HashMap<>();
+        try{
+            firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
+                @Override
+                public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
+                    HashMap<String, ColoresMusculoUsuario> musculosHM = new HashMap<>();
 
-                for (TablaMusculoUsuario musculo : musculosUsuarios){
-                    musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
+                    for (TablaMusculoUsuario musculo : musculosUsuarios){
+                        musculosHM.put(musculo.getNombre(), new ColoresMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_fuente()));
+                    }
+
+                    //Mostramos la semana desde un adaptador.
+                    CrearRutinasAdaptador adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutina, musculosHM);
+                    diasRV.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
+                    diasRV.setAdapter(adaptador);
                 }
+            });
 
-                //Mostramos la semana desde un adaptador.
-                CrearRutinasAdaptador adaptador = new CrearRutinasAdaptador(CrearRutinas.this, rutina, musculosHM);
-                diasRV.setLayoutManager(new LinearLayoutManager(CrearRutinas.this));
-                diasRV.setAdapter(adaptador);
-            }
-        });
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener los músculos.");
+            ex.printStackTrace();
+        }
     }
 
 
@@ -204,50 +212,68 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
     //Método para crear la rutina.
     private void crearRutina(){
-        firebaseManager.agregarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
-            @Override
-            public void onCallback(boolean accionRealizada) {
-                if (accionRealizada) {
-                    mostrarToast("Rutina creada correctamente");
-                    finish();
-                    cambiarActivity();
-                } else {
-                    mostrarToast("Error al crear la rutina");
+        try{
+            firebaseManager.agregarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada) {
+                        mostrarToast("Rutina creada correctamente");
+                        finish();
+                        cambiarActivity();
+                    } else {
+                        mostrarToast("Error al crear la rutina");
+                    }
                 }
-            }
-        });
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al crear la rutina.");
+            ex.printStackTrace();
+        }
     }
 
 
     //Método para actualizar la rutina.
     private void actualizarRutina(){
-        firebaseManager.actualizarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
-            @Override
-            public void onCallback(boolean accionRealizada) {
-                if (accionRealizada) {
-                    mostrarToast("Rutina actualizada correctamente");
-                    finish();
-                    cambiarActivity();
-                } else {
-                    mostrarToast("Error al actualizar la rutina");
+        try{
+            firebaseManager.actualizarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada) {
+                        mostrarToast("Rutina actualizada correctamente");
+                        finish();
+                        cambiarActivity();
+                    } else {
+                        mostrarToast("Error al actualizar la rutina");
+                    }
                 }
-            }
-        });
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al actualizar la rutina.");
+            ex.printStackTrace();
+        }
     }
 
 
     //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
     private void mostrarImagenPerfil(){
-        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
-            @Override
-            public void onCallback(TablaPerfil perfil) {
-                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
-                    Imagenes.urlImagenPerfil = perfil.getImagen();
-                    Imagenes.mostrarImagenPerfil(CrearRutinas.this, imagenPerfilMenu);
-                }
+        try{
+            firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+                @Override
+                public void onCallback(TablaPerfil perfil) {
+                    if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                        Imagenes.urlImagenPerfil = perfil.getImagen();
+                        Imagenes.mostrarImagenPerfil(CrearRutinas.this, imagenPerfilMenu);
+                    }
 
-            }
-        });
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar la imagen de perfil.");
+            ex.printStackTrace();
+        }
 
     }
 

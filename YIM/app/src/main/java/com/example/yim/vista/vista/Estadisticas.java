@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,25 +22,29 @@ import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.EstadisticasAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Estadisticas extends AppCompatActivity implements View.OnClickListener {
-    //todo hacer este, este petaba acuerdate
-    FirebaseManager firebaseManager;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
     ImageButton buscar;
     Spinner tipo;
     RecyclerView recyclerView;
-    FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
     ScrollView scrollView;
     TextView noEstadisticasTV;
-    EstadisticasAdaptador adaptador;
-    HashMap<String, String> musculosHM = new HashMap<>();
+    ProgressBar cargando;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
+    ImageView imagenPerfilMenu;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,9 +52,13 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
 
+        //Inicializar instancias.
         firebaseManager = new FirebaseManager();
 
-        //Referencias de las vistas
+
+        //Referencias de las vistas.
+        cargando = findViewById(R.id.cargando);
+
         buscar = findViewById(R.id.buscar);
         tipo = findViewById(R.id.tipo);
 
@@ -57,59 +67,67 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
         scrollView = findViewById(R.id.scrollView);
         noEstadisticasTV = findViewById(R.id.no_estadisticas_tv);
 
-        imagen_casa = findViewById(R.id.imagen_casa_menu);
-        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
-        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
+
 
         //Listeners
         buscar.setOnClickListener(this);
 
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Estadisticas.this, R.layout.spinner_items, getResources().getStringArray(R.array.tipos_busqueda));
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         tipo.setAdapter(adapter);
 
 
+        //Mostrar datos.
         try{
             obtenerEjercicios();
-        }catch (Exception ex) {
-            MostratToast.mostrarToast(this, "Error al obtener los ejercicios del usuario.");
+            mostrarImagenPerfil();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener las estadísticas.");
             ex.printStackTrace();
         }
+
+        //Ocultar barra de progreso.
+        cargando.setVisibility(View.GONE);
     }
 
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.imagen_casa_menu){
-            cambiarActivity(Inicio.class);
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.imagen_calendario_menu) {
-            cambiarActivity(RutinaSemanal.class);
+        switch (id){
+            case "buscar"://todo
+                mostrarToast(String.valueOf(tipo.getSelectedItemPosition()));
+                break;
 
-        } else if (id == R.id.imagen_estadisticas_menu) {
-            cambiarActivity(this.getClass());
-
-        } else if (id == R.id.imagen_usuario_menu) {
-            cambiarActivity(Perfil.class);
-
-        } else if (id == R.id.buscar) {
-            MostratToast.mostrarToast(this, String.valueOf(tipo.getSelectedItemPosition()));
-
+            case "imagen_casa_menu":
+                cambiarActivity(Inicio.class);
+                break;
+            case "imagen_calendario_menu":
+                cambiarActivity(RutinaSemanal.class);
+                break;
+            case "imagen_estadisticas_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
+            case "imagen_usuario_menu":
+                cambiarActivity(Perfil.class);
+                break;
         }
     }
 
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
-    }
-
-    public void obtenerEjercicios(){
+    //Método para obtener los ejercicos que tengan estadísticas.
+    private void obtenerEjercicios(){
         firebaseManager.obtenerEjerciciosUsuarioConEstadisticas(this, new FirebaseCallbackEjerciciosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
@@ -119,22 +137,63 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
                     scrollView.setVisibility(View.GONE);
                     noEstadisticasTV.setVisibility(View.VISIBLE);
                 }
+
             }
         });
     }
 
-    public void obtenerMusculos(ArrayList<TablaEjercicioUsuario> ejercicios){
-        firebaseManager.obtenerMusculosUsuario(Estadisticas.this, new FirebaseCallbackMusculosUsuario() {
+
+    //Método para obtener los colores de los músculos del usuario.
+    private void obtenerMusculos(ArrayList<TablaEjercicioUsuario> ejercicios){
+
+        firebaseManager.obtenerMusculosUsuario(this, new FirebaseCallbackMusculosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
-
-                for (TablaMusculoUsuario musculo : musculosUsuarios){
-                    musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
+                if(musculosUsuarios != null){
+                    HashMap<String, String> musculosHM = new HashMap<>();
+                    for (TablaMusculoUsuario musculo : musculosUsuarios){
+                        musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
+                    }
+                    mostrarEjercicios(ejercicios, musculosHM);
                 }
-                recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
-                adaptador = new EstadisticasAdaptador(Estadisticas.this, ejercicios, musculosHM);
-                recyclerView.setAdapter(adaptador);
+
             }
         });
+    }
+
+
+    //Método para mostrar los ejercicicios desde un adaptador.
+    private void  mostrarEjercicios(ArrayList<TablaEjercicioUsuario> ejercicios, HashMap<String, String> musculosHM){
+        recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
+        EstadisticasAdaptador adaptador = new EstadisticasAdaptador(Estadisticas.this, ejercicios, musculosHM);
+        recyclerView.setAdapter(adaptador);
+    }
+
+
+    //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    private void mostrarImagenPerfil(){
+        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+            @Override
+            public void onCallback(TablaPerfil perfil) {
+                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                    Imagenes.urlImagenPerfil = perfil.getImagen();
+                    Imagenes.mostrarImagenPerfil(Estadisticas.this, imagenPerfilMenu);
+                }
+
+            }
+        });
+
+    }
+
+
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        cambiar(this, activity);
+    }
+
+
+    //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

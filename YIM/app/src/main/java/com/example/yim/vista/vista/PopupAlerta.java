@@ -26,8 +26,6 @@ import java.util.ArrayList;
 
 public class PopupAlerta extends AppCompatActivity implements View.OnClickListener {
 
-    //Variables de instancias.
-    private FirebaseAuth auth;
     private FirebaseManager firebaseManager;
     TextView titulo_tv, texto_tv;
     Button cancelar_btn, aceptar;
@@ -155,7 +153,8 @@ public class PopupAlerta extends AppCompatActivity implements View.OnClickListen
                 cambiarActivity(VerEjercicios.class);
                 break;
             case "cerrar_sesion":
-                auth = FirebaseAuth.getInstance();
+                //Variables de instancias.
+                FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
                 finish();
                 cambiarActivity(InicioSesion.class);

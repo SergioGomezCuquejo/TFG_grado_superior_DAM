@@ -28,7 +28,8 @@
             android:text="Instruciones"
             android:background="@drawable/_style_borde_20_arriba_izquierda"
             android:textColor="@color/negro_clarito"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/informacion"
@@ -44,7 +45,8 @@
             android:text="Información"
             android:textColor="@color/negro_clarito"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
 
         <ImageView
@@ -53,7 +55,8 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:padding="7dp"
-            app:srcCompat="@drawable/cancelar" />
+            app:srcCompat="@drawable/cancelar"
+            tools:ignore="ContentDescription" />
 
 
     </LinearLayout>
@@ -85,7 +88,8 @@
                     android:id="@+id/imagen"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20dp"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
 
                 <TextView
                     android:id="@+id/nombreTV"
@@ -114,7 +118,7 @@
                         android:text="Músculos: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="17sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights,TextContrastCheck" />
 
                     <TextView
                         android:id="@+id/musculos_tv"
@@ -152,7 +156,8 @@
                         android:text="Ejecución"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <View
                         android:layout_width="0dp"
@@ -191,7 +196,8 @@
                         android:text="Consejos clave"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <View
                         android:layout_width="0dp"
@@ -246,7 +252,8 @@
                         android:text="Máximo peso"
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <View
                         android:layout_width="0dp"
@@ -272,7 +279,7 @@
                         android:text="Peso: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/peso"
@@ -305,7 +312,7 @@
                         android:text="Repeticiones: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/repeticiones"
@@ -337,7 +344,7 @@
                         android:text="Serie nº: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/serie_num"
@@ -403,7 +410,7 @@
                         android:text="Veces realizado: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/veces_realizado"
@@ -435,7 +442,7 @@
                         android:text="Veces no realizado: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/veces_no_realizado"
@@ -469,7 +476,7 @@
                         android:text="Veces usado en rutinas: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/veces_en_rutinas"
@@ -501,7 +508,7 @@
                         android:text="Veces usado en la rutina activa: "
                         android:textColor="@color/negro_clarito"
                         android:textSize="20sp"
-                        tools:ignore="NestedWeights" />
+                        tools:ignore="HardcodedText,NestedWeights" />
 
                     <TextView
                         android:id="@+id/veces_en_rutina_activa"

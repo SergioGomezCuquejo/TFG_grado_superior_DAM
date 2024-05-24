@@ -78,7 +78,29 @@ public class FirebaseManager {
     }
 
     // todo Nodo EJERCICIOS del nodo USUARIO
-    // Crear ejercicio. todo
+    // Crear ejercicio.
+    public void agregarEjercicio(Context context, TablaEjercicioUsuario nuevoEjercicio, FirebaseCallbackBoolean callback){
+
+        try{
+            String IDEjercicio = ejerciciosReference.push().getKey();
+            ejerciciosReference.child(IDEjercicio).setValue(nuevoEjercicio, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean agregado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al agregar el ejercicio: " + databaseError.getMessage());
+                        agregado = false;
+                    } else {
+                        agregado = true;
+                    }
+                    callback.onCallback(agregado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
     // Obtener ejercicios.
     public void obtenerEjerciciosUsuario(Context context, FirebaseCallbackEjerciciosUsuario callback) {
@@ -118,7 +140,7 @@ public class FirebaseManager {
                         ejercicio = dataSnapshot.getValue(TablaEjercicioUsuario.class);
 
                     } else {
-                        mostrarToast(context, "Ejercicios no encontrado.");
+                        mostrarToast(context, "Ejercicio no encontrado.");
                     }
 
                     callback.onCallback(ejercicio);
@@ -134,14 +156,101 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
+    public void obtenerEjerciciosUsuarioConEstadisticas(Context context, FirebaseCallbackEjerciciosUsuario callback) {
+        try {
+            ejerciciosUsuarioReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios = new ArrayList<TablaEjercicioUsuario>();
 
-    // Actualizar ejercicio. todo
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot ejercicioSnapshot : dataSnapshot.getChildren()) {
+                            TablaEjercicioUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjercicioUsuario.class);
+                            if(ejercicio.getEstadisticas() != null){
+                                ejercicio.setID(ejercicioSnapshot.getKey());
+                                ejerciciosUsuarios.add(ejercicio);
+                            }
+                        }
+
+                    } else {
+                        mostrarToast(context, "Ejercicios no encontrados.");
+                    }
+
+                    callback.onCallback(ejerciciosUsuarios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Actualizar ejercicio.
+    public void actualizarEjercicioUsuario(Context context, TablaEjercicioUsuario ejercicio, FirebaseCallbackBoolean callback){
+        try{
+            ejerciciosUsuarioReference.child(ejercicio.getID()).setValue(ejercicio, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar el ejercicio: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el perfil del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+
     // Eliminar ejercicio. todo
 
 
     //todo Nodo LOGROS del nodo USUARIO
     // Crear logro. todo
-    // Obtener logros.todo
+    // Obtener logros.
+    public void obtenerLogrosUsuario(Context context, FirebaseCallbackLogrosUsuario callback) {
+        try {
+            logrosUsuarioReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaLogroUsuario> logrosUsuario = new ArrayList<TablaLogroUsuario>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot logroSnapshot : dataSnapshot.getChildren()) {
+                            TablaLogroUsuario logro = logroSnapshot.getValue(TablaLogroUsuario.class);
+                            logro.setID(logroSnapshot.getKey());
+                            logrosUsuario.add(logro);
+                        }
+
+                    } else {
+                        mostrarToast(context, "Logros no encontrado.");
+                    }
+
+                    callback.onCallback(logrosUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los logros del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los logros del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
     // Actualizar logro. todo
     // Eliminar logro. todo
 
@@ -149,7 +258,7 @@ public class FirebaseManager {
     // todo Nodo PERFIL del nodo USUARIO
     // Crear perfil. todo
 
-    // Obtener perfil.todo
+    // Obtener perfil.
     public void obtenerPerfil(Context context, FirebaseCallbackPerfil callback) {
         try {
             perfilUsuarioReference.addValueEventListener(new ValueEventListener() {
@@ -178,7 +287,28 @@ public class FirebaseManager {
         }
     }
 
-    // Actualizar perfil. todo
+    // Actualizar perfil.
+    public void actualizarPerfil(Context context, TablaPerfil perfil, FirebaseCallbackBoolean callback){
+        try{
+            perfilUsuarioReference.setValue(perfil, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar el perfil: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el perfil del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
     // Eliminar perfil. todo
 
 
@@ -219,15 +349,36 @@ public class FirebaseManager {
         }
     }
 
-    // Actualizar músculo. todo
+    // Actualizar músculo.
+    public void actualizarMusculoUsuario(Context context, TablaMusculoUsuario musculo, FirebaseCallbackBoolean callback){
+        try{
+            musculosUsuarioReference.child(musculo.getID()).setValue(musculo, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar el músculo: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los músculos del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
     // Eliminar músculo. todo
 
     // todo Nodo RUTINA ACTIVA del nodo USUARIO
     // Crear rutina activa. todo
     // Obtener rutina activa.todo
-    // Actualizar rutina activa. todo
-    public void actualizarRutina(Context context, int numDia, int numEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
 
+    // Actualizar rutina activa.
+    public void actualizarRutina(Context context, int numDia, int numEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
         try{
             DatabaseReference historialRutinaActivaUsuarioReference = rutinaActivaUsuarioReference.child("semana").child(String.valueOf(numDia-1)).
                     child("ejercicios").child(String.valueOf(numEjercicio)).child("historial");
@@ -559,80 +710,15 @@ public class FirebaseManager {
 
 
 
-    public boolean actualizarColoresMusculosUsuario(Context context, String idMusculo, String colorFondo, String colorFuente){
-        boolean actualizado = false;
-        try{
-            DatabaseReference musculosUsuarioReference = usuariosReference.child(idUsuario).child("musculos").child(idMusculo);
-
-            musculosUsuarioReference.child("color_fondo").setValue(colorFondo);
-            musculosUsuarioReference.child("color_fuente").setValue(colorFuente);
-
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar los colores del músculo.");
-            e.printStackTrace();
-        }
-        return actualizado;
-    }
 
 
 
-    public void obtenerEjerciciosUsuarioConEstadisticas(Context context, FirebaseCallbackEjerciciosUsuario callback) {
-        try {
-            usuariosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios = new ArrayList<TablaEjercicioUsuario>();
-
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            DataSnapshot ejerciciosSnapshot = usuarioSnapshot.child("ejercicios");
-
-                            for (DataSnapshot ejercicioSnapshot : ejerciciosSnapshot.getChildren()) {
-                                TablaEjercicioUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjercicioUsuario.class);
-                                if(ejercicio.getEstadisticas() != null){
-                                    ejercicio.setID(ejercicioSnapshot.getKey());
-                                    ejerciciosUsuarios.add(ejercicio);
-                                }
-                            }
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
-                    }
-
-                    callback.onCallback(ejerciciosUsuarios);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario");
-                }
-            });
-        } catch (Exception ex) {
-            MostratToast.mostrarToast(context, "Error al obtener los ejercicios del usuario.");
-            ex.printStackTrace();
-        }
-    }
 
 
 
-    public boolean agregarEjercicio(Context context, TablaEjercicioUsuario nuevoEjercicio){
-        boolean actualizado = false;
-        try{
-            DatabaseReference ejerciciosUsuarioReference = usuariosReference.child(idUsuario).child("ejercicios");
-            String idEjercicio = ejerciciosUsuarioReference.push().getKey();
 
-            ejerciciosUsuarioReference.child(idEjercicio).setValue(nuevoEjercicio);
 
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al agregar el ejercicio.");
-            e.printStackTrace();
-        }
-        return actualizado;
-    }
+
 
     public boolean eliminarEjercicio(Context context, String ID){
         boolean eliminado = false;
@@ -648,55 +734,8 @@ public class FirebaseManager {
         return eliminado;
     }
 
-    public boolean actualizarEjercicio(Context context, TablaEjercicioUsuario ejercicio){
-        boolean actualizado = false;
-        try{
-            DatabaseReference ejerciciosUsuarioReference = usuariosReference.child(idUsuario).child("ejercicios");
 
-            ejerciciosUsuarioReference.child(ejercicio.getID()).setValue(ejercicio);
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar el ejercicio.");
-            e.printStackTrace();
-        }
-        return actualizado;
-    }
-    public void obtenerLogrosUsuario(Context context, FirebaseCallbackLogrosUsuario callback) {
-        try {
-            usuariosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaLogroUsuario> logrosUsuario = new ArrayList<TablaLogroUsuario>();
 
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            DataSnapshot logrosSnapshot = usuarioSnapshot.child("logros");
-
-                            for (DataSnapshot logroSnapshot : logrosSnapshot.getChildren()) {
-                                TablaLogroUsuario logro = logroSnapshot.getValue(TablaLogroUsuario.class);
-                                logro.setID(logroSnapshot.getKey());
-                                logrosUsuario.add(logro);
-                            }
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
-                    }
-                    
-                    callback.onCallback(logrosUsuario);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los logros del usuario");
-                }
-            });
-        } catch (Exception ex) {
-            MostratToast.mostrarToast(context, "Error al obtener los logros del usuario.");
-            ex.printStackTrace();
-        }
-    }
 
     public void obtenerLogrosUsuario(Context context, ArrayList<String> titulos, FirebaseCallbackLogrosUsuario callback) {
         try {
@@ -1002,20 +1041,6 @@ public class FirebaseManager {
             e.printStackTrace();
         }
         return eliminada;
-    }
-
-    public boolean modificarPerfil(Context context, TablaPerfil perfil){
-        boolean actualizado = false;
-        try{
-            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("perfil");
-
-            rutinaUsuarioReference.setValue(perfil);
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
-            e.printStackTrace();
-        }
-        return actualizado;
     }
 
 

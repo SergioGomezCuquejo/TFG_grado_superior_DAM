@@ -12,20 +12,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaUsuario;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
+import com.example.yim.vista.vista.EjerciciosRutinas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class PopupAgregarEjercicioAdaptador extends RecyclerView.Adapter<PopupAgregarEjercicioAdaptador.PopupAgregarEjercicioAdaptadorViewHolder> {
 
     private ArrayList<TablaEjercicioUsuario> ejercicios;
-
+    private TablaRutinaUsuario rutinaUsuario;
+    private HashMap<String, ColoresMusculoUsuario> musculosSemana;
+    private int dia;
     private Context context;
 
-    public PopupAgregarEjercicioAdaptador(Context context, ArrayList<TablaEjercicioUsuario> ejercicios) {
+    public PopupAgregarEjercicioAdaptador(Context context, ArrayList<TablaEjercicioUsuario> ejercicios, TablaRutinaUsuario rutinaUsuario, int dia, HashMap<String, ColoresMusculoUsuario> musculosSemana) {
         this.context = context;
         this.ejercicios = ejercicios;
+        this.rutinaUsuario = rutinaUsuario;
+        this.dia = dia;
+        this.musculosSemana = musculosSemana;
     }
 
     @NonNull
@@ -44,8 +56,10 @@ public class PopupAgregarEjercicioAdaptador extends RecyclerView.Adapter<PopupAg
         holder.ejercicioRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rutinaUsuario.getSemana().get(dia).getEjercicios().add(new TablaEjercicioRutinaUsuario(ejercicio, ejercicios.size()));
 
-            }
+                CambiarActivity.cambiar(context, EjerciciosRutinas.class, rutinaUsuario, dia, musculosSemana);
+            } 
         });
 
         holder.imagen.setImageResource(R.drawable.curl_de_biceps_hombre);

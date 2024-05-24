@@ -10,12 +10,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaPerfil;
@@ -27,15 +30,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Perfil extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth auth;
-    FirebaseManager firebaseManager;
-    FirebaseUser user;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
     ImageButton guardarIB, editarIB, cancelarIB;
     ImageView imagenPerfil, imagenPerfilMenu;
     TextView nombreTV, email, genero, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
     EditText nombreET, pesoET, alturaET, edadET;
-    LinearLayout logros, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-
+    LinearLayout logros;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
     ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -49,7 +54,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         firebaseManager = new FirebaseManager();
 
 
-        //Controlar que no se ha cerrado sesión.
+        //Controlar que si se ha cerrado sesión lleve a la interfaz InicioSesion.
         user = auth.getCurrentUser();
         if(user == null){
             cambiarActivity(InicioSesion.class);
@@ -79,10 +84,10 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         logros = findViewById(R.id.logros);
 
-        imagen_casa = findViewById(R.id.imagen_casa_menu);
-        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
-        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
         imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
 
@@ -97,14 +102,20 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         cerrarSesion.setOnClickListener(this);
 
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
 
 
-        //Mostrar los datos del usuario.
-        mostrarDatos();
+        //Mostrar datos.
+        try{
+            mostrarDatos();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar el perfil.");
+            ex.printStackTrace();
+        }
     }
 
     //Listeners.
@@ -166,11 +177,12 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 cambiarActivity(Estadisticas.class);
                 break;
             case "imagen_usuario":
-                cambiarActivity(this.getClass());
+                cambiarActivity(Perfil.class);
                 break;
         }
     }
 
+    //Método para almacenar los cambios realizados
     private TablaPerfil obtenerPerfil(){
         TablaPerfil perfil = new TablaPerfil();
         perfil.setNombre(nombreET.getText().toString());
@@ -182,29 +194,32 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         return perfil;
     }
 
-    //Mostrar los datos del usuario.
+    //Método para mostrar los datos del usuario.
     public void mostrarDatos(){
         try{
             firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
                 @Override
                 public void onCallback(TablaPerfil perfil) {
-                    nombreTV.setText(perfil.getNombre());
-                    nombreET.setText(perfil.getNombre());
-                    email.setText(perfil.getEmail());
-                    genero.setText(perfil.getGenero());
-                    pesoTV.setText(String.valueOf(perfil.getPeso()));
-                    pesoET.setText(String.valueOf(perfil.getPeso()));
-                    alturaTV.setText(String.valueOf(perfil.getAltura()));
-                    alturaET.setText(String.valueOf(perfil.getAltura()));
-                    edadTV.setText(String.valueOf(perfil.getEdad()));
-                    edadET.setText(String.valueOf(perfil.getEdad()));
+                    if(perfil != null){
+                        nombreTV.setText(perfil.getNombre());
+                        nombreET.setText(perfil.getNombre());
+                        email.setText(perfil.getEmail());
+                        genero.setText(perfil.getGenero());
+                        pesoTV.setText(String.valueOf(perfil.getPeso()));
+                        pesoET.setText(String.valueOf(perfil.getPeso()));
+                        alturaTV.setText(String.valueOf(perfil.getAltura()));
+                        alturaET.setText(String.valueOf(perfil.getAltura()));
+                        edadTV.setText(String.valueOf(perfil.getEdad()));
+                        edadET.setText(String.valueOf(perfil.getEdad()));
 
-                    Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfil);
-                    Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfilMenu);
+                        Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfil);
+                        Imagenes.mostrarImagenPerfil(Perfil.this, imagenPerfilMenu);
+
+                    }else {
+                        mostrarToast("No hay datos del perfil");
+                    }
                 }
             });
-
-
         }catch (Exception ex){
             mostrarToast("Error al obtener los datos del usuario.");
             ex.printStackTrace();
@@ -212,29 +227,21 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    //Cambiar a otra interfaz.
-    private void cambiarActivity(Class<?> activity) {
-        CambiarActivity.cambiar(this, activity);
-    }
-
-    private void cambiarVisibilidad(View view, int visibilidad) {
-        CambiarVisibilidad.cambiarVisibilidad(view, visibilidad);
-    }
-
+    //Método para guardar los cambios del perfil.
     private void guardarDatos(TablaPerfil perfil) {
-        if(firebaseManager.modificarPerfil(this, perfil)){
-            mostrarToast("Datos actualizados correctamente");
-        }else{
-            mostrarToast("Error al actualizar los datos");
-        }
+        firebaseManager.actualizarPerfil(this, perfil, new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+                if (accionRealizada) {
+                    mostrarToast("Datos actualizados correctamente");
+                } else {
+                    mostrarToast("Error al actualizar los datos");
+                }
+            }
+        });
     }
 
-    private void mostrarToast(String mensaje){
-        MostratToast.mostrarToast(this, mensaje);
-    }
-
-
-    ////
+    //Método para mostrar la galería del usuario.
     private void subirImagen(){
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
@@ -243,6 +250,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         progressDialog = new ProgressDialog(this);
     }
 
+    //Al recibir la imagen la actualiza.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode == RESULT_OK){
@@ -252,6 +260,23 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    //Método para llamar a CambiarVisibilidad.java. (Clase que permite hacer visible o invisible una vista)
+    private void cambiarVisibilidad(View view, int visibilidad) {
+        CambiarVisibilidad.cambiarVisibilidad(view, visibilidad);
+    }
+
+    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        CambiarActivity.cambiar(this, activity);
+    }
+
+
+    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 
 

@@ -141,7 +141,8 @@
                             android:text="Nombre:"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/nombre_tv"
@@ -182,7 +183,8 @@
                             android:layout_marginEnd="10dp"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
 
                         <TextView
@@ -304,7 +306,8 @@
                             android:text="00,000"
                             android:inputType="numberDecimal"
                             android:textSize="20sp"
-                            android:maxLength="5"/>
+                            android:maxLength="5"
+                            tools:ignore="Autofill,HardcodedText,LabelFor" />
                         <TextView
                             android:id="@+id/peso_tv"
                             android:visibility="gone"
@@ -314,7 +317,8 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -322,7 +326,8 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="kg"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
 
                     </LinearLayout>
 
@@ -357,7 +362,8 @@
                             android:text="00,000"
                             android:inputType="numberDecimal"
                             android:textSize="20sp"
-                            android:maxLength="5"/>
+                            android:maxLength="5"
+                            tools:ignore="Autofill,HardcodedText,LabelFor" />
 
                         <TextView
                             android:id="@+id/altura_tv"
@@ -367,7 +373,8 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -375,7 +382,8 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="cm"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -408,7 +416,8 @@
                             android:text="00"
                             android:inputType="number"
                             android:textSize="20sp"
-                            android:maxLength="2"/>
+                            android:maxLength="2"
+                            tools:ignore="Autofill,HardcodedText,LabelFor" />
 
                         <TextView
                             android:id="@+id/edad_tv"
@@ -418,7 +427,8 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -426,7 +436,8 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="años"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -442,7 +453,8 @@
                     android:text="Política de privacidad"
                     android:textColor="@color/azul_clarito"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/cerrar_sesion"
@@ -457,7 +469,8 @@
                     android:text="Cerrar sesión"
                     android:textColor="@color/rojo_clarito"
                     android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
         </ScrollView>

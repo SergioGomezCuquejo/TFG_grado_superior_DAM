@@ -127,18 +127,25 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
         }
     }
 
+
     //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
     private void mostrarImagenPerfil(){
-        firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
-            @Override
-            public void onCallback(TablaPerfil perfil) {
-                if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
-                    Imagenes.urlImagenPerfil = perfil.getImagen();
-                    Imagenes.mostrarImagenPerfil(EjerciciosDiarios.this, imagenPerfilMenu);
-                }
+        try{
+            firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+                @Override
+                public void onCallback(TablaPerfil perfil) {
+                    if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                        Imagenes.urlImagenPerfil = perfil.getImagen();
+                        Imagenes.mostrarImagenPerfil(EjerciciosDiarios.this, imagenPerfilMenu);
+                    }
 
-            }
-        });
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar la imagen de perfil.");
+            ex.printStackTrace();
+        }
 
     }
 
