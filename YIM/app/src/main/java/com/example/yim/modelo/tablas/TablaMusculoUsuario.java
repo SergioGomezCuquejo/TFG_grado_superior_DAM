@@ -27,10 +27,10 @@ public class TablaMusculoUsuario implements Serializable {
         this.ejercicios_totales = ejercicios_totales;
         this.nombre = nombre;
     }
-    public TablaMusculoUsuario(String color_fondo, String color_fuente, String nombre) {
-        this.color_fondo = color_fondo;
-        this.color_fuente = color_fuente;
-        this.nombre = nombre;
+    public TablaMusculoUsuario(TablaMusculo musculo) {
+        this.color_fondo = musculo.getColor_fondo();
+        this.color_fuente = musculo.getColor_letras();
+        this.nombre = musculo.getNombre();
     }
 
     public String getID() {

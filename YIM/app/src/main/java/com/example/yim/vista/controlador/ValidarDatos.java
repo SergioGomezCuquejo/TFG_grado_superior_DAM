@@ -14,7 +14,7 @@ public class ValidarDatos {
         return pattern.matcher(emailUsuario).matches();
     }
 
-    //Comprobar que la contraseña tenga mínimo 6 carácteres.
+    //Comprobar que la contraseña tenga mínimo 6 caracteres, una mayúscula, un número y un carácter especial.
     public static boolean validarContrasena(String contrasenaUsuario){
         boolean correcta;
 
@@ -26,10 +26,5 @@ public class ValidarDatos {
             correcta = false;
         }
         return correcta;
-    }
-
-    //Comprobar si el String esta vacío.
-    public static boolean campoVacio(String texto){
-        return texto.isEmpty() || texto.equals(" ");
     }
 }

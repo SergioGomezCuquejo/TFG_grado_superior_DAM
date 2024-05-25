@@ -1,7 +1,5 @@
 package com.example.yim.vista.vista;
 
-import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,26 +9,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.VerEjerciciosAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaPerfil;
+import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class VerEjercicios extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth auth;
-    FirebaseManager firebaseManager;
-    FirebaseUser user;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    ImageView imagenPerfilMenu, agregarEjercicio;
     RecyclerView recyclerView;
-    ImageView agregar_ejercicio;
-    FrameLayout imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    VerEjerciciosAdaptador adaptador;
+    ProgressBar cargando;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,77 +40,123 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_ver_ejercicios);
 
         //Inicializar instancias.
-        auth = FirebaseAuth.getInstance();
         firebaseManager = new FirebaseManager();
 
 
-        //Controlar que no se ha cerrado sesión.
-        user = auth.getCurrentUser();
-        if(user == null){
-            cambiarActivity(InicioSesion.class);
-        }
-
         //Referencias de las vistas.
+        cargando = findViewById(R.id.cargando);
+
         recyclerView = findViewById(R.id.ejercicios);
 
-        agregar_ejercicio = findViewById(R.id.agregar_ejercicio);
+        agregarEjercicio = findViewById(R.id.agregar_ejercicio);
 
-        imagen_casa = findViewById(R.id.imagen_casa_menu);
-        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
-        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
+        imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
-        //Listeners
-        agregar_ejercicio.setOnClickListener(this);
 
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
+        //Listeners.
+        agregarEjercicio.setOnClickListener(this);
 
-        mostrarEjercicios();
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
+
+
+        //Mostrar datos.
+        try{
+            mostrarImagenPerfil();
+            mostrarEjercicios();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar los ejercicios.");
+            ex.printStackTrace();
+        }
+
+
+        //Ocultar barra de progreso.
+        cargando.setVisibility(View.GONE);
 
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.agregar_ejercicio) {
-            cambiarActivity(PopupCrearEjercicios.class);
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.imagen_casa_menu){
-            cambiarActivity(Inicio.class);
+        switch (id){
+            case "agregar_ejercicio":
+                cambiarActivity(PopupCrearEjercicios.class);
+                break;
 
-        } else if (id == R.id.imagen_calendario_menu) {
-            cambiarActivity(RutinaSemanal.class);
+            case "imagen_casa_menu":
+                cambiarActivity(Inicio.class);
+                break;
+            case "imagen_calendario_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
 
-        } else if (id == R.id.imagen_estadisticas_menu) {
-            cambiarActivity(Estadisticas.class);
-
-        } else if (id == R.id.imagen_usuario_menu) {
-            cambiarActivity(Perfil.class);
-
+            case "atras_iv":
+            case "imagen_estadisticas_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
+            case "imagen_usuario_menu":
+                cambiarActivity(Perfil.class);
+                break;
         }
     }
 
+    // Método para mostrar los ejercicios y su información desde un adaptador.
     public void mostrarEjercicios(){
         try{
             firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
                 @Override
                 public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
                     recyclerView.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
-                    adaptador = new VerEjerciciosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
+                    VerEjerciciosAdaptador adaptador = new VerEjerciciosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
                     recyclerView.setAdapter(adaptador);
                 }
             });
 
         }catch (Exception ex){
-            MostratToast.mostrarToast(this, "Error al obtener los musculos del usuario.");
+            mostrarToast("Error al obtener los musculos del usuario.");
             ex.printStackTrace();
         }
     }
 
+
+    // Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    private void mostrarImagenPerfil(){
+        try{
+            firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
+                @Override
+                public void onCallback(TablaPerfil perfil) {
+                    if(perfil.getImagen() != null && !perfil.getImagen().equals("")){
+                        Imagenes.urlImagenPerfil = perfil.getImagen();
+                        Imagenes.mostrarImagenPerfil(VerEjercicios.this, imagenPerfilMenu);
+                    }
+
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al mostrar la imagen de perfil.");
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    // Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
+        CambiarActivity.cambiar(this, activity);
+    }
+
+
+    // Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 }

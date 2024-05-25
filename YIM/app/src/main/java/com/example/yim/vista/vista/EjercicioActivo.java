@@ -462,7 +462,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
     //Método para actualizar el historial en Firebase Database.
     private void guardarHistorial(){
-        firebaseManager.actualizarRutina(this, dia, numEjercicio, ejercicioActivo.getHistorial(), new FirebaseCallbackBoolean() {
+        firebaseManager.actualizarRutinaActiva(this, dia, numEjercicio, ejercicioActivo.getHistorial(), new FirebaseCallbackBoolean() {
             @Override
             public void onCallback(boolean accionRealizada) {
                 if(!accionRealizada){
@@ -475,7 +475,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
     //Método para actualizar la serie en Firebase Database.
     private void subirSerie(){
-        firebaseManager.actualizarRutina(this, dia, numEjercicio,ejercicioActivo.getSeries_realizadas(), new FirebaseCallbackBoolean() {
+        firebaseManager.actualizarRutinaActiva(this, dia, numEjercicio,ejercicioActivo.getSeries_realizadas(), new FirebaseCallbackBoolean() {
             @Override
             public void onCallback(boolean accionRealizada) {
                 if(!accionRealizada){

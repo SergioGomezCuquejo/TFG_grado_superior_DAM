@@ -100,8 +100,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
         //Mostrar datos.
         try{
-            mostrarRutina(rutinaUsuario);
             mostrarImagenPerfil();
+            mostrarRutina(rutinaUsuario);
 
         } catch (Exception ex) {
             mostrarToast("Error al obtener los datos de la rutina.");
@@ -236,7 +236,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     //Método para actualizar la rutina.
     private void actualizarRutina(){
         try{
-            firebaseManager.actualizarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+            firebaseManager.actualizarRutinaActiva(this, rutinaUsuario, new FirebaseCallbackBoolean() {
                 @Override
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada) {

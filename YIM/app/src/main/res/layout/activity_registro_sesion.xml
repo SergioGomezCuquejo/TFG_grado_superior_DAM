@@ -33,7 +33,7 @@
             android:foregroundGravity="center_vertical"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="20dp">
 
             <View
                 android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:autofillHints=""
                 android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
                 android:ems="10"
@@ -127,18 +127,48 @@
                 android:inputType="textPassword"
                 android:padding="10dp"
                 tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
             <TextView
                 android:id="@+id/error"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
                 android:shadowColor="#000000"
                 android:textColor="@color/rojo_clarito"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <CheckBox
+                    android:id="@+id/aceptar_politicas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/azul_oscuro"/>
+
+                <TextView
+                    android:id="@+id/aceptar_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="Aceptar "
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/politicas_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="políticas de privacidad."
+                    android:textColor="@color/azul_oscuro"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/registrarse"
@@ -158,7 +188,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal">

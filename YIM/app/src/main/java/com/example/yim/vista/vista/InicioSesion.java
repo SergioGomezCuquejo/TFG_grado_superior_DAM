@@ -113,7 +113,7 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
 
             } else {
                 if(contrasenaUsuario.length() < 6){
-                    mostrarError("La contraseña debe tener al ménos 6 carácteres.");
+                    mostrarError("La contraseña debe tener al ménos 6 caracteres.");
                 } else {
                     mostrarError("La contraseña debe incluir al menos una letra mayúscula, un número y un carácter especial.");
                 }

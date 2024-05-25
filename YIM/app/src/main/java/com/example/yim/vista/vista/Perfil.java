@@ -34,7 +34,6 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     private FirebaseAuth auth;
-    private FirebaseUser user;
     ImageButton guardarIB, editarIB, cancelarIB;
     ImageView imagenPerfil, imagenPerfilMenu;
     TextView nombreTV, email, genero, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
@@ -43,7 +42,6 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
     ProgressDialog progressDialog;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +50,10 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         //Inicializar instancias.
         auth = FirebaseAuth.getInstance();
         firebaseManager = new FirebaseManager();
+        FirebaseUser user = auth.getCurrentUser();
 
 
         //Controlar que si se ha cerrado sesión lleve a la interfaz InicioSesion.
-        user = auth.getCurrentUser();
         if(user == null){
             cambiarActivity(InicioSesion.class);
         }
@@ -91,6 +89,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
 
+
+
         //Listeners.
         guardarIB.setOnClickListener(this);
         editarIB.setOnClickListener(this);
@@ -100,12 +100,14 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
 
         logros.setOnClickListener(this);
 
+        politica.setOnClickListener(this);
         cerrarSesion.setOnClickListener(this);
 
         imagenCasaMenu.setOnClickListener(this);
         imagenCalendarioMenu.setOnClickListener(this);
         imagenEstadisticasMenu.setOnClickListener(this);
         imagenUsuarioMenu.setOnClickListener(this);
+
 
 
         //Mostrar datos.
@@ -164,19 +166,23 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 subirImagen();
                 break;
 
-            case "cerrar_sesion":
-                CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
+            case "politica":
+                cambiarActivity(PoliticasPrivacidad.class);
                 break;
-            case "imagen_casa":
+            case "cerrar_sesion":
+                cambiarActivity();
+                break;
+
+            case "imagen_casa_menu":
                 cambiarActivity(Inicio.class);
                 break;
-            case "imagen_calendario":
+            case "imagen_calendario_menu":
                 cambiarActivity(RutinaSemanal.class);
                 break;
-            case "imagen_estadisticas":
+            case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
-            case "imagen_usuario":
+            case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);
                 break;
         }
@@ -271,6 +277,9 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity(Class<?> activity) {
         CambiarActivity.cambiar(this, activity);
+    }
+    private void cambiarActivity() {
+        CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
     }
 
 

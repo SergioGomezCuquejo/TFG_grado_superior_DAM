@@ -3,30 +3,23 @@ package com.example.yim.modelo.tablas;
 import java.util.ArrayList;
 
 public class TablaUsuario {
-    private TablaPerfil perfil;
     private ArrayList<TablaEjercicioUsuario> ejercicios;
     private ArrayList<TablaLogroUsuario> logros;
     private ArrayList<TablaMusculoUsuario> musculos;
+    private TablaPerfil perfil;
 
     public TablaUsuario() {
-        perfil = new TablaPerfil();
-        musculos = new ArrayList<TablaMusculoUsuario>();
-        ejercicios = new ArrayList<TablaEjercicioUsuario>();
     }
 
-    public TablaUsuario(TablaPerfil perfil, ArrayList<TablaEjercicioUsuario> ejercicios, ArrayList<TablaLogroUsuario> logros,
-                        ArrayList<TablaMusculoUsuario> musculos) {
-        this.perfil = perfil;
+    public TablaUsuario(ArrayList<TablaEjercicioUsuario> ejercicios, ArrayList<TablaLogroUsuario> logros,
+                        ArrayList<TablaMusculoUsuario> musculos, TablaPerfil perfil) {
         this.ejercicios = ejercicios;
         this.logros = logros;
         this.musculos = musculos;
+        this.perfil = perfil;
     }
 
-    public TablaPerfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(TablaPerfil perfil) {
+    public TablaUsuario(TablaPerfil perfil) {
         this.perfil = perfil;
     }
 
@@ -46,11 +39,19 @@ public class TablaUsuario {
         this.logros = logros;
     }
 
-    public  ArrayList<TablaMusculoUsuario> getMusculos() {
+    public ArrayList<TablaMusculoUsuario> getMusculos() {
         return musculos;
     }
 
-    public void setMusculos( ArrayList<TablaMusculoUsuario> musculos) {
+    public void setMusculos(ArrayList<TablaMusculoUsuario> musculos) {
         this.musculos = musculos;
+    }
+
+    public TablaPerfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(TablaPerfil perfil) {
+        this.perfil = perfil;
     }
 }

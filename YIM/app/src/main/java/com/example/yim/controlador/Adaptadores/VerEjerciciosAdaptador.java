@@ -46,8 +46,6 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
         String nombreEjercicio = ejercicioUsuario.getNombre();
 
 
-
-
         if (nombreEjercicio.charAt(0) == '-' ){  //Creado por el usuario
             holder.ejercicio.setOnClickListener(new View.OnClickListener() {
                 @Override

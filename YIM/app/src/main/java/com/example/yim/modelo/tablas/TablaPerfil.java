@@ -6,13 +6,6 @@ public class TablaPerfil {
     private String email, genero, imagen, nombre;
 
     public TablaPerfil() {
-        altura = 0;
-        edad = 0;
-        email = "";
-        genero = "";
-        imagen = "";
-        nombre = "";
-        peso = 0;
     }
 
     public TablaPerfil(double altura, int edad, String email, String genero,
@@ -24,6 +17,11 @@ public class TablaPerfil {
         this.imagen = imagen;
         this.nombre = nombre;
         this.peso = peso;
+    }
+
+    public TablaPerfil(String email, String nombre) {
+        this.email = email;
+        this.nombre = nombre;
     }
 
     public double getAltura() {

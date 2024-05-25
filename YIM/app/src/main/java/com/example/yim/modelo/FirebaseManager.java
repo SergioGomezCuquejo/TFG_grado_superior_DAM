@@ -77,7 +77,134 @@ public class FirebaseManager {
         rutinasUsuarioReference = usuariosReference.child(IDUsuario).child("rutinas"); //Nodo RUTINAS del nodo USUARIOS.
     }
 
-    // todo Nodo EJERCICIOS del nodo USUARIO
+    // Nodo EJERCICIOS.
+    // Obtener ejercicios.
+    public void obtenerEjercicios(Context context, FirebaseCallbackEjercicios callback){
+        try {
+            ejerciciosReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjercicio> ejercicios = new ArrayList<>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot ejerciciosSnapshot : dataSnapshot.getChildren()) {
+                            ejercicios.add(ejerciciosSnapshot.getValue(TablaEjercicio.class));
+                        }
+
+                    } else {
+                        mostrarToast(context, "No hay ejercicios disponibles");
+                    }
+
+                    callback.onCallback(ejercicios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los ejercicios.");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Nodo LOGROS.
+    // Obtener logros.
+    public void obtenerLogros(Context context, FirebaseCallbackLogros callback){
+        try {
+            logrosReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaLogro> logros = new ArrayList<>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot logrosSnapshot : dataSnapshot.getChildren()) {
+                            logros.add(logrosSnapshot.getValue(TablaLogro.class));
+                        }
+
+                    } else {
+                        mostrarToast(context, "No hay logros disponibles");
+                    }
+
+                    callback.onCallback(logros);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los logros.");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los logros.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Nodo MUSCULOS.
+    // Obtener músculos.
+    public void obtenerMusculos(Context context, FirebaseCallbackMusculos callback){
+        try {
+            musculosReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaMusculo> musculos = new ArrayList<>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot musculosSnapshot : dataSnapshot.getChildren()) {
+                            musculos.add(musculosSnapshot.getValue(TablaMusculo.class));
+                        }
+
+                    } else {
+                        mostrarToast(context, "No hay músculos disponibles");
+                    }
+
+                    callback.onCallback(musculos);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los músculos.");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los músculos.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Nodo USUARIOS.
+
+    // Crear usuario. todo
+    public void agregarUsuario(Context context, String IDUsuario, TablaUsuario usuario, FirebaseCallbackBoolean callback) {
+        try{
+            usuariosReference.child(IDUsuario).setValue(usuario, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean agregado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al agregar el usuario: " + databaseError.getMessage());
+                        agregado = false;
+                    } else {
+                        agregado = true;
+                    }
+                    callback.onCallback(agregado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los usuarios.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Obtener usuario. todo
+
+    // Actualizar usurio. todo
+
+    // Eliminar usuario. todo
+
+
+    // todo Nodo EJERCICIOS del nodo USUARIOS.
     // Crear ejercicio.
     public void agregarEjercicio(Context context, TablaEjercicioUsuario nuevoEjercicio, FirebaseCallbackBoolean callback){
 
@@ -216,7 +343,7 @@ public class FirebaseManager {
     // Eliminar ejercicio. todo
 
 
-    //todo Nodo LOGROS del nodo USUARIO
+    //todo Nodo LOGROS del nodo USUARIOS.
     // Crear logro. todo
     // Obtener logros.
     public void obtenerLogrosUsuario(Context context, FirebaseCallbackLogrosUsuario callback) {
@@ -255,7 +382,7 @@ public class FirebaseManager {
     // Eliminar logro. todo
 
 
-    // todo Nodo PERFIL del nodo USUARIO
+    // todo Nodo PERFIL del nodo USUARIOS.
     // Crear perfil. todo
 
     // Obtener perfil.
@@ -308,11 +435,31 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
+    public void actualizarPerfil(Context context, String urlImagen, FirebaseCallbackBoolean callback){
+        try{
+            perfilUsuarioReference.child("imagen").setValue(urlImagen, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar la imagen del perfil: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el perfil del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
     // Eliminar perfil. todo
 
 
-    // todo Nodo MUSCULOS del nodo USUARIO
+    // todo Nodo MUSCULOS del nodo USUARIOS.
     // Crear músculo. todo
 
     // Obtener músculos.
@@ -373,12 +520,40 @@ public class FirebaseManager {
 
     // Eliminar músculo. todo
 
-    // todo Nodo RUTINA ACTIVA del nodo USUARIO
+    // todo Nodo RUTINA ACTIVA del nodo USUARIOS.
     // Crear rutina activa. todo
     // Obtener rutina activa.todo
+    public void obtenerRutinaActiva(Context context, FirebaseCallbackRutinaActiva callback) {
+        try {
+            rutinaActivaUsuarioReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
+
+                    if (dataSnapshot.exists()) {
+                        rutinaActiva = dataSnapshot.getValue(TablaRutinaActiva.class);
+
+                    } else {
+                        mostrarToast(context, "Rutina activa no encontrada.");
+                    }
+
+                    callback.onCallback(rutinaActiva);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    MostratToast.mostrarToast(context, "Error al obtener la rutina activa del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener la rutina activa del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
 
     // Actualizar rutina activa.
-    public void actualizarRutina(Context context, int numDia, int numEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
+    public void actualizarRutinaActiva(Context context, int numDia, int numEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
         try{
             DatabaseReference historialRutinaActivaUsuarioReference = rutinaActivaUsuarioReference.child("semana").child(String.valueOf(numDia-1)).
                     child("ejercicios").child(String.valueOf(numEjercicio)).child("historial");
@@ -400,7 +575,7 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
-    public void actualizarRutina(Context context, int numDia, int numEjercicio, int seriesRealizadas, FirebaseCallbackBoolean callback){
+    public void actualizarRutinaActiva(Context context, int numDia, int numEjercicio, int seriesRealizadas, FirebaseCallbackBoolean callback){
         try{
             DatabaseReference seriesRutinaActivaUsuarioReference = rutinaActivaUsuarioReference.child("semana").child(String.valueOf(numDia-1)).
                     child("ejercicios").child(String.valueOf(numEjercicio)).child("series_realizadas");
@@ -418,7 +593,31 @@ public class FirebaseManager {
                 }
             });
         } catch (Exception ex) {
-            mostrarToast(context, "Error al obtener las rutinas del usuario.");
+            mostrarToast(context, "Error al obtener la rutina activa del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void actualizarRutinaActiva(Context context, TablaRutinaUsuario rutina){
+        try{
+            rutinaActivaUsuarioReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    long id = dataSnapshot.getChildrenCount();
+
+                    for(TablaDiaRutinaUsuario diaRutinaUsuario : rutina.getSemana()){
+                        diaRutinaUsuario.setDia((int) id+1);
+                        rutinaActivaUsuarioReference.child("semana").child(String.valueOf(id)).setValue(diaRutinaUsuario);
+                        id++;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener la rutina activa del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener la rutina activa del usuario.");
             ex.printStackTrace();
         }
     }
@@ -427,7 +626,7 @@ public class FirebaseManager {
 
 
 
-    // todo Nodo RUTINAS del nodo USUARIO.
+    // todo Nodo RUTINAS del nodo USUARIOS.
 
     // Crear rutina.
     public void agregarRutina(Context context, TablaRutinaUsuario rutina, FirebaseCallbackBoolean callback){
@@ -452,10 +651,68 @@ public class FirebaseManager {
         }
     }
 
-    // Obtener rutinas. todo
+    // Obtener rutinas.
+    public void obtenerRutinasUsuario(Context context, FirebaseCallbackRutinasUsuario callback){
+        try {
+            rutinasUsuarioReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaRutinaUsuario> rutinasUsuario = new ArrayList<TablaRutinaUsuario>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot rutinaSnapshot : dataSnapshot.getChildren()) {
+                            TablaRutinaUsuario rutina = rutinaSnapshot.getValue(TablaRutinaUsuario.class);
+                            rutina.setID(rutinaSnapshot.getKey());
+                            rutinasUsuario.add(rutina);
+                        }
+
+                    } else {
+                        mostrarToast(context, "No se han encontrado rutinas del usuairo.");
+                    }
+
+                    callback.onCallback(rutinasUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener las rutinas del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener las rutinas del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void obtenerRutinaUsuario(Context context, String IDRutina, FirebaseCallbackRutinaUsuario callback){
+        try {
+            rutinasUsuarioReference.child(IDRutina).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaRutinaUsuario rutinaUsuario = new TablaRutinaUsuario();
+
+                    if (dataSnapshot.exists()) {
+                        rutinaUsuario = dataSnapshot.getValue(TablaRutinaUsuario.class);
+
+                    } else {
+                        mostrarToast(context, "Rutina no encontrada.");
+                    }
+
+                    callback.onCallback(rutinaUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener la rutina del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener las rutinas del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
     // Actualizar rutina.
-    public void actualizarRutina(Context context, TablaRutinaUsuario rutina, FirebaseCallbackBoolean callback){
+    public void actualizarRutinaActiva(Context context, TablaRutinaUsuario rutina, FirebaseCallbackBoolean callback){
         rutinasUsuarioReference.child(rutina.getID()).setValue(rutina, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -492,219 +749,9 @@ public class FirebaseManager {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void obtenerEjercicios(Context context, FirebaseCallbackEjercicios callback){
-        try{
-            ejerciciosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaEjercicio> ejercicios = new ArrayList<>();
-
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot ejerciciosSnapshot : dataSnapshot.getChildren()) {
-                            ejercicios.add(ejerciciosSnapshot.getValue(TablaEjercicio.class));
-                        }
-
-                    } else {
-                        Toast.makeText(context, "No hay ejercicios disponibles", Toast.LENGTH_SHORT).show();
-                    }
-
-                    callback.onCallback(ejercicios);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los ejercicios");
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al obtener los ejercicios.");
-            e.printStackTrace();
-        }
-    }
-
-    public void obtenerLogros(Context context, FirebaseCallbackLogros callback){
-        try{
-            logrosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaLogro> logros = new ArrayList<>();
-
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot logrosSnapshot : dataSnapshot.getChildren()) {
-                            logros.add(logrosSnapshot.getValue(TablaLogro.class));
-                        }
-
-                    } else {
-                        Toast.makeText(context, "No hay logros disponibles", Toast.LENGTH_SHORT).show();
-                    }
-
-                    callback.onCallback(logros);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los logros");
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al obtener los logros.");
-            e.printStackTrace();
-        }
-    }
-
-    public void obtenerMusculos(Context context, FirebaseCallbackMusculos callback){
-        try{
-            musculosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaMusculo> musculos = new ArrayList<>();
-
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot musculosSnapshot : dataSnapshot.getChildren()) {
-                            musculos.add(musculosSnapshot.getValue(TablaMusculo.class));
-                        }
-
-                    } else {
-                        Toast.makeText(context, "No hay músculos disponibles", Toast.LENGTH_SHORT).show();
-                    }
-
-                    callback.onCallback(musculos);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los músculos");
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al obtener los músculos.");
-            e.printStackTrace();
-        }
-    }
-
-
-    public void agregarUsuario(Context context, String idAuth, String email, String nombre) {
-        try{
-
-            obtenerEjercicios(context, new FirebaseCallbackEjercicios() {
-                @Override
-                public void onCallback(ArrayList<TablaEjercicio> ejercicios) {
-
-                    obtenerLogros(context, new FirebaseCallbackLogros() {
-                        @Override
-                        public void onCallback(ArrayList<TablaLogro> logros) {
-
-
-                                obtenerMusculos(context, new FirebaseCallbackMusculos() {
-                                    @Override
-                                    public void onCallback(ArrayList<TablaMusculo> musculos) {
-
-                                        agregarUsuario(context, idAuth, email, nombre, ejercicios, logros, musculos);
-
-                                    }
-                                });
-
-                        }
-                    });
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al agregar el usuario.");
-            e.printStackTrace();
-        }
-    }
-
-    public void agregarUsuario(Context context, String idAuth, String email, String nombre,
-                               ArrayList<TablaEjercicio> ejercicios, ArrayList<TablaLogro> logros, ArrayList<TablaMusculo> musculos){
-        try{
-            TablaUsuario nuevoUsuario = new TablaUsuario();
-
-            //Perfil
-            nuevoUsuario.getPerfil().setEmail(email);
-            nuevoUsuario.getPerfil().setNombre(nombre);
-
-            //Ejercicios
-            ArrayList<TablaEjercicioUsuario> ejerciciosUsuario = new ArrayList<TablaEjercicioUsuario>();
-            TablaEjercicioUsuario ejercicioUsuario;
-            for (TablaEjercicio ejercicio : ejercicios) {
-                ejercicioUsuario = new TablaEjercicioUsuario(ejercicio);
-                ejerciciosUsuario.add(ejercicioUsuario);
-            }
-            nuevoUsuario.setEjercicios(ejerciciosUsuario);
-
-            //Logros
-            ArrayList<TablaLogroUsuario> logrosUsuario = new ArrayList<TablaLogroUsuario>();
-            TablaLogroUsuario logroUsuario;
-            for (TablaLogro logro : logros) {
-                logroUsuario = new TablaLogroUsuario(logro);
-                logrosUsuario.add(logroUsuario);
-            }
-            nuevoUsuario.setLogros(logrosUsuario);
-
-            //Músculos
-            ArrayList<TablaMusculoUsuario> musculosUsuario = new ArrayList<TablaMusculoUsuario>();
-            TablaMusculoUsuario musculoUsuario;
-            for (TablaMusculo musculo : musculos) {
-                musculoUsuario = new TablaMusculoUsuario(musculo.getColor_fondo(), musculo.getColor_letras(), musculo.getNombre());
-                musculosUsuario.add(musculoUsuario);
-            }
-            nuevoUsuario.setMusculos(musculosUsuario);
-
-            //Enviar
-            usuariosReference.child(idAuth).setValue(nuevoUsuario);
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al agregar el usuario.");
-            e.printStackTrace();
-        }
-    }
-
-
-    public void obtenerUsuario(Context context, FirebaseCallbackUsuario callback){
-        try{
-            usuariosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaUsuario usuario = null;
-
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            usuario = usuarioSnapshot.getValue(TablaUsuario.class);
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "No hay usuarios.");
-                    }
-
-                    callback.onCallback(usuario);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los usuarios");
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al obtener el usuario.");
-            e.printStackTrace();
-        }
-    }
 
 
 
-    public boolean modificarPerfil(Context context, String urlImagen){
-        boolean actualizado = false;
-        try{
-            DatabaseReference rutinaUsuarioReference = usuariosReference.child(idUsuario).child("perfil");
-
-            rutinaUsuarioReference.child("imagen").setValue(urlImagen);
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
-            e.printStackTrace();
-        }
-        return actualizado;
-    }
 
 
 
@@ -794,73 +841,7 @@ public class FirebaseManager {
         return actualizados;
     }
 
-    public void obtenerRutinasUsuario(Context context, FirebaseCallbackRutinasUsuario callback){
-        try {
-            usuariosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaRutinaUsuario> rutinasUsuario = new ArrayList<TablaRutinaUsuario>();
 
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            DataSnapshot rutinasSnapshot = usuarioSnapshot.child("rutinas");
-
-                            for (DataSnapshot rutinaSnapshot : rutinasSnapshot.getChildren()) {
-                                TablaRutinaUsuario rutina = rutinaSnapshot.getValue(TablaRutinaUsuario.class);
-                                rutina.setID(rutinaSnapshot.getKey());
-                                rutinasUsuario.add(rutina);
-                            }
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
-                    }
-
-                    callback.onCallback(rutinasUsuario);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener las rutinas del usuario");
-                }
-            });
-        } catch (Exception ex) {
-            MostratToast.mostrarToast(context, "Error al obtener las rutinas del usuario.");
-            ex.printStackTrace();
-        }
-    }
-
-    public void obtenerRutinaUsuario(Context context, String idRutina, FirebaseCallbackRutinaUsuario callback){
-        try{
-            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaRutinaUsuario rutinaUsuario = new TablaRutinaUsuario();
-
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot rutinaSnapshot = dataSnapshot.child(idUsuario).child("rutinas").child(idRutina);
-
-                        if (rutinaSnapshot.exists()) {
-                            rutinaUsuario = rutinaSnapshot.getValue(TablaRutinaUsuario.class);
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "No hay rutinas.");
-                    }
-
-                    callback.onCallback(rutinaUsuario);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener las rutinas");
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al obtener la rutina.");
-            e.printStackTrace();
-        }
-    }
 
 
 
@@ -944,38 +925,6 @@ public class FirebaseManager {
         return eliminada;
     }
 
-    public void obtenerRutinaActiva(Context context, FirebaseCallbackRutinaActiva callback) {
-        try {
-            usuariosReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
-
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            DataSnapshot rutinaActivaSnapshot = usuarioSnapshot.child("rutina_activa");
-
-                            rutinaActiva = rutinaActivaSnapshot.getValue(TablaRutinaActiva.class);
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
-                    }
-
-                    callback.onCallback(rutinaActiva);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener la rutina del usuario");
-                }
-            });
-        } catch (Exception ex) {
-            MostratToast.mostrarToast(context, "Error al obtener la rutina del usuario.");
-            ex.printStackTrace();
-        }
-    }
 
 
 
@@ -996,38 +945,7 @@ public class FirebaseManager {
         return agregada;
     }
 
-    public void modificarRutinaActiva(Context context, String idRutina){
-        try{
 
-            obtenerRutinaUsuario(context, idRutina, new FirebaseCallbackRutinaUsuario() {
-                @Override
-                public void onCallback(TablaRutinaUsuario rutina) {
-
-                    DatabaseReference rutinaActivaReference = usuariosReference.child(idUsuario).child("rutina_activa").child("semana");
-                    rutinaActivaReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            long id = dataSnapshot.getChildrenCount();
-
-                            for(TablaDiaRutinaUsuario diaRutinaUsuario : rutina.getSemana()){
-                                diaRutinaUsuario.setDia((int) id+1);
-                                rutinaActivaReference.child(String.valueOf(id)).setValue(diaRutinaUsuario);
-                                id++;
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            MostratToast.mostrarToast(context, "Error al obtener la rutina activa del usuario");
-                        }
-                    });
-                }
-            });
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar el perfil.");
-            e.printStackTrace();
-        }
-    }
 
     public boolean eliminarRutinaActiva(Context context){
         boolean eliminada = false;
@@ -1042,7 +960,5 @@ public class FirebaseManager {
         }
         return eliminada;
     }
-
-
 
 }

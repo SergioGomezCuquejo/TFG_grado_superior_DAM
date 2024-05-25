@@ -24,7 +24,8 @@
             android:text="Rutina activa "
             android:textColor="@color/blanco"
             android:textSize="16sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            tools:ignore="HardcodedText" />
 
 
 
@@ -47,7 +48,8 @@
             android:textColor="@color/gris_oscuro"
             android:gravity="center"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -82,7 +84,18 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/_style_circulo_fondo_oscuro__borde_blanco"
-                android:src="@drawable/mas" />
+                android:src="@drawable/mas"
+                tools:ignore="ContentDescription" />
+
+
+            <ProgressBar
+                android:id="@+id/cargando"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:indeterminateTint="@color/gris_clarito" />
         </RelativeLayout>
 
         <LinearLayout
@@ -93,76 +106,74 @@
             android:paddingTop="2dp"
             android:baselineAligned="false">
 
-            <LinearLayout
+
+            <FrameLayout
                 android:id="@+id/imagen_casa_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/casa"
                     android:contentDescription="@string/imagen_casa" />
 
-            </LinearLayout>
+            </FrameLayout>
 
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_calendario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_rectangulo_negro_traslucido__borde_negro_izquierda"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/_style_rectangulo_negro_traslucido__borde_negro_izquierda">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/calendario"
                     android:contentDescription="@string/imagen_casa" />
 
-            </LinearLayout>
+            </FrameLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_estadisticas_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_borde_negro_derecha_izquierda"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/_style_borde_negro_derecha_izquierda">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/estadisticas"
                     android:contentDescription="@string/imagen_estadisticas" />
 
-            </LinearLayout>
+            </FrameLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_usuario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_perfil_menu"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/usuario"
-                    android:contentDescription="@string/imagen_usuario" />
+                    app:shapeAppearanceOverlay="@style/radius" />
 
-            </LinearLayout>
+            </FrameLayout>
+
         </LinearLayout>
     </LinearLayout>
 

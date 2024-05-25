@@ -128,7 +128,7 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
     }
 
 
-    //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    // Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
     private void mostrarImagenPerfil(){
         try{
             firebaseManager.obtenerPerfil(this, new FirebaseCallbackPerfil() {
@@ -150,13 +150,13 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
     }
 
 
-    //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    // Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity(Class<?> activity) {
         CambiarActivity.cambiar(this, activity);
     }
 
 
-    //Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    // Método para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
     private void mostrarToast(String mensaje){
         MostratToast.mostrarToast(this, mensaje);
     }

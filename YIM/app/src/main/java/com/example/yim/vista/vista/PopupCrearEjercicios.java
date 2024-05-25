@@ -25,7 +25,6 @@ import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.controlador.ValidarDatos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -252,7 +251,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         imagenEjercicio = imagen.getText().toString();
 
         nombreEjercicio = nombreET.getText().toString();
-        nombreVacio = ValidarDatos.campoVacio(nombreEjercicio);
+        nombreVacio = nombreEjercicio.isEmpty() || nombreEjercicio.equals(" ");
 
         notasEjercicio = notasET.getText().toString();
 
@@ -324,7 +323,6 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             ex.printStackTrace();
         }
     }
-
 
 
     //Método que permite el cambiado de colores de una vista.

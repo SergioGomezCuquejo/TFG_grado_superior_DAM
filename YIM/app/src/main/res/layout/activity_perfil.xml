@@ -310,13 +310,12 @@
                             tools:ignore="Autofill,HardcodedText,LabelFor" />
                         <TextView
                             android:id="@+id/peso_tv"
-                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
-                            android:text="0"
+                            android:text="0.0"
                             android:textSize="20sp"
                             tools:ignore="HardcodedText" />
 
@@ -372,7 +371,7 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
-                            android:text="0"
+                            android:text="0.0"
                             android:textSize="20sp"
                             tools:ignore="HardcodedText" />
 
@@ -483,77 +482,75 @@
             android:paddingTop="2dp"
             android:baselineAligned="false">
 
-            <LinearLayout
+
+            <FrameLayout
                 android:id="@+id/imagen_casa_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/casa"
                     android:contentDescription="@string/imagen_casa" />
 
-            </LinearLayout>
+            </FrameLayout>
 
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_calendario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_borde_negro_izquierda"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/_style_borde_negro_izquierda">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/calendario"
                     android:contentDescription="@string/imagen_casa" />
 
-            </LinearLayout>
+            </FrameLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_estadisticas_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style_borde_negro_derecha_izquierda"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/_style_borde_negro_derecha_izquierda">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="fitCenter"
+                    android:layout_gravity="center"
                     android:src="@drawable/estadisticas"
                     android:contentDescription="@string/imagen_estadisticas" />
 
-            </LinearLayout>
+            </FrameLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/imagen_usuario_menu"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@color/negro_traslucido"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_weight="1">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imagen_perfil_menu"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/usuario"
                     app:shapeAppearanceOverlay="@style/radius" />
 
-            </LinearLayout>
+            </FrameLayout>
+
         </LinearLayout>
 
     </LinearLayout>

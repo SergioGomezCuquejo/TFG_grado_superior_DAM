@@ -26,7 +26,6 @@ import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
-import com.example.yim.vista.controlador.ValidarDatos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -372,7 +371,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         imagenEjercicio = imagenTV.getText().toString();
 
         nombreEjercicio = nombreET.getText().toString();
-        nombreVacio = ValidarDatos.campoVacio(nombreEjercicio);
+        nombreVacio = nombreEjercicio.isEmpty() || nombreEjercicio.equals(" ");
 
         notasEjercicio = notasET.getText().toString();
 
