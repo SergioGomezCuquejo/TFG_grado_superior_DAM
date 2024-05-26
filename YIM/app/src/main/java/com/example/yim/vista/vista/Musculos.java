@@ -86,10 +86,8 @@ public class Musculos extends AppCompatActivity implements View.OnClickListener 
                 cambiarActivity(Inicio.class);
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(RutinaSemanal.class);
                 break;
-
-            case "atras_iv":
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;

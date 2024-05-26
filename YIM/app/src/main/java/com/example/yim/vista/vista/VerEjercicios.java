@@ -13,10 +13,13 @@ import android.widget.ProgressBar;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.VerEjerciciosAdaptador;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.controlador.Adaptadores.VerEjerciciosCreadosAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosCreados;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.Imagenes;
@@ -29,7 +32,7 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     ImageView imagenPerfilMenu, agregarEjercicio;
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewCreados, recyclerViewPorDefecto;
     ProgressBar cargando;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
 
@@ -46,7 +49,8 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         //Referencias de las vistas.
         cargando = findViewById(R.id.cargando);
 
-        recyclerView = findViewById(R.id.ejercicios);
+        recyclerViewCreados = findViewById(R.id.ejercicios_creados);
+        recyclerViewPorDefecto = findViewById(R.id.ejercicios_por_defecto);
 
         agregarEjercicio = findViewById(R.id.agregar_ejercicio);
 
@@ -69,7 +73,8 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
         //Mostrar datos.
         try{
             mostrarImagenPerfil();
-            mostrarEjercicios();
+            mostrarEjerciciosCreados();
+            mostrarEjerciciosPorDefecto();
 
         } catch (Exception ex) {
             mostrarToast("Error al mostrar los ejercicios.");
@@ -95,10 +100,9 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
                 cambiarActivity(Inicio.class);
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(RutinaSemanal.class);
                 break;
 
-            case "atras_iv":
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
@@ -109,14 +113,30 @@ public class VerEjercicios extends AppCompatActivity implements View.OnClickList
     }
 
     // Método para mostrar los ejercicios y su información desde un adaptador.
-    public void mostrarEjercicios(){
+    public void mostrarEjerciciosCreados(){
         try{
-            firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
+            firebaseManager.obtenerEjerciciosCreados(this, new FirebaseCallbackEjerciciosCreados() {
                 @Override
-                public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
+                public void onCallback(ArrayList<TablaEjercicioCreado> ejerciciosUsuarios) {
+                    recyclerViewCreados.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
+                    VerEjerciciosCreadosAdaptador adaptador = new VerEjerciciosCreadosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
+                    recyclerViewCreados.setAdapter(adaptador);
+                }
+            });
+
+        }catch (Exception ex){
+            mostrarToast("Error al obtener los musculos del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void mostrarEjerciciosPorDefecto(){
+        try{
+            firebaseManager.obtenerEjerciciosPorDefecto(this, new FirebaseCallbackEjerciciosPorDefecto() {
+                @Override
+                public void onCallback(ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuarios) {
+                    recyclerViewPorDefecto.setLayoutManager(new LinearLayoutManager(VerEjercicios.this));
                     VerEjerciciosAdaptador adaptador = new VerEjerciciosAdaptador(VerEjercicios.this, ejerciciosUsuarios);
-                    recyclerView.setAdapter(adaptador);
+                    recyclerViewPorDefecto.setAdapter(adaptador);
                 }
             });
 

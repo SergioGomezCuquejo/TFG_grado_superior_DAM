@@ -53,8 +53,8 @@ public class LogrosAdaptador extends RecyclerView.Adapter<LogrosAdaptador.Logros
         if(logro.getProgreso() < logro.getTotal()) {
             holder.progreso.setVisibility(View.VISIBLE);
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams)  holder.progreso.getLayoutParams();
-            int progreso = (int) (( ((double) logro.getProgreso()) / logro.getTotal()) * 80);
-            layoutParams.width = (int) ((80 - progreso) * Resources.getSystem().getDisplayMetrics().density);
+            int progreso = (int) (( ((double) logro.getProgreso()) / logro.getTotal()) * 100);
+            layoutParams.width = (int) ((100 - progreso) * Resources.getSystem().getDisplayMetrics().density);
             layoutParams.setMarginStart( (int) (progreso * Resources.getSystem().getDisplayMetrics().density));
 
             holder.progreso.setLayoutParams(layoutParams);

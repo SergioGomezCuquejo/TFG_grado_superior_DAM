@@ -1,7 +1,5 @@
 package com.example.yim.controlador.Adaptadores;
 
-import static androidx.browser.customtabs.CustomTabsClient.getPackageName;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
+import com.example.yim.vista.controlador.MostratToast;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 
-public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAdaptador.VerEjerciciosViewHolder> {
+public class VerEjerciciosCreadosAdaptador extends RecyclerView.Adapter<VerEjerciciosCreadosAdaptador.VerEjerciciosViewHolder> {
 
-    private ArrayList<TablaEjercicioPorDefecto> ejercicios;
+    private ArrayList<TablaEjercicioCreado> ejercicios;
 
     private Context context;
 
-    public VerEjerciciosAdaptador(Context context, ArrayList<TablaEjercicioPorDefecto> ejercicios) {
+    public VerEjerciciosCreadosAdaptador(Context context, ArrayList<TablaEjercicioCreado> ejercicios) {
         this.context = context;
         this.ejercicios = ejercicios;
     }
@@ -41,8 +42,8 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
 
     @Override
     public void onBindViewHolder(@NonNull VerEjerciciosViewHolder holder, int position) {
-        String musculos = "";
-        TablaEjercicioPorDefecto ejercicioUsuario = ejercicios.get(position);
+        String musculos, nombre;
+        TablaEjercicioCreado ejercicioUsuario = ejercicios.get(position);
         String nombreEjercicio = ejercicioUsuario.getNombre();
 
 
@@ -54,10 +55,21 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
         });
 
         if(ejercicioUsuario.getImagen() != null){
-            holder.imagen.setImageResource(context.getResources().getIdentifier(ejercicioUsuario.getImagen(), "drawable", context.getPackageName()));
+            Imagenes.mostrarImagen(context, ejercicioUsuario.getImagen(),  holder.imagenIV);
+        }else{
+            holder.imagenTexto.setVisibility(View.VISIBLE);
+            holder.imagenIV.setVisibility(View.INVISIBLE);
+            nombre = ejercicioUsuario.getNombre().toUpperCase();
+            nombre = nombre.substring(1);
+            if (nombre.length() >= 3) {
+                nombre = nombre.substring(0, 3);
+            }
+            holder.imagenTexto.setText(nombre);
         }
-        holder.nombre.setText(nombreEjercicio);
 
+        holder.nombre.setText(nombreEjercicio.substring(1));
+
+        musculos = "";
         for(String musculo : ejercicioUsuario.getMusculos()){
             musculos += musculo + ", ";
         }
@@ -73,14 +85,14 @@ public class VerEjerciciosAdaptador extends RecyclerView.Adapter<VerEjerciciosAd
 
     public static class VerEjerciciosViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout ejercicio;
-        ImageView imagen;
+        ImageView imagenIV;
         TextView nombre, musculos, imagenTexto;
 
 
         public VerEjerciciosViewHolder(@NonNull View itemView) {
             super(itemView);
             ejercicio = itemView.findViewById(R.id.ejercicio);
-            imagen = itemView.findViewById(R.id.imagen);
+            imagenIV = itemView.findViewById(R.id.imagen);
             imagenTexto = itemView.findViewById(R.id.imagen_texto);
             nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);

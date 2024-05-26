@@ -3,7 +3,7 @@ package com.example.yim.modelo.tablas;
 import java.util.ArrayList;
 
 public class TablaUsuario {
-    private ArrayList<TablaEjercicioUsuario> ejercicios;
+    private TablaEjerciciosUsuario ejercicios;
     private ArrayList<TablaLogroUsuario> logros;
     private ArrayList<TablaMusculoUsuario> musculos;
     private TablaPerfil perfil;
@@ -11,7 +11,7 @@ public class TablaUsuario {
     public TablaUsuario() {
     }
 
-    public TablaUsuario(ArrayList<TablaEjercicioUsuario> ejercicios, ArrayList<TablaLogroUsuario> logros,
+    public TablaUsuario(TablaEjerciciosUsuario ejercicios, ArrayList<TablaLogroUsuario> logros,
                         ArrayList<TablaMusculoUsuario> musculos, TablaPerfil perfil) {
         this.ejercicios = ejercicios;
         this.logros = logros;
@@ -23,11 +23,11 @@ public class TablaUsuario {
         this.perfil = perfil;
     }
 
-    public ArrayList<TablaEjercicioUsuario> getEjercicios() {
+    public TablaEjerciciosUsuario getEjercicios() {
         return ejercicios;
     }
 
-    public void setEjercicios(ArrayList<TablaEjercicioUsuario> ejercicios) {
+    public void setEjercicios(TablaEjerciciosUsuario ejercicios) {
         this.ejercicios = ejercicios;
     }
 

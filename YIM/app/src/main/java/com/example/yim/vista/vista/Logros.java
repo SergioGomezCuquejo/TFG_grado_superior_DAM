@@ -89,10 +89,8 @@ public class Logros extends AppCompatActivity implements View.OnClickListener {
                 cambiarActivity(Inicio.class);
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(RutinaSemanal.class);
                 break;
-
-            case "atras_iv":
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
@@ -110,7 +108,7 @@ public class Logros extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onCallback(ArrayList<TablaLogroUsuario> logrosUsuario) {
                     if(logrosUsuario.size() > 0){
-                        int columnas = 4;
+                        int columnas = 3;
 
                         layoutManager = new GridLayoutManager(Logros.this, columnas);
                         logros.setLayoutManager(layoutManager);

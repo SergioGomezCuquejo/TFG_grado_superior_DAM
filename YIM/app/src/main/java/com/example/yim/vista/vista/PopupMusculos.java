@@ -17,7 +17,6 @@ import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -27,6 +26,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     private TablaMusculoUsuario musculoUsuario;
+    private static final int REQUEST_CODE_PM = 5;
     ImageView cancelar, guardar;
     LinearLayout color_fondo, color_letras;
     TextView musculoTV, color_fondo_tv, color_letras_tv;
@@ -200,11 +200,26 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         ambilWarnaDialog.show();
     }
 
-
+    // Método para obtener la respuesta del botón que se pulsa en PopupAlerta.java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_PM) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    finish();
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity() {
-        CambiarActivity.cambiar(this, "Descartar cambios.", "¿Desea descartar los cambios no guardados?", "ir_a_musculos");
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", "Descartar cambios");
+        intent.putExtra("texto", "¿Desea descartar los cambios no guardados?");
+        startActivityForResult(intent, REQUEST_CODE_PM);
     }
 
 

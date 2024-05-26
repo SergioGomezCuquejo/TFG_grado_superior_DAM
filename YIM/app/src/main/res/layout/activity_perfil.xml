@@ -162,7 +162,6 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:textSize="20sp"
-                            android:background="@android:color/transparent"
                             tools:ignore="Autofill,LabelFor,TextFields" />
 
                     </LinearLayout>

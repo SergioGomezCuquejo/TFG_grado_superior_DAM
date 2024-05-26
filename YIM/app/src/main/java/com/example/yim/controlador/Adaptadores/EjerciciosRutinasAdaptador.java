@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioRutinaUsuario;
+import com.example.yim.vista.controlador.Imagenes;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -57,6 +58,10 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
 
             if (holder != null) {
                 TablaEjercicioRutinaUsuario ejercicioActualizado = new TablaEjercicioRutinaUsuario();
+                ejercicioActualizado.setID(ejercicioOriginal.getID());
+
+                ejercicioActualizado.setImagen(ejercicioOriginal.getImagen());
+
                 ejercicioActualizado.setMusculos(ejercicioOriginal.getMusculos());
                 ejercicioActualizado.setNombre(ejercicioOriginal.getNombre());
                 ejercicioActualizado.setPosicion(ejercicioOriginal.getPosicion());
@@ -79,8 +84,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
     @Override
     public void onBindViewHolder(@NonNull EjerciciosRutinasViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TablaEjercicioRutinaUsuario ejercicioRutinaUsuario = diaRutinaUsuario.getEjercicios().get(position);
-        String musculos = "";
-
+        String musculos, nombre;
         holder.ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +103,28 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
             }
         });
 
-        holder.imagen.setImageResource(R.drawable.curl_de_biceps_hombre);
-        holder.nombre.setText(ejercicioRutinaUsuario.getNombre());
+        if(ejercicioRutinaUsuario.getNombre().startsWith("-")){
+            if(ejercicioRutinaUsuario.getImagen() != null){
+                Imagenes.mostrarImagen(context, ejercicioRutinaUsuario.getImagen(),  holder.imagen);
+            }else{
+                holder.imagenTexto.setVisibility(View.VISIBLE);
+                holder.imagen.setVisibility(View.INVISIBLE);
+                nombre = ejercicioRutinaUsuario.getNombre().toUpperCase();
+                nombre = nombre.substring(1);
+                if (nombre.length() >= 3) {
+                    nombre = nombre.substring(0, 3);
+                }
+                holder.imagenTexto.setText(nombre);
+            }
+            holder.nombre.setText(ejercicioRutinaUsuario.getNombre().substring(1));
+        }else{
+            if(ejercicioRutinaUsuario.getImagen() != null){
+                holder.imagen.setImageResource(context.getResources().getIdentifier(ejercicioRutinaUsuario.getImagen(), "drawable", context.getPackageName()));
+            }
+            holder.nombre.setText(ejercicioRutinaUsuario.getNombre());
+        }
 
+        musculos= "";
         for(String musculo : ejercicioRutinaUsuario.getMusculos()){
             musculos += musculo + ", ";
         }
@@ -183,7 +206,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
     public static class EjerciciosRutinasViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout ejercicio;
         ShapeableImageView imagen;
-        TextView nombre, musculos;
+        TextView nombre, musculos, imagenTexto;
         LinearLayout editar, opciones;
         EditText minutos, segundos, series, repeticiones;
         ImageButton subirIB, bajarIB;
@@ -194,6 +217,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
             ejercicio = itemView.findViewById(R.id.ejercicio);
 
             imagen = itemView.findViewById(R.id.imagen);
+            imagenTexto = itemView.findViewById(R.id.imagen_texto);
 
             nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);

@@ -13,10 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yim.R;
-import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.controlador.ValidarDatos;
 import com.google.android.gms.tasks.OnCompleteListener;

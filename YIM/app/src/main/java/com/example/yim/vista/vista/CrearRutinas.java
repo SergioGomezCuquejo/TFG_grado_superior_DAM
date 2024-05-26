@@ -1,5 +1,6 @@
 package com.example.yim.vista.vista;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -37,13 +39,13 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     private TablaRutinaUsuario rutinaUsuario;
+    private Class<?> irA;
+    private static final int REQUEST_CODE_CR = 1;
     ImageView atrasIV, guardarIV, imagenPerfilMenu;
     EditText nombreET;
     RecyclerView diasRV;
     ProgressBar cargando;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +120,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
 
         switch (id){
             case "atras_iv":
-                cambiarActivity("ir_a_ver_rutinas");
+                irA = VerRutinas.class;
+                cambiarActivity();
                 break;
 
             case "guardar_iv":
@@ -126,22 +129,26 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case "imagen_casa_menu":
-                cambiarActivity("ir_a_inicio");
+                irA = Inicio.class;
+                cambiarActivity();
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity("ir_a_rutina_semanal");
+                irA = RutinaSemanal.class;
+                cambiarActivity();
                 break;
             case "imagen_estadisticas_menu":
-                cambiarActivity("ir_a_estadisticas");
+                irA = Estadisticas.class;
+                cambiarActivity();
                 break;
             case "imagen_usuario_menu":
-                cambiarActivity("ir_a_perfil");
+                irA = Perfil.class;
+                cambiarActivity();
                 break;
         }
     }
 
 
-    //Métodos para mostrar los datos de la rutina.
+    // Métodos para mostrar los datos de la rutina.
     private void mostrarRutina(TablaRutinaUsuario rutina){
 
         if(rutina.getInformacion() != null){
@@ -152,7 +159,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Obtenemos los colores de los músculos del usuario.
+    // Obtenemos los colores de los músculos del usuario.
     private void mostrarSemana(TablaRutinaUsuario rutina){
         try{
             firebaseManager.obtenerMusculosUsuario(CrearRutinas.this, new FirebaseCallbackMusculosUsuario() {
@@ -188,7 +195,6 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             mostrarToast("Escribe un nombre de rutina");
 
         }else{
-            //Comprobar si es una creación o modificación de rutina.
             if (rutinaUsuario.getInformacion() == null){
                 nueva = true;
                 infoRutinaUsuario = new TablaInfoRutinaUsuario(nombreRutina);
@@ -198,11 +204,11 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
             }
             rutinaUsuario.setInformacion(infoRutinaUsuario);
 
-            //Si no existe la rutina se creará.
+            // Si no existe se creará.
             if(nueva){
                 crearRutina();
 
-            //Si ya existe la rutina se actualizarán sus datos.
+            // Si ya existe se actualizarán sus datos.
             }else{
                 actualizarRutina();
             }
@@ -218,8 +224,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada) {
                         mostrarToast("Rutina creada correctamente");
-                        finish();
-                        cambiarActivity();
+                        cambiarActivity(VerRutinas.class);
                     } else {
                         mostrarToast("Error al crear la rutina");
                     }
@@ -236,13 +241,12 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     //Método para actualizar la rutina.
     private void actualizarRutina(){
         try{
-            firebaseManager.actualizarRutinaActiva(this, rutinaUsuario, new FirebaseCallbackBoolean() {
+            firebaseManager.actualizarRutina(this, rutinaUsuario, new FirebaseCallbackBoolean() {
                 @Override
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada) {
                         mostrarToast("Rutina actualizada correctamente");
-                        finish();
-                        cambiarActivity();
+                        cambiarActivity(VerRutinas.class);
                     } else {
                         mostrarToast("Error al actualizar la rutina");
                     }
@@ -278,12 +282,32 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
-    private void cambiarActivity() {
-        CambiarActivity.cambiar(this, VerRutinas.class);
+    // Método para obtener la respuesta del botón que se pulsa en PopupAlerta.java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_CR) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    cambiarActivity(irA);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
-    private void cambiarActivity(String ira) {
-        CambiarActivity.cambiar(this, "Descartar cambios", "¿Desea descartar los cambios no guardados?", ira);
+
+
+
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        CambiarActivity.cambiar(this, activity);
+        finish();
+    }
+    private void cambiarActivity() {
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", "Descartar cambios");
+        intent.putExtra("texto", "¿Desea descartar los cambios no guardados?");
+        startActivityForResult(intent, REQUEST_CODE_CR);
     }
 
 

@@ -31,7 +31,7 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
     ImageView atras, imagenPerfilMenu;
     RecyclerView recyclerView;
     ProgressBar cargando;
-    TextView diaTV;
+    TextView diaTV, sinEjercicios;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -48,16 +48,14 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
         //Obtener la rutina que se ha seleccionado.
         if(intent.hasExtra("diaRutinaActiva")) {
             diaRutinaActiva = (TablaDiaRutinaActiva) intent.getSerializableExtra("diaRutinaActiva");
-        }else{
-            diaRutinaActiva = null;
-            //todo hacer
         }
 
 
         //Referencias de las vistas.
         cargando = findViewById(R.id.cargando);
 
-        //agregar_ejercicio = findViewById(R.id.agregar_ejercicio);//TOdo intentar hacer
+        sinEjercicios = findViewById(R.id.sin_ejercicios);
+
         atras = findViewById(R.id.atras_iv);
         diaTV = findViewById(R.id.dia_tv);
         recyclerView = findViewById(R.id.ejercicios);
@@ -101,11 +99,10 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
             case "imagen_casa_menu":
                 cambiarActivity(Inicio.class);
                 break;
-            case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
-                break;
-
             case "atras_iv":
+            case "imagen_calendario_menu":
+                cambiarActivity(RutinaSemanal.class);
+                break;
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
@@ -118,12 +115,12 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
 
     //Método para mostrar los ejercicios desde un adaptador.
     private void mostrarEjercicios(){
-        if(diaRutinaActiva != null) {
+        if(diaRutinaActiva.getEjercicios() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             EjerciciosDiariosAdaptador adaptador = new EjerciciosDiariosAdaptador(this, diaRutinaActiva);
             recyclerView.setAdapter(adaptador);
         }else{
-            //todo
+            sinEjercicios.setVisibility(View.VISIBLE);
         }
     }
 

@@ -27,211 +27,228 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:foregroundGravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@drawable/_style_rectangulo_gris" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/merriweather_light"
-                android:gravity="center"
-                android:text="@string/registrarse"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@drawable/_style_rectangulo_gris" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/merriweather_light"
-                android:text="@string/nombre_de_usuario"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/nombreTV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:autofillHints=""
-                android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
-                android:ems="10"
-                android:fontFamily="@font/merriweather_light"
-                android:inputType="text"
-                android:padding="10dp"
-                tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_light"
-                android:text="@string/email"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:autofillHints=""
-                android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
-                android:ems="10"
-                android:fontFamily="@font/merriweather_light"
-                android:inputType="textEmailAddress"
-                android:padding="10dp"
-                tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_light"
-                android:text="@string/contrasena"
-                android:textColor="@color/negro_oscuro"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/contrasena"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:autofillHints=""
-                android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
-                android:ems="10"
-                android:fontFamily="@font/merriweather_light"
-                android:inputType="textPassword"
-                android:padding="10dp"
-                tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-            <TextView
-                android:id="@+id/error"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweather_light"
-                android:gravity="center"
-                android:shadowColor="#000000"
-                android:textColor="@color/rojo_clarito"
-                android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-
-                <CheckBox
-                    android:id="@+id/aceptar_politicas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/azul_oscuro"/>
-
-                <TextView
-                    android:id="@+id/aceptar_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="Aceptar "
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/politicas_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="políticas de privacidad."
-                    android:textColor="@color/azul_oscuro"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/registrarse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/_style_borde_10"
-                android:backgroundTint="@color/azul_oscuro"
-                android:fontFamily="@font/merriweather_light"
-                android:shadowColor="@color/azul"
-                android:shadowDx="5"
-                android:shadowDy="5"
-                android:shadowRadius="10"
-                android:text="@string/registrarse_mayusculas"
-                android:textColor="@color/blanco"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal">
+                android:foregroundGravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
                     android:background="@drawable/_style_rectangulo_gris" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
-                    android:text="@string/tienes_cuenta"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:text="@string/registrarse"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="40sp"
                     android:textStyle="bold" />
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
                     android:background="@drawable/_style_rectangulo_gris" />
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/nombre_de_usuario"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nombreTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
+                    android:ems="10"
+                    android:fontFamily="@font/merriweather_light"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/email"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:autofillHints=""
+                    android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
+                    android:ems="10"
+                    android:fontFamily="@font/merriweather_light"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="@string/contrasena"
+                    android:textColor="@color/negro_oscuro"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/contrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints=""
+                    android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
+                    android:ems="10"
+                    android:fontFamily="@font/merriweather_light"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/error"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:textColor="@color/rojo_clarito"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <CheckBox
+                        android:id="@+id/aceptar_politicas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/azul_oscuro"/>
+
+                    <TextView
+                        android:id="@+id/aceptar_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="Aceptar "
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/politicas_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="políticas de privacidad."
+                        android:textColor="@color/azul_oscuro"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/registrarse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_style_borde_10"
+                    android:backgroundTint="@color/azul_oscuro"
+                    android:fontFamily="@font/merriweather_light"
+                    android:shadowColor="@color/azul"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:text="@string/registrarse_mayusculas"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/_style_rectangulo_gris" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/tienes_cuenta"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/_style_rectangulo_gris" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/iniciar_sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/_style_borde_10"
+                    android:backgroundTint="@color/azul"
+                    android:fontFamily="@font/merriweather_light"
+                    android:shadowColor="@color/azul_clarito"
+                    android:shadowDx="10"
+                    android:shadowDy="10"
+                    android:shadowRadius="20"
+                    android:text="@string/iniciar_sesion_mayusculas"
+                    android:textColor="@color/negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/iniciar_sesion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/_style_borde_10"
-                android:backgroundTint="@color/azul"
-                android:fontFamily="@font/merriweather_light"
-                android:shadowColor="@color/azul_clarito"
-                android:shadowDx="10"
-                android:shadowDy="10"
-                android:shadowRadius="20"
-                android:text="@string/iniciar_sesion_mayusculas"
-                android:textColor="@color/negro"
-                android:textSize="20sp" />
-        </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/cargando"
+                android:visibility="gone"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:indeterminateTint="@color/gris_oscuro" />
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

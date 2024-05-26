@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
         int seriesRealizadas = ejercicioActivo.getSeries_realizadas();
         int seriesNecesarias = ejercicioActivo.getSeries_necesarias();
         int color;
+        String nombre;
 
         holder.ejercicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +60,26 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
             }
         });
 
-        holder.imagen.setImageResource(R.drawable.curl_de_biceps_hombre);
-        holder.nombre.setText(ejercicioActivo.getNombre());
+        if(ejercicioActivo.getNombre().startsWith("-")){
+            if(ejercicioActivo.getImagen() != null){
+                Imagenes.mostrarImagen(context, ejercicioActivo.getImagen(),  holder.imagenIV);
+            }else{
+                holder.imagenTexto.setVisibility(View.VISIBLE);
+                holder.imagenIV.setVisibility(View.INVISIBLE);
+                nombre = ejercicioActivo.getNombre().toUpperCase();
+                nombre = nombre.substring(1);
+                if (nombre.length() >= 3) {
+                    nombre = nombre.substring(0, 3);
+                }
+                holder.imagenTexto.setText(nombre);
+            }
+            holder.nombre.setText(ejercicioActivo.getNombre().substring(1));
+        }else{
+            if(ejercicioActivo.getImagen() != null){
+                holder.imagenIV.setImageResource(context.getResources().getIdentifier(ejercicioActivo.getImagen(), "drawable", context.getPackageName()));
+            }
+            holder.nombre.setText(ejercicioActivo.getNombre());
+        }
 
         for(String musculo : ejercicioActivo.getMusculos()){
             musculos.append(musculo).append(", ");
@@ -85,14 +106,14 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
 
     public static class EjerciciosRutinasViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout ejercicio;
-        ShapeableImageView imagen;
-        TextView nombre, musculos, progreso;
+        ImageView imagenIV;
+        TextView nombre, musculos, imagenTexto, progreso;
 
         public EjerciciosRutinasViewHolder(@NonNull View itemView) {
             super(itemView);
             ejercicio = itemView.findViewById(R.id.ejercicio);
 
-            imagen = itemView.findViewById(R.id.imagen);
+            imagenIV = itemView.findViewById(R.id.imagen);
 
             nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);

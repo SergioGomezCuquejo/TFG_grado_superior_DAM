@@ -5,26 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
@@ -35,20 +38,24 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
     //Variables de instancias.
     private FirebaseManager firebaseManager;
-    private TablaEjercicioUsuario ejercicioUsuario;
+    private TablaEjercicioCreado ejercicioUsuario;
+    private static final int REQUEST_CODE_PVEC = 7;
     ViewFlipper viewFlipper, instrucionesVF;
-    TextView instrucionesTV, informacionTV, imagenTV, musculosTV, pesoMaxTV, repeticionesMaxTV, serieNumTV,
-            vecesRealizadoTV, vecesNoRealizadoTV, vecesEnRutinasTV, vecesEnRutinaActivaTV;
-    ImageView cerrar, atras, guardar;
+    TextView instrucionesTV, informacionTV, musculosTV, pesoMaxTV, repeticionesMaxTV, serieNumTV,
+            vecesRealizadoTV, vecesNoRealizadoTV, vecesEnRutinasTV, vecesEnRutinaActivaTV, nombreRutinaTV;
+    FrameLayout nombreRutinaFL;
+    ImageView cerrar, atras, guardar, imagenIV;
+    RelativeLayout imagenRL;
     EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     Button borrar;
     StringBuilder musculosString;
     HashSet<String> musculos = new HashSet<>();
-    String inicialesNombre, imagenEjercicio, nombreEjercicio, notasEjercicio, musculosEjercicio;
+    String nombreEjercicio, notasEjercicio, musculosEjercicio, accion;
     int flipperActivo, descansoEjercicio, seriesEjercicio, repeticionesEjercicio;
     ArrayList<String> musculosArray;
     boolean nombreVacio, musculosVacios, descansoVacio, seriesVacias, repeticionesVacias, datosGuardados;
+    ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +80,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         //Obtener la rutina que se ha seleccionado.
         if(intent.hasExtra("ejercicioUsuario")) {
-            ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+            ejercicioUsuario = (TablaEjercicioCreado) intent.getSerializableExtra("ejercicioUsuario");
         }else{
             mostrarToast("Error al obtener el ejercicio");
             finish();
@@ -87,9 +94,14 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         informacionTV = findViewById(R.id.informacion_tv);
         cerrar = findViewById(R.id.cerrar);
 
+
+        nombreRutinaFL = findViewById(R.id.nombre_rutina_fl);
+        nombreRutinaTV = findViewById(R.id.nombre_rutina_tv);
+        imagenRL = findViewById(R.id.imagen_rl);
+        imagenIV = findViewById(R.id.imagen_iv);
+
         guardar = findViewById(R.id.guardar_iv);
         instrucionesVF = findViewById(R.id.instruciones_vf);
-        imagenTV = findViewById(R.id.imagen_ejercicio);
         nombreET = findViewById(R.id.nombre_et);
         descansoET = findViewById(R.id.descanso_et);
         seriesET = findViewById(R.id.series_et);
@@ -115,6 +127,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
 
         //Listeners.
+        imagenRL.setOnClickListener(this);
         guardar.setOnClickListener(this);
         instrucionesTV.setOnClickListener(this);
         informacionTV.setOnClickListener(this);
@@ -126,33 +139,6 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         //Poner por defecto la opción de instrucciones
         cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
-
-
-        //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
-        nombreET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (s.toString().length() <= 0){
-                    inicialesNombre = "NOMBRE";
-
-                } else if (s.toString().length() == 1) {
-                    inicialesNombre = s.toString();
-
-                } else {
-                    inicialesNombre = s.toString().substring(0,2);
-
-                }
-                imagenTV.setText( inicialesNombre.toUpperCase() );
-
-            }
-        });
-
 
         //Cambiar los checkBox al marcarse
         CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
@@ -203,7 +189,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
             mostrarDatos();
 
         } catch (Exception ex) {
-            mostrarToast("Error al mostrar los datos del ejercicio.");
+            mostrarToast("Error al mostrar los datos del ejercicio2.");
             ex.printStackTrace();
         }
 
@@ -234,16 +220,22 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
                 }
                 break;
 
+            case "imagen_rl":
+                subirImagen();
+                break;
+
             case "cerrar":
                 if(datosGuardados){
                     finish();
                 }else{
-                    cambiarActivity();
+                    accion = "";
+                    cambiarActivity("Descartar cambios", "¿Desea descartar los cambios no guardados?");
                 }
                 break;
 
             case "guardar_iv":
                 guardarEjercicio();
+                finish();
                 break;
 
             case "musculos_tv":
@@ -263,8 +255,9 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
                 instrucionesVF.showPrevious();
                 break;
 
-            case "borrar": //todo
-                CambiarActivity.cambiar(this, "¿Eliminar ejercicio?", "", "ID" + ejercicioUsuario.getID() + "EJ");
+            case "borrar":
+                accion = "Eliminar";
+                cambiarActivity("Eliminar ejercicio", "¿Desea eliminar el ejercicio?");
                 break;
         }
     }
@@ -342,7 +335,24 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     //Método para mostrar la información el ejercicio.
     @SuppressLint("SetTextI18n")
     public void mostrarDatos(){
-        imagenTV.setText(ejercicioUsuario.getImagen());
+
+        String nombre;
+        if(ejercicioUsuario.getImagen() != null){
+            Imagenes.mostrarImagen(this, ejercicioUsuario.getImagen(), imagenIV);
+        }else{
+            nombreRutinaFL.setVisibility(View.VISIBLE);
+            imagenIV.setVisibility(View.GONE);
+            nombre = ejercicioUsuario.getNombre().toUpperCase();
+            nombre = nombre.substring(1);
+            if (nombre.length() >= 3) {
+                nombre = nombre.substring(0, 3);
+            }
+            nombreRutinaTV.setText(nombre);
+        }
+
+
+
+
         nombreET.setText(ejercicioUsuario.getNombre().substring(1));
         descansoET.setText(String.valueOf(ejercicioUsuario.getTiempo_descanso()));
         seriesET.setText(String.valueOf(ejercicioUsuario.getSeries_recomendadas()));
@@ -368,19 +378,13 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
     //Método para guardar los datos del ejercicio.
     public void guardarEjercicio(){
-        imagenEjercicio = imagenTV.getText().toString();
-
         nombreEjercicio = nombreET.getText().toString();
         nombreVacio = nombreEjercicio.isEmpty() || nombreEjercicio.equals(" ");
 
         notasEjercicio = notasET.getText().toString();
 
         musculosEjercicio = musculosTV.getText().toString();
-        if(musculosEjercicio.equals("Selecciona los músculos")){
-            musculosVacios = true;
-        }else{
-            musculosVacios = false;
-        }
+        musculosVacios = musculosEjercicio.equals("Selecciona los músculos");
 
         if(descansoET.getText().toString().isEmpty()){
             descansoEjercicio = 0;
@@ -409,13 +413,12 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         if(!musculosVacios){
             musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
-            musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(", ")));
+            musculosArray = new ArrayList<>(Arrays.asList(musculosEjercicio.split(", ")));
         }
 
 
         if(!nombreVacio && !musculosVacios && !descansoVacio && !seriesVacias && !repeticionesVacias){
 
-            ejercicioUsuario.setImagen(imagenEjercicio);
             ejercicioUsuario.setMusculos(musculosArray);
             ejercicioUsuario.setNombre("-" + nombreEjercicio);
             ejercicioUsuario.setNotas(notasEjercicio);
@@ -429,9 +432,9 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         }
 
     }
-    private void actualizarEjercicio( TablaEjercicioUsuario ejercicio){
+    private void actualizarEjercicio( TablaEjercicioCreado ejercicio){
         try{
-            firebaseManager.actualizarEjercicioUsuario(this, ejercicio, new FirebaseCallbackBoolean() {
+            firebaseManager.actualizarEjercicioCreado(this, ejercicio, new FirebaseCallbackBoolean() {
                 @Override
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada){
@@ -450,11 +453,74 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         }
     }
 
+    // Método para eliminar el ejercicio.
+    private void eliminarEjercicio(){
+        try{
+            firebaseManager.eliminarEjercicio(this, ejercicioUsuario.getID(), new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if(accionRealizada){
+                        mostrarToast("Ejercicio eliminado correctamente");
+                        finish();
+                    }else{
+                        mostrarToast("No se han podido eliminar el ejercicio");
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast("Error al eliminar el ejercicio.");
+            ex.printStackTrace();
+        }
+    }
+
+    //Método para mostrar la galería del usuario.
+    private void subirImagen(){
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+
+        startActivityForResult(i, 300);
+        progressDialog = new ProgressDialog(this);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            // Al recibir la imagen se actualizará.
+            if (requestCode == 300){
+                Uri image_url = data.getData();
+                Imagenes.subirImagen(this, progressDialog, "Actualizando la imagen del ejercicio..", "ejercicio/" + ejercicioUsuario.getID(), image_url, new FirebaseCallbackUri() {
+                    @Override
+                    public void onCallback(Uri uri) {
+                        Imagenes.mostrarImagen(PopupVerEjerciciosCreados.this, uri.toString(), imagenIV);
+                        ejercicioUsuario.setImagen(uri.toString());
+                    }
+                });
+
+
+                // Si la respuesta es del PopupAlerta.java y es true se cerrará sesión.
+            }else if (requestCode == REQUEST_CODE_PVEC) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    if(accion.equals("Eliminar")){
+                        eliminarEjercicio();
+                    }else{
+                        finish();
+                    }
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
-    private void cambiarActivity() {
-        CambiarActivity.cambiar(this, "Cerrar sin guardar", "¿Desea descartar los cambios?", "ir_a_ver_ejercicios");
+    private void cambiarActivity(String titulo, String texto) {
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("texto", texto);
+        startActivityForResult(intent, REQUEST_CODE_PVEC);
     }
 
 

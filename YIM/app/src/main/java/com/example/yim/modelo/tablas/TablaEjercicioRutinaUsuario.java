@@ -7,6 +7,7 @@ public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<Tab
     private String ID;
     private ArrayList<String> musculos;
     private String nombre;
+    private String imagen;
     private int posicion;
     private int repeticiones;
     private int series;
@@ -15,7 +16,8 @@ public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<Tab
     public TablaEjercicioRutinaUsuario() {
     }
 
-    public TablaEjercicioRutinaUsuario(ArrayList<String> musculos, String nombre, int posicion, int repeticiones, int series, int tiempo_descanso) {
+    public TablaEjercicioRutinaUsuario(String imagen, ArrayList<String> musculos, String nombre, int posicion, int repeticiones, int series, int tiempo_descanso) {
+        this.imagen = imagen;
         this.musculos = musculos;
         this.nombre = nombre;
         this.posicion = posicion;
@@ -24,13 +26,34 @@ public class TablaEjercicioRutinaUsuario implements Serializable, Comparable<Tab
         this.tiempo_descanso = tiempo_descanso;
     }
 
-    public TablaEjercicioRutinaUsuario(TablaEjercicioUsuario ejercicio, int posicion) {
+    public TablaEjercicioRutinaUsuario(TablaEjercicioPorDefecto ejercicio, int posicion) {
+        this.ID = ejercicio.getID();
         this.musculos = ejercicio.getMusculos();
         this.nombre = ejercicio.getNombre();
+        this.posicion = posicion;
+        this.imagen = ejercicio.getImagen();
+        this.repeticiones = ejercicio.getRepeticiones_recomendadas();
+        this.series = ejercicio.getSeries_recomendadas();
+        this.tiempo_descanso = ejercicio.getTiempo_descanso();
+    }
+
+    public TablaEjercicioRutinaUsuario(TablaEjercicioCreado ejercicio, int posicion) {
+        this.ID = ejercicio.getID();
+        this.musculos = ejercicio.getMusculos();
+        this.nombre = ejercicio.getNombre();
+        this.imagen = ejercicio.getImagen();
         this.posicion = posicion;
         this.repeticiones = ejercicio.getRepeticiones_recomendadas();
         this.series = ejercicio.getSeries_recomendadas();
         this.tiempo_descanso = ejercicio.getTiempo_descanso();
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getID() {

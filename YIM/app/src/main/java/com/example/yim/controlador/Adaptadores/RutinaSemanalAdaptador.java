@@ -20,15 +20,13 @@ import com.example.yim.vista.controlador.CambiarActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-//TODO intentar junar con CrearRutinasAdaptador
-public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdaptador.CrearRutinasViewHolder> {
+public class RutinaSemanalAdaptador extends RecyclerView.Adapter<RutinaSemanalAdaptador.RutinaSemanalAdaptadorViewHolder> {
     private final ArrayList<TablaDiaRutinaActiva> rutinaActiva;
     private final Context context;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
     HashMap<String, ColoresMusculoUsuario> musculosSemana;
 
-    public RutinaActivaAdaptador(Context context, ArrayList<TablaDiaRutinaActiva> rutinaActiva, HashMap<String, ColoresMusculoUsuario> musculosHM) {
+    public RutinaSemanalAdaptador(Context context, ArrayList<TablaDiaRutinaActiva> rutinaActiva, HashMap<String, ColoresMusculoUsuario> musculosHM) {
         this.context = context;
         this.rutinaActiva = rutinaActiva;
         this.musculosHM = musculosHM;
@@ -37,15 +35,15 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
 
     @NonNull
     @Override
-    public CrearRutinasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RutinaSemanalAdaptadorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_crear_rutinas, parent, false);
 
-        return new CrearRutinasViewHolder(view);
+        return new RutinaSemanalAdaptadorViewHolder(view);
     }
 
     @SuppressLint({"SetTextI18n"})
     @Override
-    public void onBindViewHolder(@NonNull CrearRutinasViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RutinaSemanalAdaptadorViewHolder holder, int position) {
         TablaDiaRutinaActiva diaRutinaActiva = rutinaActiva.get(position);
         int dia = diaRutinaActiva.getDia();
 
@@ -66,6 +64,8 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
         holder.numeroDia.setText(String.valueOf(dia));
 
         if(diaRutinaActiva.getMusculos() != null){
+            holder.musculoCentro.setVisibility(View.GONE);
+            holder.musculoDerecha.setVisibility(View.GONE);
             ArrayList<String> musculosUsuario = diaRutinaActiva.getMusculos();
             if (musculosUsuario.size() >= 2){
                 holder.musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
@@ -111,11 +111,11 @@ public class RutinaActivaAdaptador extends RecyclerView.Adapter<RutinaActivaAdap
         return rutinaActiva.size();
     }
 
-    public static class CrearRutinasViewHolder extends RecyclerView.ViewHolder {
+    public static class RutinaSemanalAdaptadorViewHolder extends RecyclerView.ViewHolder {
         LinearLayout dia;
         TextView semanaTV, numeroDia, musculoIzquierda, musculoCentro, musculoDerecha;
 
-        public CrearRutinasViewHolder(@NonNull View itemView) {
+        public RutinaSemanalAdaptadorViewHolder(@NonNull View itemView) {
             super(itemView);
             semanaTV = itemView.findViewById(R.id.semana_tv);
 

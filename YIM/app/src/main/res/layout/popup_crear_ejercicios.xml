@@ -69,47 +69,55 @@
                 android:gravity="center|center_vertical"
                 tools:ignore="UselessParent">
 
-                <FrameLayout
-                    android:id="@+id/imagen_fl"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:layout_centerHorizontal="true"
-                    tools:ignore="NestedWeights">
+                <RelativeLayout
+                    android:id="@+id/imagen_rl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
 
+                    <FrameLayout
+                        android:id="@+id/layout"
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        tools:ignore="NestedWeights">
 
-                    <TextView
-                        android:id="@+id/imagen_ejercicio"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/_style_borde_blanco_20"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="center"
-                        android:text="@string/nombre_mayusculas"
-                        android:textColor="@color/blanco"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        tools:ignore="TextSizeCheck" />
-                </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/_style_borde_blanco_20"
+                            tools:ignore="NestedWeights">
 
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_alignEnd="@id/imagen_fl"
-                    android:layout_alignBottom="@id/imagen_fl"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_50"
-                    android:contentDescription="@string/imagen_subir"
-                    android:padding="10dp"
-                    android:src="@drawable/subir_imagen_blanca" />
+                            <FrameLayout
+                                android:id="@+id/nombre_rutina_fl"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                tools:ignore="NestedWeights">
+
+                                <TextView
+                                    android:id="@+id/nombre_rutina_tv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/merriweather_light"
+                                    android:gravity="center"
+                                    android:text="@string/nombre_mayusculas"
+                                    android:textColor="@color/blanco"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold"
+                                    tools:ignore="TextSizeCheck" />
+                            </FrameLayout>
+                        </FrameLayout>
+                    </FrameLayout>
+
+                </RelativeLayout>
 
 
                 <TextView
                     android:id="@+id/nombre_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/imagen_fl"
+                    android:layout_below="@id/imagen_rl"
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/nombre"
                     android:textColor="@color/negro_clarito"

@@ -59,6 +59,7 @@
             tools:ignore="UselessParent">
 
             <RelativeLayout
+                android:id="@+id/imagen_rl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -76,10 +77,31 @@
                         tools:ignore="NestedWeights">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/imagen"
+                            android:id="@+id/imagen_iv"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             app:shapeAppearanceOverlay="@style/radius" />
+
+                        <FrameLayout
+                            android:id="@+id/nombre_rutina_fl"
+                            android:visibility="gone"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            tools:ignore="NestedWeights">
+                            <TextView
+                                android:id="@+id/nombre_rutina_tv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="@drawable/_style_borde_blanco_20"
+                                android:fontFamily="@font/merriweather_light"
+                                android:gravity="center"
+                                android:text="@string/nombre_mayusculas"
+                                android:textColor="@color/blanco"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+                        </FrameLayout>
                     </FrameLayout>
                 </FrameLayout>
 

@@ -1,14 +1,15 @@
 package com.example.yim.modelo;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioCreado;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicios;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosCreados;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogros;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogrosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
@@ -17,10 +18,10 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaActiva;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinasUsuario;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicio;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaHistorial;
 import com.example.yim.modelo.tablas.TablaLogro;
 import com.example.yim.modelo.tablas.TablaLogroUsuario;
@@ -206,11 +207,11 @@ public class FirebaseManager {
 
     // todo Nodo EJERCICIOS del nodo USUARIOS.
     // Crear ejercicio.
-    public void agregarEjercicio(Context context, TablaEjercicioUsuario nuevoEjercicio, FirebaseCallbackBoolean callback){
+    public void agregarEjercicio(Context context, TablaEjercicioCreado nuevoEjercicio, FirebaseCallbackBoolean callback){
 
         try{
-            String IDEjercicio = ejerciciosReference.push().getKey();
-            ejerciciosReference.child(IDEjercicio).setValue(nuevoEjercicio, new DatabaseReference.CompletionListener() {
+            String IDEjercicio = ejerciciosUsuarioReference.child("creados").push().getKey();
+            ejerciciosUsuarioReference.child("creados").child(IDEjercicio).setValue(nuevoEjercicio, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     boolean agregado;
@@ -230,15 +231,16 @@ public class FirebaseManager {
     }
 
     // Obtener ejercicios.
-    public void obtenerEjerciciosUsuario(Context context, FirebaseCallbackEjerciciosUsuario callback) {
+    public void obtenerEjerciciosCreados(Context context, FirebaseCallbackEjerciciosCreados callback) {
         try {
-            ejerciciosUsuarioReference.addValueEventListener(new ValueEventListener() {
+            ejerciciosUsuarioReference.child("creados").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios = new ArrayList<TablaEjercicioUsuario>();
+                    ArrayList<TablaEjercicioCreado> ejerciciosUsuarios = new ArrayList<TablaEjercicioCreado>();
+                    TablaEjercicioCreado ejercicio;
 
                     for (DataSnapshot ejercicioSnapshot : dataSnapshot.getChildren()) {
-                        TablaEjercicioUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjercicioUsuario.class);
+                        ejercicio = ejercicioSnapshot.getValue(TablaEjercicioCreado.class);
                         ejercicio.setID(ejercicioSnapshot.getKey());
                         ejerciciosUsuarios.add(ejercicio);
                     }
@@ -248,23 +250,49 @@ public class FirebaseManager {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                    mostrarToast(context, "Error al obtener los ejercicios creados por el usuario");
                 }
             });
         } catch (Exception ex) {
-            mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            mostrarToast(context, "Error al obtener los ejercicios creados por el usuario.");
             ex.printStackTrace();
         }
     }
-    public void obtenerEjercicioUsuario(Context context, String IDEjercicio, FirebaseCallbackEjercicioUsuario callback) {
+    public void obtenerEjerciciosPorDefecto(Context context, FirebaseCallbackEjerciciosPorDefecto callback) {
         try {
-            ejerciciosUsuarioReference.child(IDEjercicio).addValueEventListener(new ValueEventListener() {
+            ejerciciosUsuarioReference.child("por_defecto").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaEjercicioUsuario ejercicio = new TablaEjercicioUsuario();
+                    ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuarios = new ArrayList<TablaEjercicioPorDefecto>();
+
+                    for (DataSnapshot ejercicioSnapshot : dataSnapshot.getChildren()) {
+                        TablaEjercicioPorDefecto ejercicio = ejercicioSnapshot.getValue(TablaEjercicioPorDefecto.class);
+                        ejercicio.setID(ejercicioSnapshot.getKey());
+                        ejerciciosUsuarios.add(ejercicio);
+                    }
+
+                    callback.onCallback(ejerciciosUsuarios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los ejercicios por defecto del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios por defecto del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void obtenerEjercicioCreado(Context context, String IDEjercicio, FirebaseCallbackEjercicioCreado callback) {
+        try {
+            ejerciciosUsuarioReference.child("creados").child(IDEjercicio).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaEjercicioCreado ejercicio = new TablaEjercicioCreado();
 
                     if (dataSnapshot.exists()) {
-                        ejercicio = dataSnapshot.getValue(TablaEjercicioUsuario.class);
+                        ejercicio = dataSnapshot.getValue(TablaEjercicioCreado.class);
 
                     } else {
                         mostrarToast(context, "Ejercicio no encontrado.");
@@ -283,16 +311,76 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
-    public void obtenerEjerciciosUsuarioConEstadisticas(Context context, FirebaseCallbackEjerciciosUsuario callback) {
+    public void obtenerEjercicioPorDefecto(Context context, String IDEjercicio, FirebaseCallbackEjercicioPorDefecto callback) {
         try {
-            ejerciciosUsuarioReference.addValueEventListener(new ValueEventListener() {
+            ejerciciosUsuarioReference.child("por_defecto").child(IDEjercicio).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios = new ArrayList<TablaEjercicioUsuario>();
+                    TablaEjercicioPorDefecto ejercicio = new TablaEjercicioPorDefecto();
+
+                    if (dataSnapshot.exists()) {
+                        ejercicio = dataSnapshot.getValue(TablaEjercicioPorDefecto.class);
+
+                    } else {
+                        mostrarToast(context, "Ejercicio no encontrado.");
+                    }
+
+                    callback.onCallback(ejercicio);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void obtenerEjerciciosCreadosConEstadisticas(Context context, FirebaseCallbackEjerciciosCreados callback) {
+        try {
+            ejerciciosUsuarioReference.child("creados").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjercicioCreado> ejerciciosUsuarios = new ArrayList<TablaEjercicioCreado>();
 
                     if (dataSnapshot.exists()) {
                         for (DataSnapshot ejercicioSnapshot : dataSnapshot.getChildren()) {
-                            TablaEjercicioUsuario ejercicio = ejercicioSnapshot.getValue(TablaEjercicioUsuario.class);
+                            TablaEjercicioCreado ejercicio = ejercicioSnapshot.getValue(TablaEjercicioCreado.class);
+                            if(ejercicio.getEstadisticas() != null){
+                                ejercicio.setID(ejercicioSnapshot.getKey());
+                                ejerciciosUsuarios.add(ejercicio);
+                            }
+                        }
+
+                    } else {
+                        mostrarToast(context, "Ejercicios no encontrados.");
+                    }
+
+                    callback.onCallback(ejerciciosUsuarios);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener los ejercicios del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener los ejercicios del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void obtenerEjerciciosPorDefectoConEstadisticas(Context context, FirebaseCallbackEjerciciosPorDefecto callback) {
+        try {
+            ejerciciosUsuarioReference.child("por_defecto").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuarios = new ArrayList<TablaEjercicioPorDefecto>();
+
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot ejercicioSnapshot : dataSnapshot.getChildren()) {
+                            TablaEjercicioPorDefecto ejercicio = ejercicioSnapshot.getValue(TablaEjercicioPorDefecto.class);
                             if(ejercicio.getEstadisticas() != null){
                                 ejercicio.setID(ejercicioSnapshot.getKey());
                                 ejerciciosUsuarios.add(ejercicio);
@@ -318,9 +406,9 @@ public class FirebaseManager {
     }
 
     // Actualizar ejercicio.
-    public void actualizarEjercicioUsuario(Context context, TablaEjercicioUsuario ejercicio, FirebaseCallbackBoolean callback){
+    public void actualizarEjercicioCreado(Context context, TablaEjercicioCreado ejercicio, FirebaseCallbackBoolean callback){
         try{
-            ejerciciosUsuarioReference.child(ejercicio.getID()).setValue(ejercicio, new DatabaseReference.CompletionListener() {
+            ejerciciosUsuarioReference.child("creados").child(ejercicio.getID()).setValue(ejercicio, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     boolean actualizado;
@@ -338,9 +426,51 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
+    public void actualizarEjercicioCreado(Context context, String IDEjercicio, String urlImagen, FirebaseCallbackBoolean callback){
+
+        try{
+            ejerciciosUsuarioReference.child("creados").child(IDEjercicio).child("imagen").setValue(urlImagen, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar la imagen del ejercicio: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el ejercicio del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
 
-    // Eliminar ejercicio. todo
+    // Eliminar ejercicio.
+    public void eliminarEjercicio(Context context, String IDEjercicio, FirebaseCallbackBoolean callback){
+
+        try{
+            ejerciciosUsuarioReference.child("creados").child(IDEjercicio).removeValue( new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean eliminado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al eliminar el ejercicio: " + databaseError.getMessage());
+                        eliminado = false;
+                    }else{
+                        eliminado = true;
+                    }
+                    callback.onCallback(eliminado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al eliminar el ejercicio.");
+            ex.printStackTrace();
+        }
+    }
 
 
     //todo Nodo LOGROS del nodo USUARIOS.
@@ -520,21 +650,37 @@ public class FirebaseManager {
 
     // Eliminar músculo. todo
 
+
     // todo Nodo RUTINA ACTIVA del nodo USUARIOS.
-    // Crear rutina activa. todo
-    // Obtener rutina activa.todo
+
+    // Crear rutina activa.
+    public void agregarRutinaActiva(Context context, TablaRutinaActiva nuevaRutinaActiva){
+        try{
+            rutinaActivaUsuarioReference.setValue(nuevaRutinaActiva, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al agregar la rutina semanal: " + databaseError.getMessage());
+                    }
+                }
+            });
+        } catch (Exception e) {
+            MostratToast.mostrarToast(context, "Error al agregar la rutina semanal.");
+            e.printStackTrace();
+        }
+    }
+
+    // Obtener rutina activa.
     public void obtenerRutinaActiva(Context context, FirebaseCallbackRutinaActiva callback) {
         try {
             rutinaActivaUsuarioReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
+                    TablaRutinaActiva rutinaActiva = null;
 
                     if (dataSnapshot.exists()) {
                         rutinaActiva = dataSnapshot.getValue(TablaRutinaActiva.class);
 
-                    } else {
-                        mostrarToast(context, "Rutina activa no encontrada.");
                     }
 
                     callback.onCallback(rutinaActiva);
@@ -599,7 +745,7 @@ public class FirebaseManager {
     }
     public void actualizarRutinaActiva(Context context, TablaRutinaUsuario rutina){
         try{
-            rutinaActivaUsuarioReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            rutinaActivaUsuarioReference.child("semana").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     long id = dataSnapshot.getChildrenCount();
@@ -613,16 +759,34 @@ public class FirebaseManager {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    mostrarToast(context, "Error al obtener la rutina activa del usuario");
+                    mostrarToast(context, "Error al obtener la rutina semanal del usuario");
                 }
             });
         } catch (Exception ex) {
-            mostrarToast(context, "Error al obtener la rutina activa del usuario.");
+            mostrarToast(context, "Error al obtener la rutina semanal del usuario.");
             ex.printStackTrace();
         }
     }
 
-    // Eliminar rutina activa. todo
+    // Eliminar rutina activa.
+
+    public void eliminarRutinaActiva(Context context){
+        try{
+            rutinaActivaUsuarioReference.removeValue( new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al eliminar la rutina semanal: " + databaseError.getMessage());
+
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al eliminar la rutina semanal del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
 
 
@@ -666,8 +830,6 @@ public class FirebaseManager {
                             rutinasUsuario.add(rutina);
                         }
 
-                    } else {
-                        mostrarToast(context, "No se han encontrado rutinas del usuairo.");
                     }
 
                     callback.onCallback(rutinasUsuario);
@@ -712,7 +874,43 @@ public class FirebaseManager {
     }
 
     // Actualizar rutina.
-    public void actualizarRutinaActiva(Context context, TablaRutinaUsuario rutina, FirebaseCallbackBoolean callback){
+    public void desactivarRutinas(Context context, FirebaseCallbackRutinaUsuario callback){
+        try {
+            rutinasUsuarioReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    TablaRutinaUsuario rutina;
+                    TablaRutinaUsuario rutinaActivaUsuario = null;
+
+                    if (dataSnapshot.exists()) {
+                        Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                        while (iterator.hasNext() && rutinaActivaUsuario == null) {
+                            DataSnapshot rutinaSnapshot = iterator.next();
+                            rutina = rutinaSnapshot.getValue(TablaRutinaUsuario.class);
+                            if (rutina.getInformacion().isActivo()) {
+                                rutina.setID(rutinaSnapshot.getKey());
+                                rutinaActivaUsuario = rutina;
+                            }
+                        }
+
+                    } else {
+                        mostrarToast(context, "Rutina no encontrada.");
+                    }
+
+                    callback.onCallback(rutinaActivaUsuario);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mostrarToast(context, "Error al obtener la rutina del usuario");
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener las rutinas del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void actualizarRutina(Context context, TablaRutinaUsuario rutina, FirebaseCallbackBoolean callback){
         rutinasUsuarioReference.child(rutina.getID()).setValue(rutina, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -727,9 +925,55 @@ public class FirebaseManager {
             }
         });
     }
+    public void actualizarRutina(Context context, String IDRutina, boolean activo){
+        rutinasUsuarioReference.child(IDRutina).child("informacion").child("activo").setValue(activo, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    mostrarToast(context, "Error al actualizar la rutina: " + databaseError.getMessage());
+                }
+            }
+        });
+    }
+    public void actualizarRutina(Context context, String IDRutina, String urlImagen, FirebaseCallbackBoolean callback){
+
+        try{
+            rutinasUsuarioReference.child(IDRutina).child("informacion").child("imagen").setValue(urlImagen, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar la imagen de la rutina: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener la rutina del usuario.");
+            ex.printStackTrace();
+        }
+    }
 
 
-    // Eliminar rutina. todo
+    // Eliminar rutina.
+    public void eliminarRutina(Context context, String ID, FirebaseCallbackBoolean callback){
+        rutinasUsuarioReference.child(ID).removeValue( new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                boolean eliminada;
+                if (databaseError != null) {
+                    mostrarToast(context, "Error al eliminar la rutina: " + databaseError.getMessage());
+                    eliminada = false;
+                } else {
+                    eliminada = true;
+                }
+                callback.onCallback(eliminada);
+            }
+        });
+    }
 
 
 
@@ -767,19 +1011,7 @@ public class FirebaseManager {
 
 
 
-    public boolean eliminarEjercicio(Context context, String ID){
-        boolean eliminado = false;
-        try{
-            DatabaseReference ejerciciosUsuarioReference = usuariosReference.child(idUsuario).child("ejercicios");
 
-            ejerciciosUsuarioReference.child(ID).removeValue();
-            eliminado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al eliminar el ejercicio.");
-            e.printStackTrace();
-        }
-        return eliminado;
-    }
 
 
 
@@ -847,118 +1079,19 @@ public class FirebaseManager {
 
 
 
-    public void desactivarRutinas(Context context){
-        try {
-            usuariosReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    TablaRutinaUsuario rutinaUsuario = new TablaRutinaUsuario();
-                    boolean desactivadas = false;
-
-                    if (dataSnapshot.exists()) {
-                        DataSnapshot usuarioSnapshot = dataSnapshot.child(idUsuario);
-
-                        if (usuarioSnapshot.exists()) {
-                            DataSnapshot rutinasSnapshot = usuarioSnapshot.child("rutinas");
-
-                            Iterator<DataSnapshot> iterator = rutinasSnapshot.getChildren().iterator();
-                            while (iterator.hasNext() && !desactivadas) {
-                                DataSnapshot rutinaSnapshot = iterator.next();
-                                rutinaUsuario = rutinaSnapshot.getValue(TablaRutinaUsuario.class);
-
-                                if(rutinaUsuario.getInformacion().isActivo()){
-                                    rutinaUsuario.setID(rutinaSnapshot.getKey());
-                                    rutinaUsuario.getInformacion().setActivo(false);
-                                    /*
-                                    if(actualizarRutina(context, rutinaUsuario)){
-                                        desactivadas = true;
-                                    }else{
-                                        MostratToast.mostrarToast(context, "Error al desactivar rutinas");
-                                    }
-                                     */
-                                }
-                            }
-                        }
-                    } else {
-                        MostratToast.mostrarToast(context, "Usuario no encontrado.");
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    MostratToast.mostrarToast(context, "Error al obtener los logros del usuario");
-                }
-            });
-        } catch (Exception ex) {
-            MostratToast.mostrarToast(context, "Error al obtener los logros del usuario.");
-            ex.printStackTrace();
-        }
-    }
-
-
-
-    public boolean modificarActivoRutina(Context context, String ID, boolean activo){
-        boolean actualizado = false;
-        try{
-            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutinas");
-
-            rutinasUsuarioReference.child(ID).child("informacion").child("activo").setValue(activo);
-            actualizado = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al actualizar la rutina.");
-            e.printStackTrace();
-        }
-        return actualizado;
-    }
-
-    public boolean eliminarRutina(Context context, String ID){
-        boolean eliminada = false;
-        try{
-            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutinas");
-
-            rutinasUsuarioReference.child(ID).removeValue();
-            eliminada = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al eliminar la rutina.");
-            e.printStackTrace();
-        }
-        return eliminada;
-    }
 
 
 
 
 
 
-    public boolean agregarRutinaActiva(Context context, TablaRutinaActiva nuevaRutinaActiva){
-        boolean agregada = false;
-        try{
-            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa");
-
-            rutinasUsuarioReference.setValue(nuevaRutinaActiva);
-
-            agregada = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al agregar la rutina.");
-            e.printStackTrace();
-        }
-        return agregada;
-    }
 
 
 
-    public boolean eliminarRutinaActiva(Context context){
-        boolean eliminada = false;
-        try{
-            DatabaseReference rutinasUsuarioReference = usuariosReference.child(idUsuario).child("rutina_activa");
 
-            rutinasUsuarioReference.removeValue();
-            eliminada = true;
-        } catch (Exception e) {
-            MostratToast.mostrarToast(context, "Error al eliminar la rutina.");
-            e.printStackTrace();
-        }
-        return eliminada;
-    }
+
+
+
+
 
 }

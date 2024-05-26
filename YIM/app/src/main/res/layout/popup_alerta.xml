@@ -17,7 +17,7 @@
         tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/titulo"
+            android:id="@+id/titulo_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -35,7 +35,7 @@
             android:background="@drawable/_style_rectangulo_gris" />
 
         <TextView
-            android:id="@+id/texto"
+            android:id="@+id/texto_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

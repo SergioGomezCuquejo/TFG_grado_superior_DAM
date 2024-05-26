@@ -1,20 +1,23 @@
 package com.example.yim.vista.controlador;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.content.Context;
 import android.content.Intent;
 
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.vista.EjercicioActivo;
 import com.example.yim.vista.vista.EjerciciosDiarios;
-import com.example.yim.vista.vista.EjerciciosRutinas;
-import com.example.yim.vista.vista.PopupAlerta;
 import com.example.yim.vista.vista.PopupLogros;
 import com.example.yim.vista.vista.PopupMusculos;
+import com.example.yim.vista.vista.PopupVerEjercicios;
+import com.example.yim.vista.vista.PopupVerEjerciciosCreados;
 
 import java.util.HashMap;
 
@@ -26,6 +29,7 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
+    /*
     //De un activity a PopupAlerta.java.
     public static void cambiar(Context context, String titulo, String texto, String iraA) {
         Intent intent = new Intent(context, PopupAlerta.class);
@@ -46,6 +50,8 @@ public class CambiarActivity {
         context.startActivity(intent);
 
     }
+
+     */
 
     //De un activity a EjerciciosDiarios.java pasando por parámetro  un objeto TablaDiaRutinaActiva.
     public static void cambiar(Context context, TablaDiaRutinaActiva diaRutinaActiva) {
@@ -93,16 +99,14 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    public static void cambiar(Context context, Class<?> activity, TablaEjercicioUsuario ejercicioUsuario) {
-        Intent intent = new Intent(context, activity);
+    public static void cambiar(Context context, TablaEjercicioPorDefecto ejercicioUsuario) {
+        Intent intent = new Intent(context, PopupVerEjercicios.class);
         intent.putExtra("ejercicioUsuario", ejercicioUsuario);
         context.startActivity(intent);
     }
-
-
-
-
-
-
-
+    public static void cambiar(Context context, TablaEjercicioCreado ejercicioUsuario) {
+        Intent intent = new Intent(context, PopupVerEjerciciosCreados.class);
+        intent.putExtra("ejercicioUsuario", ejercicioUsuario);
+        context.startActivity(intent);
+    }
 }

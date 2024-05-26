@@ -3,7 +3,6 @@ package com.example.yim.vista.vista;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,16 +13,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.CambiarActivity;
-import com.example.yim.vista.controlador.CambiarVisibilidad;
 import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +32,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     private FirebaseAuth auth;
+    private static final int REQUEST_CODE_P = 3;
     ImageButton guardarIB, editarIB, cancelarIB;
     ImageView imagenPerfil, imagenPerfilMenu;
     TextView nombreTV, email, genero, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
@@ -256,30 +255,54 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         progressDialog = new ProgressDialog(this);
     }
 
-    //Al recibir la imagen la actualiza.
+
+    // Método para obtener las respuestas.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode == RESULT_OK){
+
+            // Al recibir la imagen se actualizará.
             if (requestCode == 300){
                 Uri image_url = data.getData();
-                Imagenes.subirImagen(this, progressDialog, "Actualizando foto de perfil..", "perfil/" + auth.getUid(), image_url);
+                Imagenes.subirImagen(this, progressDialog, "Actualizando foto de perfil..", "perfil/" + auth.getUid(), image_url, new FirebaseCallbackUri() {
+                    @Override
+                    public void onCallback(Uri uri) {
+
+                        Imagenes.mostrarImagen(Perfil.this, uri.toString(), imagenPerfil);
+                        Imagenes.mostrarImagen(Perfil.this, uri.toString(), imagenPerfilMenu);
+                    }
+                });
+
+
+            // Si la respuesta es del PopupAlerta.java y es true se cerrará sesión.
+            }else if (requestCode == REQUEST_CODE_P) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    auth.signOut();
+                    cambiarActivity(InicioSesion.class);
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
 
-    //Método para llamar a CambiarVisibilidad.java. (Clase que permite hacer visible o invisible una vista)
+    // Método para hacer visible o invisible una vista.
     private void cambiarVisibilidad(View view, int visibilidad) {
-        CambiarVisibilidad.cambiarVisibilidad(view, visibilidad);
+        view.setVisibility(visibilidad);
     }
+
 
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity(Class<?> activity) {
         CambiarActivity.cambiar(this, activity);
     }
+
     private void cambiarActivity() {
-        CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", "Cerrar sesión");
+        intent.putExtra("texto", "¿Desea cerrar sesión?");
+        startActivityForResult(intent, REQUEST_CODE_P);
     }
 
 

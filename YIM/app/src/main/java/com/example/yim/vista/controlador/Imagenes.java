@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +34,7 @@ public class Imagenes {
 
 
     // Método para subir la imagen al Firebase Storage.
-    public static void subirImagen(Context context, ProgressDialog progressDialog, String mensageDialog, String ruta, Uri url) {
+    public static void subirImagen(Context context, ProgressDialog progressDialog, String mensageDialog, String ruta, Uri url, FirebaseCallbackUri callback) {
         inicializarStorage();
         progressDialog.setMessage(mensageDialog);
 
@@ -48,7 +49,34 @@ public class Imagenes {
                     uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri urlImagen) {
-                            subirImagenPerfil(context, progressDialog, urlImagen);
+                            if(ruta.startsWith("perfil/")){
+                                subirImagenPerfil(context, progressDialog, urlImagen, new FirebaseCallbackBoolean() {
+                                    @Override
+                                    public void onCallback(boolean accionRealizada) {
+                                        callback.onCallback(urlImagen);
+                                    }
+                                });
+
+                            }else{
+                                int index = ruta.indexOf('/');
+                                String ID = ruta.substring(index + 1);
+
+                                if(ruta.startsWith("rutina/")){
+                                    subirImagenRutina(context, progressDialog, urlImagen, ID, new FirebaseCallbackBoolean() {
+                                        @Override
+                                        public void onCallback(boolean accionRealizada) {
+                                            callback.onCallback(urlImagen);
+                                        }
+                                    });
+                                } if(ruta.startsWith("ejercicio/")){
+                                    subirImagenEjercicio(context, progressDialog, urlImagen, ID, new FirebaseCallbackBoolean() {
+                                        @Override
+                                        public void onCallback(boolean accionRealizada) {
+                                            callback.onCallback(urlImagen);
+                                        }
+                                    });
+                                }
+                            }
                         }
                     });
                 }
@@ -64,7 +92,7 @@ public class Imagenes {
 
 
     // Método para subir la imagen de perfil.
-    public static void subirImagenPerfil(Context context, ProgressDialog progressDialog, Uri urlImagen){
+    public static void subirImagenPerfil(Context context, ProgressDialog progressDialog, Uri urlImagen, FirebaseCallbackBoolean callback){
         try{
             firebaseManager.actualizarPerfil(context, urlImagen.toString(), new FirebaseCallbackBoolean() {
                 @Override
@@ -74,11 +102,54 @@ public class Imagenes {
                     } else {
                         mostrarToast(context, "Error al subir la imagen de perfil");
                     }
+                    callback.onCallback(accionRealizada);
                 }
             });
 
         } catch (Exception ex) {
-            mostrarToast(context, "Error al crear la rutina.");
+            mostrarToast(context, "Error al actualizar la rutina.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Método para subir la imagen de la rutina.
+    public static void subirImagenRutina(Context context, ProgressDialog progressDialog, Uri urlImagen, String IDRutina, FirebaseCallbackBoolean callback){
+        try{
+            firebaseManager.actualizarRutina(context,IDRutina ,urlImagen.toString(), new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada) {
+                        progressDialog.dismiss();
+                    } else {
+                        mostrarToast(context, "Error al subir la imagen de la rutina");
+                    }
+                    callback.onCallback(accionRealizada);
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al actualizar la rutina.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Método para subir la imagen de la ejercicio.
+    public static void subirImagenEjercicio(Context context, ProgressDialog progressDialog, Uri urlImagen, String IDRutina, FirebaseCallbackBoolean callback){
+        try{
+            firebaseManager.actualizarEjercicioCreado(context,IDRutina ,urlImagen.toString(), new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if (accionRealizada) {
+                        progressDialog.dismiss();
+                    } else {
+                        mostrarToast(context, "Error al subir la imagen del ejercicio");
+                    }
+                    callback.onCallback(accionRealizada);
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al actualizar el ejercicio.");
             ex.printStackTrace();
         }
     }

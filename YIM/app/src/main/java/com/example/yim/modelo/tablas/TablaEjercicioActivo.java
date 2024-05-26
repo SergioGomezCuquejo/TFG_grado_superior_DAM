@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class TablaEjercicioActivo implements Serializable {
     private ArrayList<TablaHistorial> historial;
     private String id_ejercicio;
+    private String imagen;
     private ArrayList<String> musculos;
     private String nombre;
     private int posicion;
@@ -18,9 +19,10 @@ public class TablaEjercicioActivo implements Serializable {
     }
 
     public TablaEjercicioActivo(ArrayList<TablaHistorial> historial, String id_ejercicio, ArrayList<String> musculos, String nombre,
-                                int posicion, int repeticiones, int series_necesarias, int series_realizadas, int tiempo_descanso) {
+                                String imagen, int posicion, int repeticiones, int series_necesarias, int series_realizadas, int tiempo_descanso) {
         this.historial = historial;
         this.id_ejercicio = id_ejercicio;
+        this.imagen = imagen;
         this.musculos = musculos;
         this.nombre = nombre;
         this.posicion = posicion;
@@ -36,10 +38,19 @@ public class TablaEjercicioActivo implements Serializable {
         this.musculos = ejercicio.getMusculos();
         this.nombre = ejercicio.getNombre();
         this.posicion = ejercicio.getPosicion();
+        this.imagen = ejercicio.getImagen();
         this.repeticiones = ejercicio.getRepeticiones();
         this.series_necesarias = ejercicio.getSeries();
         this.series_realizadas = 0;
         this.tiempo_descanso = ejercicio.getTiempo_descanso();
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public ArrayList<TablaHistorial> getHistorial() {

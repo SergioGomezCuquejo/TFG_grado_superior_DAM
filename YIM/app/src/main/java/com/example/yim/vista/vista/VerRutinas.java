@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.VerRutinasAdaptador;
@@ -29,6 +31,8 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
     //Variables de instancias.
     private FirebaseManager firebaseManager;
     RecyclerView recyclerView;
+    TextView sinRutinas;
+    ScrollView scrollView;
     ImageView agregarRutina, imagenPerfilMenu;
     ProgressBar cargando;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
@@ -48,6 +52,8 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
 
         recyclerView = findViewById(R.id.rutinas);
 
+        sinRutinas = findViewById(R.id.sin_rutinas);
+        scrollView = findViewById(R.id.scrollView);
         agregarRutina = findViewById(R.id.agregar_rutina);
 
         imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
@@ -94,10 +100,9 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
                 cambiarActivity(Inicio.class);
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(RutinaSemanal.class);
                 break;
 
-            case "atras_iv":
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
@@ -113,9 +118,13 @@ public class VerRutinas extends AppCompatActivity implements View.OnClickListene
             firebaseManager.obtenerRutinasUsuario(this, new FirebaseCallbackRutinasUsuario() {
                 @Override
                 public void onCallback(ArrayList<TablaRutinaUsuario> rutinas) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(VerRutinas.this));
-                    VerRutinasAdaptador adaptador = new VerRutinasAdaptador(VerRutinas.this, rutinas);
-                    recyclerView.setAdapter(adaptador);
+                    if(!rutinas.isEmpty()){
+                        recyclerView.setLayoutManager(new LinearLayoutManager(VerRutinas.this));
+                        VerRutinasAdaptador adaptador = new VerRutinasAdaptador(VerRutinas.this, rutinas);
+                        recyclerView.setAdapter(adaptador);
+                    }else{
+                        sinRutinas.setVisibility(View.VISIBLE);
+                    }
                 }
             });
 

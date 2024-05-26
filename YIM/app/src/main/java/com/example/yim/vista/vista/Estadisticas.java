@@ -19,12 +19,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.yim.R;
-import com.example.yim.controlador.Adaptadores.EstadisticasAdaptador;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.controlador.Adaptadores.EstadisticasEjercicioCreadoAdaptador;
+import com.example.yim.controlador.Adaptadores.EstadisticasEjercicioPorDefectoAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosCreados;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.Imagenes;
@@ -89,8 +92,9 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
 
         //Mostrar datos.
         try{
-            obtenerEjercicios();
             mostrarImagenPerfil();
+            obtenerEjerciciosCreados();
+            obtenerEjerciciosPorDefecto();
 
         } catch (Exception ex) {
             mostrarToast("Error al obtener las estadísticas.");
@@ -127,12 +131,26 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
     }
 
     //Método para obtener los ejercicos que tengan estadísticas.
-    private void obtenerEjercicios(){
-        firebaseManager.obtenerEjerciciosUsuarioConEstadisticas(this, new FirebaseCallbackEjerciciosUsuario() {
+    private void obtenerEjerciciosCreados(){
+        firebaseManager.obtenerEjerciciosCreadosConEstadisticas(this, new FirebaseCallbackEjerciciosCreados() {
             @Override
-            public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
+            public void onCallback(ArrayList<TablaEjercicioCreado> ejerciciosUsuarios) {
                 if(ejerciciosUsuarios != null && ejerciciosUsuarios.size() > 0){
-                    obtenerMusculos(ejerciciosUsuarios);
+                    obtenerMusculosEjercicioCreados(ejerciciosUsuarios);
+                }else{
+                    scrollView.setVisibility(View.GONE);
+                    noEstadisticasTV.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+    }
+    private void obtenerEjerciciosPorDefecto(){
+        firebaseManager.obtenerEjerciciosPorDefectoConEstadisticas(this, new FirebaseCallbackEjerciciosPorDefecto() {
+            @Override
+            public void onCallback(ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuarios) {
+                if(ejerciciosUsuarios != null && ejerciciosUsuarios.size() > 0){
+                    obtenerMusculosEjercicioPorDefecto(ejerciciosUsuarios);
                 }else{
                     scrollView.setVisibility(View.GONE);
                     noEstadisticasTV.setVisibility(View.VISIBLE);
@@ -144,7 +162,7 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
 
 
     //Método para obtener los colores de los músculos del usuario.
-    private void obtenerMusculos(ArrayList<TablaEjercicioUsuario> ejercicios){
+    private void obtenerMusculosEjercicioCreados(ArrayList<TablaEjercicioCreado> ejercicios){
 
         firebaseManager.obtenerMusculosUsuario(this, new FirebaseCallbackMusculosUsuario() {
             @Override
@@ -154,7 +172,23 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
                     for (TablaMusculoUsuario musculo : musculosUsuarios){
                         musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
                     }
-                    mostrarEjercicios(ejercicios, musculosHM);
+                    mostrarEjerciciosCreados(ejercicios, musculosHM);
+                }
+
+            }
+        });
+    }
+    private void obtenerMusculosEjercicioPorDefecto(ArrayList<TablaEjercicioPorDefecto> ejercicios){
+
+        firebaseManager.obtenerMusculosUsuario(this, new FirebaseCallbackMusculosUsuario() {
+            @Override
+            public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuarios) {
+                if(musculosUsuarios != null){
+                    HashMap<String, String> musculosHM = new HashMap<>();
+                    for (TablaMusculoUsuario musculo : musculosUsuarios){
+                        musculosHM.put(musculo.getNombre(), musculo.getColor_fondo());
+                    }
+                    mostrarEjerciciosPorDefecto(ejercicios, musculosHM);
                 }
 
             }
@@ -163,9 +197,14 @@ public class Estadisticas extends AppCompatActivity implements View.OnClickListe
 
 
     //Método para mostrar los ejercicicios desde un adaptador.
-    private void  mostrarEjercicios(ArrayList<TablaEjercicioUsuario> ejercicios, HashMap<String, String> musculosHM){
+    private void  mostrarEjerciciosCreados(ArrayList<TablaEjercicioCreado> ejercicios, HashMap<String, String> musculosHM){
         recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
-        EstadisticasAdaptador adaptador = new EstadisticasAdaptador(Estadisticas.this, ejercicios, musculosHM);
+        EstadisticasEjercicioCreadoAdaptador adaptador = new EstadisticasEjercicioCreadoAdaptador(Estadisticas.this, ejercicios, musculosHM);
+        recyclerView.setAdapter(adaptador);
+    }
+    private void  mostrarEjerciciosPorDefecto(ArrayList<TablaEjercicioPorDefecto> ejercicios, HashMap<String, String> musculosHM){
+        recyclerView.setLayoutManager(new LinearLayoutManager(Estadisticas.this));
+        EstadisticasEjercicioPorDefectoAdaptador adaptador = new EstadisticasEjercicioPorDefectoAdaptador(Estadisticas.this, ejercicios, musculosHM);
         recyclerView.setAdapter(adaptador);
     }
 

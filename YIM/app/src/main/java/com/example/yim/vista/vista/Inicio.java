@@ -5,6 +5,7 @@ import static com.example.yim.vista.controlador.CambiarActivity.cambiar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,124 +15,140 @@ import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaActiva;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaPerfil;
-import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 import com.example.yim.vista.controlador.Imagenes;
+import com.example.yim.vista.controlador.MostratToast;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
-    FirebaseAuth auth;
-    FirebaseManager firebaseManager;
-    FirebaseUser user;
-    LinearLayout continuar_linearlayout, musculos_linearlayout, imagen_casa, imagen_calendario, imagen_estadisticas, imagen_usuario;
-    TextView ejercicios, rutinas;
-    ImageView lupa_ejercicios, mas_ejercicios_pequeno, lupa_rutinas, mas_rutinas_pequeno;
-    FrameLayout mas_ejercicios_grande, mas_rutinas_grande;
-    ShapeableImageView rutina1, rutina2;
+
+    //Variables de instancias.
+    private FirebaseManager firebaseManager;
+    LinearLayout continuarLinearlayout, rutinasLL;
+    TextView continuarTV, semanaTV, diaTV;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
     ImageView imagenPerfilMenu;
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-
         //Inicializar instancias.
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         firebaseManager = new FirebaseManager();
 
 
         //Controlar que no se ha cerrado sesión.
-        user = auth.getCurrentUser();
+        FirebaseUser user = auth.getCurrentUser();
         if(user == null){
             cambiarActivity(InicioSesion.class);
         }
 
-        //Referencias de las vistas
-        continuar_linearlayout = findViewById(R.id.continuar_linearlayout);
-        musculos_linearlayout = findViewById(R.id.musculos_linearlayout);
-        imagen_casa = findViewById(R.id.imagen_casa_menu);
-        imagen_calendario = findViewById(R.id.imagen_calendario_menu);
-        imagen_estadisticas = findViewById(R.id.imagen_estadisticas_menu);
-        imagen_usuario = findViewById(R.id.imagen_usuario_menu);
-        ejercicios = findViewById(R.id.ejercicios);
-        rutinas = findViewById(R.id.rutinas);
-        lupa_ejercicios = findViewById(R.id.lupa_ejercicios);
-        mas_ejercicios_pequeno = findViewById(R.id.mas_ejercicios_pequeno);
-        lupa_rutinas = findViewById(R.id.lupa_rutinas);
-        mas_rutinas_pequeno = findViewById(R.id.mas_rutinas_pequeno);
-        mas_ejercicios_grande = findViewById(R.id.mas_ejercicios_grande);
-        mas_rutinas_grande = findViewById(R.id.mas_rutinas_grande);
-        rutina1 = findViewById(R.id.rutina1);
-        rutina2 = findViewById(R.id.rutina2);
+        //Referencias de las vistas.
+        continuarLinearlayout = findViewById(R.id.continuar_linearlayout);
+        continuarTV = findViewById(R.id.continuar_tv);
+        semanaTV = findViewById(R.id.semana_tv);
+        diaTV = findViewById(R.id.dia_tv);
 
-
+        imagenCasaMenu = findViewById(R.id.imagen_casa_menu);
+        imagenCalendarioMenu = findViewById(R.id.imagen_calendario_menu);
+        imagenEstadisticasMenu = findViewById(R.id.imagen_estadisticas_menu);
+        imagenUsuarioMenu = findViewById(R.id.imagen_usuario_menu);
         imagenPerfilMenu = findViewById(R.id.imagen_perfil_menu);
 
-        //Listeners
-        continuar_linearlayout.setOnClickListener(this);
-        musculos_linearlayout.setOnClickListener(this);
-        imagen_casa.setOnClickListener(this);
-        imagen_calendario.setOnClickListener(this);
-        imagen_estadisticas.setOnClickListener(this);
-        imagen_usuario.setOnClickListener(this);
-        ejercicios.setOnClickListener(this);
-        rutinas.setOnClickListener(this);
-        lupa_ejercicios.setOnClickListener(this);
-        mas_ejercicios_pequeno.setOnClickListener(this);
-        lupa_rutinas.setOnClickListener(this);
-        mas_rutinas_pequeno.setOnClickListener(this);
-        mas_ejercicios_grande.setOnClickListener(this);
-        mas_rutinas_grande.setOnClickListener(this);
-        rutina1.setOnClickListener(this);
-        rutina2.setOnClickListener(this);
 
-        mostrarImagenPerfil();
+        //Listeners
+        continuarLinearlayout.setOnClickListener(this);
+
+        imagenCasaMenu.setOnClickListener(this);
+        imagenCalendarioMenu.setOnClickListener(this);
+        imagenEstadisticasMenu.setOnClickListener(this);
+        imagenUsuarioMenu.setOnClickListener(this);
+
+        //Mostrar datos.
+        try{
+            mostrarImagenPerfil();
+            continuar();
+
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener el inicio.");
+            ex.printStackTrace();
+        }
+
+
 
     }
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.continuar_linearlayout || id == R.id.rutina1 || id == R.id.imagen_calendario_menu) {
-            cambiarActivity(RutinaSemanal.class);
+        String id = getResources().getResourceEntryName(view.getId());
 
-        } else if (id == R.id.musculos_linearlayout) {
-            cambiarActivity(Musculos.class);
+        switch (id){
+            case "continuar_linearlayout":
+                if(continuarTV.getText().equals("Continuar")){
+                    cambiarActivity(RutinaSemanal.class);
+                }else{
+                    cambiarActivity(VerRutinas.class);
+                }
+                break;
 
-        } else if (id == R.id.imagen_casa_menu) {
-            cambiarActivity(this.getClass());
-
-        } else if (id == R.id.imagen_estadisticas_menu) {
-            cambiarActivity(Estadisticas.class);
-
-        } else if (id == R.id.imagen_usuario_menu) {
-            cambiarActivity(Perfil.class);
-
-        } else if (id == R.id.ejercicios || id == R.id.lupa_ejercicios) {
-            cambiarActivity(VerEjercicios.class);
-
-        } else if (id == R.id.rutinas || id == R.id.lupa_rutinas) {
-            cambiarActivity(VerRutinas.class);
-
-        } else if (id == R.id.mas_ejercicios_pequeno || id == R.id.mas_ejercicios_grande) {
-            CambiarActivity.cambiar(this, "Cerrar sesión", "¿Desea cerrar sesión?", "cerrar_sesion");
-
-        } else if (id == R.id.mas_rutinas_pequeno || id == R.id.mas_rutinas_grande) {
-            cambiarActivity(Logros.class);
-
-        } else if (id == R.id.rutina2) {
-            cambiarActivity(EjerciciosRutinas.class);
-
+            case "imagen_casa_menu":
+                cambiarActivity(Inicio.class);
+                break;
+            case "imagen_calendario_menu":
+                cambiarActivity(RutinaSemanal.class);
+                break;
+            case "imagen_estadisticas_menu":
+                cambiarActivity(Estadisticas.class);
+                break;
+            case "imagen_usuario_menu":
+                cambiarActivity(Perfil.class);
+                break;
         }
     }
 
-    private void cambiarActivity(Class<?> activity) {
-        cambiar(this, activity);
+    private void continuar(){
+        try {
+            firebaseManager.obtenerRutinaActiva(this, new FirebaseCallbackRutinaActiva() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onCallback(TablaRutinaActiva rutinaActiva) {
+                    if(rutinaActiva != null){
+                        semanaTV.setVisibility(View.VISIBLE);
+
+                        continuarTV.setText("Continuar");
+                        semanaTV.setText("Semana " + (rutinaActiva.getSemana().size()/7));
+                    }else{
+                        continuarTV.setText("Empezar a crear una rutina");
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast("Error al obtener la rutina semanal.");
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    //Método que obtiene la imagen de perfil, si tiene llama a Imagenes.java. (Clase que permite la visualización de imagenes de Firebase Storage)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        int REQUEST_CODE = 1;
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                MostratToast.mostrarToast(this, "res - " + resultado);
+            }
+        }
     }
 
     private void mostrarImagenPerfil(){
@@ -146,6 +163,18 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
+    }
+
+
+    //Métodos para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
+    private void cambiarActivity(Class<?> activity) {
+        cambiar(this, activity);
+    }
+
+
+    //Métodos para llamar a MostratToast.java. (Clase que muestra un mensaje por pantalla)
+    private void mostrarToast(String mensaje){
+        MostratToast.mostrarToast(this, mensaje);
     }
 
 }

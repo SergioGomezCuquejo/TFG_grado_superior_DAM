@@ -1,0 +1,269 @@
+package com.example.yim.modelo.tablas;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class TablaEjercicioPorDefecto implements Serializable {
+    private ArrayList<TablaHistorial> historial;
+    private ArrayList<TablaEstadistica> estadisticas;
+    private String ID;
+    private ArrayList<String> consejos_clave;
+    private ArrayList<String> ejecucion;
+    private String imagen;
+    private String imagen_realizar;
+    private ArrayList<String> musculos;
+    private String nombre;
+    private String notas;
+    private int peso_maximo;
+    private int peso_recomendado;
+    private int repeticiones_maximas;
+    private int repeticiones_recomendadas;
+    private int series_maximas;
+    private int series_recomendadas;
+    private int tiempo_descanso;
+    private int veces_no_realizado;
+    private int veces_realizado;
+    private int veces_usado_en_rutina_activa;
+    private int veces_usado_en_rutinas;
+
+    public TablaEjercicioPorDefecto() {
+    }
+
+    public TablaEjercicioPorDefecto(ArrayList<TablaEstadistica> estadisticas, ArrayList<TablaHistorial> historial, ArrayList<String> consejos_clave, ArrayList<String> ejecucion,
+                                    String imagen, String imagenRealizar, ArrayList<String> musculos, String nombre, String notas, int peso_maximo, int peso_recomendado,
+                                    int repeticiones_maximas, int repeticiones_recomendadas, int series_maximas, int series_recomendadas, int tiempo_descanso,
+                                    int veces_no_realizado, int veces_realizado, int veces_usado_en_rutian_activa, int veces_usado_en_rutinas) {
+        this.estadisticas = estadisticas;
+        this.historial = historial;
+        this.consejos_clave = consejos_clave;
+        this.ejecucion = ejecucion;
+        this.imagen = imagen;
+        this.imagen_realizar = imagenRealizar;
+        this.musculos = musculos;
+        this.nombre = nombre;
+        this.notas = notas;
+        this.peso_maximo = peso_maximo;
+        this.peso_recomendado = peso_recomendado;
+        this.repeticiones_maximas = repeticiones_maximas;
+        this.repeticiones_recomendadas = repeticiones_recomendadas;
+        this.series_maximas = series_maximas;
+        this.series_recomendadas = series_recomendadas;
+        this.tiempo_descanso = tiempo_descanso;
+        this.veces_no_realizado = veces_no_realizado;
+        this.veces_realizado = veces_realizado;
+        this.veces_usado_en_rutina_activa = veces_usado_en_rutian_activa;
+        this.veces_usado_en_rutinas = veces_usado_en_rutinas;
+    }
+
+    public TablaEjercicioPorDefecto(TablaEjercicio ejercicio) {
+        consejos_clave = ejercicio.getConsejos_clave();
+        ejecucion = ejercicio.getEjecucion();
+        imagen = ejercicio.getImagen();
+        imagen_realizar = ejercicio.getImagen_realizar();
+        musculos = ejercicio.getMusculos();
+        nombre = ejercicio.getNombre();
+    }
+
+    public TablaEjercicioPorDefecto(String imagen, String imagenRealizar, ArrayList<String> musculos, String nombre, String notas,
+                                    int repeticiones_recomendadas, int series_recomendadas, int tiempo_descanso) {
+        this.imagen = imagen;
+        this.imagen_realizar = imagenRealizar;
+        this.musculos = musculos;
+        this.nombre = nombre;
+        this.notas = notas;
+        this.repeticiones_recomendadas = repeticiones_recomendadas;
+        this.series_recomendadas = series_recomendadas;
+        this.tiempo_descanso = tiempo_descanso;
+    }
+
+    public ArrayList<TablaEstadistica> getEstadisticas() {
+        return estadisticas;
+    }
+
+    public void setEstadisticas(ArrayList<TablaEstadistica> estadisticas) {
+        this.estadisticas = estadisticas;
+    }
+
+    public ArrayList<TablaHistorial> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ArrayList<TablaHistorial> historial) {
+        this.historial = historial;
+    }
+
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public ArrayList<String> getConsejos_clave() {
+        return consejos_clave;
+    }
+
+    public void setConsejos_clave(ArrayList<String> consejos_clave) {
+        this.consejos_clave = consejos_clave;
+    }
+
+    public ArrayList<String> getEjecucion() {
+        return ejecucion;
+    }
+
+    public void setEjecucion(ArrayList<String> ejecucion) {
+        this.ejecucion = ejecucion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getImagen_realizar() {
+        return imagen_realizar;
+    }
+
+    public void setImagen_realizar(String imagen_realizar) {
+        this.imagen_realizar = imagen_realizar;
+    }
+
+    public ArrayList<String> getMusculos() {
+        return musculos;
+    }
+
+    public void setMusculos(ArrayList<String> musculos) {
+        this.musculos = musculos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
+    public int getPeso_maximo() {
+        return peso_maximo;
+    }
+
+    public void setPeso_maximo(int peso_maximo) {
+        this.peso_maximo = peso_maximo;
+    }
+
+    public int getPeso_recomendado() {
+        return peso_recomendado;
+    }
+
+    public void setPeso_recomendado(int peso_recomendado) {
+        this.peso_recomendado = peso_recomendado;
+    }
+
+    public int getRepeticiones_maximas() {
+        return repeticiones_maximas;
+    }
+
+    public void setRepeticiones_maximas(int repeticiones_maximas) {
+        this.repeticiones_maximas = repeticiones_maximas;
+    }
+
+    public int getRepeticiones_recomendadas() {
+        return repeticiones_recomendadas;
+    }
+
+    public void setRepeticiones_recomendadas(int repeticiones_recomendadas) {
+        this.repeticiones_recomendadas = repeticiones_recomendadas;
+    }
+
+    public int getSeries_maximas() {
+        return series_maximas;
+    }
+
+    public void setSeries_maximas(int series_maximas) {
+        this.series_maximas = series_maximas;
+    }
+
+    public int getSeries_recomendadas() {
+        return series_recomendadas;
+    }
+
+    public void setSeries_recomendadas(int series_recomendadas) {
+        this.series_recomendadas = series_recomendadas;
+    }
+
+    public int getTiempo_descanso() {
+        return tiempo_descanso;
+    }
+
+    public void setTiempo_descanso(int tiempo_descanso) {
+        this.tiempo_descanso = tiempo_descanso;
+    }
+
+    public int getVeces_no_realizado() {
+        return veces_no_realizado;
+    }
+
+    public void setVeces_no_realizado(int veces_no_realizado) {
+        this.veces_no_realizado = veces_no_realizado;
+    }
+
+    public int getVeces_realizado() {
+        return veces_realizado;
+    }
+
+    public void setVeces_realizado(int veces_realizado) {
+        this.veces_realizado = veces_realizado;
+    }
+
+    public int getVeces_usado_en_rutina_activa() {
+        return veces_usado_en_rutina_activa;
+    }
+
+    public void setVeces_usado_en_rutina_activa(int veces_usado_en_rutina_activa) {
+        this.veces_usado_en_rutina_activa = veces_usado_en_rutina_activa;
+    }
+
+    public int getVeces_usado_en_rutinas() {
+        return veces_usado_en_rutinas;
+    }
+
+    public void setVeces_usado_en_rutinas(int veces_usado_en_rutinas) {
+        this.veces_usado_en_rutinas = veces_usado_en_rutinas;
+    }
+
+    @Override
+    public String toString() {
+        return "TablaEjerciciosUsuario{" +
+                "consejos_clave=" + consejos_clave +
+                ", ejecucion=" + ejecucion +
+                ", imagen='" + imagen + '\'' +
+                ", musculos=" + musculos +
+                ", nombre='" + nombre + '\'' +
+                ", notas='" + notas + '\'' +
+                ", peso_maximo=" + peso_maximo +
+                ", repeticiones_maximas=" + repeticiones_maximas +
+                ", repeticiones_recomendadas=" + repeticiones_recomendadas +
+                ", series_maximas=" + series_maximas +
+                ", series_recomendadas=" + series_recomendadas +
+                ", tiempo_descanso=" + tiempo_descanso +
+                ", veces_no_realizado=" + veces_no_realizado +
+                ", veces_realizado=" + veces_realizado +
+                ", veces_usado_en_rutian_activa=" + veces_usado_en_rutina_activa +
+                ", veces_usado_en_rutinas=" + veces_usado_en_rutinas +
+                '}';
+    }
+}

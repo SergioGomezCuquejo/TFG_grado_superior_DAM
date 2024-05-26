@@ -5,36 +5,55 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
+import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
+import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaInfoRutinaUsuario;
+import com.example.yim.modelo.tablas.TablaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
-import com.google.android.material.imageview.ShapeableImageView;
+
+import java.util.ArrayList;
 
 public class PopupRutinas extends AppCompatActivity implements View.OnClickListener {
 
     //Variables de instancias.
+    private FirebaseManager firebaseManager;
     private TablaRutinaUsuario rutinaUsuario;
+    private static final int REQUEST_CODE_PR = 6;
     ImageView cancelar, editar;
-    ShapeableImageView imagen;
+    RelativeLayout imagenRL;
+    ImageView imagenIV;
     LinearLayout activo_ll;
     SwitchCompat activo;
     TextView diasDescansados, diasDeDescanso, diasTotales, diasCompletados, musculosTotales, musculosActivos,
-            ejerciciosSinRealizar, ejerciciosRealizados, vecesActivada, vecesCompletadas;
+            ejerciciosSinRealizar, ejerciciosRealizados, vecesActivada, vecesCompletadas, nombreRutinaTV;
+    FrameLayout nombreRutinaFL;
     Button borrar;
     boolean primeraVez;
-    @SuppressLint("MissingInflatedId")
+    String accion;
+    ProgressDialog progressDialog;
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,12 +70,13 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
 
         //Inicializar instancias.
+        firebaseManager = new FirebaseManager();
         Intent intent = getIntent();
         primeraVez = true;
 
 
         //Obtener la rutina que se ha seleccionado.
-        if(intent.hasExtra("diaRutinaActiva")) {
+        if(intent.hasExtra("rutinaUsuario")) {
             rutinaUsuario = (TablaRutinaUsuario) intent.getSerializableExtra("rutinaUsuario");
         }else {
             mostrarToast("Errror al obtener la rutina");
@@ -68,7 +88,10 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         cancelar = findViewById(R.id.cancelar);
         editar = findViewById(R.id.editar);
 
-        imagen = findViewById(R.id.imagen);
+        nombreRutinaFL = findViewById(R.id.nombre_rutina_fl);
+        nombreRutinaTV = findViewById(R.id.nombre_rutina_tv);
+        imagenRL = findViewById(R.id.imagen_rl);
+        imagenIV = findViewById(R.id.imagen_iv);
 
         activo_ll = findViewById(R.id.activo_ll);
         activo = findViewById(R.id.activo);
@@ -88,6 +111,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
 
 
         //Listeners.
+        imagenRL.setOnClickListener(this);
         cancelar.setOnClickListener(this);
         editar.setOnClickListener(this);
         borrar.setOnClickListener(this);
@@ -98,17 +122,13 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean estaActivo) {
                 cambiarActivo(estaActivo);
-                if(!primeraVez){
+                if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
+                    accion = "Activar";
+                    cambiarActivity( "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal");
 
-                    //TODO
-                    if(activo.isChecked() && !rutinaUsuario.getInformacion().isActivo()){
-                        cambiarActivity( "¿Activar rutina?", "Al activar la rutina se desactivará la que ya esté activa y se reiniciarán los días de la rutina semanal.", "activar");
-
-                    } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
-                        cambiarActivity("¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal.", "desactivar");
-                    }
-                }else {
-                    primeraVez = false;
+                } else if (!activo.isChecked() && rutinaUsuario.getInformacion().isActivo()){
+                    accion = "Desactivar";
+                    cambiarActivity("¿Desactivar rutina?", "Al desactivar la rutina se reiniciarán los días de la rutina semanal");
                 }
             }
         });
@@ -121,7 +141,6 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             mostrarToast("Error al mostrar los datos de la rutina.");
             ex.printStackTrace();
         }
-        mostrarInfo();
     }
 
     @Override
@@ -134,12 +153,20 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case "editar":
-                cambiarActivity(CrearRutinas.class, rutinaUsuario);
+                cambiarActivity(rutinaUsuario);
                 break;
 
-            case "borrar"://todo
-                CambiarActivity.cambiar(this, "Borrar rutina.",
-                        "¿Desea eliminar la rutina '" + rutinaUsuario.getInformacion().getNombre() + "'?", "ID" + rutinaUsuario.getID() + "RU");
+            case "imagen_rl":
+                subirImagen();
+                break;
+
+            case "borrar":
+                accion = "Eliminar";
+                if(rutinaUsuario.getInformacion().isActivo()){
+                    cambiarActivity("Al borrar la rutina también se eliminará la Rutina Semanal", "¿Desea continuar?");
+                }else{
+                    cambiarActivity("Borrar rutina", "¿Desea eliminar la rutina?");
+                }
                 break;
         }
     }
@@ -161,11 +188,22 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     //Método para mostrar los datos de la rutina.
     private void mostrarInfo(){
         TablaInfoRutinaUsuario infoRutina = rutinaUsuario.getInformacion();
+        String nombre;
 
         activo.setChecked(infoRutina.isActivo());
         cambiarActivo(activo.isChecked());
 
-        imagen.setImageResource(R.drawable.pierna);
+        if(infoRutina.getImagen() != null){
+            Imagenes.mostrarImagen(this, infoRutina.getImagen(), imagenIV);
+        }else{
+            nombreRutinaFL.setVisibility(View.VISIBLE);
+            imagenIV.setVisibility(View.GONE);
+            nombre = rutinaUsuario.getInformacion().getNombre().toUpperCase();
+            if (nombre.length() >= 3) {
+                nombre = nombre.substring(0, 3);
+            }
+            nombreRutinaTV.setText(nombre);
+        }
 
         diasDescansados.setText(String.valueOf(infoRutina.getDias_descansados()));
         diasDeDescanso.setText(String.valueOf(infoRutina.getDias_descanso()));
@@ -179,13 +217,146 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         vecesCompletadas.setText(String.valueOf(infoRutina.getVeces_completada()));
     }
 
+    // Método para eliminar la rutina.
+    private void eliminarRutina(){
+        try{
+            firebaseManager.eliminarRutina(this, rutinaUsuario.getID(), new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if(accionRealizada){
+                        finish();
+                        mostrarToast("Rutina eliminada correctamente.");
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            mostrarToast("Error al eliminar la rutina del usuario.");
+            ex.printStackTrace();
+        }
+
+    }
+
+    // Método para eliminar la rutina activa.
+    private void eliminarRutinaActiva(){
+        try{
+            firebaseManager.eliminarRutinaActiva(this);
+
+        } catch (Exception ex) {
+            mostrarToast("Error al eliminar la rutina del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    // Método para activar/desactivar la rutina.
+    private void activarRutina(boolean activar){
+        try {
+            firebaseManager.actualizarRutina(this, rutinaUsuario.getID(), activar);
+        } catch (Exception ex) {
+            mostrarToast("Error al actualizar la rutina del usuario.");
+            ex.printStackTrace();
+        }
+
+    }
+    private  void desactivarOtraRutina(String IDRutina){
+        try {
+            firebaseManager.actualizarRutina(this, IDRutina, false);
+        } catch (Exception ex) {
+            mostrarToast("Error al desactivar la rutina del usuario.");
+            ex.printStackTrace();
+        }
+    }
+
+    private  void desactivarRutinas(){
+        try {
+            firebaseManager.desactivarRutinas(this, new FirebaseCallbackRutinaUsuario() {
+                @Override
+                public void onCallback(TablaRutinaUsuario rutina) {
+                    if(rutina != null){
+                        desactivarOtraRutina(rutina.getID());
+                        eliminarRutinaActiva();
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast("Error al desactivar las rutinas del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    private void crearRutinaActiva(){
+        TablaRutinaActiva rutinaActiva = new TablaRutinaActiva();
+        rutinaActiva.setIdRutina(rutinaUsuario.getID());
+
+        ArrayList<TablaDiaRutinaActiva> semana = new ArrayList<>();
+        for(TablaDiaRutinaUsuario diaRutinaUsuario : rutinaUsuario.getSemana()){
+            semana.add(new TablaDiaRutinaActiva(diaRutinaUsuario));
+        }
+        rutinaActiva.setSemana(semana);
+        firebaseManager.agregarRutinaActiva(this, rutinaActiva);
+    }
+
+    //Método para mostrar la galería del usuario.
+    private void subirImagen(){
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+
+        startActivityForResult(i, 300);
+        progressDialog = new ProgressDialog(this);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+
+            // Al recibir la imagen se actualizará.
+            if (requestCode == 300){
+                Uri image_url = data.getData();
+                Imagenes.subirImagen(this, progressDialog, "Actualizando la imagen de la rutina..", "rutina/" + rutinaUsuario.getID(), image_url, new FirebaseCallbackUri() {
+                    @Override
+                    public void onCallback(Uri uri) {
+                        Imagenes.mostrarImagen(PopupRutinas.this, uri.toString(), imagenIV);
+                    }
+                });
+
+
+            // Si la respuesta es del PopupAlerta.java y es true se cerrará sesión.
+            }else if (requestCode == REQUEST_CODE_PR) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    if (accion.equals("Eliminar")){
+                        if(rutinaUsuario.getInformacion().isActivo()){
+                            eliminarRutinaActiva();
+                        }
+                        eliminarRutina();
+
+                    }else {
+                        if(accion.equals("Activar")){
+                            desactivarRutinas();
+                            activarRutina(true);
+                            crearRutinaActiva();
+                        }else{
+                            activarRutina(false);
+                            eliminarRutinaActiva();
+                        }
+                        finish();
+                    }
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
-    private void cambiarActivity(Class<?> activity, TablaRutinaUsuario rutinaUsuario) {
-        CambiarActivity.cambiar(this, activity, rutinaUsuario);
+    private void cambiarActivity(TablaRutinaUsuario rutinaUsuario) {
+        CambiarActivity.cambiar(this, CrearRutinas.class, rutinaUsuario);
     }
-    private void cambiarActivity(String titulo, String texto, String accion) {
-        CambiarActivity.cambiar(this, titulo, texto, "ir_a_ver_rutinas", rutinaUsuario, accion);
+    private void cambiarActivity(String titulo, String texto) {
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("texto", texto);
+        startActivityForResult(intent, REQUEST_CODE_PR);
     }
 
 

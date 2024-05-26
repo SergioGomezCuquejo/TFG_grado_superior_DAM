@@ -28,12 +28,14 @@ import android.widget.TextView;
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.HistorialAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioCreado;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicioActivo;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaHistorial;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.modelo.tablas.TablaSerie;
@@ -52,7 +54,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     private TablaDiaRutinaActiva diaRutinaActiva;
     private TablaEjercicioActivo ejercicioActivo;
     ImageView atras, imagenSH, agregarSerie, costeIB, imagenPerfilMenu;
-    TextView ejerciciosTotalesTV, tituloTV, serieTV, costeTV, seriesTV, historialTV;
+    TextView ejerciciosTotalesTV, tituloTV, serieTV, costeTV, seriesTV, historialTV, nombreRutinaTV;
     ImageButton botonInfo;
     Button repeticionesNecesariasBT, descansoBT;
     LinearLayout costeLL;
@@ -60,7 +62,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     EditText pesoET, repeticionesET;
     RecyclerView historialRV;
     ProgressBar cargando;
-    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
+    FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu, nombreRutinaFL;
 
     private boolean descansando;
     private int numEjercicio, numEjercicios, dia, serieActual;
@@ -100,6 +102,8 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
         cargando = findViewById(R.id.cargando);
 
         atras = findViewById(R.id.atras_iv);
+        nombreRutinaFL = findViewById(R.id.nombre_rutina_fl);
+        nombreRutinaTV = findViewById(R.id.nombre_rutina_tv);
         ejerciciosTotalesTV = findViewById(R.id.ejercios_totales_tv);
 
         imagenSH = findViewById(R.id.imagen_sh);
@@ -170,8 +174,8 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
         //Mostrar datos.
         try{
-            mostrarEjercicio();
             mostrarImagenPerfil();
+            mostrarEjercicio();
 
         } catch (Exception ex) {
             mostrarToast("Error al obtener los datos del ejercicio.");
@@ -196,7 +200,11 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case "boton_info":
-                mostrarInfoEjercicio();
+                if(ejercicioActivo.getNombre().startsWith("-")){
+                    mostrarInfoEjercicioCreado();
+                }else {
+                    mostrarInfoEjercicioPorDefecto();
+                }
                 break;
 
             case "repeticiones_necesarias_bt":
@@ -233,6 +241,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                             mostrarToast("Día completado");
                             finish();
                         }else{
+                            mostrarToast(String.valueOf(ejercicioActivo.getPosicion()));
                             cambiarActivity();
                         }
                     }
@@ -265,15 +274,34 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     private void mostrarEjercicio(){
         ArrayList<TablaSerie> series = new ArrayList<TablaSerie>();
         ArrayList<String> dias = new ArrayList<String>();
-        String costeString;
+        String costeString, nombre;
         int serieHistorial, colorCoste;
         TablaSerie serieAnteriorHistorial;
         HistorialAdaptador adaptador;
 
         ejerciciosTotalesTV.setText("Ejercicio " + (numEjercicio+1) + " de " + numEjercicios);
 
-        imagenSH.setImageResource(R.drawable.curl_de_biceps_hombre);
-        tituloTV.setText(ejercicioActivo.getNombre());
+        if(ejercicioActivo.getNombre().startsWith("-")){
+            if(ejercicioActivo.getImagen() != null){
+                Imagenes.mostrarImagen(this, ejercicioActivo.getImagen(),  imagenSH);
+            }else{
+                nombreRutinaFL.setVisibility(View.VISIBLE);
+                imagenSH.setVisibility(View.INVISIBLE);
+                nombre = ejercicioActivo.getNombre().toUpperCase();
+                nombre = nombre.substring(1);
+                if (nombre.length() >= 3) {
+                    nombre = nombre.substring(0, 3);
+                }
+                nombreRutinaTV.setText(nombre);
+            }
+            tituloTV.setText(ejercicioActivo.getNombre().substring(1));
+        }else {
+            if(ejercicioActivo.getImagen() != null){
+                imagenSH.setImageResource(getResources().getIdentifier(ejercicioActivo.getImagen(), "drawable", getPackageName()));
+            }
+            tituloTV.setText(ejercicioActivo.getNombre());
+
+        }
 
         repeticionesNecesariasBT.setText(String.valueOf(ejercicioActivo.getRepeticiones()));
 
@@ -339,10 +367,22 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
 
     //Método para mostrar la información del ejercicio.
-    private void mostrarInfoEjercicio(){
-        firebaseManager.obtenerEjercicioUsuario(this, ejercicioActivo.getId_ejercicio(), new FirebaseCallbackEjercicioUsuario() {
+    private void mostrarInfoEjercicioCreado(){
+        firebaseManager.obtenerEjercicioCreado(this, ejercicioActivo.getId_ejercicio(), new FirebaseCallbackEjercicioCreado() {
             @Override
-            public void onCallback(TablaEjercicioUsuario ejercicio) {
+            public void onCallback(TablaEjercicioCreado ejercicio) {
+                if (ejercicio != null) {
+                    cambiarActivity(ejercicio);
+                } else {
+                    mostrarToast("Error al obtener el ejercicio");
+                }
+            }
+        });
+    }
+    private void mostrarInfoEjercicioPorDefecto(){
+        firebaseManager.obtenerEjercicioPorDefecto(this, ejercicioActivo.getId_ejercicio(), new FirebaseCallbackEjercicioPorDefecto() {
+            @Override
+            public void onCallback(TablaEjercicioPorDefecto ejercicio) {
                 if (ejercicio != null) {
                     cambiarActivity(ejercicio);
                 } else {
@@ -516,11 +556,14 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     private void cambiarActivity(TablaDiaRutinaActiva diaRutinaActiva) {
         CambiarActivity.cambiar(this, diaRutinaActiva);
     }
-    private void cambiarActivity(TablaEjercicioUsuario ejercicio){
-        CambiarActivity.cambiar(this, PopupVerEjercicios.class, ejercicio);
+    private void cambiarActivity(TablaEjercicioCreado ejercicio){
+        CambiarActivity.cambiar(this, ejercicio);
+    }
+    private void cambiarActivity(TablaEjercicioPorDefecto ejercicio){
+        CambiarActivity.cambiar(this, ejercicio);
     }
     private void cambiarActivity(){
-        CambiarActivity.cambiar(this, diaRutinaActiva, (ejercicioActivo.getPosicion()+1));
+        CambiarActivity.cambiar(this, diaRutinaActiva, (ejercicioActivo.getPosicion()-1));
     }
 
 

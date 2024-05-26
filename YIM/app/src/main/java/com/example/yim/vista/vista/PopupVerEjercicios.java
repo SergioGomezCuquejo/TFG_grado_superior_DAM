@@ -18,17 +18,18 @@ import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.controlador.Adaptadores.PopupVerEjerciciosAdaptador;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
 public class PopupVerEjercicios extends AppCompatActivity implements View.OnClickListener {
 
     //Variables de instancias.
-    private TablaEjercicioUsuario ejercicioUsuario;
+    private TablaEjercicioPorDefecto ejercicioUsuario;
     TextView instruciones, informacion;
     ImageView cerrar;
     ViewFlipper viewFlipper;
-    ImageView imagen;
+    ImageView imagenIV;
     TextView nombre, musculosTV, peso, repeticiones, serieNum, vecesRealizado, vecesNoRealizado, vecesEnRutinas, vecesEnRutinaActiva;
     RecyclerView ejecucion, consejos;
     int flipperActivo;
@@ -36,7 +37,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ver_ejercicios);
+        setContentView(R.layout.popup_ver_ejercicios);
 
         //Cambiar el tamaño de la pantalla.
         DisplayMetrics medidasVentana = new DisplayMetrics();
@@ -54,11 +55,8 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
 
         //Obtener la rutina que se ha seleccionado.
         if(intent.hasExtra("ejercicioUsuario")) {
-            ejercicioUsuario = (TablaEjercicioUsuario) intent.getSerializableExtra("ejercicioUsuario");
+            ejercicioUsuario = (TablaEjercicioPorDefecto) intent.getSerializableExtra("ejercicioUsuario");
 
-        }else {
-            mostrarToast("Error al obtener el ejercicio");
-            finish();
         }
 
 
@@ -68,7 +66,7 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         cerrar = findViewById(R.id.cerrar);
         viewFlipper = findViewById(R.id.viewFlipper);
 
-        imagen = findViewById(R.id.imagen);
+        imagenIV = findViewById(R.id.imagen);
         nombre = findViewById(R.id.nombreTV);
         musculosTV = findViewById(R.id.musculos_tv);
 
@@ -160,7 +158,9 @@ public class PopupVerEjercicios extends AppCompatActivity implements View.OnClic
         String musculos = "";
         PopupVerEjerciciosAdaptador adaptadorEjecucion, adaptadorConsejos;
 
-        imagen.setImageResource(R.drawable.curl_realizar);
+        if(ejercicioUsuario.getImagen_realizar() != null){
+            imagenIV.setImageResource(getResources().getIdentifier(ejercicioUsuario.getImagen_realizar(), "drawable", getPackageName()));
+        }
 
         nombre.setText(ejercicioUsuario.getNombre());
 

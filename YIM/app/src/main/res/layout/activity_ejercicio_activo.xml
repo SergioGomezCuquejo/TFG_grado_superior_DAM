@@ -75,8 +75,30 @@
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/curl_de_biceps_hombre"
                     app:shapeAppearanceOverlay="@style/radius" />
+
+                <FrameLayout
+                    android:id="@+id/nombre_rutina_fl"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/_style_borde_blanco_20"
+                    android:visibility="gone"
+                    tools:ignore="NestedWeights">
+
+                    <TextView
+                        android:id="@+id/nombre_rutina_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/nombre_mayusculas"
+                        android:textColor="@color/blanco"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+                </FrameLayout>
 
                 <ImageButton
                     android:id="@+id/boton_info"

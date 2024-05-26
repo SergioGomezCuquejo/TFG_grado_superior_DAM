@@ -13,11 +13,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.yim.R;
-import com.example.yim.controlador.Adaptadores.PopupAgregarEjercicioAdaptador;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.controlador.Adaptadores.PopupAgregarEjercicioCreadoAdaptador;
+import com.example.yim.controlador.Adaptadores.PopupAgregarEjercicioPorDefectoAdaptador;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosCreados;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosPorDefecto;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
@@ -32,7 +35,7 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
     private HashMap<String, ColoresMusculoUsuario> musculosSemana;
     ImageView cancelar;
     ProgressBar cargando;
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewCreados, recyclerViewPorDefecto;
     int dia;
 
     @SuppressLint("MissingInflatedId")
@@ -70,7 +73,9 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
         cargando = findViewById(R.id.cargando);
 
         cancelar = findViewById(R.id.cancelar);
-        recyclerView = findViewById(R.id.ejercicios);
+
+        recyclerViewCreados = findViewById(R.id.ejercicios_creados);
+        recyclerViewPorDefecto = findViewById(R.id.ejercicios_por_defecto);
 
 
         //Listeners.
@@ -79,7 +84,8 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
 
         //Mostrar datos.
         try{
-            mostrarEjercicios();
+            mostrarEjerciciosCreados();
+            mostrarEjerciciosPorDefecto();
 
         } catch (Exception ex) {
             mostrarToast("Error al mostrar los ejercicios de la rutina.");
@@ -98,15 +104,32 @@ public class PopupAgregarEjercicio extends AppCompatActivity implements View.OnC
         }
     }
 
-    //Método parar mostrar los ejercicios disponibles desde un adaptador.
-    private void mostrarEjercicios(){
-        firebaseManager.obtenerEjerciciosUsuario(this, new FirebaseCallbackEjerciciosUsuario() {
+    //Métodos parar mostrar los ejercicios disponibles desde un adaptador.
+    private void mostrarEjerciciosCreados(){
+        firebaseManager.obtenerEjerciciosCreados(this, new FirebaseCallbackEjerciciosCreados() {
             @Override
-            public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuarios) {
+            public void onCallback(ArrayList<TablaEjercicioCreado> ejerciciosCreadosUsuario) {
+                if(ejerciciosCreadosUsuario.size() > 0) {
+                    recyclerViewCreados.setLayoutManager(new LinearLayoutManager(PopupAgregarEjercicio.this));
+                    PopupAgregarEjercicioCreadoAdaptador adaptador = new PopupAgregarEjercicioCreadoAdaptador(PopupAgregarEjercicio.this,
+                            ejerciciosCreadosUsuario, rutinaUsuario, dia , musculosSemana);
+                    recyclerViewCreados.setAdapter(adaptador);
+
+                }else{
+                    mostrarToast("Ejercicios no encontrados.");
+                }
+            }
+        });
+    }
+    private void mostrarEjerciciosPorDefecto(){
+        firebaseManager.obtenerEjerciciosPorDefecto(this, new FirebaseCallbackEjerciciosPorDefecto() {
+            @Override
+            public void onCallback(ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuarios) {
                 if(ejerciciosUsuarios.size() > 0) {
-                    recyclerView.setLayoutManager(new LinearLayoutManager(PopupAgregarEjercicio.this));
-                    PopupAgregarEjercicioAdaptador adaptador = new PopupAgregarEjercicioAdaptador(PopupAgregarEjercicio.this, ejerciciosUsuarios, rutinaUsuario, dia , musculosSemana);
-                    recyclerView.setAdapter(adaptador);
+                    recyclerViewPorDefecto.setLayoutManager(new LinearLayoutManager(PopupAgregarEjercicio.this));
+                    PopupAgregarEjercicioPorDefectoAdaptador adaptador = new PopupAgregarEjercicioPorDefectoAdaptador(PopupAgregarEjercicio.this,
+                            ejerciciosUsuarios, rutinaUsuario, dia , musculosSemana);
+                    recyclerViewPorDefecto.setAdapter(adaptador);
 
                 }else{
                     mostrarToast("Ejercicios no encontrados.");

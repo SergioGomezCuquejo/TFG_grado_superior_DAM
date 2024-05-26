@@ -3,6 +3,9 @@ package com.example.yim.vista.vista;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,38 +18,42 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.ObtenerLogro;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
-import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.modelo.tablas.TablaEjercicio;
+import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class PopupCrearEjercicios extends AppCompatActivity implements View.OnClickListener {
 
     //Variables de instancias.
     private FirebaseManager firebaseManager;
+    private static final int REQUEST_CODE_PCE = 4;
     ViewFlipper viewFlipper;
-    ImageView cancelar, guardar, atras;
-    FrameLayout imagenFL;
-    TextView imagen, musculosTV;
+    ImageView cancelar, guardar, atras, imagenIV;
+    RelativeLayout imagenRL;
+    TextView musculosTV, nombreRutinaTV;
+    FrameLayout nombreRutinaFL;
     EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
-    String inicialesNombre;
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     StringBuilder musculosString;
-    TablaEjercicioUsuario ejercicioUsuario;
-    String imagenEjercicio, nombreEjercicio, notasEjercicio, musculosEjercicio;
+    TablaEjercicioCreado ejercicioUsuario;
+    String nombreEjercicio, notasEjercicio, musculosEjercicio;
     int descansoEjercicio, seriesEjercicio, repeticionesEjercicio;
-    HashSet<String> musculos = new HashSet<>();
+    ArrayList<String> musculos = new ArrayList<>();
     boolean nombreVacio, musculosVacios, descansoVacio, seriesVacias, repeticionesVacias, datosGuardados;
+    ProgressDialog progressDialog;
 
     @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
@@ -77,8 +84,11 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar_iv);
 
-        imagenFL = findViewById(R.id.imagen_fl);
-        imagen = findViewById(R.id.imagen_ejercicio);
+        nombreRutinaFL = findViewById(R.id.nombre_rutina_fl);
+        nombreRutinaTV = findViewById(R.id.nombre_rutina_tv);
+        imagenRL = findViewById(R.id.imagen_rl);
+        imagenIV = findViewById(R.id.imagen_iv);
+
 
         nombreET = findViewById(R.id.nombre_et);
         descansoET = findViewById(R.id.descanso_et);
@@ -94,8 +104,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         //Listeners
         cancelar.setOnClickListener(this);
         guardar.setOnClickListener(this);
-
-        imagenFL.setOnClickListener(this);
+        imagenRL.setOnClickListener(this);
 
         musculosTV.setOnClickListener(this);
 
@@ -107,32 +116,6 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         biceps = findViewById(R.id.biceps);
         cuadriceps = findViewById(R.id.cuadriceps);
 
-
-
-        //Actualizar las 2 primeras iniciales de la referencia del ejercicio.
-        nombreET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (s.toString().length() <= 0){
-                    inicialesNombre = "NOMBRE";
-
-                } else if (s.toString().length() == 1) {
-                    inicialesNombre = s.toString();
-
-                } else {
-                    inicialesNombre = s.toString().substring(0,2);
-
-                }
-                imagen.setText( inicialesNombre.toUpperCase() );
-
-            }
-        });
 
 
         //Cambiar los checkBox al marcarse.
@@ -220,19 +203,10 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
     //Método para identificar el músculo marcado.
     private String obtenerMusculo(int id) {
-        String musculo = "";
         String idString = getResources().getResourceEntryName(id);
+        String musculo = idString.replace('_', ' ');
 
-        switch (idString) {
-            case "todo_el_cuerpo":
-                musculo = "Todo el cuerpo";
-                break;
-            case "tren_superior":
-                musculo = "Tren superior";
-                break;
-            case "espalda":
-                musculo = "Espalda";
-                break;
+        switch (musculo) {
             case "biceps":
                 musculo = "Bíceps";
                 break;
@@ -243,13 +217,9 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         return musculo;
     }
 
-
     //Método para el guardado de los datos del ejercicio.
     public void guardarEjercicio(){
         ArrayList<String> musculosArray;
-
-        imagenEjercicio = imagen.getText().toString();
-
         nombreEjercicio = nombreET.getText().toString();
         nombreVacio = nombreEjercicio.isEmpty() || nombreEjercicio.equals(" ");
 
@@ -288,11 +258,11 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
             musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(", ")));
 
-            ejercicioUsuario = new TablaEjercicioUsuario(imagenEjercicio, musculosArray, "-" + nombreEjercicio, notasEjercicio,
-                    repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
+            mostrarToast(musculosArray.toString());
+            ejercicioUsuario = new TablaEjercicioCreado(musculosArray, "-" + nombreEjercicio,
+                    notasEjercicio, repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
 
-
-            agregarEjercicio(ejercicioUsuario);
+            agregarEjercicio();
         }else{
             mostrarToast("Completa todos los campos");
         }
@@ -301,9 +271,9 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
 
     //Método para crear el ejercicio.
-    private void agregarEjercicio(TablaEjercicioUsuario ejercicio){
+    private void agregarEjercicio(){
         try{
-            firebaseManager.agregarEjercicio(this, ejercicio, new FirebaseCallbackBoolean() {
+            firebaseManager.agregarEjercicio(this, ejercicioUsuario, new FirebaseCallbackBoolean() {
                 @Override
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada) {
@@ -324,6 +294,19 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_PCE) {
+                boolean resultado = data.getBooleanExtra("resultado", false);
+                if(resultado){
+                    finish();
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     //Método que permite el cambiado de colores de una vista.
     private void cambiarColores(View view, int color){
@@ -333,7 +316,10 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
     //Método para llamar a CambiarActivity.java. (Clase que permite el cambio de activity)
     private void cambiarActivity() {
-        CambiarActivity.cambiar(this, "Descartar cambios.", "¿Desea descartar los cambios no guardados?", "ir_a_ejercicios");
+        Intent intent = new Intent(this, PopupAlerta.class);
+        intent.putExtra("titulo", "Descartar cambios");
+        intent.putExtra("texto", "¿Desea descartar los cambios no guardados?");
+        startActivityForResult(intent, REQUEST_CODE_PCE);
     }
 
 

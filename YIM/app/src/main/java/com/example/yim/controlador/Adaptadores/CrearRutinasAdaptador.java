@@ -28,14 +28,12 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
     private TablaRutinaUsuario rutinasUsuario;
     private Context context;
     HashMap<String, ColoresMusculoUsuario> musculosHM;
-    HashMap<String, ColoresMusculoUsuario> musculosSemana;
 
     public CrearRutinasAdaptador(Context context, TablaRutinaUsuario rutinasUsuario, HashMap<String, ColoresMusculoUsuario> musculosHM) {
         this.context = context;
         this.rutinasUsuario = rutinasUsuario;
         this.musculosHM = musculosHM;
         this.rutinasUsuario.ordenarSemana();
-        musculosSemana = new HashMap<>();
     }
 
     @NonNull
@@ -55,7 +53,7 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
         holder.dia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CambiarActivity.cambiar(context, EjerciciosRutinas.class, rutinasUsuario, dia, musculosSemana);
+                CambiarActivity.cambiar(context, EjerciciosRutinas.class, rutinasUsuario, dia, musculosHM);
             }
         });
 
@@ -72,16 +70,21 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
                 }
             }
             String musculo;
-            String fondo = "#FFFFFFFF";
-            String fuente = "#FF000000";
+            String fondo;
+            String fuente;
             for (int i = 0; i < musculosUsuario.size(); i++){
                 musculo = musculosUsuario.get(i);
                 if(musculosHM.containsKey(musculo)){
                     fondo = musculosHM.get(musculo).getColor_fondo();
                     fuente = musculosHM.get(musculo).getColor_fuente();
-                    musculosSemana.put(musculo, musculosHM.get(musculo));
+                }else{
+                    fondo = "#FFFFFFFF";
+                    fuente = "#FF000000";
                 }
-                musculo = musculo.toUpperCase();
+
+                if(musculo.equals("Descanso")){
+                    musculo = musculo.toUpperCase();
+                }
                 if(i == 0){
                     holder.musculoIzquierda.setText(musculo);
                     holder.musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));

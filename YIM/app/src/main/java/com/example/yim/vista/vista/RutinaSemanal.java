@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yim.R;
-import com.example.yim.controlador.Adaptadores.RutinaActivaAdaptador;
+import com.example.yim.controlador.Adaptadores.RutinaSemanalAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackRutinaActiva;
@@ -43,7 +43,7 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
     ProgressBar cargando;
     ImageView agregarSemana, imagenPerfilMenu;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
-    RutinaActivaAdaptador adaptador;
+    RutinaSemanalAdaptador adaptador;
     String IDRutina;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -105,10 +105,9 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
                 cambiarActivity(Inicio.class);
                 break;
             case "imagen_calendario_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(RutinaSemanal.class);
                 break;
 
-            case "atras_iv":
             case "imagen_estadisticas_menu":
                 cambiarActivity(Estadisticas.class);
                 break;
@@ -150,11 +149,12 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
                 }
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(RutinaSemanal.this));
-                adaptador = new RutinaActivaAdaptador(RutinaSemanal.this, rutinaActiva, musculosHM);
+                adaptador = new RutinaSemanalAdaptador(RutinaSemanal.this, rutinaActiva, musculosHM);
                 recyclerView.setAdapter(adaptador);
             }
         });
     }
+
 
     // Método para agregar una nueva semana a la rutina activa de la rutina activada.
     private void agregarSemana(){

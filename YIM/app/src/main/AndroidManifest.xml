@@ -63,6 +63,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.PopupCerrable" />
         <activity
+            android:name=".vista.vista.PopupAlerta"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
             android:name=".vista.vista.PopupCrearEjercicios"
             android:exported="false"
             android:theme="@style/AppTheme.PopupCerrable" />

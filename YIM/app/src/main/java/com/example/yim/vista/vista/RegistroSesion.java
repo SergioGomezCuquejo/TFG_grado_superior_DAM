@@ -12,19 +12,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicios;
-import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosUsuario;
+import com.example.yim.modelo.Callbacks.FirebaseCallbackEjerciciosPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogros;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackLogrosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculos;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicio;
-import com.example.yim.modelo.tablas.TablaEjercicioUsuario;
+import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
+import com.example.yim.modelo.tablas.TablaEjerciciosUsuario;
 import com.example.yim.modelo.tablas.TablaLogro;
 import com.example.yim.modelo.tablas.TablaLogroUsuario;
 import com.example.yim.modelo.tablas.TablaMusculo;
@@ -52,6 +54,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
     CheckBox aceptarPoliticas;
     Button registrarse, iniciarSesion;
     String nombreUsuario, emailUsuario, contrasenaUsuario;
+    ProgressBar cargando;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -65,6 +68,8 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
 
         //Referencias de las vistas.
+        cargando = findViewById(R.id.cargando);
+
         nombre = findViewById(R.id.nombreTV);
         email = findViewById(R.id.email);
         contrasena = findViewById(R.id.contrasena);
@@ -94,6 +99,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
         switch (id) {
             case "registrarse":
+                cargando.setVisibility(View.VISIBLE);
                 nombreUsuario = nombre.getText().toString();
                 emailUsuario = email.getText().toString();
                 contrasenaUsuario = contrasena.getText().toString();
@@ -128,12 +134,9 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
                     if (task.isSuccessful()) {
                         String IDAuth = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-
                         crearUsuario(IDAuth, nombreUsuario, emailUsuario);
 
-
                     }
-
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -151,46 +154,46 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
 
     // Método para crear el objeto usuario.
     private void crearUsuario(String IDAuth, String nombreUsuario, String emailUsuario){
-        obtenerEjercicios(new FirebaseCallbackEjerciciosUsuario() {
+        obtenerEjercicios(new FirebaseCallbackEjerciciosPorDefecto() {
             @Override
-            public void onCallback(ArrayList<TablaEjercicioUsuario> ejerciciosUsuario) {
+            public void onCallback(ArrayList<TablaEjercicioPorDefecto> ejerciciosUsuario) {
 
                 obtenerLogros(new FirebaseCallbackLogrosUsuario() {
                     @Override
                     public void onCallback(ArrayList<TablaLogroUsuario> logrosUsuario) {
+
                         obtenerMusculos(new FirebaseCallbackMusculosUsuario() {
                             @Override
                             public void onCallback(ArrayList<TablaMusculoUsuario> musculosUsuario) {
-
                                 TablaUsuario usuario = new TablaUsuario();
-                                usuario.setEjercicios(ejerciciosUsuario);
-                                mostrarToast("Ejericios: " + usuario.getEjercicios().size());
-                                usuario.setLogros(logrosUsuario);
-                                mostrarToast("Logros: " + usuario.getLogros().size());
-                                usuario.setMusculos(musculosUsuario);
-                                mostrarToast("Músculos: " + usuario.getMusculos().size());
 
-                                usuario.setPerfil(new TablaPerfil(nombreUsuario, emailUsuario));
+                                usuario.setEjercicios(new TablaEjerciciosUsuario(ejerciciosUsuario));
+                                usuario.setLogros(logrosUsuario);
+                                usuario.setMusculos(musculosUsuario);
+                                usuario.setPerfil(new TablaPerfil(emailUsuario, nombreUsuario));
+
                                 agregarUsuario(IDAuth, usuario);
                             }
                         });
+
                     }
                 });
+
             }
         });
     }
 
 
     // Método para rellenar los ejercicios por defecto del usuario.
-    private void obtenerEjercicios(FirebaseCallbackEjerciciosUsuario callback){
+    private void obtenerEjercicios(FirebaseCallbackEjerciciosPorDefecto callback){
         try{
             firebaseManager.obtenerEjercicios(this, new FirebaseCallbackEjercicios() {
                 @Override
                 public void onCallback(ArrayList<TablaEjercicio> ejercicios) {
-                    ArrayList <TablaEjercicioUsuario> ejerciciosUsuario = new ArrayList<>();
+                    ArrayList <TablaEjercicioPorDefecto> ejerciciosUsuario = new ArrayList<>();
 
                     for (TablaEjercicio ejercicio : ejercicios){
-                        ejerciciosUsuario.add(new TablaEjercicioUsuario(ejercicio));
+                        ejerciciosUsuario.add(new TablaEjercicioPorDefecto(ejercicio));
                     }
 
                     callback.onCallback(ejerciciosUsuario);
@@ -258,6 +261,7 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
                     }else{
                         mostrarToast( "Error al registrar el usuario");
                     }
+                    cargando.setVisibility(View.GONE);
                 }
             });
         }catch (Exception ex){

@@ -54,6 +54,26 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <TextView
+            android:id="@+id/sin_ejercicios"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/_style2_borde_gris_oscuro_10"
+            android:backgroundTintMode="add"
+            android:backgroundTint="@color/fondo_clarito"
+            android:fontFamily="@font/merriweather_light"
+            android:text="No hay ejercicios para este día"
+            android:textColor="@color/gris_oscuro"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
@@ -71,22 +91,6 @@
                 android:paddingRight="10dp"/>
 
         </ScrollView>
-
-        <!-- TODO hacer
-        <ImageView
-            android:id="@+id/agregar_ejercicio"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="15dp"
-            android:layout_alignEnd="@id/scrollView"
-            android:layout_alignBottom="@id/scrollView"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/_style_circulo_fondo_oscuro__borde_blanco"
-            android:src="@drawable/mas"
-            android:contentDescription="@string/agregar_ejercicio" />
-        -->
-
 
         <ProgressBar
             android:id="@+id/cargando"
