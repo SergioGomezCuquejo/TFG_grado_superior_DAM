@@ -21,6 +21,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackMusculosUsuario;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.ColoresMusculoUsuario;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaInfoRutinaUsuario;
@@ -137,7 +138,7 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
                 cambiarActivity();
                 break;
             case "imagen_estadisticas_menu":
-                irA = Estadisticas.class;
+                irA = Logros.class;
                 cambiarActivity();
                 break;
             case "imagen_usuario_menu":
@@ -224,6 +225,8 @@ public class CrearRutinas extends AppCompatActivity implements View.OnClickListe
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada) {
                         mostrarToast("Rutina creada correctamente");
+                        ObtenerLogro obtenerLogro = new ObtenerLogro();
+                        obtenerLogro.obtenerLogro(CrearRutinas.this, "Crear rutina", 1);
                         cambiarActivity(VerRutinas.class);
                     } else {
                         mostrarToast("Error al crear la rutina");

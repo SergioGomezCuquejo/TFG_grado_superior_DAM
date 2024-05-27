@@ -18,7 +18,7 @@
         android:id="@+id/musculo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/_style2_borde_blanco_10"
+        android:background="@drawable/_style_borde_blanco_10_2"
         android:backgroundTintMode="add"
         android:fontFamily="@font/merriweather_light"
         android:gravity="center"

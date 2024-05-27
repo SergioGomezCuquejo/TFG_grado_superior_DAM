@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -54,7 +53,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
     ProgressBar cargando;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
     TextView musculoIzquierda, musculoCentro, musculoDerecha, descanso, musculoElegidoIzquierda, musculoElegidoCentro, musculoElegidoDerecha;
-    CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
+    CheckBox todoElCuerpo, trenSuperior, trenInferior, pecho, espalda, hombro, biceps, antebrazo, triceps, trapecio, gluteo, gemelo, femoral, cuadriceps;
     boolean cambiar;
     int dia;
     ArrayList<String> musculosArray = new ArrayList<>();
@@ -93,11 +92,22 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculoCentro = findViewById(R.id.musculo_centro);
         musculoDerecha = findViewById(R.id.musculo_derecha);
 
+
         todoElCuerpo = findViewById(R.id.todo_el_cuerpo);
         trenSuperior = findViewById(R.id.tren_superior);
+        trenInferior = findViewById(R.id.tren_inferior);
+        pecho = findViewById(R.id.pecho);
         espalda = findViewById(R.id.espalda);
+        hombro = findViewById(R.id.hombro);
         biceps = findViewById(R.id.biceps);
+        antebrazo = findViewById(R.id.antebrazo);
+        triceps = findViewById(R.id.triceps);
+        trapecio = findViewById(R.id.trapecio);
+        gluteo = findViewById(R.id.gluteo);
+        gemelo = findViewById(R.id.gemelo);
+        femoral = findViewById(R.id.femoral);
         cuadriceps = findViewById(R.id.cuadriceps);
+
 
         cancelar = findViewById(R.id.cancelar);
         musculoDerechaLL = findViewById(R.id.musculo_derecha_ll);
@@ -155,25 +165,54 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
                     cambiarColores((TextView) buttonView, getResources().getColor(R.color.blanco));
                     if (id == R.id.todo_el_cuerpo) {
                         trenSuperior.setChecked(false);
+                        trenInferior.setChecked(false);
+                        pecho.setChecked(false);
                         espalda.setChecked(false);
+                        hombro.setChecked(false);
                         biceps.setChecked(false);
+                        antebrazo.setChecked(false);
+                        triceps.setChecked(false);
+                        trapecio.setChecked(false);
+                        gluteo.setChecked(false);
+                        gemelo.setChecked(false);
+                        femoral.setChecked(false);
                         cuadriceps.setChecked(false);
 
-                        musculosEliminar = new ArrayList<>(Arrays.asList("Tren superior", "Cuádriceps", "Bíceps", "Espalda"));
+                        musculosEliminar = new ArrayList<>(Arrays.asList("Tren superior", "Tren inferior", "Pecho", "Espalda",
+                                "Hombro", "Bíceps", "Antebrazo", "Tríceps", "Trapecio", "Glúteo", "Gemelo", "Femoral", "Cuádriceps"));
                         musculosArray.removeAll(musculosEliminar);
 
                     } else{
                         todoElCuerpo.setChecked(false);
 
                         if (id == R.id.tren_superior) {
+                            pecho.setChecked(false);
                             espalda.setChecked(false);
+                            hombro.setChecked(false);
                             biceps.setChecked(false);
+                            antebrazo.setChecked(false);
+                            triceps.setChecked(false);
+                            trapecio.setChecked(false);
 
-                            musculosArray.remove("Bíceps");
-                            musculosArray.remove("Espalda");
+                            musculosEliminar = new ArrayList<>(Arrays.asList("Pecho", "Espalda", "Hombro", "Bíceps", "Antebrazo", "Tríceps", "Trapecio"));
+                            musculosArray.removeAll(musculosEliminar);
 
-                        } else if (id == R.id.biceps || id == R.id.espalda) {
+                        } else if (id == R.id.pecho || id == R.id.espalda || id == R.id.hombro || id == R.id.biceps || id == R.id.antebrazo || id == R.id.triceps || id == R.id.trapecio) {
                             trenSuperior.setChecked(false);
+                            musculosArray.remove("Tren superior");
+                        }
+                        if (id == R.id.tren_inferior) {
+                            gluteo.setChecked(false);
+                            gemelo.setChecked(false);
+                            femoral.setChecked(false);
+                            cuadriceps.setChecked(false);
+
+                            musculosEliminar = new ArrayList<>(Arrays.asList("Glúteo", "Gemelo", "Femoral", "Cuádriceps"));
+                            musculosArray.removeAll(musculosEliminar);
+                            
+                        } else if (id == R.id.gluteo || id == R.id.gemelo || id == R.id.femoral || id == R.id.cuadriceps) {
+                            trenInferior.setChecked(false);
+                            musculosArray.remove("Tren inferior");
                         }
                     }
                 } else {
@@ -192,8 +231,17 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
         todoElCuerpo.setOnCheckedChangeListener(checkBoxListener);
         trenSuperior.setOnCheckedChangeListener(checkBoxListener);
+        trenInferior.setOnCheckedChangeListener(checkBoxListener);
+        pecho.setOnCheckedChangeListener(checkBoxListener);
         espalda.setOnCheckedChangeListener(checkBoxListener);
+        hombro.setOnCheckedChangeListener(checkBoxListener);
         biceps.setOnCheckedChangeListener(checkBoxListener);
+        antebrazo.setOnCheckedChangeListener(checkBoxListener);
+        triceps.setOnCheckedChangeListener(checkBoxListener);
+        trapecio.setOnCheckedChangeListener(checkBoxListener);
+        gluteo.setOnCheckedChangeListener(checkBoxListener);
+        gemelo.setOnCheckedChangeListener(checkBoxListener);
+        femoral.setOnCheckedChangeListener(checkBoxListener);
         cuadriceps.setOnCheckedChangeListener(checkBoxListener);
 
 
@@ -253,7 +301,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
                 cambiarActivity();
                 break;
             case "imagen_estadisticas_menu":
-                irA = Estadisticas.class;
+                irA = Logros.class;
                 cambiarActivity();
                 break;
             case "imagen_usuario_menu":
@@ -263,19 +311,27 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         }
     }
 
+    //Método para identificar el músculo marcado.
     private String obtenerMusculo(int id) {
         String idString = getResources().getResourceEntryName(id);
         String musculo = idString.replace('_', ' ');
-        musculo = musculo.substring(0, 1).toUpperCase() + musculo.substring(1);
 
         switch (musculo) {
-            case "Biceps":
-                musculo = "Bíceps";
+            case "biceps":
+                musculo = "bíceps";
                 break;
-            case "Cuadriceps":
-                musculo = "Cuádriceps";
+            case "cuadriceps":
+                musculo = "cuádriceps";
+                break;
+            case "triceps":
+                musculo = "tríceps";
+                break;
+            case "gluteo":
+                musculo = "glúteo";
                 break;
         }
+        musculo = musculo.substring(0,1).toUpperCase() + musculo.substring(1);
+
         return musculo;
     }
 
@@ -306,7 +362,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculoDerechaLL.setVisibility(View.GONE);
         musculoDerecha.setVisibility(View.GONE);
         musculoCentro.setVisibility(View.GONE);
-        musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_10);
+        musculoIzquierda.setBackgroundResource(R.drawable._style_borde_blanco_10_2);
 
         musculoIzquierda.setTextSize(20);
         musculoDerecha.setTextSize(17);

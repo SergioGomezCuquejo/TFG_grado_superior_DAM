@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -104,7 +105,7 @@ public class EjerciciosDiarios extends AppCompatActivity  implements View.OnClic
                 cambiarActivity(RutinaSemanal.class);
                 break;
             case "imagen_estadisticas_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(Logros.class);
                 break;
             case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);

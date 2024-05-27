@@ -48,7 +48,7 @@ public class LogrosAdaptador extends RecyclerView.Adapter<LogrosAdaptador.Logros
             }
         });
 
-        holder.imagen.setImageResource(R.drawable.logro_50_flexiones);
+        holder.imagen.setImageResource(context.getResources().getIdentifier(logro.getImagen(), "drawable", context.getPackageName()));
 
         if(logro.getProgreso() < logro.getTotal()) {
             holder.progreso.setVisibility(View.VISIBLE);

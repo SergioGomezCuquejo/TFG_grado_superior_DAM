@@ -181,7 +181,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
                 cambiarActivity(RutinaSemanal.class);
                 break;
             case "imagen_estadisticas_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(Logros.class);
                 break;
             case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);

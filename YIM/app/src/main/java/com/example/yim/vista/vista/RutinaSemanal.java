@@ -109,7 +109,7 @@ public class RutinaSemanal extends AppCompatActivity implements View.OnClickList
                 break;
 
             case "imagen_estadisticas_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(Logros.class);
                 break;
             case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);

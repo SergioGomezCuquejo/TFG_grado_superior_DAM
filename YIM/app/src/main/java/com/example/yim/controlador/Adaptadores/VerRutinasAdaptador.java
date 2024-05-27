@@ -16,7 +16,6 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.Imagenes;
-import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.vista.PopupRutinas;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -47,7 +46,7 @@ public class VerRutinasAdaptador extends RecyclerView.Adapter<VerRutinasAdaptado
         String nombre;
 
         if(rutinaUsuario.getInformacion().isActivo()){
-            holder.rutina.setBackgroundResource(R.drawable._style2_borde_amarillo_20__padding_10);
+            holder.rutina.setBackgroundResource(R.drawable._style_borde_amarillo_20__padding_10);
         }
 
         holder.rutina.setOnClickListener(new View.OnClickListener() {

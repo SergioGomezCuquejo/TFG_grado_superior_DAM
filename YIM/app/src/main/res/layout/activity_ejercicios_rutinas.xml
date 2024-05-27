@@ -47,7 +47,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/_style2_borde_blanco_10"
+                android:background="@drawable/_style_borde_blanco_10_2"
                 android:backgroundTintMode="add"
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
@@ -62,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="3dp"
-                android:background="@drawable/_style2_borde_blanco_0"
+                android:background="@drawable/_style_borde_blanco_0"
                 android:backgroundTintMode="add"
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
@@ -173,7 +173,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/_style2_borde_blanco_10"
+                        android:background="@drawable/_style_borde_blanco_10_2"
                         android:backgroundTintMode="add"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
@@ -188,7 +188,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="25dp"
                         android:layout_weight="1"
-                        android:background="@drawable/_style2_borde_blanco_10"
+                        android:background="@drawable/_style_borde_blanco_10_2"
                         android:backgroundTintMode="add"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
@@ -217,7 +217,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/_style2_borde_blanco_10"
+                        android:background="@drawable/_style_borde_blanco_10_2"
                         android:backgroundTintMode="add"
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
@@ -268,8 +268,8 @@
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center_vertical"
                         android:minHeight="48dp"
-                        android:text="Todo el cuerpo"
                         android:textColor="@color/negro_oscuro"
+                        android:text="Todo el cuerpo"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
@@ -285,6 +285,38 @@
                         android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Tren superior"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/tren_inferior"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Tren inferior"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/pecho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Pecho"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -307,6 +339,22 @@
                         tools:ignore="HardcodedText" />
 
                     <CheckBox
+                        android:id="@+id/hombro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Hombro"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
                         android:id="@+id/biceps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -323,6 +371,70 @@
                         tools:ignore="HardcodedText" />
 
                     <CheckBox
+                        android:id="@+id/antebrazo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Antebrazo"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/triceps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Tríceps"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/trapecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Trapecio"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/gluteo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Glúteo"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
                         android:id="@+id/cuadriceps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -333,6 +445,38 @@
                         android:gravity="center_vertical"
                         android:minHeight="48dp"
                         android:text="Cuádriceps"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/gemelo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Gemelo"
+                        android:textColor="@color/negro_oscuro"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <CheckBox
+                        android:id="@+id/femoral"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/_popup_musculos_ejerciocios_checkbox"
+                        android:button="@null"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="Femoral"
                         android:textColor="@color/negro_oscuro"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -461,9 +605,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/imagen_estadisticas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/estadisticas" />
+                android:src="@drawable/logros" />
 
         </FrameLayout>
 

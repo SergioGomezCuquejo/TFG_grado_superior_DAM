@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 public class ObtenerLogro {
     private FirebaseManager firebaseManager;
-
     private ArrayList<String> titulos;
-    public void obtenerLogro(Context context, String logro){
+    public void obtenerLogro(Context context, String logro, int suma){
         firebaseManager = new FirebaseManager();
         titulos = new ArrayList<String>();
         switch (logro){
@@ -20,13 +19,44 @@ public class ObtenerLogro {
                 titulos.add("Creador novel");
                 titulos.add("Creador avanzado");
                 titulos.add("Creador supremo");
-                crearEjercicio(context);
+                crearLogro(context, suma);
+                break;
+            case "Hacer flexiones":
+                titulos.add("El niño de las flexiones");
+                titulos.add("El señor de las flexiones");
+                titulos.add("La máquina de las flexiones");
+                crearLogro(context, suma);
+                break;
+            case "Cambiar colores":
+                titulos.add("Color primario");
+                titulos.add("Color ido");
+                titulos.add("Multicolor");
+                crearLogro(context, suma);
+                break;
+            case "Inicio sesion":
+                titulos.add("Iniciador");
+                crearLogro(context, suma);
+                break;
+            case "Hacer dia":
+                titulos.add("Por algo se empieza");
+                titulos.add("La semana más larga");
+                titulos.add("¿Un mes ya?");
+                crearLogro(context, suma);
+                break;
+            case "Crear rutina":
+                titulos.add("Las rutinas son lo mio");
+                crearLogro(context, suma);
+                break;
+            case "Toma de medidas":
+                titulos.add("Así soy yo");
+                crearLogro(context, suma);
+                break;
             default:
 
         }
     }
 
-    private void crearEjercicio(Context context){
+    private void crearLogro(Context context, int suma){
         firebaseManager.obtenerLogrosUsuario(context, titulos, new FirebaseCallbackLogrosUsuario() {
             @Override
             public void onCallback(ArrayList<TablaLogroUsuario> logrosUsuario) {
@@ -35,7 +65,7 @@ public class ObtenerLogro {
 
 
                     if(logro.getProgreso() < logro.getTotal()){
-                        logro.setProgreso(logro.getProgreso() + 1);
+                        logro.setProgreso(logro.getProgreso() + suma);
                         logrosActualizados.add(logro);
 
                         if (logro.getProgreso() == logro.getTotal()){

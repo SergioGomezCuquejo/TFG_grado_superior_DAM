@@ -42,370 +42,166 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        tools:ignore="UselessParent">
-
-        <TextView
-            android:id="@+id/musculo_tv"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:autofillHints="Musculo"
-            android:background="@drawable/_style2_borde_blanco_10"
-            android:backgroundTintMode="add"
-            android:fontFamily="@font/merriweather_light"
-            android:gravity="center"
-            android:text="@string/biceps"
-            android:textColor="@color/negro_oscuro"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize,TextContrastCheck" />
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:gravity="center|center_vertical"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
             android:baselineAligned="false"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
             tools:ignore="UselessParent">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/musculo_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/_style_rectangulo_gris" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/cambiar_colores"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/_style_rectangulo_gris" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/color_fondo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/color_del_fondo"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/color_fondo_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_88888"
-                    android:textColor="@color/blanco"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/color_letras"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/color_de_las_letras"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/color_letras_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_88888"
-                    android:textColor="@color/blanco"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/_style_rectangulo_gris" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center"
-                    android:text="@string/informacion_adicional"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="3dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/_style_rectangulo_gris" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/usos_esta_semana"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/ejercicos_en_rutina_activa"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_888"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/ejercicios_realizados"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="HardcodedText,NestedWeights" />
-
-                <TextView
-                    android:id="@+id/ejercicios_realizados"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_888"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/ejercicios_sin_realizar"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/ejercicios_sin_realizar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_888"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/ejercicios_totales"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/ejercicios_totales"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_888"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:padding="2dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:fontFamily="@font/merriweather_light"
-                    android:text="@string/usado_en_rutinas"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/ejercicos_en_rutinas"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="right"
-                    android:text="@string/_888"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded" />
-            </LinearLayout>
-
+                android:layout_height="70dp"
+                android:autofillHints="Musculo"
+                android:background="@drawable/_style_borde_blanco_10_2"
+                android:backgroundTintMode="add"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:text="@string/biceps"
+                android:textColor="@color/negro_oscuro"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor,NestedWeights,VisualLintTextFieldSize,TextContrastCheck" />
         </LinearLayout>
-    </ScrollView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:baselineAligned="false"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/_style_rectangulo_gris" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/cambiar_colores"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="3dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/_style_rectangulo_gris" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/color_fondo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="@string/color_del_fondo"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="18sp"
+                        tools:ignore="NestedWeights" />
+
+                    <TextView
+                        android:id="@+id/color_fondo_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="right"
+                        android:text="@string/_88888"
+                        android:textColor="@color/blanco"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlHardcoded" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/color_letras"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="@string/color_de_las_letras"
+                        android:textColor="@color/negro_clarito"
+                        android:textSize="18sp"
+                        tools:ignore="NestedWeights" />
+
+                    <TextView
+                        android:id="@+id/color_letras_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="right"
+                        android:text="@string/_88888"
+                        android:textColor="@color/blanco"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlHardcoded" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

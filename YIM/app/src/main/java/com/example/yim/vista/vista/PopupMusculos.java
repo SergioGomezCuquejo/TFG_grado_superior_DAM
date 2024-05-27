@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.yim.R;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaMusculoUsuario;
 import com.example.yim.vista.controlador.MostratToast;
 
@@ -30,7 +31,6 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
     ImageView cancelar, guardar;
     LinearLayout color_fondo, color_letras;
     TextView musculoTV, color_fondo_tv, color_letras_tv;
-    TextView ejercicosEnRutinaActiva, ejerciciosRealizados, ejerciciosSinRealizar, ejerciciosTotales, ejercicosEnRutinas;
     int colorFondo, colorLetras;
     boolean datosCambiados;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -46,7 +46,7 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         int ancho = medidasVentana.widthPixels;
         int alto = medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
+        getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.50));
 
 
         //Inicializar instancias.
@@ -58,12 +58,6 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         //Referencias de las vistas.
         cancelar = findViewById(R.id.cancelar);
         guardar = findViewById(R.id.guardar_iv);
-
-        ejercicosEnRutinaActiva = findViewById(R.id.ejercicos_en_rutina_activa);
-        ejerciciosRealizados = findViewById(R.id.ejercicios_realizados);
-        ejerciciosSinRealizar = findViewById(R.id.ejercicios_sin_realizar);
-        ejerciciosTotales = findViewById(R.id.ejercicios_totales);
-        ejercicosEnRutinas = findViewById(R.id.ejercicos_en_rutinas);
 
         musculoTV = findViewById(R.id.musculo_tv);
         color_fondo = findViewById(R.id.color_fondo);
@@ -137,13 +131,6 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
         color_letras_tv.setText(musculoUsuario.getColor_fuente());
         colorLetras = Color.parseColor(musculoUsuario.getColor_fuente());
         color_letras_tv.setTextColor(colorLetras);
-
-        ejercicosEnRutinaActiva.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinaActual()));
-        ejerciciosRealizados.setText(String.valueOf(musculoUsuario.getEjercicios_realizados()));
-        ejerciciosSinRealizar.setText(String.valueOf(musculoUsuario.getEjercicios_sin_realizar()));
-        ejerciciosTotales.setText(String.valueOf(musculoUsuario.getEjercicios_totales()));
-        ejercicosEnRutinas.setText(String.valueOf(musculoUsuario.getEjercicios_en_rutinas()));
-
     }
 
 
@@ -155,6 +142,9 @@ public class PopupMusculos extends AppCompatActivity implements View.OnClickList
                 public void onCallback(boolean accionRealizada) {
                     if(accionRealizada){
                         mostrarToast("Datos guardados correctamente");
+
+                        ObtenerLogro obtenerLogro = new ObtenerLogro();
+                        obtenerLogro.obtenerLogro(PopupMusculos.this, "Cambiar colores", 1);
                         finish();
                     }else{
                         mostrarToast("No se ha podido actualizar el músculo correctamente");

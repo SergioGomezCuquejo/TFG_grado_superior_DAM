@@ -21,6 +21,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaPerfil;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.Imagenes;
@@ -186,7 +187,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 cambiarActivity(RutinaSemanal.class);
                 break;
             case "imagen_estadisticas_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(Logros.class);
                 break;
             case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);
@@ -246,6 +247,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onCallback(boolean accionRealizada) {
                 if (accionRealizada) {
+                    ObtenerLogro obtenerLogro = new ObtenerLogro();
+                    obtenerLogro.obtenerLogro(Perfil.this, "Toma de medidas", 1);
                     mostrarToast("Datos actualizados correctamente");
                 } else {
                     mostrarToast("Error al actualizar los datos");

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yim.R;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.controlador.ValidarDatos;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,6 +95,8 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             mostrarToast("Bienvenido a YIM");
+                            ObtenerLogro obtenerLogro = new ObtenerLogro();
+                            obtenerLogro.obtenerLogro(InicioSesion.this, "Inicio sesion", 1);
                             cambiarActivity(Inicio.class);
                         }
                     }

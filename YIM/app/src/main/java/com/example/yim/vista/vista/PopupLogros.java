@@ -75,7 +75,7 @@ public class PopupLogros extends AppCompatActivity {
     public void mostrarLogro(){
         titulo.setText(logroUsuario.getTitulo());
 
-        imagen.setImageResource(R.drawable.logro_50_flexiones);
+        imagen.setImageResource(getResources().getIdentifier(logroUsuario.getImagen(), "drawable", getPackageName()));
 
         if(logroUsuario.getProgreso() < logroUsuario.getTotal()) {
             progresoView.setVisibility(View.VISIBLE);

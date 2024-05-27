@@ -102,15 +102,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/_style_borde_negro_derecha_izquierda">
+            android:background="@drawable/_style_rectangulo_negro_traslucido__borde_negro_izquierda_derecha">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:src="@drawable/estadisticas"
-                android:contentDescription="@string/imagen_estadisticas" />
+                android:src="@drawable/logros" />
 
         </FrameLayout>
 

@@ -32,6 +32,7 @@ import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioCreado;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackEjercicioPorDefecto;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackPerfil;
 import com.example.yim.modelo.FirebaseManager;
+import com.example.yim.modelo.ObtenerLogro;
 import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.modelo.tablas.TablaEjercicioCreado;
@@ -236,12 +237,18 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                     vaciarCampos();
                     mostrarEjercicio();
                     historialTV.setVisibility(View.GONE);
+                    if(ejercicioActivo.getNombre().equals("Flexiones de pecho")){
+                        ObtenerLogro obtenerLogro = new ObtenerLogro();
+                        obtenerLogro.obtenerLogro(EjercicioActivo.this, "Hacer flexiones", Integer.parseInt(repeticionesString));
+                    }
 
 
                     if(ejercicioActivo.getSeries_realizadas() == ejercicioActivo.getSeries_necesarias()){
                         if(numEjercicio+1 == numEjercicios){
                             cambiarActivity(diaRutinaActiva);
                             mostrarToast("Día completado");
+                            ObtenerLogro obtenerLogro = new ObtenerLogro();
+                            obtenerLogro.obtenerLogro(EjercicioActivo.this, "Hacer dia", Integer.parseInt(repeticionesString));
                             finish();
                         }else{
                             cambiarActivity();
@@ -260,7 +267,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                 cambiarActivity(RutinaSemanal.class);
                 break;
             case "imagen_estadisticas_menu":
-                cambiarActivity(Estadisticas.class);
+                cambiarActivity(Logros.class);
                 break;
             case "imagen_usuario_menu":
                 cambiarActivity(Perfil.class);

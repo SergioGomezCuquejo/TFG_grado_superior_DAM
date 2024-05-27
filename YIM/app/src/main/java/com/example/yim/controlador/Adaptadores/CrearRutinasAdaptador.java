@@ -66,7 +66,7 @@ public class CrearRutinasAdaptador extends RecyclerView.Adapter<CrearRutinasAdap
                 holder.musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
                 holder.musculoCentro.setVisibility(View.VISIBLE);
                 if(musculosUsuario.size() == 3){
-                    holder.musculoCentro.setBackgroundResource(R.drawable._style2_borde_blanco_0);
+                    holder.musculoCentro.setBackgroundResource(R.drawable._style_borde_blanco_0);
                     holder.musculoDerecha.setVisibility(View.VISIBLE);
                 }
             }

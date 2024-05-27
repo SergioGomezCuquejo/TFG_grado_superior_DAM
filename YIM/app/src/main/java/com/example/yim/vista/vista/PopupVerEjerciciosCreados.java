@@ -55,7 +55,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     ImageView cerrar, atras, guardar, imagenIV;
     RelativeLayout imagenRL;
     EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
-    CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
+    CheckBox todoElCuerpo, trenSuperior, trenInferior, pecho, espalda, hombro, biceps, antebrazo, triceps, trapecio, gluteo, gemelo, femoral, cuadriceps;
     Button borrar;
     RecyclerView historialRV;
     StringBuilder musculosString;
@@ -117,11 +117,19 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         musculosTV = findViewById(R.id.musculos_tv);
         borrar = findViewById(R.id.borrar);
 
-        atras = findViewById(R.id.atras_iv);
         todoElCuerpo = findViewById(R.id.todo_el_cuerpo);
         trenSuperior = findViewById(R.id.tren_superior);
+        trenInferior = findViewById(R.id.tren_inferior);
+        pecho = findViewById(R.id.pecho);
         espalda = findViewById(R.id.espalda);
+        hombro = findViewById(R.id.hombro);
         biceps = findViewById(R.id.biceps);
+        antebrazo = findViewById(R.id.antebrazo);
+        triceps = findViewById(R.id.triceps);
+        trapecio = findViewById(R.id.trapecio);
+        gluteo = findViewById(R.id.gluteo);
+        gemelo = findViewById(R.id.gemelo);
+        femoral = findViewById(R.id.femoral);
         cuadriceps = findViewById(R.id.cuadriceps);
 
         historialRV = findViewById(R.id.historial_rv);
@@ -137,7 +145,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         borrar.setOnClickListener(this);
 
 
-        //Cambiar los checkBox al marcarse
+        //Cambiar los checkBox al marcarse.
         CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -145,29 +153,59 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
                 String musculo = obtenerMusculo(id);
 
                 if (isChecked) {
-                    musculos.add(musculo);
+                    if(musculos.size() < 3){
+                        musculos.add(musculo);
 
-                    cambiarColores((TextView) buttonView, getResources().getColor(R.color.blanco));
-                    if (id == R.id.todo_el_cuerpo) {
-                        trenSuperior.setChecked(false);
-                        espalda.setChecked(false);
-                        biceps.setChecked(false);
-                        cuadriceps.setChecked(false);
-
-                    } else{
-                        todoElCuerpo.setChecked(false);
-
-                        if (id == R.id.tren_superior) {
-                            espalda.setChecked(false);
-                            biceps.setChecked(false);
-
-                        } else if (id == R.id.biceps || id == R.id.espalda) {
+                        cambiarColores((TextView) buttonView, getResources().getColor(R.color.blanco));
+                        if (id == R.id.todo_el_cuerpo) {
                             trenSuperior.setChecked(false);
+                            trenInferior.setChecked(false);
+                            pecho.setChecked(false);
+                            espalda.setChecked(false);
+                            hombro.setChecked(false);
+                            biceps.setChecked(false);
+                            antebrazo.setChecked(false);
+                            triceps.setChecked(false);
+                            trapecio.setChecked(false);
+                            gluteo.setChecked(false);
+                            gemelo.setChecked(false);
+                            femoral.setChecked(false);
+                            cuadriceps.setChecked(false);
+
+
+                        } else{
+                            todoElCuerpo.setChecked(false);
+
+                            if (id == R.id.tren_superior) {
+                                pecho.setChecked(false);
+                                espalda.setChecked(false);
+                                hombro.setChecked(false);
+                                biceps.setChecked(false);
+                                antebrazo.setChecked(false);
+                                triceps.setChecked(false);
+                                trapecio.setChecked(false);
+
+                            } else if (id == R.id.pecho || id == R.id.espalda ||id == R.id.hombro || id == R.id.biceps ||id == R.id.antebrazo || id == R.id.triceps || id == R.id.trapecio) {
+                                trenSuperior.setChecked(false);
+                            }
+
+                            if (id == R.id.tren_inferior) {
+                                gluteo.setChecked(false);
+                                gemelo.setChecked(false);
+                                femoral.setChecked(false);
+                                cuadriceps.setChecked(false);
+
+                            } else if (id == R.id.gluteo || id == R.id.gemelo || id == R.id.femoral || id == R.id.cuadriceps) {
+                                trenInferior.setChecked(false);
+                            }
                         }
+
+                    }
+                    else{
+                        buttonView.setChecked(false);
                     }
                 } else {
                     musculos.remove(musculo);
-
 
                     cambiarColores((TextView) buttonView, getResources().getColor(R.color.negro_oscuro));
                 }
@@ -177,8 +215,17 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
         todoElCuerpo.setOnCheckedChangeListener(checkBoxListener);
         trenSuperior.setOnCheckedChangeListener(checkBoxListener);
+        trenInferior.setOnCheckedChangeListener(checkBoxListener);
+        pecho.setOnCheckedChangeListener(checkBoxListener);
         espalda.setOnCheckedChangeListener(checkBoxListener);
+        hombro.setOnCheckedChangeListener(checkBoxListener);
         biceps.setOnCheckedChangeListener(checkBoxListener);
+        antebrazo.setOnCheckedChangeListener(checkBoxListener);
+        triceps.setOnCheckedChangeListener(checkBoxListener);
+        trapecio.setOnCheckedChangeListener(checkBoxListener);
+        gluteo.setOnCheckedChangeListener(checkBoxListener);
+        gemelo.setOnCheckedChangeListener(checkBoxListener);
+        femoral.setOnCheckedChangeListener(checkBoxListener);
         cuadriceps.setOnCheckedChangeListener(checkBoxListener);
 
         //Mostrar datos.
@@ -239,29 +286,26 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         }
     }
 
-    //Método para obtener el nombre del músculo marcado.
+    //Método para identificar el músculo marcado.
     private String obtenerMusculo(int id) {
-        String musculo = "";
-
         String idString = getResources().getResourceEntryName(id);
+        String musculo = idString.replace('_', ' ');
 
-        switch (idString){
-            case "todo_el_cuerpo":
-                musculo = "Todo el cuerpo";
-                break;
-            case "tren_superior":
-                musculo = "Tren superior";
-                break;
-            case "espalda":
-                musculo = "Espalda";
-                break;
+        switch (musculo) {
             case "biceps":
-                musculo = "Bíceps";
+                musculo = "bíceps";
                 break;
             case "cuadriceps":
-                musculo = "Cuádriceps";
+                musculo = "cuádriceps";
+                break;
+            case "triceps":
+                musculo = "tríceps";
+                break;
+            case "gluteo":
+                musculo = "glúteo";
                 break;
         }
+        musculo = musculo.substring(0,1).toUpperCase() + musculo.substring(1);
 
         return musculo;
     }
