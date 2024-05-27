@@ -14,7 +14,7 @@
         android:contentDescription="@string/fondo_gimnasio" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="380dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/azul_clarito"
@@ -33,7 +33,7 @@
             android:foregroundGravity="center_vertical"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="20dp">
 
             <View
                 android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="@string/bienvenido"
                 android:textColor="@color/negro_oscuro"
-                android:textSize="40sp"
+                android:textSize="33sp"
                 android:textStyle="bold" />
 
             <View
@@ -78,8 +78,8 @@
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
                     android:text="@string/iniciar_sesion"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textColor="@color/negro"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <View
@@ -162,7 +162,7 @@
                 android:shadowRadius="10"
                 android:text="@string/iniciar_sesion_mayusculas"
                 android:textColor="@color/blanco"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,8 +185,8 @@
                     android:fontFamily="@font/merriweather_light"
                     android:gravity="center"
                     android:text="@string/eres_nuevo"
-                    android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textColor="@color/negro"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <View
@@ -209,7 +209,7 @@
                 android:shadowRadius="20"
                 android:text="@string/registrarse_mayusculas"
                 android:textColor="@color/negro"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -139,7 +139,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/color_del_fondo"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -151,7 +151,7 @@
                     android:gravity="right"
                     android:text="@string/_88888"
                     android:textColor="@color/blanco"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -176,7 +176,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/color_de_las_letras"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -189,7 +189,7 @@
                     android:gravity="right"
                     android:text="@string/_88888"
                     android:textColor="@color/blanco"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
 
@@ -248,7 +248,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/usos_esta_semana"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -260,7 +260,7 @@
                     android:gravity="right"
                     android:text="@string/_888"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
@@ -283,7 +283,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/ejercicios_realizados"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText,NestedWeights" />
 
                 <TextView
@@ -295,7 +295,7 @@
                     android:gravity="right"
                     android:text="@string/_888"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
@@ -318,7 +318,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/ejercicios_sin_realizar"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -330,7 +330,7 @@
                     android:gravity="right"
                     android:text="@string/_888"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
@@ -353,7 +353,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/ejercicios_totales"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -365,7 +365,7 @@
                     android:gravity="right"
                     android:text="@string/_888"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>
@@ -388,7 +388,7 @@
                     android:fontFamily="@font/merriweather_light"
                     android:text="@string/usado_en_rutinas"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <TextView
@@ -400,7 +400,7 @@
                     android:gravity="right"
                     android:text="@string/_888"
                     android:textColor="@color/negro_clarito"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="RtlHardcoded" />
             </LinearLayout>

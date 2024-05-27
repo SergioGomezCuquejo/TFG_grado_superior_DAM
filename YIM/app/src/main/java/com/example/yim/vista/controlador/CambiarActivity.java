@@ -29,30 +29,6 @@ public class CambiarActivity {
         context.startActivity(intent);
     }
 
-    /*
-    //De un activity a PopupAlerta.java.
-    public static void cambiar(Context context, String titulo, String texto, String iraA) {
-        Intent intent = new Intent(context, PopupAlerta.class);
-        intent.putExtra("titulo", titulo);
-        intent.putExtra("texto", texto);
-        intent.putExtra("iraA", iraA);
-        context.startActivity(intent);
-    }
-
-    //De un activity a PopupAlerta.java pasa pasando por parámetros Strings y un objeto TablaRutinaUsuario.
-    public static void cambiar(Context context, String titulo, String texto, String iraA, TablaRutinaUsuario rutinaUsuario, String accion) {
-        Intent intent = new Intent(context, PopupAlerta.class);
-        intent.putExtra("titulo", titulo);
-        intent.putExtra("texto", texto);
-        intent.putExtra("iraA", iraA);
-        intent.putExtra("rutinaUsuario", rutinaUsuario);
-        intent.putExtra("accion", accion);
-        context.startActivity(intent);
-
-    }
-
-     */
-
     //De un activity a EjerciciosDiarios.java pasando por parámetro  un objeto TablaDiaRutinaActiva.
     public static void cambiar(Context context, TablaDiaRutinaActiva diaRutinaActiva) {
         Intent intent = new Intent(context, EjerciciosDiarios.class);

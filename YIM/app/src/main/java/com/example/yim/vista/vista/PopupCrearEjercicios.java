@@ -45,7 +45,7 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
     RelativeLayout imagenRL;
     TextView musculosTV, nombreRutinaTV;
     FrameLayout nombreRutinaFL;
-    EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
+    EditText nombreET, descansoMinutosET, descansoSegundosET, seriesET, repeticionesET, notasET;
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     StringBuilder musculosString;
     TablaEjercicioCreado ejercicioUsuario;
@@ -91,7 +91,8 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
 
 
         nombreET = findViewById(R.id.nombre_et);
-        descansoET = findViewById(R.id.descanso_et);
+        descansoMinutosET = findViewById(R.id.descanso_minutos_et);
+        descansoSegundosET = findViewById(R.id.descanso_segundos_et);
         seriesET = findViewById(R.id.series_et);
         repeticionesET = findViewById(R.id.repeticiones_et);
         notasET = findViewById(R.id.notas_et);
@@ -228,11 +229,11 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
         musculosEjercicio = musculosTV.getText().toString();
         musculosVacios = musculosEjercicio.equals("Selecciona los músculos");
 
-        if(descansoET.getText().toString().isEmpty()){
+        if(descansoMinutosET.getText().toString().isEmpty() && descansoSegundosET.getText().toString().isEmpty()){
             descansoEjercicio = 0;
             descansoVacio = true;
         }else{
-            descansoEjercicio = Integer.parseInt(descansoET.getText().toString());
+            descansoEjercicio = Integer.parseInt(descansoMinutosET.getText().toString()) * 60 + Integer.parseInt(descansoSegundosET.getText().toString());
             descansoVacio = false;
         }
 

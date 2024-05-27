@@ -45,7 +45,7 @@
         android:fontFamily="@font/merriweather_light"
         android:layout_toEndOf="@id/imagen"
         android:textColor="@color/blanco"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/musculos"
@@ -57,5 +57,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/blanco"
+        android:textSize="12sp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp" />
 </RelativeLayout>

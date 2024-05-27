@@ -46,8 +46,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
     ImageView imagenIV;
     LinearLayout activo_ll;
     SwitchCompat activo;
-    TextView diasDescansados, diasDeDescanso, diasTotales, diasCompletados, musculosTotales, musculosActivos,
-            ejerciciosSinRealizar, ejerciciosRealizados, vecesActivada, vecesCompletadas, nombreRutinaTV;
+    TextView nombreRutinaTV, nombreTextoRutinaTV;
     FrameLayout nombreRutinaFL;
     Button borrar;
     boolean primeraVez;
@@ -66,7 +65,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         int ancho = medidasVentana.widthPixels;
         int alto = medidasVentana.heightPixels;
 
-        getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.85));
+        getWindow().setLayout((int)(ancho * 0.90), (int) (alto * 0.75));
 
 
         //Inicializar instancias.
@@ -92,20 +91,10 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
         nombreRutinaTV = findViewById(R.id.nombre_rutina_tv);
         imagenRL = findViewById(R.id.imagen_rl);
         imagenIV = findViewById(R.id.imagen_iv);
+        nombreTextoRutinaTV = findViewById(R.id.nombre_texto_rutina_tv);
 
         activo_ll = findViewById(R.id.activo_ll);
         activo = findViewById(R.id.activo);
-
-        diasDescansados = findViewById(R.id.dias_descansados);
-        diasDeDescanso = findViewById(R.id.dias_de_descanso);
-        diasTotales = findViewById(R.id.dias_totales);
-        diasCompletados = findViewById(R.id.dias_completados);
-        musculosTotales = findViewById(R.id.musculos_totales);
-        musculosActivos = findViewById(R.id.musculos_activos);
-        ejerciciosSinRealizar = findViewById(R.id.ejercicios_sin_realizar);
-        ejerciciosRealizados = findViewById(R.id.ejercicios_realizados);
-        vecesActivada = findViewById(R.id.veces_activada);
-        vecesCompletadas = findViewById(R.id.veces_completadas);
 
         borrar = findViewById(R.id.borrar);
 
@@ -204,17 +193,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
             }
             nombreRutinaTV.setText(nombre);
         }
-
-        diasDescansados.setText(String.valueOf(infoRutina.getDias_descansados()));
-        diasDeDescanso.setText(String.valueOf(infoRutina.getDias_descanso()));
-        diasTotales.setText(String.valueOf(infoRutina.getDias_totales()));
-        diasCompletados.setText(String.valueOf(infoRutina.getDias_completados()));
-        musculosTotales.setText(String.valueOf(infoRutina.getMusculos_totales()));
-        musculosActivos.setText(String.valueOf(infoRutina.getMusculos_activos()));
-        ejerciciosSinRealizar.setText(String.valueOf(infoRutina.getEjercicios_sin_realizar()));
-        ejerciciosRealizados.setText(String.valueOf(infoRutina.getEjercicios_realizados()));
-        vecesActivada.setText(String.valueOf(infoRutina.getVeces_activada()));
-        vecesCompletadas.setText(String.valueOf(infoRutina.getVeces_completada()));
+        nombreTextoRutinaTV.setText(infoRutina.getNombre());
     }
 
     // Método para eliminar la rutina.

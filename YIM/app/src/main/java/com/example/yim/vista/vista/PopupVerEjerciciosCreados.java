@@ -1,14 +1,18 @@
 package com.example.yim.vista.vista;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -23,15 +27,20 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.yim.R;
+import com.example.yim.controlador.Adaptadores.HistorialAdaptador;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackBoolean;
 import com.example.yim.modelo.Callbacks.FirebaseCallbackUri;
 import com.example.yim.modelo.FirebaseManager;
 import com.example.yim.modelo.tablas.TablaEjercicioCreado;
+import com.example.yim.modelo.tablas.TablaHistorial;
+import com.example.yim.modelo.tablas.TablaSerie;
 import com.example.yim.vista.controlador.Imagenes;
 import com.example.yim.vista.controlador.MostratToast;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class PopupVerEjerciciosCreados extends AppCompatActivity implements View.OnClickListener {
@@ -41,14 +50,14 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     private TablaEjercicioCreado ejercicioUsuario;
     private static final int REQUEST_CODE_PVEC = 7;
     ViewFlipper viewFlipper, instrucionesVF;
-    TextView instrucionesTV, informacionTV, musculosTV, pesoMaxTV, repeticionesMaxTV, serieNumTV,
-            vecesRealizadoTV, vecesNoRealizadoTV, vecesEnRutinasTV, vecesEnRutinaActivaTV, nombreRutinaTV;
+    TextView musculosTV, nombreRutinaTV, historialTV;
     FrameLayout nombreRutinaFL;
     ImageView cerrar, atras, guardar, imagenIV;
     RelativeLayout imagenRL;
     EditText nombreET, descansoET, seriesET, repeticionesET, notasET;
     CheckBox todoElCuerpo, trenSuperior, espalda, biceps, cuadriceps;
     Button borrar;
+    RecyclerView historialRV;
     StringBuilder musculosString;
     HashSet<String> musculos = new HashSet<>();
     String nombreEjercicio, notasEjercicio, musculosEjercicio, accion;
@@ -90,8 +99,6 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         //Referencias de las vistas.
         viewFlipper = findViewById(R.id.viewFlipper);
 
-        instrucionesTV = findViewById(R.id.instruciones_tv);
-        informacionTV = findViewById(R.id.informacion_tv);
         cerrar = findViewById(R.id.cerrar);
 
 
@@ -117,28 +124,18 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         biceps = findViewById(R.id.biceps);
         cuadriceps = findViewById(R.id.cuadriceps);
 
-        pesoMaxTV = findViewById(R.id.peso_max_tv);
-        repeticionesMaxTV = findViewById(R.id.repeticiones_max_tv);
-        serieNumTV = findViewById(R.id.serie_num_tv);
-        vecesRealizadoTV = findViewById(R.id.veces_realizado_tv);
-        vecesNoRealizadoTV = findViewById(R.id.veces_no_realizado_tv);
-        vecesEnRutinasTV = findViewById(R.id.veces_en_rutinas_tv);
-        vecesEnRutinaActivaTV = findViewById(R.id.veces_en_rutina_activa_tv);
+        historialRV = findViewById(R.id.historial_rv);
+        historialTV = findViewById(R.id.historial_tv);
 
 
         //Listeners.
         imagenRL.setOnClickListener(this);
         guardar.setOnClickListener(this);
-        instrucionesTV.setOnClickListener(this);
-        informacionTV.setOnClickListener(this);
         cerrar.setOnClickListener(this);
         musculosTV.setOnClickListener(this);
         atras.setOnClickListener(this);
         borrar.setOnClickListener(this);
 
-
-        //Poner por defecto la opción de instrucciones
-        cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
 
         //Cambiar los checkBox al marcarse
         CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
@@ -200,26 +197,6 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         String id = getResources().getResourceEntryName(view.getId());
 
         switch (id){
-            case "instruciones_tv":
-                if(flipperActivo != 1) {
-                    flipperActivo = 1;
-                    viewFlipper.showNext();
-
-                    cambiarColores(instrucionesTV, R.color.fondo_oscuro, R.color.blanco);
-                    cambiarColores(informacionTV, R.color.fondo_clarito, R.color.negro_clarito);
-                }
-                break;
-
-            case "informacion_tv":
-                if(flipperActivo != 2) {
-                    flipperActivo = 2;
-                    viewFlipper.showPrevious();
-
-                    cambiarColores(informacionTV, R.color.fondo_oscuro, R.color.blanco);
-                    cambiarColores(instrucionesTV, R.color.fondo_clarito, R.color.negro_clarito);
-                }
-                break;
-
             case "imagen_rl":
                 subirImagen();
                 break;
@@ -312,21 +289,6 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
 
 
     //Métodos para cambiar los colores de la vista.
-    public void cambiarColores(View view, @ColorRes int colorFondoRes, @ColorRes int colorLetrasRes){
-        Drawable shape;
-        TextView textView = (TextView) view;
-
-        int colorFondo = ContextCompat.getColor(this, colorFondoRes);
-        int colorLetras = ContextCompat.getColor(this, colorLetrasRes);
-
-        if(view.getId() == R.id.instruciones_tv){
-            shape = textView.getBackground();
-            shape.setColorFilter(colorFondo, android.graphics.PorterDuff.Mode.SRC);
-        } else if (view.getId() == R.id.informacion_tv) {
-            textView.setBackgroundColor(colorFondo);
-        }
-        textView.setTextColor(colorLetras);
-    }
     public void cambiarColores(View view, int color){
         ((TextView) view).setTextColor(color);
     }
@@ -335,8 +297,8 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
     //Método para mostrar la información el ejercicio.
     @SuppressLint("SetTextI18n")
     public void mostrarDatos(){
-
         String nombre;
+
         if(ejercicioUsuario.getImagen() != null){
             Imagenes.mostrarImagen(this, ejercicioUsuario.getImagen(), imagenIV);
         }else{
@@ -366,14 +328,6 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         }
 
         musculosTV.setText(musculosString.substring(0, musculosString.length() - 2) + ".");
-
-        pesoMaxTV.setText(String.valueOf(ejercicioUsuario.getPeso_maximo()));
-        repeticionesMaxTV.setText(String.valueOf(ejercicioUsuario.getRepeticiones_maximas()));
-        serieNumTV.setText(String.valueOf(ejercicioUsuario.getSeries_maximas()));
-        vecesRealizadoTV.setText(String.valueOf(ejercicioUsuario.getVeces_realizado()));
-        vecesNoRealizadoTV.setText(String.valueOf(ejercicioUsuario.getVeces_no_realizado()));
-        vecesEnRutinasTV.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutinas()));
-        vecesEnRutinaActivaTV.setText(String.valueOf(ejercicioUsuario.getVeces_usado_en_rutina_activa()));
     }
 
     //Método para guardar los datos del ejercicio.

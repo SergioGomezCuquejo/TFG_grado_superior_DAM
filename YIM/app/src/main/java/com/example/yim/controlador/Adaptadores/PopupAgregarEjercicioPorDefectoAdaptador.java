@@ -17,6 +17,7 @@ import com.example.yim.modelo.tablas.TablaEjercicioRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioPorDefecto;
 import com.example.yim.modelo.tablas.TablaRutinaUsuario;
 import com.example.yim.vista.controlador.CambiarActivity;
+import com.example.yim.vista.controlador.MostratToast;
 import com.example.yim.vista.vista.EjerciciosRutinas;
 
 import java.util.ArrayList;

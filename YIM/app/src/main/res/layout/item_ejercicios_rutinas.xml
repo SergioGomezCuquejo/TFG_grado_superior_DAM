@@ -15,7 +15,6 @@
         android:id="@+id/imagen"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerVertical="true"
         android:padding="10dp"
         app:shapeAppearanceOverlay="@style/radius" />
 
@@ -23,8 +22,6 @@
         android:id="@+id/imagen_texto"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -47,7 +44,7 @@
         android:layout_toEndOf="@id/imagen"
         android:fontFamily="@font/merriweather_light"
         android:textColor="@color/blanco"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/musculos"
@@ -57,6 +54,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
+        android:textSize="11sp"
         android:layout_toEndOf="@id/imagen"
         android:fontFamily="@font/merriweather_light"
         android:textColor="@color/blanco" />

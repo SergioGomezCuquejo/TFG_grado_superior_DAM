@@ -3,6 +3,7 @@ package com.example.yim.vista.vista;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -35,12 +36,13 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_P = 3;
     ImageButton guardarIB, editarIB, cancelarIB;
     ImageView imagenPerfil, imagenPerfilMenu;
-    TextView nombreTV, email, genero, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
-    EditText nombreET, pesoET, alturaET, edadET;
+    TextView nombreTV, email, generoTV, pesoTV, alturaTV, edadTV, politica, cerrarSesion;
+    EditText nombreET, generoET, pesoET, alturaET, edadET;
     LinearLayout logros;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu;
     ProgressDialog progressDialog;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         nombreTV = findViewById(R.id.nombre_tv);
         nombreET = findViewById(R.id.nombre_et);
         email = findViewById(R.id.email);
-        genero = findViewById(R.id.genero);
+        generoTV = findViewById(R.id.genero_tv);
+        generoET = findViewById(R.id.genero_et);
         pesoTV = findViewById(R.id.peso_tv);
         pesoET = findViewById(R.id.peso_et);
         alturaTV = findViewById(R.id.altura_tv);
@@ -135,12 +138,14 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 cambiarVisibilidad(guardarIB, View.GONE);
                 cambiarVisibilidad(cancelarIB, View.GONE);
                 cambiarVisibilidad(nombreET, View.GONE);
+                cambiarVisibilidad(generoET, View.GONE);
                 cambiarVisibilidad(pesoET, View.GONE);
                 cambiarVisibilidad(alturaET, View.GONE);
                 cambiarVisibilidad(edadET, View.GONE);
 
                 cambiarVisibilidad(editarIB, View.VISIBLE);
                 cambiarVisibilidad(nombreTV, View.VISIBLE);
+                cambiarVisibilidad(generoTV, View.VISIBLE);
                 cambiarVisibilidad(pesoTV, View.VISIBLE);
                 cambiarVisibilidad(alturaTV, View.VISIBLE);
                 cambiarVisibilidad(edadTV, View.VISIBLE);
@@ -149,6 +154,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
             case "editar_ib":
                 cambiarVisibilidad(editarIB, View.GONE);
                 cambiarVisibilidad(nombreTV, View.GONE);
+                cambiarVisibilidad(generoTV, View.GONE);
                 cambiarVisibilidad(pesoTV, View.GONE);
                 cambiarVisibilidad(alturaTV, View.GONE);
                 cambiarVisibilidad(edadTV, View.GONE);
@@ -156,6 +162,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                 cambiarVisibilidad(guardarIB, View.VISIBLE);
                 cambiarVisibilidad(cancelarIB, View.VISIBLE);
                 cambiarVisibilidad(nombreET, View.VISIBLE);
+                cambiarVisibilidad(generoET, View.VISIBLE);
                 cambiarVisibilidad(pesoET, View.VISIBLE);
                 cambiarVisibilidad(alturaET, View.VISIBLE);
                 cambiarVisibilidad(edadET, View.VISIBLE);
@@ -192,7 +199,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         TablaPerfil perfil = new TablaPerfil();
         perfil.setNombre(nombreET.getText().toString());
         perfil.setEmail(email.getText().toString());
-        perfil.setGenero(genero.getText().toString());
+        perfil.setGenero(generoET.getText().toString());
         perfil.setPeso(Double.parseDouble(pesoET.getText().toString()));
         perfil.setAltura(Double.parseDouble(alturaET.getText().toString()));
         perfil.setEdad(Integer.parseInt(edadET.getText().toString()));
@@ -209,7 +216,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                         nombreTV.setText(perfil.getNombre());
                         nombreET.setText(perfil.getNombre());
                         email.setText(perfil.getEmail());
-                        genero.setText(perfil.getGenero());
+                        generoTV.setText(perfil.getGenero());
+                        generoET.setText(perfil.getGenero());
                         pesoTV.setText(String.valueOf(perfil.getPeso()));
                         pesoET.setText(String.valueOf(perfil.getPeso()));
                         alturaTV.setText(String.valueOf(perfil.getAltura()));

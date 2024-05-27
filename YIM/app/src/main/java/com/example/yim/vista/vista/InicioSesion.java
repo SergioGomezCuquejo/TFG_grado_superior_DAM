@@ -101,11 +101,13 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         mostrarError("Correo o contraseña incorrectos.");
+                        contrasena.setText("");
                     }
                 });
 
             } else if(!emailCorrecto){
                 mostrarError("Email no valido.");
+                contrasena.setText("");
 
             } else {
                 if(contrasenaUsuario.length() < 6){
@@ -113,6 +115,7 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
                 } else {
                     mostrarError("La contraseña debe incluir al menos una letra mayúscula, un número y un carácter especial.");
                 }
+                contrasena.setText("");
             }
         }catch (Exception ex){
             mostrarToast( "Error al inicciar sesión");

@@ -14,7 +14,7 @@
         android:contentDescription="@string/fondo_gimnasio" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="380dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/azul_clarito"
@@ -53,7 +53,7 @@
                     android:gravity="center"
                     android:text="@string/registrarse"
                     android:textColor="@color/negro_oscuro"
-                    android:textSize="40sp"
+                    android:textSize="33sp"
                     android:textStyle="bold" />
 
                 <View
@@ -81,6 +81,7 @@
                     android:autofillHints=""
                     android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
                     android:ems="10"
+                    android:maxLength="20"
                     android:fontFamily="@font/merriweather_light"
                     android:inputType="text"
                     android:padding="10dp"
@@ -104,6 +105,7 @@
                     android:autofillHints=""
                     android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
                     android:ems="10"
+                    android:maxLength="20"
                     android:fontFamily="@font/merriweather_light"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
@@ -127,6 +129,7 @@
                     android:autofillHints=""
                     android:background="@drawable/_style_rectangulo_azul_clarito__borde_negro_clarito"
                     android:ems="10"
+                    android:maxLength="20"
                     android:fontFamily="@font/merriweather_light"
                     android:inputType="textPassword"
                     android:padding="10dp"
@@ -151,7 +154,8 @@
                         android:id="@+id/aceptar_politicas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:buttonTint="@color/azul_oscuro"/>
+                        android:buttonTint="@color/azul_oscuro"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <TextView
                         android:id="@+id/aceptar_tv"
@@ -159,18 +163,21 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:fontFamily="@font/merriweather_light"
+                        android:textColor="@color/negro"
                         android:text="Aceptar "
+                        android:textStyle="bold"
                         tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/politicas_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:fontFamily="@font/merriweather_light"
+                        android:gravity="center_vertical"
                         android:text="políticas de privacidad."
                         android:textColor="@color/azul_oscuro"
-                        tools:ignore="HardcodedText" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,TextContrastCheck" />
 
                 </LinearLayout>
 
@@ -187,7 +194,8 @@
                     android:shadowRadius="10"
                     android:text="@string/registrarse_mayusculas"
                     android:textColor="@color/blanco"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -210,8 +218,8 @@
                         android:fontFamily="@font/merriweather_light"
                         android:gravity="center"
                         android:text="@string/tienes_cuenta"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
+                        android:textColor="@color/negro"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <View
@@ -235,7 +243,7 @@
                     android:shadowRadius="20"
                     android:text="@string/iniciar_sesion_mayusculas"
                     android:textColor="@color/negro"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
 

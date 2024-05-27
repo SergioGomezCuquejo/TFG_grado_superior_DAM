@@ -308,6 +308,9 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
         musculoCentro.setVisibility(View.GONE);
         musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_10);
 
+        musculoIzquierda.setTextSize(20);
+        musculoDerecha.setTextSize(17);
+
         if(musculosArray.size() >= 1){
             musculo = musculosArray.get(0);
             musculoElegidoIzquierda.setText(musculo);
@@ -316,6 +319,7 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
 
 
             if(musculosArray.size() >= 2){
+                musculoIzquierda.setTextSize(17);
                 musculoIzquierda.setBackgroundResource(R.drawable._style2_borde_blanco_izquierda);
                 musculo = musculosArray.get(1);
                 musculoElegidoCentro.setText(musculo);
@@ -327,6 +331,8 @@ public class EjerciciosRutinas extends AppCompatActivity implements View.OnClick
                 musculoDerechaLL.setVisibility(View.VISIBLE);
 
                 if(musculosArray.size() == 3){
+                    musculoIzquierda.setTextSize(15);
+                    musculoDerecha.setTextSize(15);
                     musculoCentro.setVisibility(View.VISIBLE);
                     musculoCentro.setText(musculo);
                     colorMusculo(musculo, musculoElegidoCentro, musculoCentro);

@@ -257,7 +257,9 @@ public class RegistroSesion extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onCallback(boolean accionRealizada) {
                     if (accionRealizada){
-                        mostrarToast( "Usuario registrado correctamente");
+                        mostrarToast( "Bienvenido a YIM");
+                        cambiarActivity(Inicio.class);
+
                     }else{
                         mostrarToast( "Error al registrar el usuario");
                     }

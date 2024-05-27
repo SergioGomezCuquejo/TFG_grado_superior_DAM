@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20"
     android:orientation="vertical"
     tools:context=".vista.vista.PopupVerEjerciciosCreados">
 
@@ -11,42 +12,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20_arriba"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/instruciones_tv"
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/merriweather_light"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:gravity="center"
-            android:text="Instruciones"
-            android:background="@drawable/_style_borde_20_arriba_izquierda"
-            android:textColor="@color/negro_clarito"
-            android:textSize="20sp"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/informacion_tv"
+            android:layout_height="47dp"
+            android:layout_weight="1" />
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/merriweather_light"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:gravity="center"
-            android:text="Información"
-            android:textColor="@color/negro_clarito"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
+            android:layout_height="47dp"
+            android:layout_weight="1" />
 
 
         <ImageView
@@ -62,21 +37,13 @@
     </LinearLayout>
 
     <ViewFlipper
-        android:id="@+id/viewFlipper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:inAnimation="@android:anim/slide_in_left"
-        android:outAnimation="@android:anim/slide_out_right"
-        android:background="@drawable/_style_rectangulo_fondo_clarito__borde_blanco_20_abajo"
-        android:padding="20dp">
-
-        <ViewFlipper
             android:id="@+id/instruciones_vf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inAnimation="@android:anim/slide_in_left"
             android:outAnimation="@android:anim/slide_out_right"
-            tools:context=".vista.vista.PopupCrearEjercicios">
+            tools:context=".vista.vista.PopupCrearEjercicios"
+        android:padding="20dp">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -193,6 +160,7 @@
                         android:minHeight="48dp"
                         android:minLines="1"
                         android:padding="10dp"
+                        android:textSize="16sp"
                         android:textColor="@color/negro_oscuro"
                         android:textColorHint="@color/negro_clarito"
                         android:textStyle="bold"
@@ -227,7 +195,7 @@
                         android:minHeight="48dp"
                         android:textColor="@color/negro_oscuro"
                         android:textColorHint="@color/negro_clarito"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         tools:ignore="VisualLintTextFieldSize" />
 
@@ -276,7 +244,7 @@
                                 android:minHeight="48dp"
                                 android:textColor="@color/negro_oscuro"
                                 android:textColorHint="@color/negro_clarito"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold"
                                 tools:ignore="DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
                         </LinearLayout>
@@ -318,7 +286,7 @@
                                 android:minHeight="48dp"
                                 android:textColor="@color/negro_oscuro"
                                 android:textColorHint="@color/negro_clarito"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold"
                                 tools:ignore="VisualLintTextFieldSize" />
                         </LinearLayout>
@@ -353,6 +321,7 @@
                         android:maxLines="3"
                         android:minHeight="48dp"
                         android:minLines="1"
+                        android:textSize="16sp"
                         android:textColor="@color/negro_oscuro"
                         android:textColorHint="@color/negro_clarito"
                         android:textStyle="bold"
@@ -386,7 +355,7 @@
                         android:minHeight="48dp"
                         android:text="@string/hint_musculos_ejercicios"
                         android:textColor="@color/negro_clarito"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         tools:ignore="NestedWeights" />
 
@@ -402,7 +371,7 @@
                         android:padding="15dp"
                         android:text="Eliminar ejercicio"
                         android:textColor="@color/blanco"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText" />
 
@@ -519,319 +488,6 @@
                 </ScrollView>
             </LinearLayout>
         </ViewFlipper>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:gravity="center"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/_style_rectangulo_gris" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="center"
-                        android:text="Máximo peso"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/_style_rectangulo_gris" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Peso: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/peso_max_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Repeticiones: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/repeticiones_max_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Serie nº: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/serie_num_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/blanco"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/_style_rectangulo_gris" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="2"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="center"
-                        android:text="@string/informacion_adicional"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/_style_rectangulo_gris" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Veces realizado: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/veces_realizado_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Veces no realizado: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/veces_no_realizado_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/_style_borde_fondo_oscuro_arriba"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Veces usado en rutinas: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/veces_en_rutinas_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:baselineAligned="false"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:fontFamily="@font/merriweather_light"
-                        android:text="Veces usado en la rutina activa: "
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        tools:ignore="HardcodedText,NestedWeights" />
-
-                    <TextView
-                        android:id="@+id/veces_en_rutina_activa_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/merriweather_light"
-                        android:gravity="right"
-                        android:textColor="@color/negro_clarito"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlHardcoded" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
-
-    </ViewFlipper>
 
 
 

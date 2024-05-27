@@ -39,6 +39,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="7dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -140,7 +141,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="Nombre:"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
 
@@ -151,7 +152,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
 
                         <EditText
                             android:id="@+id/nombre_et"
@@ -161,7 +162,8 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
+                            android:maxLength="20"
                             tools:ignore="Autofill,LabelFor,TextFields" />
 
                     </LinearLayout>
@@ -181,7 +183,7 @@
                             android:text="Email:"
                             android:layout_marginEnd="10dp"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
 
@@ -193,7 +195,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -261,17 +263,29 @@
                             android:padding="10dp"
                             android:text="@string/genero"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/genero"
+                            android:id="@+id/genero_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
-                            android:layout_marginEnd="10dp"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
+
+                        <EditText
+                            android:id="@+id/genero_et"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/merriweather_light"
+                            android:gravity="right"
+                            android:maxLength="10"
+                            android:textColor="@color/negro_oscuro"
+                            android:textSize="18sp"
+                            android:visibility="gone"
+                            tools:ignore="Autofill,LabelFor,TextFields" />
 
                     </LinearLayout>
 
@@ -291,7 +305,7 @@
                             android:padding="10dp"
                             android:text="@string/peso"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -304,7 +318,7 @@
                             android:layout_marginEnd="5dp"
                             android:text="00,000"
                             android:inputType="numberDecimal"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:maxLength="5"
                             tools:ignore="Autofill,HardcodedText,LabelFor" />
                         <TextView
@@ -315,7 +329,8 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0.0"
-                            android:textSize="20sp"
+                            android:maxLength="5"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
 
                         <TextView
@@ -324,7 +339,7 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="kg"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
 
                     </LinearLayout>
@@ -345,7 +360,7 @@
                             android:padding="10dp"
                             android:text="@string/altura"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
 
@@ -359,7 +374,7 @@
                             android:layout_marginEnd="5dp"
                             android:text="00,000"
                             android:inputType="numberDecimal"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:maxLength="5"
                             tools:ignore="Autofill,HardcodedText,LabelFor" />
 
@@ -371,7 +386,8 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0.0"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
+                            android:maxLength="5"
                             tools:ignore="HardcodedText" />
 
                         <TextView
@@ -380,7 +396,7 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="cm"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
 
@@ -400,7 +416,7 @@
                             android:padding="10dp"
                             android:text="@string/edad"
                             android:textColor="@color/negro_oscuro"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <EditText
@@ -413,7 +429,7 @@
                             android:layout_marginEnd="5dp"
                             android:text="00"
                             android:inputType="number"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             android:maxLength="2"
                             tools:ignore="Autofill,HardcodedText,LabelFor" />
 
@@ -425,7 +441,7 @@
                             android:textColor="@color/negro_oscuro"
                             android:layout_marginEnd="5dp"
                             android:text="0"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
 
                         <TextView
@@ -434,7 +450,7 @@
                             android:fontFamily="@font/merriweather_light"
                             android:textColor="@color/negro_oscuro"
                             android:text="años"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>

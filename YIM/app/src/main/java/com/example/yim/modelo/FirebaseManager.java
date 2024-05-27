@@ -426,6 +426,26 @@ public class FirebaseManager {
             ex.printStackTrace();
         }
     }
+    public void actualizarEjercicioCreado(Context context, String IDEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
+        try{
+            ejerciciosUsuarioReference.child("creados").child(IDEjercicio).child("historial").setValue(historial, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar el ejercicio: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el perfil del usuario.");
+            ex.printStackTrace();
+        }
+    }
     public void actualizarEjercicioCreado(Context context, String IDEjercicio, String urlImagen, FirebaseCallbackBoolean callback){
 
         try{
@@ -444,6 +464,26 @@ public class FirebaseManager {
             });
         } catch (Exception ex) {
             mostrarToast(context, "Error al obtener el ejercicio del usuario.");
+            ex.printStackTrace();
+        }
+    }
+    public void actualizarEjercicioPorDefecto(Context context, String IDEjercicio, ArrayList<TablaHistorial> historial, FirebaseCallbackBoolean callback){
+        try{
+            ejerciciosUsuarioReference.child("por_defecto").child(IDEjercicio).child("historial").setValue(historial, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    boolean actualizado;
+                    if (databaseError != null) {
+                        mostrarToast(context, "Error al actualizar el ejercicio: " + databaseError.getMessage());
+                        actualizado = false;
+                    } else {
+                        actualizado = true;
+                    }
+                    callback.onCallback(actualizado);
+                }
+            });
+        } catch (Exception ex) {
+            mostrarToast(context, "Error al obtener el perfil del usuario.");
             ex.printStackTrace();
         }
     }

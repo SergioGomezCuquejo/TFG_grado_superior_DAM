@@ -158,32 +158,62 @@
                     android:textSize="20sp"
                     tools:ignore="NestedWeights" />
 
-                <EditText
-                    android:id="@+id/descanso_et"
+                <LinearLayout
+                    android:id="@+id/descanso_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/descanso_tv"
-                    android:layout_marginTop="10dp"
-                    android:autofillHints=""
-                    android:background="@drawable/_style_rectangulo_gris_clarito__borde_10"
-                    android:padding="10dp"
-                    android:fontFamily="@font/merriweather_light"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_descanso_ejercicios"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:minHeight="48dp"
-                    android:textColor="@color/negro_oscuro"
-                    android:textColorHint="@color/negro_clarito"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:ignore="VisualLintTextFieldSize" />
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/descanso_minutos_et"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:background="@drawable/_style_rectangulo_gris_clarito__borde_10"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center|center_vertical"
+                        android:hint="Minutos"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:textColor="@color/negro_oscuro"
+                        android:textColorHint="@color/negro_clarito"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintTextFieldSize" />
+                    <EditText
+                        android:id="@+id/descanso_segundos_et"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:autofillHints=""
+                        android:background="@drawable/_style_rectangulo_gris_clarito__borde_10"
+                        android:padding="10dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center|center_vertical"
+                        android:hint="Segundos"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:minHeight="48dp"
+                        android:textColor="@color/negro_oscuro"
+                        android:textColorHint="@color/negro_clarito"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="VisualLintTextFieldSize" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/series_repeticiones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/descanso_et"
+                    android:layout_below="@id/descanso_ll"
                     android:orientation="horizontal"
                     android:baselineAligned="false">
 

@@ -44,6 +44,7 @@ public class RutinaSemanalAdaptador extends RecyclerView.Adapter<RutinaSemanalAd
     @SuppressLint({"SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull RutinaSemanalAdaptadorViewHolder holder, int position) {
+        String musculo, fondo, fuente;
         TablaDiaRutinaActiva diaRutinaActiva = rutinaActiva.get(position);
         int dia = diaRutinaActiva.getDia();
 
@@ -75,26 +76,34 @@ public class RutinaSemanalAdaptador extends RecyclerView.Adapter<RutinaSemanalAd
                     holder.musculoDerecha.setVisibility(View.VISIBLE);
                 }
             }
-            String musculo;
-            String fondo = "#FFFFFFFF";
-            String fuente = "#FF000000";
+            holder.musculoIzquierda.setTextSize(20);
+            holder.musculoCentro.setTextSize(17);
             for (int i = 0; i < musculosUsuario.size(); i++){
                 musculo = musculosUsuario.get(i);
                 if(musculosHM.containsKey(musculo)){
                     fondo = musculosHM.get(musculo).getColor_fondo();
                     fuente = musculosHM.get(musculo).getColor_fuente();
-                    musculosSemana.put(musculo, musculosHM.get(musculo));
+                }else{
+                    fondo = "#FFFFFFFF";
+                    fuente = "#FF000000";
                 }
-                musculo = musculo.toUpperCase();
+
+                if(musculo.equals("Descanso")){
+                    musculo = musculo.toUpperCase();
+                }
                 if(i == 0){
+                    holder.musculoIzquierda.setTextSize(20);
                     holder.musculoIzquierda.setText(musculo);
                     holder.musculoIzquierda.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
                     holder.musculoIzquierda.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
                 } else if (i == 1) {
+                    holder.musculoIzquierda.setTextSize(17);
                     holder.musculoCentro.setText(musculo);
                     holder.musculoCentro.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
                     holder.musculoCentro.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));
                 }else {
+                    holder.musculoIzquierda.setTextSize(15);
+                    holder.musculoCentro.setTextSize(15);
                     holder.musculoDerecha.setText(musculo);
                     holder.musculoDerecha.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(fondo)));
                     holder.musculoDerecha.setTextColor(ColorStateList.valueOf(Color.parseColor(fuente)));

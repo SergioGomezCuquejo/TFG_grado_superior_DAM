@@ -64,6 +64,8 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     ProgressBar cargando;
     FrameLayout imagenCasaMenu, imagenCalendarioMenu, imagenEstadisticasMenu, imagenUsuarioMenu, nombreRutinaFL;
 
+    private TablaEjercicioCreado ejercicioCreado;
+    private TablaEjercicioPorDefecto ejercicioPorDefecto;
     private boolean descansando;
     private int numEjercicio, numEjercicios, dia, serieActual;
     private CountDownTimer countDownTimer;
@@ -177,8 +179,9 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
             mostrarImagenPerfil();
             mostrarEjercicio();
 
+
         } catch (Exception ex) {
-            mostrarToast("Error al obtener los datos del ejercicio.");
+            mostrarToast("Error al obtener los datos del ejercicio.1");
             ex.printStackTrace();
         }
 
@@ -201,9 +204,9 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
             case "boton_info":
                 if(ejercicioActivo.getNombre().startsWith("-")){
-                    mostrarInfoEjercicioCreado();
+                    mostrarInfoCreado();
                 }else {
-                    mostrarInfoEjercicioPorDefecto();
+                    mostrarInfoPorDefecto();
                 }
                 break;
 
@@ -241,7 +244,6 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                             mostrarToast("Día completado");
                             finish();
                         }else{
-                            mostrarToast(String.valueOf(ejercicioActivo.getPosicion()));
                             cambiarActivity();
                         }
                     }
@@ -282,6 +284,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
         ejerciciosTotalesTV.setText("Ejercicio " + (numEjercicio+1) + " de " + numEjercicios);
 
         if(ejercicioActivo.getNombre().startsWith("-")){
+            ejercicioCreado = new TablaEjercicioCreado();
             if(ejercicioActivo.getImagen() != null){
                 Imagenes.mostrarImagen(this, ejercicioActivo.getImagen(),  imagenSH);
             }else{
@@ -296,6 +299,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
             }
             tituloTV.setText(ejercicioActivo.getNombre().substring(1));
         }else {
+            ejercicioPorDefecto = new TablaEjercicioPorDefecto();
             if(ejercicioActivo.getImagen() != null){
                 imagenSH.setImageResource(getResources().getIdentifier(ejercicioActivo.getImagen(), "drawable", getPackageName()));
             }
@@ -324,6 +328,9 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                     serieHistorial = 1;
                 }
 
+                if(serieHistorial == 1 && ejercicioActivo.getHistorial().size() == 1){
+                    serieHistorial = 0;
+                }
                 if(ejercicioActivo.getHistorial().get(serieHistorial).getSeries().size() >= serieActual){
                     serieAnteriorHistorial = ejercicioActivo.getHistorial().get(serieHistorial).getSeries().get(serieActual-1);
                     switch (serieAnteriorHistorial.getCoste()) {
@@ -363,31 +370,61 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
         }else{
             historialTV.setVisibility(View.VISIBLE);
         }
+
+        if(ejercicioActivo.getNombre().startsWith("-")){
+            obtenerEjercicioCreado(new FirebaseCallbackEjercicioCreado() {
+                @Override
+                public void onCallback(TablaEjercicioCreado ejercicio) {
+                }
+            });
+        }else {
+            obtenerEjercicioPorDefecto(new FirebaseCallbackEjercicioPorDefecto() {
+                @Override
+                public void onCallback(TablaEjercicioPorDefecto ejercicio) {
+                }
+            });
+        }
     }
 
 
     //Método para mostrar la información del ejercicio.
-    private void mostrarInfoEjercicioCreado(){
+    private void obtenerEjercicioCreado(FirebaseCallbackEjercicioCreado callback){
         firebaseManager.obtenerEjercicioCreado(this, ejercicioActivo.getId_ejercicio(), new FirebaseCallbackEjercicioCreado() {
             @Override
             public void onCallback(TablaEjercicioCreado ejercicio) {
-                if (ejercicio != null) {
-                    cambiarActivity(ejercicio);
-                } else {
-                    mostrarToast("Error al obtener el ejercicio");
+                if (ejercicio == null) {
+                    mostrarToast("Error al obtener el ejercicio. 2 ");
                 }
+                callback.onCallback(ejercicio);
             }
         });
     }
-    private void mostrarInfoEjercicioPorDefecto(){
+    private void obtenerEjercicioPorDefecto(FirebaseCallbackEjercicioPorDefecto callback){
         firebaseManager.obtenerEjercicioPorDefecto(this, ejercicioActivo.getId_ejercicio(), new FirebaseCallbackEjercicioPorDefecto() {
             @Override
             public void onCallback(TablaEjercicioPorDefecto ejercicio) {
-                if (ejercicio != null) {
-                    cambiarActivity(ejercicio);
-                } else {
-                    mostrarToast("Error al obtener el ejercicio");
+                if (ejercicio == null) {
+                    mostrarToast("Error al obtener el ejercicio. 3");
                 }
+                callback.onCallback(ejercicio);
+            }
+        });
+    }
+
+    private void mostrarInfoCreado(){
+        obtenerEjercicioCreado(new FirebaseCallbackEjercicioCreado() {
+            @Override
+            public void onCallback(TablaEjercicioCreado ejercicio) {
+                cambiarActivity(ejercicio);
+            }
+        });
+    }
+
+    private void mostrarInfoPorDefecto(){
+        obtenerEjercicioPorDefecto(new FirebaseCallbackEjercicioPorDefecto() {
+            @Override
+            public void onCallback(TablaEjercicioPorDefecto ejercicio) {
+                cambiarActivity(ejercicio);
             }
         });
     }
@@ -455,16 +492,33 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void agregarSerie(String pesoString, String repeticionesString){
         try {
+            cargando.setVisibility(View.VISIBLE);
             guardarSerie(pesoString, repeticionesString);
-            guardarHistorial();
-            subirSerie();
-            if(descansando){
-                noDescansar();
-            }
+            guardarHistorial(new FirebaseCallbackBoolean() {
+                @Override
+                public void onCallback(boolean accionRealizada) {
+                    if(ejercicioCreado != null){
 
-            ejercicioActivo.setSeries_realizadas(ejercicioActivo.getSeries_realizadas()+1);
+                        guardarHistorialCreado(new FirebaseCallbackBoolean() {
+                            @Override
+                            public void onCallback(boolean accionRealizada) {
+                                series();
+                            }
+                        });
+                    }else{
+
+                        guardarHistorialPorDefecto(new FirebaseCallbackBoolean() {
+                            @Override
+                            public void onCallback(boolean accionRealizada) {
+                                series();
+                            }
+                        });
+                    }
+                }
+            });
 
         } catch (Exception ex) {
+            cargando.setVisibility(View.GONE);
             mostrarToast("Error al agregar la serie del ejercicio.");
             ex.printStackTrace();
         }
@@ -488,7 +542,6 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
         }
 
         ejercicioActivo.getHistorial().get(posicion).getSeries().add(new TablaSerie(costeHoy, Integer.parseInt(peso), Integer.parseInt(repeticiones), serieActual));
-
     }
 
     //Método para obtener el día de hoy en formato 'dia/mes/año'.
@@ -501,26 +554,64 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
 
 
     //Método para actualizar el historial en Firebase Database.
-    private void guardarHistorial(){
+    private void guardarHistorial(FirebaseCallbackBoolean callback){
         firebaseManager.actualizarRutinaActiva(this, dia, numEjercicio, ejercicioActivo.getHistorial(), new FirebaseCallbackBoolean() {
             @Override
             public void onCallback(boolean accionRealizada) {
                 if(!accionRealizada){
                     mostrarToast("Error al actualizar el ejercicio.");
                 }
+                callback.onCallback(accionRealizada);
             }
         });
+    }
+    private void guardarHistorialCreado(FirebaseCallbackBoolean callback){
+        firebaseManager.actualizarEjercicioCreado(this, ejercicioActivo.getId_ejercicio(), ejercicioActivo.getHistorial(), new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+                if(!accionRealizada){
+                    mostrarToast("Error al actualizar el ejercicio creado.");
+                }
+                callback.onCallback(accionRealizada);
+            }
+        });
+    }
+    private void guardarHistorialPorDefecto(FirebaseCallbackBoolean callback){
+        firebaseManager.actualizarEjercicioPorDefecto(this, ejercicioActivo.getId_ejercicio(), ejercicioActivo.getHistorial(), new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+                if(!accionRealizada){
+                    mostrarToast("Error al actualizar el ejercicio creado.");
+                }
+                callback.onCallback(accionRealizada);
+            }
+        });
+    }
+    private void series(){
+        subirSerie(new FirebaseCallbackBoolean() {
+            @Override
+            public void onCallback(boolean accionRealizada) {
+
+            }
+        });
+        if(descansando){
+            noDescansar();
+        }
+
+        ejercicioActivo.setSeries_realizadas(ejercicioActivo.getSeries_realizadas()+1);
+        cargando.setVisibility(View.GONE);
     }
 
 
     //Método para actualizar la serie en Firebase Database.
-    private void subirSerie(){
+    private void subirSerie(FirebaseCallbackBoolean callback){
         firebaseManager.actualizarRutinaActiva(this, dia, numEjercicio,ejercicioActivo.getSeries_realizadas(), new FirebaseCallbackBoolean() {
             @Override
             public void onCallback(boolean accionRealizada) {
                 if(!accionRealizada){
                     mostrarToast("Error al actualizar el ejercicio.");
                 }
+                callback.onCallback(accionRealizada);
             }
         });
     }

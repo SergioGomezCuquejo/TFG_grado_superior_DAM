@@ -16,9 +16,9 @@
 
     <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, RegistroSesion , Inicio, VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas, Musculos, PopupMusculos, RutinaSemanal, Perfil, PopupAlerta -->
 
-    <color name="azul_clarito">#EBFEFE</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
+    <color name="azul_clarito">#CDEBFEFE</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
     <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
-    <color name="azul_oscuro">#1E9CD5</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
+    <color name="azul_oscuro">#C42FA6DC</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
 
     <color name="rojo_clarito">#FA4B4B</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, PopupRutinas, PopupMusculos, PopupAlerta -->
     <color name="rojo">#FF0000</color> <!-- EjerciciosDiarios -->

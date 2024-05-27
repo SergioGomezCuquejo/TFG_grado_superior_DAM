@@ -24,7 +24,7 @@
             android:fontFamily="@font/merriweather_light"
             android:gravity="center"
             android:textColor="@color/blanco"
-            android:textSize="30sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
 
@@ -78,7 +78,7 @@
                 android:fontFamily="@font/merriweather_light"
                 android:gravity="center"
                 android:textColor="@color/negro_clarito"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <View
@@ -97,7 +97,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/merriweather_light"
             android:textColor="@color/negro_clarito"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="NestedWeights" />
 
 

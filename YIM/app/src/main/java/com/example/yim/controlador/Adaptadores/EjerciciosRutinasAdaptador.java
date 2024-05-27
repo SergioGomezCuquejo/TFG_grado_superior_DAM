@@ -21,6 +21,7 @@ import com.example.yim.R;
 import com.example.yim.modelo.tablas.TablaDiaRutinaUsuario;
 import com.example.yim.modelo.tablas.TablaEjercicioRutinaUsuario;
 import com.example.yim.vista.controlador.Imagenes;
+import com.example.yim.vista.controlador.MostratToast;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -102,6 +103,8 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
                 visible = !visible;
             }
         });
+        holder.imagenTexto.setVisibility(View.INVISIBLE);
+        holder.imagen.setVisibility(View.VISIBLE);
 
         if(ejercicioRutinaUsuario.getNombre().startsWith("-")){
             if(ejercicioRutinaUsuario.getImagen() != null){
@@ -118,7 +121,9 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
             }
             holder.nombre.setText(ejercicioRutinaUsuario.getNombre().substring(1));
         }else{
+
             if(ejercicioRutinaUsuario.getImagen() != null){
+                MostratToast.mostrarToast(context, ejercicioRutinaUsuario.getImagen());
                 holder.imagen.setImageResource(context.getResources().getIdentifier(ejercicioRutinaUsuario.getImagen(), "drawable", context.getPackageName()));
             }
             holder.nombre.setText(ejercicioRutinaUsuario.getNombre());
@@ -139,8 +144,7 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
         holder.repeticiones.setText(String.valueOf(ejercicioRutinaUsuario.getRepeticiones()));
 
 
-        int posicion = ejercicioRutinaUsuario.getPosicion();
-        if(posicion == 0){
+        if(position == 0){
             holder.subirIB.setImageResource(R.drawable.flecha_gris);
         }else{
             holder.subirIB.setImageResource(R.drawable.flecha_verde);
@@ -148,19 +152,19 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View v) {
-                    TablaEjercicioRutinaUsuario ejercicioAnterior = diaRutinaUsuario.getEjercicios().get(posicion - 1);
+                    TablaEjercicioRutinaUsuario ejercicioAnterior = diaRutinaUsuario.getEjercicios().get(position - 1);
 
-                    ejercicioRutinaUsuario.setPosicion(posicion - 1);
-                    ejercicioAnterior.setPosicion(posicion);
-                    diaRutinaUsuario.getEjercicios().set(posicion - 1, ejercicioRutinaUsuario);
-                    diaRutinaUsuario.getEjercicios().set(posicion, ejercicioAnterior);
-                    notifyItemMoved(posicion, posicion - 1);
+                    ejercicioRutinaUsuario.setPosicion(position - 1);
+                    ejercicioAnterior.setPosicion(position);
+                    diaRutinaUsuario.getEjercicios().set(position - 1, ejercicioRutinaUsuario);
+                    diaRutinaUsuario.getEjercicios().set(position, ejercicioAnterior);
+                    notifyItemMoved(position, position - 1);
                     notifyDataSetChanged();
                 }
             });
 
         }
-        if (posicion+1 == diaRutinaUsuario.getEjercicios().size()) {
+        if (position+1 == diaRutinaUsuario.getEjercicios().size()) {
             holder.bajarIB.setImageResource(R.drawable.flecha_gris);
         }else{
             holder.bajarIB.setImageResource(R.drawable.flecha_roja);
@@ -168,14 +172,14 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
                 @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onClick(View v) {
-                    TablaEjercicioRutinaUsuario ejercicioSiguiente = diaRutinaUsuario.getEjercicios().get(posicion + 1);
+                    TablaEjercicioRutinaUsuario ejercicioSiguiente = diaRutinaUsuario.getEjercicios().get(position + 1);
 
-                    ejercicioRutinaUsuario.setPosicion(posicion + 1);
-                    ejercicioSiguiente.setPosicion(posicion);
-                    diaRutinaUsuario.getEjercicios().set(posicion + 1, ejercicioRutinaUsuario);
-                    diaRutinaUsuario.getEjercicios().set(posicion, ejercicioSiguiente);
+                    ejercicioRutinaUsuario.setPosicion(position + 1);
+                    ejercicioSiguiente.setPosicion(position);
+                    diaRutinaUsuario.getEjercicios().set(position + 1, ejercicioRutinaUsuario);
+                    diaRutinaUsuario.getEjercicios().set(position, ejercicioSiguiente);
 
-                    notifyItemMoved(posicion, posicion + 1);
+                    notifyItemMoved(position, position + 1);
                     notifyDataSetChanged();
                 }
             });
