@@ -19,7 +19,6 @@ import com.example.yim.modelo.tablas.TablaDiaRutinaActiva;
 import com.example.yim.modelo.tablas.TablaEjercicioActivo;
 import com.example.yim.vista.controlador.CambiarActivity;
 import com.example.yim.vista.controlador.Imagenes;
-import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 
@@ -114,6 +113,7 @@ public class EjerciciosDiariosAdaptador extends RecyclerView.Adapter<EjerciciosD
             ejercicio = itemView.findViewById(R.id.ejercicio);
 
             imagenIV = itemView.findViewById(R.id.imagen);
+            imagenTexto = itemView.findViewById(R.id.imagen_texto);
 
             nombre = itemView.findViewById(R.id.nombreTV);
             musculos = itemView.findViewById(R.id.musculos);

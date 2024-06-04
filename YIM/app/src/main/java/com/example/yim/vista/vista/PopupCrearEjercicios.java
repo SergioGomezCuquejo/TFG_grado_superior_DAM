@@ -314,7 +314,6 @@ public class PopupCrearEjercicios extends AppCompatActivity implements View.OnCl
             musculosEjercicio = musculosEjercicio.substring(0, musculosString.length() - 2);
             musculosArray = new ArrayList<String>(Arrays.asList(musculosEjercicio.split(", ")));
 
-            mostrarToast(musculosArray.toString());
             ejercicioUsuario = new TablaEjercicioCreado(musculosArray, "-" + nombreEjercicio,
                     notasEjercicio, repeticionesEjercicio, seriesEjercicio, descansoEjercicio);
 

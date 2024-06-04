@@ -74,15 +74,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="40dp"
-                android:padding="2dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="10dp"
+                android:padding="2dp"
                 android:src="@drawable/reloj"
                 tools:ignore="ContentDescription" />
 
@@ -90,7 +91,6 @@
                 android:id="@+id/minutos"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
                 android:backgroundTint="@color/blanco"
                 android:ems="2"
                 android:gravity="center"
@@ -103,20 +103,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="7dp"
-                android:gravity="center"
                 android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
                 android:text=":"
                 android:textColor="@color/gris"
                 android:textSize="18dp"
                 tools:ignore="HardcodedText,SpUsage" />
 
-
             <EditText
                 android:id="@+id/segundos"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
                 android:backgroundTint="@color/blanco"
                 android:ems="2"
                 android:gravity="center"

@@ -294,6 +294,7 @@ public class PopupRutinas extends AppCompatActivity implements View.OnClickListe
                 Imagenes.subirImagen(this, progressDialog, "Actualizando la imagen de la rutina..", "rutina/" + rutinaUsuario.getID(), image_url, new FirebaseCallbackUri() {
                     @Override
                     public void onCallback(Uri uri) {
+                        finish();
                         Imagenes.mostrarImagen(PopupRutinas.this, uri.toString(), imagenIV);
                     }
                 });

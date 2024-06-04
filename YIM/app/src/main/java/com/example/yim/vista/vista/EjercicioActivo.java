@@ -242,6 +242,8 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
                         obtenerLogro.obtenerLogro(EjercicioActivo.this, "Hacer flexiones", Integer.parseInt(repeticionesString));
                     }
 
+                    ejercicioActivo.setSeries_realizadas(ejercicioActivo.getSeries_realizadas()+1);
+                    CambiarActivity.cambiar(this, diaRutinaActiva, ejercicioActivo.getPosicion());
 
                     if(ejercicioActivo.getSeries_realizadas() == ejercicioActivo.getSeries_necesarias()){
                         if(numEjercicio+1 == numEjercicios){
@@ -499,6 +501,7 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void agregarSerie(String pesoString, String repeticionesString){
         try {
+
             cargando.setVisibility(View.VISIBLE);
             guardarSerie(pesoString, repeticionesString);
             guardarHistorial(new FirebaseCallbackBoolean() {
@@ -605,7 +608,6 @@ public class EjercicioActivo extends AppCompatActivity implements View.OnClickLi
             noDescansar();
         }
 
-        ejercicioActivo.setSeries_realizadas(ejercicioActivo.getSeries_realizadas()+1);
         cargando.setVisibility(View.GONE);
     }
 

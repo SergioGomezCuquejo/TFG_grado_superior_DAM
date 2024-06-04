@@ -117,6 +117,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
         musculosTV = findViewById(R.id.musculos_tv);
         borrar = findViewById(R.id.borrar);
 
+        atras = findViewById(R.id.atras_iv);
         todoElCuerpo = findViewById(R.id.todo_el_cuerpo);
         trenSuperior = findViewById(R.id.tren_superior);
         trenInferior = findViewById(R.id.tren_inferior);
@@ -490,6 +491,7 @@ public class PopupVerEjerciciosCreados extends AppCompatActivity implements View
                 Imagenes.subirImagen(this, progressDialog, "Actualizando la imagen del ejercicio..", "ejercicio/" + ejercicioUsuario.getID(), image_url, new FirebaseCallbackUri() {
                     @Override
                     public void onCallback(Uri uri) {
+                        finish();
                         Imagenes.mostrarImagen(PopupVerEjerciciosCreados.this, uri.toString(), imagenIV);
                         ejercicioUsuario.setImagen(uri.toString());
                     }

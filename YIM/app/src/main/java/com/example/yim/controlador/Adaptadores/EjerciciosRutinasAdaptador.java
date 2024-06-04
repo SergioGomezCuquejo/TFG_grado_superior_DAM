@@ -123,7 +123,6 @@ public class EjerciciosRutinasAdaptador extends RecyclerView.Adapter<EjerciciosR
         }else{
 
             if(ejercicioRutinaUsuario.getImagen() != null){
-                MostratToast.mostrarToast(context, ejercicioRutinaUsuario.getImagen());
                 holder.imagen.setImageResource(context.getResources().getIdentifier(ejercicioRutinaUsuario.getImagen(), "drawable", context.getPackageName()));
             }
             holder.nombre.setText(ejercicioRutinaUsuario.getNombre());
