@@ -1,0 +1,356 @@
+<resources>
+    <string name="app_name">YIM</string>
+
+    <!-- InicioSesion, Registro, PreguntasRegistro -->
+    <string name="fondo_gimnasio">fondo_gimnasio</string>
+
+
+    <!-- InicioSesion -->
+    <string name="bienvenido">Bienvenid@</string>
+
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="email">Email</string> <!-- InicioSesion, RegistroSesion -->
+    <string name="contrasena">Contraseña</string> <!-- InicioSesion, RegistroSesion -->
+
+    <string name="eres_nuevo">¿Eres nuevo?</string>
+    <string name="registrarse_mayusculas">REGISTRARSE</string> <!-- InicioSesion, RegistroSesion -->
+    <string name="iniciar_sesion_mayusculas">INICIAR SESIÓN</string> <!-- InicioSesion, RegistroSesion -->
+
+    <!-- RegistroSesion -->
+    <string name="registrarse">Registrarse</string>
+
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="tienes_cuenta">¿Tienes cuenta?</string>
+
+    <!-- Políticas de privacidad -->
+
+    <string name="politicas_parrafo_inicial">
+        De conformidad con el Reglamento (UE) 2016/679, del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas
+        físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (Reglamento General de Protección de Datos – RGPD),
+        YIM, informa a los usuarios de la aplicación YIM (en adelante, la Aplicación), acerca del tratamiento de los datos personales, que
+        ellos voluntariamente hayan facilitado durante el proceso de registro, acceso y utilización del servicio.
+    </string>
+
+    <string name="politicas_titulo1">
+        1. IDENTIFICACIÓN DEL RESPONSABLE DEL TRATAMIENTO
+    </string>
+    <string name="politicas_parrafo1">
+        YIM, con CIF/NIF n.º: B12345678 y domicilio a efectos de notificaciones en: Plaza de Santa Ana, 13, 28012 Cortes, Madrid e inscrita en el Registro Mercantil
+        de Madrid, Tomo 1234, Folio 56, Sección 8ª, Hoja M-123456, inscripción 1ª (en adelante, el Responsable del Tratamiento), es la entidad responsable del tratamiento
+        de los datos facilitados por los clientes de la Aplicación (en adelante, el/los Usuario/s).
+    </string>
+
+    <string name="politicas_titulo2">
+        2. FINALIDAD DEL TRATAMIENTO DE DATOS
+    </string>
+    <string name="politicas_parrafo2">
+        Para proceder al registro, acceso y posterior uso de la Aplicación, el Usuario deberá facilitar -de forma voluntaria-, datos de carácter personal (esencialmente,
+        identificativos y de contacto), los cuales serán incorporados a soportes automatizados titularidad de YIM.
+
+        \n\nLa recogida, almacenamiento, modificación, estructuración y en su caso, eliminación, de los datos proporcionados por los Usuarios, constituirán operaciones de
+        tratamiento llevadas a cabo por el Responsable, con la finalidad de garantizar el correcto funcionamiento de la Aplicación, mantener la relación de prestación de
+        servicios y/o comercial con el Usuario, y para la gestión, administración, información, prestación y mejora del servicio.
+
+        \n\nLos datos personales facilitados por el Usuario -especialmente, el correo electrónico o e-mail- podrán emplearse también para remitir boletines (newsletters), así
+        como comunicaciones comerciales de promociones y/o publicidad de la Aplicación, siempre y cuando, el Usuario haya prestado previamente su consentimiento expreso para
+        la recepción de estas comunicaciones vía electrónica.
+    </string>
+
+    <string name="politicas_titulo3">
+        3. LEGITIMACIÓN
+    </string>
+    <string name="politicas_parrafo3">
+        El tratamiento de los datos del Usuario, se realiza con las siguientes bases jurídicas que legitiman el mismo:
+
+        \n\n• La solicitud de información y/o la contratación de los servicios de la Aplicación, cuyos términos y condiciones se pondrán a disposición del Usuario en todo
+        caso, con carácter previo, para su expresa aceptación.
+        \n• El consentimiento libre, específico, informado e inequívoco del Usuario, poniendo a su disposición la presente política de privacidad, que deberá aceptar mediante
+        una declaración o una clara acción afirmativa, como el marcado de una casilla dispuesta al efecto.
+
+        \n\nEn caso de que el Usuario no facilite a YIM sus datos, o lo haga de forma errónea o incompleta, no será posible proceder al uso de la Aplicación.
+    </string>
+
+    <string name="politicas_titulo4">
+        4. CONSERVACIÓN DE LOS DATOS PERSONALES
+    </string>
+    <string name="politicas_parrafo4">
+       Los datos personales proporcionados por el Usuario, se conservarán en los sistemas y bases de datos del Responsable del Tratamiento, mientras aquel continúe haciendo
+        uso de la Aplicación, y siempre que no solicite su supresión.
+
+       \n\nCon el objetivo de depurar las posibles responsabilidades derivadas del tratamiento, los datos se conservarán por un período mínimo de cinco años.
+    </string>
+
+    <string name="politicas_titulo5">
+        5. DESTINATARIOS
+    </string>
+    <string name="politicas_parrafo5">
+       Los datos no se comunicarán a ningún tercero ajeno a YIM, salvo obligación legal o en cualquier caso, previa solicitud del consentimiento del Usuario.
+
+       \n\nDe otra parte, YIM podrá dar acceso o transmitir los datos personales facilitados por el Usuario, a terceros proveedores de servicios, con los que haya suscrito
+        acuerdos de encargo de tratamiento de datos, y que únicamente accedan a dicha información para prestar un servicio en favor y por cuenta del Responsable.
+    </string>
+
+    <string name="politicas_titulo6">
+        6. RETENCIÓN DE DATOS
+    </string>
+    <string name="politicas_parrafo6">
+       YIM, informa al Usuario de que, como prestador de servicio de alojamiento de datos y en virtud de lo establecido en la Ley 34/2002, de 11 de julio, de Servicios
+        de la Sociedad de la Información y de Comercio Electrónico (LSSI), retiene por un período máximo de 12 meses la información imprescindible para identificar el origen
+        de los datos alojados y el momento en que se inició la prestación del servicio.
+
+       \n\nLa retención de estos datos no afecta al secreto de las comunicaciones y solo podrán ser utilizados en el marco de una investigación criminal o para la salvaguardia de
+        la seguridad pública, poniéndose a disposición de los jueces y/o tribunales o del Ministerio que así los requiera.
+
+       \n\nLa comunicación de datos a las Fuerzas y Cuerpos de Seguridad del Estado, se hará en virtud de lo dispuesto por la normativa sobre protección de datos personales, y
+        bajo el máximo respeto a la misma.
+    </string>
+
+    <string name="politicas_titulo7">
+        7. PROTECCIÓN DE LA INFORMACIÓN ALOJADA
+    </string>
+    <string name="politicas_parrafo7">
+       El Responsable del Tratamiento, adopta las medidas necesarias para garantizar la seguridad, integridad y confidencialidad de los datos conforme a lo dispuesto en el
+        Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de
+        2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de los mismos.
+
+       \n\nSi bien el Responsable, realiza copias de seguridad de los contenidos alojados en sus servidores, sin embargo, no se responsabiliza de la pérdida o el borrado accidental
+        de los datos por parte de los Usuarios. De igual manera, no garantiza la reposición total de los datos borrados por los Usuarios, ya que los citados datos podrían haber
+        sido suprimidos y/o modificados durante el período de tiempo transcurrido desde la última copia de seguridad.
+
+       \n\nLos servicios facilitados o prestados a través de la Aplicación, excepto los servicios específicos de backup, no incluyen la reposición de los contenidos conservados en
+        las copias de seguridad realizadas por el Responsable del Tratamiento, cuando esta pérdida sea imputable al usuario; en este caso, se determinará una tarifa acorde a la
+        complejidad y volumen de la recuperación, siempre previa aceptación del usuario. La reposición de datos borrados solo está incluida en el precio del servicio cuando la pérdida
+        del contenido sea debida a causas atribuibles al Responsable.
+    </string>
+
+    <string name="politicas_titulo8">
+        8. EJERCICIO DE DERECHOS
+    </string>
+    <string name="politicas_parrafo8">
+       YIM, informa al Usuario de que le asisten los derechos de acceso, rectificación, limitación, supresión, oposición y portabilidad, los cuales podrá ejercitar mediante petición
+        dirigida al correo electrónico: <a href="mailto:privacidad@yimapp.comm">privacidad@yimapp.com</a>
+
+       \n\nAsimismo, el Usuario tiene derecho a revocar el consentimiento inicialmente prestado, y a interponer reclamaciones de derechos frente a la Agencia Española de Protección de Datos (AEPD).
+    </string>
+
+    <string name="politicas_titulo9">
+        9. COMUNICACIONES COMERCIALES POR VÍA ELECTRÓNICA
+    </string>
+    <string name="politicas_parrafo9">
+       En aplicación de la LSSI (Ley de Servicios de la Sociedad de la Información), YIM, no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio de comunicación
+        electrónica equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas por los destinatarios de las mismas.
+
+       \n\nEn el caso de usuarios con los que exista una relación contractual, jurídica o de servicios previa, el Responsable del Tratamiento, sí está autorizado al envío de comunicaciones comerciales
+        referentes a productos o servicios del Responsable que sean similares a los que inicialmente fueron objeto de contratación con el cliente.
+
+       \n\nEn caso de que el Usuario quiera darse de baja a la hora de recibir las citadas comunicaciones, podrá hacerlo remitiendo su voluntad por e-mail al correo electrónico:
+        <a href="mailto:dardebaja@yimapp.com">dardebaja@yimapp.com</a>
+    </string>
+
+
+    <!-- PreguntasRegistro -->
+    <string name="imagen_silueta_hombre">imagen_silueta_hombre</string>
+    <string name="comencemos">¡Comencemos a personalizar tu rutina de entrenamiento!</string>
+
+    <string name="pregunta_ejemplo">¿Cuántas flexiones de pecho puedes hacer en una ronda?</string>
+    <string name="respuesta_ejemplo1">Menos de 10</string>
+    <string name="respuesta_ejemplo2">Entre 10 y 20</string>
+    <string name="respuesta_ejemplo3">Entre 21 y 30</string>
+    <string name="respuesta_ejemplo4">Más de 30</string>
+    <string name="ejemplo_error_pregunta">Selecciona una opción.</string>
+
+    <string name="imagen_silueta_mujer">imagen_silueta_mujer</string>
+    <string name="empezar">Ya hemos diseñado la rutina perfecta para amoldarse a tus necesidades. ¡Empecemos!</string>
+
+    <string name="omitir">Omitir</string>
+    <string name="siguiente">Siguiente</string>
+
+    <string name="titulo_omitir">Omitir creación automática de rutina.</string>
+    <string name="mensaje_omitir">Podrás hacer la rutina manualmente o volver aquí más tarde.</string>
+
+
+    <!-- Menú Inferior (Inicio, VerRutinas, Musculos, RutinaSemanal, Perfil) -->
+    <string name="imagen_casa">Casa</string>
+    <string name="imagen_calendario">Calendario</string>
+    <string name="imagen_estadisticas">Estadísticas</string>
+    <string name="imagen_usuario">Usuario</string>
+
+
+    <!-- Inicio, VerEjercicios -->
+    <string name="ejercicios">Ejercicios</string>
+
+    <!-- Inicio, VerRutinas -->
+    <string name="rutinas">Rutinas</string>
+
+    <!-- Inicio, RutinaSemanal -->
+    <string name="semana_888">SEMANA 888</string>
+
+    <!-- Inicio -->
+    <string name="inicio">Inicio</string>
+
+    <string name="continuar">Continuar</string>
+    <string name="dia_888">Día 888</string>
+    <string name="imagen_continuar">imagen_continuar</string>
+
+    <string name="lupa_ejercicios">lupa_ejercicios</string>
+    <string name="mas_ejercicios_pequeno">mas_ejercicios_pequeno</string>
+    <string name="mas_ejercicios_grande">mas_ejercicios_grande</string>
+
+    <string name="lupa_rutinas">lupa_rutinas</string>
+    <string name="mas_rutinas_pequeno">mas_rutinas_pequeno</string>
+    <string name="mas_rutinas_grande">mas_rutinas_grande</string>
+
+    <string name="musculos_inicio">Personaliza el color de tus músculos</string>
+    <string name="imagen_musculos">imagen_musculos</string>
+
+    <!-- VerEjercicios -->
+    <string name="nombre_ejercicio_1">Curl de concentración con mancuerna</string>
+    <string name="musculos_ejercicio_1">Bíceps, Antebrazos</string>
+    <string name="nombre_ejercicio_2">Abdominales con barbilla de gorila.</string>
+    <string name="musculos_ejercicio_2">Abdominales, Cuádriceps</string>
+    <string name="nombre_ejercicio_3">Sentadilla con barra de pesas</string>
+    <string name="musculos_ejercicio_3">Cuádriceps, Glúteos</string>
+    <string name="nombre_ejercicio_4">Press de banca inclinado con mancuerna</string>
+    <string name="musculos_ejercicio_4">Pecho, Hombro, Tríceps</string>
+
+    <string name="agregar_ejercicio">agregar_ejercicio</string>
+
+    <!-- CrearEjercicios -->
+    <string name="nuevo_ejercicio">Nuevo ejercicio</string>
+    <string name="nombre_mayusculas">NOMBRE</string>
+
+    <string name="hint_nombre_ejercicio">Crea un nombre</string>
+
+    <string name="descanso_entre_series">Descanso entre series</string>
+    <string name="hint_descanso_ejercicios">Selecciona un tiempo</string>
+
+    <string name="series">Series</string>
+    <string name="repeticiones">Repeticiones</string>
+    <string name="hint_series_repeticiones_ejercicios">Recomendadas</string>
+
+    <string name="nota_adicional">Nota adicional</string>
+    <string name="hint_nota_ejercicios">Añadir nota</string>
+
+    <string name="hint_musculos_ejercicios">Selecciona los músculos</string>
+
+
+    <!-- CrearRutinas -->
+    <string name="dia_1">1</string>
+    <string name="dia_2">2</string>
+    <string name="dia_3">3</string>
+    <string name="dia_4">4</string>
+    <string name="dia_5">5</string>
+    <string name="dia_6">6</string>
+    <string name="dia_7">7</string>
+    <string name="descanso">_DESCANSO_</string>
+
+    <!-- VerRutinas -->
+    <string name="nombre_rutina_corto">Nombre de la rutina.</string>
+    <string name="nombre_rutina_largo">Nombre de la rutina más largo.</string>
+    <string name="agregar_rutina">agregar_rutina</string>
+    <!-- PopupRutinas -->
+    <string name="activar_rutina">Activar rutina</string>
+    <string name="rutina_activa">Rutina activa</string>
+
+    <string name="veces_activadas">Veces activada:</string>
+    <string name="musculos_activos">Músculos activos:</string>
+    <string name="musculos_totales">Músculos totales:</string>
+    <string name="dias_completados">Días completados:</string>
+    <string name="dias_totales">Días totales:</string>
+    <string name="dias_de_descanso">Días de descanso:</string>
+    <string name="dias_descansados">Días descansados:</string>
+
+    <string name="eliminar_rutina">Eliminar rutina</string>
+
+    <!-- PopupRutinas, PopupMusculos -->
+    <string name="informacion_adicional">Información adicional</string>
+    <string name="ejercicios_realizados">Ejercicios realizados:</string>
+    <string name="ejercicios_totales">Ejercicios totales:</string>
+
+    <!-- Músculos, RutinaSemanal -->
+    <string name="biceps">BÍCEPS</string>
+    <string name="espalda">ESPALDA</string>
+    <string name="hombro">HOMBRO</string>
+    <string name="pecho">PECHO</string>
+    <string name="pierna">PIERNA</string>
+    <string name="triceps">TRÍCEPS</string>
+
+    <!-- Músculos, CrearEjercicios -->
+    <string name="musculos">Músculos</string>
+
+    <!-- Músculos -->
+    <string name="agregar_musculo">agregar_músculo</string>
+    <!-- PopupMúsculos -->
+    <string name="imagen_cancelar">imagen_cancelar</string>
+    <string name="imagen_guardar">imagen_guardar</string>
+
+    <string name="cambiar_colores">Cambiar colores</string>
+    <string name="color_del_fondo">Color del fondo:</string>
+    <string name="color_de_las_letras">Color de las letras:</string>
+    <string name="_88888">#88888</string>
+
+    <string name="usos_esta_semana">Usos esta semana:</string>
+    <string name="ejercicios_sin_realizar">Ejercicios sin realizar:</string>
+    <string name="usado_en_rutinas">Usado en rutinas:</string>
+    <string name="_888">888</string>
+
+    <string name="eliminar_musculo">Eliminar músculo</string>
+
+
+    <!-- RutinaSemanal -->
+    <string name="dia_88">88</string>
+
+
+    <!-- Estadisticas -->
+    <string-array name="tipos_busqueda">
+        <item>Ejercicio</item>
+        <item>Músculo</item>
+    </string-array>
+
+    <!-- Perfil, CrearEjercicios -->
+    <string name="nombre">Nombre</string>
+
+    <!-- Perfil, Logros -->
+    <string name="logros">Logros</string>
+
+    <!-- Perfil -->
+    <string name="perfil">Mi perfil</string>
+
+    <string name="imagen_subir">imagen_subir</string>
+    <string name="nombre_ejemplo">Nombre ejemplo</string>
+    <string name="contrasena_m">Contraseña</string>
+    <string name="contrasena_ejemplo">ContrasenaEjemplo</string>
+
+
+    <string name="objetivo">Objetivo</string>
+    <string name="ganancia">Ganancia de músculo</string>
+    <string name="imagen_mayor_que">imagen_mayor_que</string>
+
+    <string name="equipo">Equipo disponible</string>
+    <string name="seleccionados">88 seleccionados</string>
+
+    <string name="informacion">Información básica</string>
+    <string name="genero">Género</string>
+    <string name="genero_ejemplo">Masculino</string>
+    <string name="unidades">Unidades</string>
+    <string name="unidades_ejemplo">kg, cm</string>
+    <string name="peso">Peso</string>
+    <string name="peso_ejemplo">0.0 kg</string>
+    <string name="altura">Altura</string>
+    <string name="altura_ejemplo">0.0 cm</string>
+    <string name="edad">Edad</string>
+    <string name="edad_ejemplo">0 años</string>
+
+
+    <!-- PopupAlerta -->
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <!---->
+
+    <string name="qq">qq</string>
+    <string name="titulo_logro_50_flexiones">El niño de las flexiones</string>
+    <string name="porcentaje_logro_50_flexiones">8/50</string>
+    <string name="descripcion_logro_50_flexiones">Realiza 50 flexiones cualquier día de cualquier rutina.</string>
+
+
+</resources>

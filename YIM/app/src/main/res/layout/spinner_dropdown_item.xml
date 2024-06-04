@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/fondo_clarito"
+    android:backgroundTintMode="add"
+    android:ellipsize="marquee"
+    android:fontFamily="@font/merriweather_light"
+    android:gravity="center"
+    android:padding="10dp"
+    android:singleLine="true"
+    android:textColor="@color/blanco"
+    android:textSize="16sp"
+    android:background="@drawable/_style_rectangulo_fondo_gris__borde_fondo_oscuro"
+    android:textStyle="bold|italic" />
+

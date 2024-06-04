@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:orientation="vertical"
+    tools:context=".vista.vista.EjercicioActivo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:padding="2dp"
+        tools:ignore="DisableBaselineAlignment">
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            tools:ignore="NestedWeights">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/atras_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/atras_gris"
+                app:shapeAppearanceOverlay="@style/radius" />
+        </FrameLayout>
+        <TextView
+            android:id="@+id/ejercios_totales_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+
+            <RelativeLayout
+                android:id="@id/ejercicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_sh"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_centerHorizontal="true"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+                <FrameLayout
+                    android:id="@+id/nombre_rutina_fl"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/_style_borde_blanco_20"
+                    android:visibility="gone"
+                    tools:ignore="NestedWeights">
+
+                    <TextView
+                        android:id="@+id/nombre_rutina_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="@string/nombre_mayusculas"
+                        android:textColor="@color/blanco"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck" />
+                </FrameLayout>
+
+                <ImageButton
+                    android:id="@+id/boton_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/fondo_clarito"
+                    app:srcCompat="@android:drawable/ic_dialog_info"
+                    tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/titulo_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imagen_sh"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/merriweather_light"
+                    android:gravity="center"
+                    android:textColor="@color/blanco"
+                    android:textSize="20sp" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/informacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ejercicio"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                tools:ignore="DisableBaselineAlignment">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/repeticiones_necesarias_bt"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/_style_circulo_fondo_oscuro__borde_verde_clarito"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:textColor="@color/blanco"
+                        android:textSize="20sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="Repeticiones necesarias"
+                        android:textColor="@color/blanco"
+                        android:textSize="15sp"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/descanso_bt"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/_style_circulo_fondo_oscuro__borde_rojo_clarito"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:textColor="@color/blanco"
+                        android:textSize="23sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="Descanso"
+                        android:textColor="@color/blanco"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/series_tv"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/_style_circulo_fondo_oscuro__borde_naranja"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:textColor="@color/blanco"
+                        android:textSize="20sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/merriweather_light"
+                        android:gravity="center"
+                        android:text="Series necesarias"
+                        android:textColor="@color/blanco"
+                        android:textSize="15sp"
+                        tools:ignore="HardcodedText" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/serie_activa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/informacion"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center|center_horizontal|center_vertical">
+
+                    <TextView
+                        android:id="@+id/serie_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/merriweather_light"
+                        android:text="Serie 1."
+                        android:textColor="@color/blanco"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/coste_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/merriweather_light"
+                        android:textColor="@color/verde_clarito"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/serie"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:ignore="ObsoleteLayoutParam">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_10"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/peso_et"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_10"
+                            android:gravity="center"
+                            android:hint="Peso"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/blanco"
+                            android:textColorHint="@color/gris"
+                            android:textSize="20dp"
+                            tools:ignore="Autofill,HardcodedText,LabelFor,NestedWeights,SpUsage,TouchTargetSizeCheck,TextSizeCheck,VisualLintTextFieldSize" />
+
+                        <EditText
+                            android:id="@+id/repeticiones_et"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_10"
+                            android:gravity="center"
+                            android:hint="Reps."
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/blanco"
+                            android:textColorHint="@color/gris"
+                            android:textSize="20dp"
+                            tools:ignore="Autofill,HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck,TextSizeCheck,VisualLintTextFieldSize" />
+
+                        <ImageButton
+                            android:id="@+id/coste_ib"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="0.3"
+                            android:backgroundTint="@color/fondo_oscuro"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/mantener"
+                            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/agregar_serie"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignEnd="@id/scrollView"
+                        android:layout_alignBottom="@id/scrollView"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/_style_circulo_fondo_oscuro__borde_blanco"
+                        android:contentDescription="@string/agregar_ejercicio"
+                        android:padding="11dp"
+                        android:src="@drawable/mas" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/coste_ll"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/informacion"
+                android:paddingEnd="20dp"
+                android:orientation="horizontal"
+                tools:ignore="RtlSymmetry">
+
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:ignore="NestedWeights" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+
+                        <RadioGroup
+                            android:id="@+id/coste_rg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/_style_borde_blanco_10_2"
+                            android:backgroundTintMode="add"
+                            android:backgroundTint="@color/fondo_clarito"
+                            android:padding="7dp">
+
+                            <RadioButton
+                                android:id="@+id/subir_rb"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:button="@null"
+                                android:fontFamily="@font/merriweather_light"
+                                android:gravity="center"
+                                android:text="Subir"
+                                tools:ignore="HardcodedText" />
+
+                            <RadioButton
+                                android:id="@+id/mantener_rb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@null"
+                                android:layout_weight="1"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:gravity="center"
+                                android:fontFamily="@font/merriweather_light"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:checked="true"
+                                android:text="Mantener"
+                                tools:ignore="HardcodedText" />
+
+                            <RadioButton
+                                android:id="@+id/bajar_rb"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/_coste_radiobutton"
+                                android:textColor="@color/blanco"
+                                android:button="@null"
+                                android:fontFamily="@font/merriweather_light"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:text="Bajar"
+                                tools:ignore="HardcodedText" />
+
+                        </RadioGroup>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/historial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/serie_activa"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/merriweather_light"
+                    android:foregroundGravity="center"
+                    android:text="Historial"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText,ObsoleteLayoutParam" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/historial_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"/>
+
+                <TextView
+                    android:id="@+id/historial_tv"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/merriweather_light"
+                    android:text="Aún no se ha realizado el ejercicio."
+                    android:textColor="@color/gris"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/cargando"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="250dp"
+                android:indeterminateTint="@color/gris_clarito" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/_style_borde_negro_arriba"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        android:baselineAligned="false">
+
+        <FrameLayout
+            android:id="@+id/imagen_casa_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/casa"
+                android:contentDescription="@string/imagen_casa" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/imagen_calendario_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/calendario"
+                android:contentDescription="@string/imagen_casa" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_estadisticas_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_derecha_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/logros" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_usuario_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_perfil_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/usuario"
+                app:shapeAppearanceOverlay="@style/radius" />
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

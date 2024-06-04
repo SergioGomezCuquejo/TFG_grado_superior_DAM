@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ejercicio_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/_style_rectangulo_fondo_oscuro__borde_blanco_20"
+    android:orientation="horizontal"
+    android:paddingTop="7dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="7dp"
+    android:layout_marginBottom="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        app:shapeAppearanceOverlay="@style/radius" />
+
+    <TextView
+        android:id="@+id/imagen_texto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/_style_borde_blanco_20"
+        android:fontFamily="@font/merriweather_light"
+        android:gravity="center"
+        android:textColor="@color/blanco"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/nombre_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imagen"
+        android:fontFamily="@font/merriweather_light"
+        android:textColor="@color/blanco"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/musculos_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombre_tv"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imagen"
+        android:fontFamily="@font/merriweather_light"
+        android:textColor="@color/blanco"
+        android:textSize="11sp" />
+
+</RelativeLayout>
+

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.YIM"
+        tools:targetApi="31">
+        <activity
+            android:name=".vista.vista.PoliticasPrivacidad"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.CrearRutinas"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.EjercicioActivo"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.EjerciciosDiarios"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.EjerciciosRutinas"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Estadisticas"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Inicio"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.InicioSesion"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Logo"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".vista.vista.Logros"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Musculos"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.PopupAgregarEjercicio"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupAlerta"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupAlerta"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupCrearEjercicios"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupLogros"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupMusculos"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupNoCerrable" />
+        <activity
+            android:name=".vista.vista.PopupRutinas"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupVerEjercicios"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupCerrable" />
+        <activity
+            android:name=".vista.vista.PopupVerEjerciciosCreados"
+            android:exported="false"
+            android:theme="@style/AppTheme.PopupNoCerrable" />
+        <activity
+            android:name=".vista.vista.Cuestionario"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.RegistroSesion"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.RutinaSemanal"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.VerEjercicios"
+            android:exported="false" />
+        <activity
+            android:name=".vista.vista.VerRutinas"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

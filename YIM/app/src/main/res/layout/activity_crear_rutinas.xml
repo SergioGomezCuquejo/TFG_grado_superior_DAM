@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:orientation="vertical"
+    tools:context=".vista.vista.CrearRutinas">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/fondo"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            tools:ignore="NestedWeights">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/atras_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/atras_gris"
+                app:shapeAppearanceOverlay="@style/radius" />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/nombre_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="Nombre de la rutina"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:inputType="textMultiLine"
+            android:maxLength="25"
+            android:maxLines="2"
+            android:minLines="1"
+            android:padding="10dp"
+            android:textColor="@color/blanco"
+            android:hint="Nombre de la rutina"
+            android:textColorHint="@color/gris_oscuro"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            tools:ignore="HardcodedText,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+        <ImageView
+            android:id="@+id/guardar_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/guardar"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dias_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+        </ScrollView>
+
+
+        <ProgressBar
+            android:id="@+id/cargando"
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/gris_clarito" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/_style_borde_negro_arriba"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        android:baselineAligned="false">
+
+
+        <FrameLayout
+            android:id="@+id/imagen_casa_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/casa"
+                android:contentDescription="@string/imagen_casa" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/imagen_calendario_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/calendario"
+                android:contentDescription="@string/imagen_casa" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_estadisticas_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/_style_borde_negro_derecha_izquierda">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/logros" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imagen_usuario_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagen_perfil_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/usuario"
+                app:shapeAppearanceOverlay="@style/radius" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>

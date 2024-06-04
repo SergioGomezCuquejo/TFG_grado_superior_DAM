@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/ejercicio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/_style_rectangulo_fondo_clarito__borde_negro"
+    android:orientation="horizontal"
+    android:padding="2dp">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        app:shapeAppearanceOverlay="@style/radius" />
+
+    <TextView
+        android:id="@+id/imagen_texto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/_style_borde_blanco_20"
+        android:fontFamily="@font/merriweather_light"
+        android:gravity="center"
+        android:textColor="@color/blanco"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/nombreTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/imagen"
+        android:fontFamily="@font/merriweather_light"
+        android:textColor="@color/blanco"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/musculos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombreTV"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="11sp"
+        android:layout_toEndOf="@id/imagen"
+        android:fontFamily="@font/merriweather_light"
+        android:textColor="@color/blanco" />
+
+    <LinearLayout
+        android:id="@+id/editar"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/musculos"
+        android:layout_toEndOf="@id/imagen"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        tools:ignore="DisableBaselineAlignment">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:padding="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/reloj"
+                tools:ignore="ContentDescription" />
+
+            <EditText
+                android:id="@+id/minutos"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blanco"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="59"
+                android:textColor="@color/blanco"
+                android:textSize="18sp"
+                tools:ignore="Autofill,HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="7dp"
+                android:gravity="center"
+                android:fontFamily="@font/merriweather_light"
+                android:text=":"
+                android:textColor="@color/gris"
+                android:textSize="18dp"
+                tools:ignore="HardcodedText,SpUsage" />
+
+
+            <EditText
+                android:id="@+id/segundos"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blanco"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="59"
+                android:textColor="@color/blanco"
+                android:textSize="18dp"
+                tools:ignore="Autofill,HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded">
+
+            <EditText
+                android:id="@+id/series_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blanco"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="88"
+                android:textColor="@color/blanco"
+                android:textSize="18dp"
+                tools:ignore="HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck"
+                android:autofillHints="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center"
+                android:text="X"
+                android:textColor="@color/gris"
+                android:textSize="18dp"
+                tools:ignore="HardcodedText,SpUsage" />
+
+            <EditText
+                android:id="@+id/repeticiones"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blanco"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="88"
+                android:textColor="@color/blanco"
+                android:textSize="18dp"
+                tools:ignore="HardcodedText,LabelFor,SpUsage,TouchTargetSizeCheck"
+                android:autofillHints="" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/opciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/editar"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/subir"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/fondo_clarito"
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/flecha_verde"
+            tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+            android:contentDescription="TODO" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/eliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:background="@drawable/_style_borde_rojo"
+            android:fontFamily="@font/merriweather_light"
+            android:text="Eliminar ejercicio"
+            android:textColor="@color/blanco"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,SmallSp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/bajar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/fondo_clarito"
+            android:padding="5dp"
+            android:rotation="180"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/flecha_roja"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+</RelativeLayout>

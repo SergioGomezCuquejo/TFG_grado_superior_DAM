@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fondo_clarito">#2E2E2E</color> <!-- Inicio, VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas, Musculos, PopupMusculos, RutinaSemanal, PopupAlerta -->
+    <color name="fondo">#252525</color> <!-- Inicio, VerEjercicios, VerRutinas, Musculos, RutinaSemanal, Perfil -->
+    <color name="fondo_oscuro">#232323</color> <!-- VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas -->
+
+    <color name="gris_translucido">#CD7C7C7C</color> <!-- Logros -->
+    <color name="gris_clarito">#E2E2E2</color> <!-- PreguntasRegistro, Perfil, CrearEjercicios -->
+    <color name="gris">#C5C4C4</color> <!-- InicioSesion, PopupRutinas, PopupMusculos, Perfil, PopupAlerta -->
+    <color name="gris_oscuro">#ACABAB</color> <!-- Inicio, Musculos, PopupMusculos, RutinaSemanal -->
+
+    <color name="negro_traslucido">#40000000</color> <!-- Inicio, RegistroSesion, Perfil -->
+    <color name="negro_clarito">#777777</color> <!-- InicioSesion, RegistroSesion, Registro, VerEjercicios, CrearEjercicios, PopupRutinas, PopupMusculos -->
+    <color name="negro">#303030</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, Inicio, VerEjercicios, VerRutinas, PopupRutinas, Musculos, PopupMusculos, RutinaSemanal, Perfil -->
+    <color name="negro_oscuro">#FF000000</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, CrearEjercicios, Musculos, PopupMusculos, RutinaSemanal, Perfil -->
+
+    <color name="blanco">#FFFFFFFF</color> <!-- InicioSesion, RegistroSesion , Inicio, VerEjercicios, CrearEjercicios, VerRutinas, PopupRutinas, Musculos, PopupMusculos, RutinaSemanal, Perfil, PopupAlerta -->
+
+    <color name="azul_clarito">#CDEBFEFE</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro -->
+    <color name="azul">#c5ebff</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
+    <color name="azul_oscuro">#C42FA6DC</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro  -->
+
+    <color name="rojo_clarito">#FA4B4B</color> <!-- InicioSesion, RegistroSesion, PreguntasRegistro, PopupRutinas, PopupMusculos, PopupAlerta -->
+    <color name="rojo">#FF0000</color> <!-- EjerciciosDiarios -->
+
+    <color name="naranja">#FFA83C</color> <!-- EjerciciosDiarios -->
+
+    <color name="verde_clarito">#02FF92</color> <!-- EjerciciosDiarios -->
+    <color name="verde">#007e48</color> <!-- PreguntasRegistro, PopupAlerta -->
+
+    <color name="amarillo">#E3994A</color> <!-- VerRutinas -->
+
+
+</resources>

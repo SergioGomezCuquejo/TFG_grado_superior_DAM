@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vista.vista.PoliticasPrivacidad">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/_style_borde_fondo_oscuro_arriba_abajo"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            tools:ignore="NestedWeights">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/atras_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/atras"
+                app:shapeAppearanceOverlay="@style/radius" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/merriweather_light"
+            android:padding="10dp"
+            android:text="Políticas de privacidad de YIM"
+            android:textColor="@color/fondo_oscuro"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo_inicial"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo1"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo1"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo2"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo2"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo3"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo3"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo4"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo4"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo5"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo5"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo6"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo6"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo7"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo7"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo8"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo8"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_titulo9"
+                android:textSize="15sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/fondo_oscuro"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politicas_parrafo9"
+                android:textSize="15sp"
+                android:textColor="@color/fondo_oscuro"
+                tools:ignore="VisualLintLongText" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

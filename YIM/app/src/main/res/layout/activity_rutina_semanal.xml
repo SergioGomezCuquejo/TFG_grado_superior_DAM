@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    tools:context=".vista.vista.RutinaSemanal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/semana_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/_style_borde_blanco_arriba_abajo"
+            android:fontFamily="@font/merriweather_light"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Rutina activa "
+            android:textColor="@color/blanco"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            tools:ignore="HardcodedText" />
+
+
+
+        <TextView
+            android:id="@+id/no_rutina_tv"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/_style2_borde_gris_oscuro_10"
+            android:backgroundTintMode="add"
+            android:backgroundTint="@color/fondo_clarito"
+            android:fontFamily="@font/merriweather_light"
+            android:padding="10dp"
+            android:text="Aún no se ha activado ninguna rutina"
+            android:textColor="@color/gris_oscuro"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                tools:ignore="UselessParent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
+
+            </ScrollView>
+
+            <ImageView
+                android:id="@+id/agregar_semana"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:layout_alignEnd="@id/scrollView"
+                android:layout_alignBottom="@id/scrollView"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/_style_circulo_fondo_oscuro__borde_blanco"
+                android:src="@drawable/mas"
+                tools:ignore="ContentDescription" />
+
+
+            <ProgressBar
+                android:id="@+id/cargando"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:indeterminateTint="@color/gris_clarito" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/_style_borde_negro_arriba"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:baselineAligned="false">
+
+
+            <FrameLayout
+                android:id="@+id/imagen_casa_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/casa"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/imagen_calendario_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_rectangulo_negro_traslucido__borde_negro_izquierda">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/calendario"
+                    android:contentDescription="@string/imagen_casa" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/imagen_estadisticas_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/_style_borde_negro_derecha_izquierda">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logros" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/imagen_usuario_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imagen_perfil_menu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/usuario"
+                    app:shapeAppearanceOverlay="@style/radius" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
